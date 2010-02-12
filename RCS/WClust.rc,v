@@ -1,0 +1,3560 @@
+head	1.60;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.60
+date	2010.01.14.18.46.31;	author samn;	state Exp;
+branches;
+next	1.59;
+
+1.59
+date	2009.06.24.18.05.31;	author samn;	state Exp;
+branches;
+next	1.58;
+
+1.58
+date	2009.06.22.03.56.55;	author samn;	state Exp;
+branches;
+next	1.57;
+
+1.57
+date	2009.01.28.21.39.54;	author samn;	state Exp;
+branches;
+next	1.56;
+
+1.56
+date	2009.01.23.00.56.00;	author samn;	state Exp;
+branches;
+next	1.55;
+
+1.55
+date	2008.11.27.20.05.55;	author samn;	state Exp;
+branches;
+next	1.54;
+
+1.54
+date	2008.09.16.01.49.31;	author samn;	state Exp;
+branches;
+next	1.53;
+
+1.53
+date	2008.09.16.01.41.11;	author samn;	state Exp;
+branches;
+next	1.52;
+
+1.52
+date	2008.08.28.04.06.19;	author samn;	state Exp;
+branches;
+next	1.51;
+
+1.51
+date	2008.08.17.05.23.55;	author samn;	state Exp;
+branches;
+next	1.50;
+
+1.50
+date	2008.08.11.20.56.03;	author samn;	state Exp;
+branches;
+next	1.49;
+
+1.49
+date	2008.07.28.18.11.49;	author samn;	state Exp;
+branches;
+next	1.48;
+
+1.48
+date	2008.07.24.18.45.39;	author samn;	state Exp;
+branches;
+next	1.47;
+
+1.47
+date	2008.07.15.03.45.18;	author samn;	state Exp;
+branches;
+next	1.46;
+
+1.46
+date	2008.07.10.15.54.27;	author samn;	state Exp;
+branches;
+next	1.45;
+
+1.45
+date	2008.07.10.03.29.10;	author samn;	state Exp;
+branches;
+next	1.44;
+
+1.44
+date	2008.06.13.15.33.35;	author samn;	state Exp;
+branches;
+next	1.43;
+
+1.43
+date	2008.06.03.16.11.29;	author samn;	state Exp;
+branches;
+next	1.42;
+
+1.42
+date	2008.05.16.18.23.47;	author samn;	state Exp;
+branches;
+next	1.41;
+
+1.41
+date	2008.05.16.03.18.38;	author samn;	state Exp;
+branches;
+next	1.40;
+
+1.40
+date	2008.05.08.14.28.15;	author samn;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2008.05.06.02.19.16;	author samn;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2008.04.25.22.04.42;	author samn;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2008.04.25.05.02.33;	author samn;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2008.04.24.23.42.05;	author samn;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2008.04.24.05.27.43;	author samn;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2008.04.22.21.32.35;	author samn;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2008.04.18.05.47.18;	author samn;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2008.04.17.17.52.28;	author samn;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.04.14.21.47.44;	author samn;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.04.11.22.25.28;	author samn;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.04.10.03.42.56;	author samn;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.04.09.04.57.12;	author samn;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.04.07.03.40.25;	author samn;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.04.01.06.08.00;	author samn;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.03.30.02.14.08;	author samn;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.03.29.03.12.21;	author samn;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.03.27.22.19.34;	author samn;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.03.26.03.58.54;	author samn;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.03.21.03.46.41;	author samn;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.03.19.15.13.20;	author samn;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.03.17.22.13.14;	author samn;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.03.16.21.34.58;	author samn;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.03.06.19.44.40;	author samn;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.03.05.01.26.12;	author samn;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.03.03.20.11.23;	author samn;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.03.01.17.50.52;	author samn;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.02.12.02.30.32;	author samn;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.02.11.20.29.56;	author samn;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.02.02.21.25.48;	author samn;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.02.02.02.53.11;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.01.23.23.38.34;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.01.16.05.37.11;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.01.13.02.43.16;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.01.12.09.31.29;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.01.10.18.43.57;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.01.10.05.37.33;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.01.07.05.27.14;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.05.21.45.08;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.02.38;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.60
+log
+@v108
+@
+text
+@// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Czech resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CSY)
+#ifdef _WIN32
+LANGUAGE LANG_CZECH, SUBLANG_DEFAULT
+#pragma code_page(1250)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\WClust.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CHOOSE_WCP_DLG DIALOG  0, 0, 247, 186
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add parameters from file"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,40,160,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,160,160,50,14
+    PUSHBUTTON      "&Refresh",IDC_REFRESH,100,160,50,14
+    LISTBOX         IDC_LIST_POSSIBLE,10,20,85,85,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST_CHOOSEN,150,20,85,85,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      ">>>",IDC_ADD_PARAM,105,55,35,14
+    LTEXT           "Parameters to insert:",IDC_STATIC,10,10,90,10
+    LTEXT           "Inserted parameters:",IDC_STATIC,150,10,80,8
+    LTEXT           "Note: files with parameters must be stored in the same directory in which the BPF file is. ",
+                    IDC_STATIC,10,110,225,15
+    LTEXT           "If e.g. RAT01.BPF is BPF file, it's WCPs file must look like RAT01*.WCP, where * is a text. E.g. RAT01_width.wcp, RAT01-energy.WCP etc.",
+                    IDC_STATIC,10,130,230,25
+END
+
+IDD_DLG_WCP_NOT_FOUND DIALOG  0, 0, 180, 165
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+CAPTION "WARNING"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&OK, Reduce",IDOK,30,145,55,14
+    LTEXT           "WARNING: WClust cannot find some parameters",IDC_STATIC,
+                    5,5,156,8
+    LTEXT           "which are set in xxx*.wcp files (xxx is a name of your",
+                    IDC_STATIC,5,15,164,8
+    LTEXT           "current used BPF/UFF file). These parameters will",
+                    IDC_STATIC,5,25,157,8
+    LTEXT           "be reduced.",IDC_STATIC,5,35,39,8
+    LTEXT           "Note: WCP files must be placed in the same directory",
+                    IDC_STATIC,5,45,168,8
+    LTEXT           "where the BPF/UFF is. You can copy them to it and",
+                    IDC_STATIC,5,55,164,8
+    LTEXT           "then press a Refresh button.",IDC_STATIC,5,65,90,8
+    PUSHBUTTON      "&Refresh",IDC_REFRESH,90,145,55,14
+    LISTBOX         IDC_LIST,5,80,165,60,LBS_NOINTEGRALHEIGHT | LBS_NOSEL | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DLG_INFO DIALOG  0, 0, 242, 181
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "File info"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,65,160,105,14
+    LTEXT           "File name:",IDC_STATIC,5,5,33,8
+    EDITTEXT        IDC_EDIT_FILE_NAME,5,15,110,12,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    LTEXT           "Sync signal changes:",IDC_STATIC,125,15,68,8
+    EDITTEXT        IDC_EDIT_SYNC,195,15,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Arena Number:",IDC_STATIC,145,35,48,8
+    LTEXT           "Room Number:",IDC_STATIC,145,55,48,8
+    LISTBOX         IDC_LIST_FOUND,5,85,110,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL | 
+                    WS_TABSTOP
+    LISTBOX         IDC_LIST_USED,125,85,110,65,LBS_SORT | 
+                    LBS_NOINTEGRALHEIGHT | LBS_NOSEL | WS_VSCROLL | 
+                    WS_TABSTOP
+    EDITTEXT        IDC_EDIT_ARENA,195,35,40,14,ES_AUTOHSCROLL | ES_READONLY
+    EDITTEXT        IDC_EDIT_ROOM,195,55,40,14,ES_AUTOHSCROLL | ES_READONLY
+    LTEXT           "Found external parameters:",IDC_STATIC,5,75,86,8
+    LTEXT           "Used external parameters:",IDC_STATIC,125,75,83,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CHOOSE_WCP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 179
+    END
+
+    IDD_DLG_WCP_NOT_FOUND, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 173
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 158
+    END
+
+    IDD_DLG_INFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 174
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Czech resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_EDITDIALOG DIALOGEX 0, 0, 401, 324
+STYLE DS_SETFONT | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "Edit Clusters"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_COMBOCLUST,280,215,61,76,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Hide",IDC_HIDEPOLY,353,215,20,14
+    PUSHBUTTON      "&New Cluster",IDC_NEWPOLY,305,231,47,14
+    PUSHBUTTON      "Noi&se Off",IDC_MAKE_NOISE_BTN,353,230,41,15
+    PUSHBUTTON      "&Draw",IDC_DRAWPOLY,280,245,35,14
+    COMBOBOX        IDC_COMBOPEN,350,245,45,75,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Remove",IDC_REMOVEPOLY,280,260,35,14
+    PUSHBUTTON      "Remove &All",IDC_REMALLPOLY,315,260,45,14
+    PUSHBUTTON      "C&opy",IDC_COPYCLUSTER,360,260,35,14
+    PUSHBUTTON      "&Zoom In",IDC_ZOOMIN,325,280,35,14
+    PUSHBUTTON      "&Fit View",IDC_FIT_VIEW,290,280,35,14
+    CONTROL         "Spin1",IDC_SPIN_Y,"msctls_updown32",UDS_ARROWKEYS,8,145,
+                    11,14
+    PUSHBUTTON      "Set &Vect.",IDC_SETTINGS,345,190,45,14
+    PUSHBUTTON      "Draw spi&kes",IDC_DRAW_SPIKES,333,140,49,15
+    CONTROL         "Spin1",IDC_SPIN_SPIKES,"msctls_updown32",UDS_ARROWKEYS,
+                    382,140,12,14
+    DEFPUSHBUTTON   "OK",IDOK,280,300,19,14
+    CONTROL         "Spin1",IDC_SPIN_X,"msctls_updown32",UDS_ARROWKEYS | 
+                    UDS_HORZ,135,308,17,10
+    PUSHBUTTON      "Se&t Sp.",IDC_SET_SPIKES,345,165,45,14
+    CONTROL         "",IDC_CHECKFIT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    280,280,8,8
+    PUSHBUTTON      "&Init view",IDC_INITVIEW,360,280,35,14
+    PUSHBUTTON      "Li&st",IDC_LIST,374,215,20,14
+    PUSHBUTTON      "&UNDO",IDC_BUT_UNDO,315,245,30,14
+    PUSHBUTTON      "&Time events",IDC_TIME_EV,281,140,51,15
+    PUSHBUTTON      ">",IDC_EXPAND,342,215,9,14
+    COMBOBOX        IDC_CMB_ORIG_NEW,339,300,55,89,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Rate C",IDC_BUTTON_RATE,301,300,29,14
+    PUSHBUTTON      "CQ",IDC_BUTTON_CINF,281,231,23,14
+END
+
+IDD_RANGEDIALOG DIALOG  0, 0, 157, 109
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set the view range"
+FONT 8, "MS Sans Serif"
+BEGIN
+    EDITTEXT        IDC_EDIT_PERCENT,5,15,55,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_FIRST_EV,5,45,55,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LAST_EV,5,75,55,14,ES_AUTOHSCROLL
+    CONTROL         "&Random",IDC_RD_RANDOM,"Button",BS_AUTORADIOBUTTON | 
+                    WS_TABSTOP,80,15,43,10
+    CONTROL         "&Exclude",IDC_RD_EXCLUDE,"Button",BS_AUTORADIOBUTTON,80,
+                    25,41,10
+    CONTROL         "&Weighted rand.",IDC_RD_WEIGHTED,"Button",
+                    BS_AUTORADIOBUTTON,80,35,65,10
+    DEFPUSHBUTTON   "OK",IDOK,75,55,70,14
+    PUSHBUTTON      "Cancel",IDCANCEL,75,75,70,14
+    LTEXT           "First event:",IDC_STATIC,5,35,36,8
+    LTEXT           "Last event:",IDC_STATIC,5,65,36,8
+    LTEXT           "% events to view:",IDC_STATIC,5,5,56,8
+    LTEXT           "Note: type ""0"" for maximum Last event",IDC_STATIC,5,
+                    95,122,8
+    GROUPBOX        "Cluster assignment",IDC_STATIC,75,5,70,45
+END
+
+IDD_EDIT_SPIKES DIALOGEX 0, 0, 491, 273
+STYLE DS_SETFONT | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
+    WS_THICKFRAME
+CAPTION "View spikes"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "&Play",IDC_PLAY,5,240,35,14
+    PUSHBUTTON      "&Next",IDC_NEXT,5,255,35,14
+    PUSHBUTTON      "&Stop",IDC_STOP,45,240,35,14
+    PUSHBUTTON      "&Clear",IDC_BCLEAR,45,255,35,14
+    CONTROL         "Chanel &1",IDC_CHECK_CH1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,90,240,44,10
+    CONTROL         "Chanel &2",IDC_CHECK_CH2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,90,250,44,10
+    CONTROL         "Chanel &3",IDC_CHECK_CH3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,135,240,44,10
+    CONTROL         "Chanel &4",IDC_CHECK_CH4,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,135,250,44,10
+    COMBOBOX        IDC_COMBOPROP,256,240,90,93,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    DEFPUSHBUTTON   "OK",IDOK,415,255,65,14
+    PUSHBUTTON      "&Remove",IDC_REMOVE,350,240,35,14
+    PUSHBUTTON      "Se&t sp.",IDC_SET_SP,415,240,65,14
+    COMBOBOX        IDC_CMB_SEL_PARAM,190,240,50,80,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Add param.",IDC_ADD,190,255,50,14
+    CONTROL         "List2",IDC_LIST_CLUST,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,415,7,65,219
+    EDITTEXT        IDC_EDIT_EXTRA_PARAM,320,256,62,12,ES_LOWERCASE | 
+                    ES_AUTOHSCROLL
+    LTEXT           "",IDC_STATIC_EXTRA_PARAM,254,257,60,12
+END
+
+IDD_SELECT_TETRODE DIALOGEX 0, 0, 254, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION
+FONT 10, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_LIST_OF_ELECTRODES,5,15,95,70,LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_ED_AMOUNT,110,15,30,12,ES_RIGHT | ES_NUMBER
+    PUSHBUTTON      "1 %",IDC_PERBUT1,110,30,20,14
+    PUSHBUTTON      "&5 %",IDC_PERBUT2,135,30,20,14
+    PUSHBUTTON      "&10 %",IDC_PERBUT3,110,50,20,14
+    PUSHBUTTON      "&20 %",IDC_PERBUT4,135,50,20,14
+    PUSHBUTTON      "5&0 %",IDC_PERBUT5,110,70,20,14
+    PUSHBUTTON      "100 %",IDC_PERBUT6,135,70,20,14
+    PUSHBUTTON      "OK",IDOK,55,125,55,12
+    LTEXT           "Which electrode&&channel load?",IDC_STATIC,4,5,96,8
+    LTEXT           "Spikes to memory:",IDC_STATIC,105,5,57,8
+    LTEXT           "%",IDC_STATIC,141,17,8,8
+    LISTBOX         IDC_LIST_MESSAGE,5,94,150,26,LBS_NOINTEGRALHEIGHT | 
+                    LBS_NOSEL | WS_TABSTOP
+    GROUPBOX        "PCA Options",IDC_STATIC,167,18,75,79
+    CONTROL         "Perform PCA",IDC_CHECK_PCA,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,172,33,53,11
+    CONTROL         "Concat. Waveforms",IDC_CHECK_PCA_CONCAT,"Button",
+                    BS_AUTO3STATE | WS_TABSTOP,170,46,68,11
+    LTEXT           "Num PCs",IDC_STATIC,174,65,60,10
+    EDITTEXT        IDC_EDIT_NUM_PCS,174,78,54,12,ES_AUTOHSCROLL
+    CONTROL         "Load EEG",IDC_CHECK_LD_EEG,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,168,101,45,8
+END
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 202, 103
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About WClust"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,10,20,20
+    LTEXT           "WClust version 2.0.0.108",IDC_STATIC,64,7,91,8,
+                    SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,75,73,50,14,WS_GROUP
+    LTEXT           "Anton Svrcek",IDC_STATIC,80,40,44,8
+    LTEXT           "Andre Fenton",IDC_STATIC,80,30,44,8
+    LTEXT           "Copyright (c) 2002-2010, Bio-Signal Group Corp.",
+                    IDC_STATIC,36,17,152,8
+    LTEXT           "Sam Neymotin",IDC_STATIC,79,50,46,8
+    LTEXT           "Bill Lytton",IDC_STATIC,86,60,31,13
+END
+
+IDD_WCLUST_FORM DIALOGEX 0, 0, 332, 158
+STYLE DS_SETFONT | DS_CENTER | WS_CHILD
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "&Set",IDC_BUT_SET,70,25,19,14
+    PUSHBUTTON      "S&how",IDC_SHOW,100,25,45,14
+    PUSHBUTTON      "&Hide",IDC_HIDE,150,25,50,14
+    PUSHBUTTON      "&1",IDC_BUTTON1,205,5,15,14
+    PUSHBUTTON      "&3",IDC_BUTTON4,225,5,15,14
+    PUSHBUTTON      "&5",IDC_BUTTON6,245,5,15,14
+    PUSHBUTTON      "&2",IDC_BUTTON3,205,25,15,14
+    PUSHBUTTON      "&4",IDC_BUTTON5,225,25,15,14
+    PUSHBUTTON      "&6",IDC_BUTTON7,245,25,15,14
+    COMBOBOX        IDC_COMBOCLUST,100,5,100,104,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_CMB_ORIG_NEW1,267,7,48,97,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_DIALLIST DIALOGEX 0, 0, 300, 202
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Cluster List "
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "&Select",IDOK,243,7,50,14
+    LISTBOX         IDC_LIST1,7,7,228,188,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Cancel",IDCANCEL,243,26,50,14
+END
+
+IDD_TIME_EV DIALOGEX 0, 0, 500, 377
+STYLE DS_SETFONT | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU | WS_THICKFRAME
+CAPTION "Time Event"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,440,297,53,14
+    PUSHBUTTON      "Cancel",IDCANCEL,440,316,53,14
+    SCROLLBAR       IDC_SCROLL_TIME,7,235,425,11,WS_TABSTOP
+    EDITTEXT        IDC_EDIT_TIME,350,262,42,12,ES_RIGHT | ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN_TIME,"msctls_updown32",UDS_ARROWKEYS,
+                    392,262,11,12
+    CONTROL         "&Raster",IDC_CHECK_RASTER,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,440,175,37,10
+    CONTROL         "&Spike",IDC_CHECK_SPIKE,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,440,185,34,10
+    CONTROL         "List1",IDC_LIST_SCALE,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,435,7,58,88
+    CONTROL         "List2",IDC_LIST_ARENA_CL,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,280,251,60,60
+    CONTROL         "List1",IDC_LIST_ROOM_CL,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,100,251,60,60
+    CONTROL         "List1",IDC_LIST_SPIKE_CL,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,435,100,58,70
+    COMBOBOX        IDC_CMB_ORIG_NEW,440,235,53,59,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CMB_ROOM,100,317,60,72,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_CMB_ARENA,280,317,60,73,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    PUSHBUTTON      "&Play",IDC_TE_PLAY,351,276,35,14
+    PUSHBUTTON      "&Clear",IDC_TE_CLEAR,389,275,35,14
+    PUSHBUTTON      "max",IDC_MAX,406,262,19,12
+    PUSHBUTTON      "&Take Pict",IDC_TE_TAKE_PICT,440,251,53,14
+    PUSHBUTTON      "Set EEG Gains",IDC_BUTTON_SET_GAINS,347,306,76,12
+    EDITTEXT        IDC_EDITEEGPLAYSPEED,347,292,40,12,ES_AUTOHSCROLL | 
+                    WS_GROUP
+    CONTROL         "",IDC_SPINEEGPLAYSPEED,"msctls_updown32",UDS_ALIGNRIGHT | 
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,388,294,11,10
+    PUSHBUTTON      "Video",IDC_BUTTON_VID_DLG_OPEN,348,322,71,12
+    EDITTEXT        IDC_EDIT_SET_TIME,347,338,47,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "SetTime(ms)",IDC_BUTTON_SET_TIME,396,338,43,13
+END
+
+IDD_POSITION_REG_DLG DIALOG  0, 0, 177, 194
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Position registration"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "use &Sync",IDC_RADIO_SYNC,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,10,10,45,10
+    CONTROL         "&constant delta-t",IDC_RADIO_CONST,"Button",
+                    BS_AUTORADIOBUTTON,10,25,65,10
+    CONTROL         "&other constant delta-t",IDC_RADIO_OTHER,"Button",
+                    BS_AUTORADIOBUTTON,15,130,83,10
+    CONTROL         "&without changes (from BPF)",IDC_RADIO_WITHOUT,"Button",
+                    BS_AUTORADIOBUTTON,15,145,103,10
+    CONTROL         "16.7 ms (60 Hz)",IDC_16_7,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP | WS_TABSTOP,25,50,65,10
+    CONTROL         "20 ms (50 Hz)",IDC_20,"Button",BS_AUTORADIOBUTTON,25,65,
+                    59,10
+    CONTROL         "33.3 ms (30 Hz)",IDC_33_3,"Button",BS_AUTORADIOBUTTON,
+                    25,80,65,10
+    CONTROL         "40 ms (25 Hz)",IDC_40,"Button",BS_AUTORADIOBUTTON,25,95,
+                    59,10
+    CONTROL         "100 ms (10 Hz)",IDC_100,"Button",BS_AUTORADIOBUTTON,25,
+                    110,63,10
+    EDITTEXT        IDC_EDIT,100,130,30,14,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "OK",IDOK,30,165,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,95,165,50,14
+    GROUPBOX        "",IDC_STATIC,15,40,150,85
+    LTEXT           "ms",IDC_STATIC,135,130,10,8
+END
+
+IDD_CHOOSE_VERX_DLG DIALOG  0, 0, 162, 159
+STYLE DS_SETFONT | WS_POPUP | WS_CAPTION | WS_THICKFRAME
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,55,140,50,14
+    CONTROL         "List1",IDC_LIST_PNTS,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,5,5,70,130
+    CONTROL         "List2",IDC_LIST_VERX,"SysListView32",LVS_REPORT | 
+                    WS_BORDER | WS_TABSTOP,85,5,70,130
+END
+
+IDD_BINDIALOG DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Bin Sizes"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,35,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,99,66,50,14
+    EDITTEXT        IDC_EDIT1,7,41,172,16,ES_AUTOHSCROLL
+    LTEXT           "Enter 4 numbers for bin sizes:",IDC_STATIC,37,23,106,16
+END
+
+IDD_DLG_CLUST_NUM DIALOGEX 0, 0, 147, 90
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | 
+    WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "InfoClust"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,15,62,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,80,63,50,14
+    LTEXT           "Enter number of clusters:",IDC_STATIC,27,14,93,20
+    EDITTEXT        IDC_EDIT_CLUST_NUMS,7,31,132,18,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_APS DIALOGEX 0, 0, 210, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "WClust - Enter APClust params"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,43,60,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,119,60,50,14
+    LTEXT           "Enter MaxIter(500), ConvIter(50), DampFactor(0.5), PrefFactor(5)",
+                    IDC_STATIC,7,7,196,18
+    EDITTEXT        IDC_EDIT_AP_CLUST,7,27,196,20,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_SHOW_SPIKE_XY DIALOGEX 0, 0, 183, 101
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "WClust - X,Y Spike Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,40,73,50,14
+    CONTROL         "Load Spike X,Y Coords",IDC_CHECK_SPIKE_XY,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,48,17,88,11
+    GROUPBOX        "X,Y Collapse Factor",IDC_STATIC,14,35,153,25
+    CONTROL         "8",IDC_RADIO_XY_8,"Button",BS_AUTORADIOBUTTON,94,46,27,
+                    8
+    CONTROL         "4",IDC_RADIO_XY_4,"Button",BS_AUTORADIOBUTTON,114,46,20,
+                    10
+    CONTROL         "2",IDC_RADIO_XY_2,"Button",BS_AUTORADIOBUTTON,136,44,24,
+                    11
+    CONTROL         "16",IDC_RADIO_XY_16,"Button",BS_AUTORADIOBUTTON,67,43,
+                    24,12
+    CONTROL         "32",IDC_RADIO_XY_32,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,41,46,19,9
+    PUSHBUTTON      "Cancel",IDCANCEL,100,73,50,14
+END
+
+IDD_KM_DIALOG DIALOGEX 0, 0, 176, 143
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "WClust - Kmeans options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,27,111,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,95,111,50,14
+    LTEXT           "MinClusts",IDC_STATIC,36,17,32,13
+    EDITTEXT        IDC_EDIT_KM_MINC,91,15,47,14,ES_AUTOHSCROLL
+    LTEXT           "MaxClusts",IDC_STATIC,36,34,41,12
+    EDITTEXT        IDC_EDIT_KM_MAXC,91,31,47,14,ES_AUTOHSCROLL
+    LTEXT           "NumIterations",IDC_STATIC,36,49,48,15
+    EDITTEXT        IDC_EDIT_KM_NITERS,91,47,47,14,ES_AUTOHSCROLL
+    LTEXT           "DBIndexIters",IDC_STATIC,36,65,46,11
+    EDITTEXT        IDC_EDIT4,91,63,47,14,ES_AUTOHSCROLL
+    CONTROL         "Normalize Data",IDC_CHECK_KM_NORMALIZE,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,36,76,71,17
+    CONTROL         "Use Medians",IDC_CHECK_KM_MEDIANS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,36,91,72,16
+END
+
+IDD_DIALOG_ECLUST DIALOGEX 0, 0, 154, 111
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Entropy Reduction Clustering Parameters"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,21,86,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,82,86,50,14
+    EDITTEXT        IDC_EDIT_EMINC,87,10,48,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_EMAXC,87,25,48,13,ES_AUTOHSCROLL
+    LTEXT           "MinClust:",IDC_STATIC_EMINC,17,12,32,11,SS_NOPREFIX
+    LTEXT           "MaxClust:",IDC_STATIC_EMAXC,17,28,32,11
+    LTEXT           "NumIterations:",IDC_STATIC_ENITER,17,41,50,12
+    EDITTEXT        IDC_EDIT_ENUMITER,87,40,48,13,ES_AUTOHSCROLL
+    LTEXT           "NumClustIterations:",IDC_STATIC_ENCITERS,17,56,66,11
+    EDITTEXT        IDC_EDIT_ENUMITER2,87,55,48,13,ES_AUTOHSCROLL
+    LTEXT           "Error Prct",IDC_STATIC,17,70,47,11
+    EDITTEXT        IDC_EDIT_ERR_PRCT_E,87,69,46,13,ES_AUTOHSCROLL
+END
+
+IDD_PROGRESS_DIALOG DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_NOIDLEMSG | DS_SETFOREGROUND | 
+    DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "WClust - performing auto-clustering"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,61,64,50,14
+    CONTROL         "",IDC_PROGRESS_BAR,"msctls_progress32",WS_BORDER | 0x1,
+                    14,42,158,19
+    LTEXT           "Performing Clustering",IDC_PROGRESS_TEXT,15,22,156,19
+END
+
+IDD_DIALOG_AUTOC_PROG DIALOGEX 0, 0, 186, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
+END
+
+IDD_DLG_RATE DIALOGEX 0, 0, 166, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+CAPTION "WClust - Please Rate Clusters"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Confirm Ratings",IDOK,21,65,123,14
+    COMBOBOX        IDC_COMBO_RATE,21,49,123,76,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | WS_VSCROLL | 
+                    WS_TABSTOP
+    GROUPBOX        "Rating",IDC_STATIC,19,18,124,28
+    LTEXT           "Poor",IDC_STATIC,99,34,18,9
+    LTEXT           "Fair",IDC_STATIC,77,34,21,9
+    LTEXT           "Good",IDC_STATIC,53,34,18,9
+    CONTROL         "Check1",IDC_CHECK_GOOD,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,57,24,12,10
+    CONTROL         "Check1",IDC_CHECK_FAIR,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,79,24,12,10
+    CONTROL         "Check1",IDC_CHECK_POOR,"Button",BS_AUTO3STATE | 
+                    WS_TABSTOP,99,24,12,10
+END
+
+IDD_DLG_AUTO_DENOISE DIALOGEX 0, 0, 208, 119
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Auto Find-Noise"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Find-Noise",IDOK,42,92,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,92,50,14
+    COMBOBOX        IDC_COMBO_LOW_SAT,16,36,48,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_HIGH_SAT,84,36,48,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_FRAC_SAT,144,37,48,30,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Low Saturation",IDC_STATIC,12,18,59,14
+    LTEXT           "High saturation",IDC_STATIC,78,18,59,12
+    LTEXT           "Fraction saturation",IDC_STATIC,132,18,66,13
+    GROUPBOX        "Find-Noise Options",IDC_STATIC,6,6,198,81
+    EDITTEXT        IDC_EDIT_MIN_SPIKE_AMP,112,63,68,15,ES_AUTOHSCROLL
+    LTEXT           "Minimum Spike Amplitude:",IDC_STATIC,27,65,83,13
+END
+
+IDD_DIALOG_EEG_GAINS DIALOGEX 0, 0, 158, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "WClust - Set EEG Gains"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Done",IDOK,51,66,50,14
+    COMBOBOX        IDC_COMBO_EEG_GAIN_CHAN,24,33,61,265,CBS_DROPDOWNLIST | 
+                    CBS_OWNERDRAWFIXED | CBS_HASSTRINGS | 
+                    CBS_DISABLENOSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDITEEGGAIN,87,33,28,13,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SPINEEGGAIN,"msctls_updown32",UDS_ALIGNRIGHT | 
+                    UDS_ARROWKEYS,116,33,11,13
+    GROUPBOX        "Select Channel / Set Gain",IDC_STATIC,15,14,124,47
+END
+
+IDD_DIALOG_SAMPLE_BATCH DIALOGEX 0, 0, 580, 159
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Sample Cluster Quality Run Batch Input File"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Done Looking",IDOK,253,138,71,14
+    EDITTEXT        IDC_EDIT_BATCH_SAMP_TXT,15,16,550,93,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | WS_VSCROLL | 
+                    WS_HSCROLL,WS_EX_DLGMODALFRAME | WS_EX_CLIENTEDGE
+    LTEXT           "First 2 lines in box above are just format description (shouldn't be in batch file!!)",
+                    IDC_STATIC_SAMP_B_TXT,169,118,262,14
+END
+
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 199
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "WClust - Set Cluster Quality Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Set Options",IDOK,40,173,58,14
+    CONTROL         "Fast NN-mode",IDC_CHECK_FAST_KLD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,42,57,12
+    PUSHBUTTON      "Cancel",IDCANCEL,105,173,50,14
+    CONTROL         "Inter-cluster",IDC_CHECK_INTER_KLD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,30,60,13
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,8,119,122
+    CONTROL         "Compute Isolation Distance",IDC_CHECK_ISOLATION_D,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,144,106,15
+    CONTROL         "Cluster VS. Background",IDC_CHECK_KLD_DO,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,21,90,12
+    CONTROL         "Find Best Dimensions",IDC_CHECK_FIND_BEST_DIMS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,53,81,12
+    EDITTEXT        IDC_EDIT_BEST_DIMS,51,79,28,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set Num Best Dims",IDC_BUTTON_SET_NUM_BEST_DIMS,81,79,
+                    67,13
+    CONTROL         "Compute Silhouette Width",IDC_CHECK_SILHOUETTE_WIDTH,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,130,98,14
+    CONTROL         "1D Slices",IDC_RADIO_1D_SLICE,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,52,103,39,11
+    CONTROL         "2D Slices",IDC_RADIO_2D_SLICES,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,97,102,40,13
+    LTEXT           "Estimate Best Dims Using:",IDC_STATIC,56,94,86,9
+    CONTROL         "Normalize Data",IDC_CHECK_NORM,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,52,66,63,10
+    CONTROL         "Compute L-Ratio",IDC_CHECK_LRATIO,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,44,159,94,11
+    CONTROL         "Use Default Dims",IDC_CHECK_KLD_DEFAULT_DIMS,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,114,68,14
+END
+
+IDD_DIALOG_VID DIALOGEX 0, 0, 463, 354
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Video"
+MENU IDR_MAINFRAME
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,205,324,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,257,323,50,14
+    PUSHBUTTON      "Pick Video",IDC_BUTTON_PICK_VID,150,323,51,16
+END
+
+IDD_DIALOG_FL DIALOGEX 0, 0, 130, 119
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "F.L.A.M.E. Clustering Params"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,7,94,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,68,94,50,14
+    LTEXT           "Distance Type:",IDC_STATIC_DT,7,9,56,13
+    EDITTEXT        IDC_EDIT_ITER_FL,64,24,54,12,ES_AUTOHSCROLL
+    LTEXT           "Iterations:",IDC_STATIC,7,26,35,13
+    EDITTEXT        IDC_EDIT_EPS_FL,64,41,54,12,ES_AUTOHSCROLL
+    LTEXT           "Epsilon:",IDC_STATIC,7,44,40,13
+    EDITTEXT        IDC_EDIT_KNNFL,63,58,54,12,ES_AUTOHSCROLL
+    LTEXT           "KNNPrct:",IDC_STATIC,7,58,40,13
+    COMBOBOX        IDC_COMBO_FL_DTT,64,7,54,12,CBS_DROPDOWNLIST | 
+                    CBS_DISABLENOSCROLL | WS_TABSTOP
+    LTEXT           "Outlier Thresh:",IDC_STATIC_THD_FL,6,75,48,12
+    EDITTEXT        IDC_EDIT_OUT_FL,63,74,54,12,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_NOTES DIALOGEX 0, 0, 412, 329
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Experiment Notes"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Save Notes",IDOK,150,312,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,312,50,14
+    LTEXT           "Type (rat,mouse):",IDC_STATIC,13,11,59,12
+    EDITTEXT        IDC_EDIT_ANIMAL_TYPE,72,9,120,15,ES_AUTOHSCROLL
+    LTEXT           "Age (days):",IDC_STATIC,13,43,42,13
+    EDITTEXT        IDC_EDIT_ANIMAL_AGE,72,41,120,15,ES_AUTOHSCROLL
+    LTEXT           "Weight (kg):",IDC_STATIC,13,27,42,12
+    EDITTEXT        IDC_EDIT_ANIMAL_WEIGHT,72,25,120,15,ES_AUTOHSCROLL
+    LTEXT           "(saline,pcp,etc):",IDC_STATIC,14,123,52,13
+    EDITTEXT        IDC_EDIT_IN1_TYPE,68,121,46,15,ES_AUTOHSCROLL
+    LTEXT           "time (minutes):",IDC_STATIC,124,123,52,13
+    EDITTEXT        IDC_EDIT_IN1_TIME,176,121,46,15,ES_AUTOHSCROLL
+    GROUPBOX        "Input 1",IDC_STATIC,6,112,402,30
+    LTEXT           "Amount (with units):",IDC_STATIC,225,123,72,13
+    EDITTEXT        IDC_EDIT_IN1_AMOUNT,293,121,30,15,ES_AUTOHSCROLL
+    LTEXT           "Location:",IDC_STATIC,330,123,48,13
+    EDITTEXT        IDC_EDIT_IN1_LOC,361,121,42,15,ES_AUTOHSCROLL
+    LTEXT           "(saline,pcp,etc):",IDC_STATIC,14,153,52,13
+    EDITTEXT        IDC_EDIT_IN2_TYPE,68,150,46,15,ES_AUTOHSCROLL
+    LTEXT           "time (minutes):",IDC_STATIC,124,153,52,13
+    EDITTEXT        IDC_EDIT_IN2_TIME,176,150,46,15,ES_AUTOHSCROLL
+    GROUPBOX        "Input 2",IDC_STATIC,6,142,402,30
+    LTEXT           "Amount (with units):",IDC_STATIC,225,153,72,13
+    EDITTEXT        IDC_EDIT10,293,150,30,15,ES_AUTOHSCROLL
+    LTEXT           "Location:",IDC_STATIC,330,153,48,13
+    EDITTEXT        IDC_EDIT_IN2_LOC,361,150,42,15,ES_AUTOHSCROLL
+    LTEXT           "(saline,pcp,etc):",IDC_STATIC,14,183,52,13
+    EDITTEXT        IDC_EDIT_IN3_TYPE,68,181,46,15,ES_AUTOHSCROLL
+    LTEXT           "time (minutes):",IDC_STATIC,124,183,52,13
+    EDITTEXT        IDC_EDIT_IN3_TIME,176,181,46,15,ES_AUTOHSCROLL
+    GROUPBOX        "Input 3",IDC_STATIC,6,172,402,30
+    LTEXT           "Amount (with units):",IDC_STATIC,225,183,72,13
+    EDITTEXT        IDC_EDIT14,293,181,30,15,ES_AUTOHSCROLL
+    LTEXT           "Location:",IDC_STATIC,330,183,48,13
+    EDITTEXT        IDC_EDIT_IN3_LOC,361,181,42,15,ES_AUTOHSCROLL
+    LTEXT           "(saline,pcp,etc):",IDC_STATIC,14,213,52,13
+    EDITTEXT        IDC_EDIT_IN4_TYPE,68,210,46,15,ES_AUTOHSCROLL
+    LTEXT           "time (minutes):",IDC_STATIC,124,213,52,13
+    EDITTEXT        IDC_EDIT_IN4_TIME,176,210,46,15,ES_AUTOHSCROLL
+    GROUPBOX        "Input 4",IDC_STATIC,6,202,402,30
+    LTEXT           "Amount (with units):",IDC_STATIC,225,213,72,13
+    EDITTEXT        IDC_EDIT18,293,210,30,15,ES_AUTOHSCROLL
+    LTEXT           "Location:",IDC_STATIC,330,213,48,13
+    EDITTEXT        IDC_EDIT_IN4_LOC,361,210,42,15,ES_AUTOHSCROLL
+    GROUPBOX        "Additional Info.",IDC_STATIC,1,232,408,78
+    EDITTEXT        IDC_EDIT_EXP_COMMENTS,7,243,395,60,ES_AUTOHSCROLL
+    CONTROL         "",IDC_MONTHCALENDAR_EXP_DATE,"SysMonthCal32",
+                    MCS_NOTODAY | MCS_NOTODAYCIRCLE | WS_TABSTOP,265,17,132,
+                    86
+    GROUPBOX        "Experiment Date",IDC_STATIC,256,5,150,102
+    GROUPBOX        "Animal Info",IDC_STATIC,6,0,192,108
+    LTEXT           "Sex:",IDC_STATIC,13,59,30,12
+    EDITTEXT        IDC_EDIT_ANIMAL_SEX,72,58,120,15,ES_AUTOHSCROLL
+    LTEXT           "Additional Details:",IDC_STATIC,13,74,35,16
+    EDITTEXT        IDC_EDIT_ANIMAL_DETAILS,72,74,120,28,ES_AUTOHSCROLL
+END
+
+IDD_SOM_DLG DIALOGEX 0, 0, 186, 154
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,31,126,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,88,126,50,14
+    LTEXT           "Dsistance Type:",IDC_STATIC,7,7,71,16
+    LTEXT           "Iterations:",IDC_STATIC,7,22,52,14
+    LTEXT           "XGrid Size:",IDC_STATIC,14,47,48,14
+    LTEXT           "YGrid Size:",IDC_STATIC,33,73,35,8
+    LTEXT           "Init Tau:",IDC_STATIC,23,94,46,16
+    EDITTEXT        IDC_EDIT_ITER_SOM,67,23,54,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_XG_SOM,65,44,54,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_YG_SOM,70,70,54,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ITAU_SOM,64,93,54,12,ES_AUTOHSCROLL
+END
+
+IDD_DIALOG_KLUSTAKWIK DIALOGEX 0, 0, 186, 114
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "KlustaKwik Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,35,82,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,90,82,50,14
+    EDITTEXT        IDC_EDIT_KK_MINCLUSTS,110,12,48,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Start Min # Clusters:",IDC_STATIC,30,15,74,10
+    LTEXT           "Start Max # Clusters:",IDC_STATIC,30,30,75,14
+    EDITTEXT        IDC_EDIT_KK_MAXCLUSTS,110,29,48,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    LTEXT           "Start Iterations:",IDC_STATIC,30,46,54,13
+    EDITTEXT        IDC_EDIT_KK_START_ITERS,110,45,48,13,ES_AUTOHSCROLL | 
+                    ES_NUMBER
+    EDITTEXT        IDC_EDIT_KK_MAX_POSSIBLE_CLUSTERS,110,61,48,13,
+                    ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Max Possible Clusters:",IDC_STATIC,30,62,75,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_EDITDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 8
+        RIGHTMARGIN, 394
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 318
+    END
+
+    IDD_RANGEDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 150
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 102
+    END
+
+    IDD_EDIT_SPIKES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 484
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 260
+    END
+
+    IDD_SELECT_TETRODE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 247
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 195
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_WCLUST_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 325
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 151
+    END
+
+    IDD_DIALLIST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 195
+    END
+
+    IDD_TIME_EV, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 493
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 370
+    END
+
+    IDD_POSITION_REG_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 170
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 187
+    END
+
+    IDD_CHOOSE_VERX_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 155
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 152
+    END
+
+    IDD_BINDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DLG_CLUST_NUM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 139
+        TOPMARGIN, 7
+    END
+
+    IDD_DIALOG_APS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 203
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DIALOG_SHOW_SPIKE_XY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 176
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_KM_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 169
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 136
+    END
+
+    IDD_DIALOG_ECLUST, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 147
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 104
+    END
+
+    IDD_PROGRESS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DIALOG_AUTOC_PROG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DLG_RATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_DLG_AUTO_DENOISE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 199
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 112
+    END
+
+    IDD_DIALOG_EEG_GAINS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 147
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_DIALOG_SAMPLE_BATCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 573
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 152
+    END
+
+    IDD_DIALOG_KLD_DLG_OPT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 189
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 192
+    END
+
+    IDD_DIALOG_VID, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 456
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 347
+    END
+
+    IDD_DIALOG_FL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 123
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 112
+    END
+
+    IDD_DIALOG_NOTES, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 405
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 322
+    END
+
+    IDD_SOM_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
+    END
+
+    IDD_DIALOG_KLUSTAKWIK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 107
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_EDITDIALOG DLGINIT
+BEGIN
+    IDC_COMBOPEN, 0x403, 6, 0
+0x6570, 0x206e, 0x0031, 
+    IDC_COMBOPEN, 0x403, 6, 0
+0x6570, 0x206e, 0x0032, 
+    IDC_COMBOPEN, 0x403, 6, 0
+0x6570, 0x206e, 0x0033, 
+    IDC_COMBOPEN, 0x403, 6, 0
+0x6570, 0x206e, 0x0034, 
+    IDC_COMBOPEN, 0x403, 6, 0
+0x6570, 0x206e, 0x0035, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\WClust.ico"
+IDR_WCLUSTTYPE          ICON                    "res\\WClustDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+IDB_0000FF              BITMAP                  "res\\0000FF.bmp"
+IDB_00FF00              BITMAP                  "res\\00FF00.bmp"
+IDB_FF0000              BITMAP                  "res\\FF0000.bmp"
+IDB_009090              BITMAP                  "res\\009090.bmp"
+IDB_909000              BITMAP                  "res\\909000.bmp"
+IDB_900090              BITMAP                  "res\\900090.bmp"
+IDB_909090              BITMAP                  "res\\909090.bmp"
+IDB_00F0F0              BITMAP                  "res\\00F0F0.bmp"
+IDB_F0F000              BITMAP                  "res\\F0F000.bmp"
+IDB_F000F0              BITMAP                  "res\\F000F0.bmp"
+IDB_0090F0              BITMAP                  "res\\0090F0.bmp"
+IDB_9000F0              BITMAP                  "res\\9000F0.bmp"
+IDB_00F090              BITMAP                  "res\\00F090.bmp"
+IDB_90F000              BITMAP                  "res\\90F000.bmp"
+IDB_F00090              BITMAP                  "res\\F00090.bmp"
+IDB_F09000              BITMAP                  "res\\F09000.bmp"
+IDB_9090F0              BITMAP                  "res\\9090F0.bmp"
+IDB_90F090              BITMAP                  "res\\90F090.bmp"
+IDB_F09090              BITMAP                  "res\\F09090.bmp"
+IDB_000000              BITMAP                  "res\\00000.bmp"
+IDB_CCCCCC              BITMAP                  "res\\CCCCCC.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR  16, 15
+BEGIN
+    BUTTON      ID_FILE_OPENBPFILE
+    SEPARATOR
+    BUTTON      ID_FILE_LOADCLUSTERS
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Open spike File...\tCtrl+O", ID_FILE_OPENBPFILE
+        MENUITEM "S&tore clust to File",        ID_FILE_STORETOBPFILE
+        MENUITEM SEPARATOR
+        MENUITEM "Load &arena",                 ID_LOAD_ARENA
+        MENUITEM "Load &room",                  ID_LOAD_ROOM
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Cluster"
+    BEGIN
+        MENUITEM "&New",                        IDC_NEWCLUST
+        MENUITEM "&Load...\tCtrl+L",            ID_FILE_LOADCLUSTERS
+        MENUITEM "&Save...\tCtrl+S",            ID_FILE_SAVECLUSTERS
+        MENUITEM SEPARATOR
+        MENUITEM "Set &Bins",                   ID_CLUSTER_SETBINS32800
+        MENUITEM "Set Spike X,Y Options",       ID_CLUSTER_USE_SPIKEXY
+        MENUITEM "Set Cluster Quality Options", ID_CLUSTER_SETKLDOPTIONS
+        MENUITEM "Compute Cluster Quality",     ID_CLUSTER_CALCCLUSTERQUALITY
+
+        MENUITEM SEPARATOR
+        MENUITEM "K-means/medians Clustering",  ID_CLUSTER_K
+        MENUITEM "Entropy Reduction Clustering", ID_CLUSTER_ENTROPYINFOCLUST
+        MENUITEM "KlustaKwik Clustering",       ID_CLUSTER_KLUSTAKWIKCLUST
+        MENUITEM "FLAME Clustering",            ID_CLUSTER_FLAMECLUSTERING
+        MENUITEM "SOM Clustering",              ID_CLUSTER_SOMCLUSTERING
+    END
+    POPUP "&Environment"
+    BEGIN
+        MENUITEM "Load...",                     ID_ENVIRONMENT_LOAD
+        MENUITEM "Save...",                     ID_ENVIRONMENT_SAVE
+    END
+    POPUP "&Tools"
+    BEGIN
+        MENUITEM "&Swap polarity +/-",          ID_MODE_SWAPPOLARITY
+        MENUITEM SEPARATOR
+        MENUITEM "&Position registration...",   ID_POS_REG_WIN
+        MENUITEM "&Time event...",              ID_TIME_EV_WIN
+        MENUITEM "&Info...",                    ID_TOOLS_INFO
+        MENUITEM SEPARATOR
+        MENUITEM "&Export Features",            ID_TOOLS_EXPORT
+        MENUITEM "Export HQ PC1+Energy",        ID_TOOLS_EXPORTHQPC1
+        MENUITEM "Export Spikes",               ID_TOOLS_EXPORTSPIKES
+        MENUITEM "Import Spikes",               ID_TOOLS_IMPORTSPIKES
+        MENUITEM "Export Cluster Bounds",       ID_TOOLS_EXPORTCLUSTERBOUNDS
+        MENUITEM SEPARATOR
+        MENUITEM "Auto Find Noise",             ID_TOOLS_AUTOFINDNOISE
+    END
+    POPUP "Batch"
+    BEGIN
+        MENUITEM "Cluster Quality",             ID_BATCH_QUALITYRUN
+        MENUITEM "Sample Batch File",           ID_BATCH_SAMPLEBATCHFILE
+        MENUITEM "TimeStamp Adjust",            ID_BATCH_TIMESTAMPADJUST
+        MENUITEM "Auto Clustering",             ID_BATCH_AUTOCLUSTERING
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About WClust...",            ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "L",            ID_FILE_LOADCLUSTERS,   VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPENBPFILE,     VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVECLUSTERS,   VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,0,0,108
+ PRODUCTVERSION 2,0,0,108
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "WClust MFC Application"
+            VALUE "FileVersion", "2, 0, 0, 108"
+            VALUE "InternalName", "WClust"
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2010"
+            VALUE "OriginalFilename", "WClust.EXE"
+            VALUE "ProductName", "WClust Application"
+            VALUE "ProductVersion", "2, 0, 0, 108"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "WClust\n\nWClust\n\n\nWClust.Document\nWClust Document"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "WClust"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "About WClust (2.0.0.108)\nAbout"
+    ID_APP_EXIT             "Quit the application;\nExit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_OPENBPFILE      "Open brain potential file"
+    IDC_NEWCLUST            "New clusters"
+    ID_FILE_SAVECLUSTERS    "Storing clusters' data to file"
+    ID_FILE_LOADCLUSTERS    "Open clusters file"
+    ID_FILE_STORETOBPFILE   "Save clusters' number to original brain potential file"
+    ID_ENVIRONMENT_OPEN     "Open file with views' parameters"
+    ID_ENVIRONMENT_SAVE     "Save views' parameters to file"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_ENVIRONMENT_LOAD     "Load views' parameters from file"
+    ID_NEWCLUST             "New clusters"
+    ID_LOAD_ARENA           "Load arena"
+    ID_FILE_STORETOFILE     "Save clusters' number to original BP file"
+    ID_MODE_SWAPPOLARITY    "Swap polarity of spikes"
+    ID_TOOLS_INFO           "Informations about used file"
+    ID_TOOLS_EXPORT         "Create a text file with parameters"
+    ID_CLUSTER_SETBINS      "Set # of Bins"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_CLUSTER_SETBINS32800 "Set # of bins for probability estimation"
+    ID_CLUSTER_INFOCLUST    "Perform Exclusive Information Clustering"
+    ID_CLUSTER_K            "Perform K-means/medians Clustering"
+    ID_CLUSTER_RESISTORINFOCLUST "Perform UD Clustering"
+    ID_CLUSTER_APCLUST      "Perform Affinity Propagation Clustering"
+    ID_CLUSTER_KLUSTAKWIKCLUST "Perform KlustaKwik Clustering"
+    ID_CLUSTER_USERSPIKEX   "Use Spike X,Y"
+    ID_CLUSTER_USERSPIKEXY  "Use Spike X,Y for clustering"
+    ID_CLUSTER_USE_SPIKEXY  "Set options for showing X,Y Spike Coords (if available)"
+    ID_CLUSTER_ENTROPYINFOCLUST "Perform entropy reduction clustering"
+    ID_TOOLS_AUTOFINDNOISE  "Automatically Check for Noise"
+    ID_BATCH_QUALITYRUN     "Perform Cluster Quality Batch Run"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_BATCH_SAMPLEBATCHFILE 
+                            "Display Sample Cluster Quality Run Batch Input File"
+    ID_CLUSTER_SETKLDOPTIONS "Set Cluster Quality Options"
+    ID_TOOLS_EXPORTSPIKES   "Export raw spikes to text file"
+    ID_CLUSTER_CALCCLUSTERQUALITY "Compute Cluster Quality"
+    ID_TOOLS_EXPORTHQPC1    "Export isolation distance/ l-ratio features to text file."
+    ID_TOOLS_IMPORTSPIKES   "Import spike waveforms from text file."
+    ID_BATCH_TIMESTAMPADJUST "Perform TimeStamp Adjust Batch Run"
+    ID_CLUSTER_FLAMECLUSTERING 
+                            "Perform Fuzzy clustering by Local Approximation of MEmberships"
+    ID_BATCH_AUTOCLUSTERING "Perform AutoClustering Batch"
+    ID_TOOLS_EXPORTCLUSTERBOUNDS 
+                            "Export user-defined cluster boundaries to text file."
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\WClust.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
+@
+
+
+1.59
+log
+@v107, added klustakwik options, def. dims for iso-i
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.107",IDC_STATIC,64,7,91,8,
+d331 1
+a331 1
+    LTEXT           "Copyright (c) 2002-2009, Bio-Signal Group Corp.",
+d1184 1
+d1221 2
+a1222 2
+ FILEVERSION 2,0,0,107
+ PRODUCTVERSION 2,0,0,107
+d1238 1
+a1238 1
+            VALUE "FileVersion", "2, 0, 0, 107"
+d1240 1
+a1240 1
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2009"
+d1243 1
+a1243 1
+            VALUE "ProductVersion", "2, 0, 0, 107"
+d1294 1
+a1294 1
+    ID_APP_ABOUT            "About WClust (2.0.0.107)\nAbout"
+d1424 2
+@
+
+
+1.58
+log
+@added autoclustering batch, som-clustering, v106
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.106",IDC_STATIC,64,7,91,8,
+d599 1
+a599 1
+IDD_DLG_AUTO_DENOISE DIALOGEX 0, 0, 208, 89
+d605 2
+a606 2
+    DEFPUSHBUTTON   "Find-Noise",IDOK,42,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,108,66,50,14
+d616 3
+a618 1
+    GROUPBOX        "Find-Noise Options",IDC_STATIC,6,6,198,54
+d651 1
+a651 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 193
+d657 1
+a657 1
+    DEFPUSHBUTTON   "Set Options",IDOK,40,166,58,14
+d660 1
+a660 1
+    PUSHBUTTON      "Cancel",IDCANCEL,105,166,50,14
+d663 1
+a663 1
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,8,119,112
+d665 1
+a665 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,137,106,15
+d674 1
+a674 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,123,98,14
+d683 3
+a685 1
+                    BS_AUTOCHECKBOX | WS_TABSTOP,44,152,94,11
+d803 22
+d990 1
+a990 1
+        BOTTOMMARGIN, 82
+d1014 1
+a1014 1
+        BOTTOMMARGIN, 186
+d1048 8
+d1220 2
+a1221 2
+ FILEVERSION 2,0,0,105
+ PRODUCTVERSION 2,0,0,105
+d1237 1
+a1237 1
+            VALUE "FileVersion", "2, 0, 0, 105"
+d1239 1
+a1239 1
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2008"
+d1242 1
+a1242 1
+            VALUE "ProductVersion", "2, 0, 0, 105"
+d1293 1
+a1293 1
+    ID_APP_ABOUT            "About WClust (2.0.0.106)\nAbout"
+@
+
+
+1.57
+log
+@notes dialog added
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.105",IDC_STATIC,64,7,91,8,
+d780 19
+d1014 8
+d1131 1
+d1158 1
+d1259 1
+a1259 1
+    ID_APP_ABOUT            "About WClust (2.0.0.105)\nAbout"
+d1388 1
+@
+
+
+1.56
+log
+@next version
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.104",IDC_STATIC,64,7,91,8,
+d717 63
+d987 8
+d1157 2
+a1158 2
+ FILEVERSION 2,0,0,104
+ PRODUCTVERSION 2,0,0,104
+d1174 1
+a1174 1
+            VALUE "FileVersion", "2, 0, 0, 104"
+d1179 1
+a1179 1
+            VALUE "ProductVersion", "2, 0, 0, 104"
+d1230 1
+a1230 1
+    ID_APP_ABOUT            "About WClust (2.0.0.104)\nAbout"
+@
+
+
+1.55
+log
+@added flame clustering, v103
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.103",IDC_STATIC,64,7,91,8,
+d331 1
+a331 1
+    LTEXT           "Copyright (c) 2002-2008, Bio-Signal Group Corp.",
+d1086 2
+a1087 2
+ FILEVERSION 2,0,0,103
+ PRODUCTVERSION 2,0,0,103
+d1103 1
+a1103 1
+            VALUE "FileVersion", "2, 0, 0, 103"
+d1108 1
+a1108 1
+            VALUE "ProductVersion", "2, 0, 0, 103"
+d1159 1
+a1159 1
+    ID_APP_ABOUT            "About WClust (2.0.0.103)\nAbout"
+@
+
+
+1.54
+log
+@v102
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.102",IDC_STATIC,64,7,91,8,
+d696 21
+d916 8
+d1032 1
+d1086 2
+a1087 2
+ FILEVERSION 2,0,0,102
+ PRODUCTVERSION 2,0,0,102
+d1103 1
+a1103 1
+            VALUE "FileVersion", "2, 0, 0, 102"
+d1108 1
+a1108 1
+            VALUE "ProductVersion", "2, 0, 0, 102"
+d1159 1
+a1159 1
+    ID_APP_ABOUT            "About WClust (2.0.0.102)\nAbout"
+d1286 2
+@
+
+
+1.53
+log
+@updated kmeans dialog
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.101",IDC_STATIC,64,7,91,8,
+d1056 2
+a1057 2
+ FILEVERSION 2,0,0,101
+ PRODUCTVERSION 2,0,0,101
+d1073 1
+a1073 1
+            VALUE "FileVersion", "2, 0, 0, 101"
+d1078 1
+a1078 1
+            VALUE "ProductVersion", "2, 0, 0, 101"
+d1129 1
+a1129 1
+    ID_APP_ABOUT            "About WClust (2.0.0.101)\nAbout"
+@
+
+
+1.52
+log
+@v101
+@
+text
+@d513 1
+a513 1
+IDD_KM_DIALOG DIALOGEX 0, 0, 219, 106
+d519 14
+a532 5
+    DEFPUSHBUTTON   "OK",IDOK,43,71,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,111,71,50,14
+    LTEXT           "Enter min-clusts(5), max-clusts(20), num-iterations(1000), DBIndex-iters(200), normalize-data(0), use-medians(0)",
+                    IDC_STATIC,17,14,195,19
+    EDITTEXT        IDC_EDIT_KM,7,42,205,21,ES_AUTOHSCROLL
+d535 1
+a535 1
+IDD_DIALOG_ECLUST DIALOGEX 0, 0, 154, 98
+d541 2
+a542 2
+    DEFPUSHBUTTON   "OK",IDOK,21,72,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,82,72,50,14
+d551 2
+d819 1
+a819 1
+        RIGHTMARGIN, 212
+d821 1
+a821 1
+        BOTTOMMARGIN, 99
+d829 1
+a829 1
+        BOTTOMMARGIN, 91
+@
+
+
+1.51
+log
+@v100
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.100",IDC_STATIC,64,7,91,8,
+d1045 2
+a1046 2
+ FILEVERSION 2,0,0,100
+ PRODUCTVERSION 2,0,0,100
+d1062 1
+a1062 1
+            VALUE "FileVersion", "2, 0, 0, 100"
+d1067 1
+a1067 1
+            VALUE "ProductVersion", "2, 0, 0, 100"
+d1118 1
+a1118 1
+    ID_APP_ABOUT            "About WClust (2.0.0.100)\nAbout"
+@
+
+
+1.50
+log
+@v99 , added import spikes, export iso-d/l-ratio features
+@
+text
+@d317 1
+a317 1
+                    WS_TABSTOP,168,103,45,8
+d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.99",IDC_STATIC,64,7,91,8,
+d1017 1
+d1045 2
+a1046 2
+ FILEVERSION 2,0,0,99
+ PRODUCTVERSION 2,0,0,99
+d1062 1
+a1062 1
+            VALUE "FileVersion", "2, 0, 0, 99"
+d1067 1
+a1067 1
+            VALUE "ProductVersion", "2, 0, 0, 99"
+d1118 1
+a1118 1
+    ID_APP_ABOUT            "About WClust (2.0.0.99)\nAbout"
+d1244 1
+@
+
+
+1.49
+log
+@v98
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.98",IDC_STATIC,64,7,91,8,
+d1007 1
+d1009 1
+d1044 2
+a1045 2
+ FILEVERSION 2,0,0,98
+ PRODUCTVERSION 2,0,0,98
+d1061 1
+a1061 1
+            VALUE "FileVersion", "2, 0, 0, 98"
+d1066 1
+a1066 1
+            VALUE "ProductVersion", "2, 0, 0, 98"
+d1117 1
+a1117 1
+    ID_APP_ABOUT            "About WClust (2.0.0.98)\nAbout"
+d1241 2
+@
+
+
+1.48
+log
+@v97, improved entropy reduction dialog
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.97",IDC_STATIC,64,7,91,8,
+d1042 2
+a1043 2
+ FILEVERSION 2,0,0,97
+ PRODUCTVERSION 2,0,0,97
+d1059 1
+a1059 1
+            VALUE "FileVersion", "2, 0, 0, 97"
+d1064 1
+a1064 1
+            VALUE "ProductVersion", "2, 0, 0, 97"
+d1115 1
+a1115 1
+    ID_APP_ABOUT            "About WClust (2.0.0.97)\nAbout"
+@
+
+
+1.47
+log
+@v96, added option to specify # of wavelet coefficients to add as dimensions
+@
+text
+@d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.96",IDC_STATIC,64,7,91,8,
+d526 1
+a526 1
+IDD_DIALOG_ECLUST DIALOGEX 0, 0, 186, 95
+d529 1
+a529 1
+CAPTION "Enter EClust parameters"
+d532 10
+a541 5
+    DEFPUSHBUTTON   "OK",IDOK,26,65,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,97,65,50,14
+    LTEXT           "Enter MinClust, MaxClust, NumIterations, NumClustIterations",
+                    IDC_STATIC,25,15,135,18
+    EDITTEXT        IDC_EDIT_ECLUST,18,35,143,20,ES_AUTOHSCROLL
+d816 1
+a816 1
+        RIGHTMARGIN, 179
+d818 1
+a818 1
+        BOTTOMMARGIN, 88
+d1042 2
+a1043 2
+ FILEVERSION 2,0,0,96
+ PRODUCTVERSION 2,0,0,96
+d1059 1
+a1059 1
+            VALUE "FileVersion", "2, 0, 0, 96"
+d1064 1
+a1064 1
+            VALUE "ProductVersion", "2, 0, 0, 96"
+d1115 1
+a1115 1
+    ID_APP_ABOUT            "About WClust (2.0.0.96)\nAbout"
+@
+
+
+1.46
+log
+@make sure extra user-added dimensions know their index when loading from .cl file, v95
+@
+text
+@d257 1
+a257 1
+IDD_EDIT_SPIKES DIALOG  0, 0, 491, 273
+d261 1
+a261 1
+FONT 8, "MS Sans Serif"
+d285 3
+d326 1
+a326 1
+    LTEXT           "WClust version 2.0.0.95",IDC_STATIC,64,7,91,8,
+d1037 2
+a1038 2
+ FILEVERSION 2,0,0,95
+ PRODUCTVERSION 2,0,0,95
+d1054 1
+a1054 1
+            VALUE "FileVersion", "2, 0, 0, 95"
+d1059 1
+a1059 1
+            VALUE "ProductVersion", "2, 0, 0, 95"
+d1110 1
+a1110 1
+    ID_APP_ABOUT            "About WClust (2.0.0.95)\nAbout"
+@
+
+
+1.45
+log
+@added LRatio , v94
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.94",IDC_STATIC,64,7,91,8,
+d1034 2
+a1035 2
+ FILEVERSION 2,0,0,94
+ PRODUCTVERSION 2,0,0,94
+d1051 1
+a1051 1
+            VALUE "FileVersion", "2, 0, 0, 94"
+d1056 1
+a1056 1
+            VALUE "ProductVersion", "2, 0, 0, 94"
+d1107 1
+a1107 1
+    ID_APP_ABOUT            "About WClust (2.0.0.94)\nAbout"
+@
+
+
+1.44
+log
+@v93
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.93",IDC_STATIC,64,7,91,8,
+d630 1
+a630 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 182
+d636 1
+a636 1
+    DEFPUSHBUTTON   "Set Options",IDOK,40,154,58,14
+d639 1
+a639 1
+    PUSHBUTTON      "Cancel",IDCANCEL,105,154,50,14
+d661 2
+d866 1
+a866 1
+        BOTTOMMARGIN, 175
+d1034 2
+a1035 2
+ FILEVERSION 2,0,0,93
+ PRODUCTVERSION 2,0,0,93
+d1051 1
+a1051 1
+            VALUE "FileVersion", "2, 0, 0, 93"
+d1056 1
+a1056 1
+            VALUE "ProductVersion", "2, 0, 0, 93"
+d1107 1
+a1107 1
+    ID_APP_ABOUT            "About WClust (2.0.0.93)\nAbout"
+@
+
+
+1.43
+log
+@v92
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.92",IDC_STATIC,64,7,91,8,
+d1032 2
+a1033 2
+ FILEVERSION 2,0,0,92
+ PRODUCTVERSION 2,0,0,92
+d1049 1
+a1049 1
+            VALUE "FileVersion", "2, 0, 0, 92"
+d1054 1
+a1054 1
+            VALUE "ProductVersion", "2, 0, 0, 92"
+d1105 1
+a1105 1
+    ID_APP_ABOUT            "About WClust (2.0.0.92)\nAbout"
+@
+
+
+1.42
+log
+@v91, normalize off by default
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.91",IDC_STATIC,64,7,91,8,
+d1032 2
+a1033 2
+ FILEVERSION 2,0,0,91
+ PRODUCTVERSION 2,0,0,91
+d1049 1
+a1049 1
+            VALUE "FileVersion", "2, 0, 0, 91"
+d1054 1
+a1054 1
+            VALUE "ProductVersion", "2, 0, 0, 91"
+d1105 1
+a1105 1
+    ID_APP_ABOUT            "About WClust (2.0.0.91)\nAbout"
+@
+
+
+1.41
+log
+@added option to normalize data (or not) before kldiv,v90
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.90",IDC_STATIC,64,7,91,8,
+d1032 2
+a1033 2
+ FILEVERSION 2,0,0,90
+ PRODUCTVERSION 2,0,0,90
+d1049 1
+a1049 1
+            VALUE "FileVersion", "2, 0, 0, 90"
+d1054 1
+a1054 1
+            VALUE "ProductVersion", "2, 0, 0, 90"
+d1105 1
+a1105 1
+    ID_APP_ABOUT            "About WClust (2.0.0.90)\nAbout"
+@
+
+
+1.40
+log
+@v89
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.89",IDC_STATIC,64,7,91,8,
+d630 1
+a630 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 167
+d636 1
+a636 1
+    DEFPUSHBUTTON   "Set Options",IDOK,40,138,58,14
+d639 1
+a639 1
+    PUSHBUTTON      "Cancel",IDCANCEL,105,138,50,14
+d642 1
+a642 1
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,8,119,99
+d644 1
+a644 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,121,106,15
+d649 3
+a651 3
+    EDITTEXT        IDC_EDIT_BEST_DIMS,51,66,28,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Set Num Best Dims",IDC_BUTTON_SET_NUM_BEST_DIMS,81,66,
+                    67,11
+d653 1
+a653 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,107,98,14
+d655 1
+a655 1
+                    BS_AUTORADIOBUTTON | WS_GROUP,52,89,39,11
+d657 4
+a660 2
+                    BS_AUTORADIOBUTTON | WS_GROUP,97,88,40,13
+    LTEXT           "Estimate Best Dims Using:",IDC_STATIC,56,80,86,9
+d864 1
+a864 1
+        BOTTOMMARGIN, 160
+d1032 2
+a1033 2
+ FILEVERSION 2,0,0,89
+ PRODUCTVERSION 2,0,0,89
+d1049 1
+a1049 1
+            VALUE "FileVersion", "2, 0, 0, 89"
+d1054 1
+a1054 1
+            VALUE "ProductVersion", "2, 0, 0, 89"
+d1105 1
+a1105 1
+    ID_APP_ABOUT            "About WClust (2.0.0.89)\nAbout"
+@
+
+
+1.39
+log
+@v88
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.88",IDC_STATIC,64,7,91,8,
+d1030 2
+a1031 2
+ FILEVERSION 2,0,0,88
+ PRODUCTVERSION 2,0,0,88
+d1047 1
+a1047 1
+            VALUE "FileVersion", "2, 0, 0, 88"
+d1052 1
+a1052 1
+            VALUE "ProductVersion", "2, 0, 0, 88"
+d1103 1
+a1103 1
+    ID_APP_ABOUT            "About WClust (2.0.0.88)\nAbout"
+@
+
+
+1.38
+log
+@v86
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.86",IDC_STATIC,64,7,91,8,
+d1030 2
+a1031 2
+ FILEVERSION 2,0,0,86
+ PRODUCTVERSION 2,0,0,86
+d1047 1
+a1047 1
+            VALUE "FileVersion", "2, 0, 0, 86"
+d1052 1
+a1052 1
+            VALUE "ProductVersion", "2, 0, 0, 86"
+d1103 1
+a1103 1
+    ID_APP_ABOUT            "About WClust (2.0.0.86)\nAbout"
+@
+
+
+1.37
+log
+@added option for 1D vs 2D slices to find best dims, v85
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.85",IDC_STATIC,64,7,91,8,
+d1030 2
+a1031 2
+ FILEVERSION 2,0,0,85
+ PRODUCTVERSION 2,0,0,85
+d1047 1
+a1047 1
+            VALUE "FileVersion", "2, 0, 0, 85"
+d1052 1
+a1052 1
+            VALUE "ProductVersion", "2, 0, 0, 85"
+d1103 1
+a1103 1
+    ID_APP_ABOUT            "About WClust (2.0.0.85)\nAbout"
+@
+
+
+1.36
+log
+@v85
+@
+text
+@d630 1
+a630 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 140
+d636 1
+a636 1
+    DEFPUSHBUTTON   "Set Options",IDOK,40,114,58,14
+d639 1
+a639 1
+    PUSHBUTTON      "Cancel",IDCANCEL,105,114,50,14
+d642 1
+a642 1
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,8,119,73
+d644 1
+a644 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,97,106,15
+d653 6
+a658 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,44,83,98,14
+d862 1
+a862 1
+        BOTTOMMARGIN, 133
+@
+
+
+1.35
+log
+@added silhouette width, v84
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.84",IDC_STATIC,64,7,91,8,
+d1025 2
+a1026 2
+ FILEVERSION 2,0,0,84
+ PRODUCTVERSION 2,0,0,84
+d1042 1
+a1042 1
+            VALUE "FileVersion", "2, 0, 0, 84"
+d1047 1
+a1047 1
+            VALUE "ProductVersion", "2, 0, 0, 84"
+d1098 1
+a1098 1
+    ID_APP_ABOUT            "About WClust (2.0.0.84)\nAbout"
+@
+
+
+1.34
+log
+@version 83 , added options for finding best dimensions for each cluster for computing kldiv
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.83",IDC_STATIC,64,7,91,8,
+d630 1
+a630 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 129
+d636 1
+a636 1
+    DEFPUSHBUTTON   "Set Options",IDOK,40,101,58,14
+d639 1
+a639 1
+    PUSHBUTTON      "Cancel",IDCANCEL,105,101,50,14
+d644 1
+a644 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,39,84,125,15
+d649 1
+a649 1
+    EDITTEXT        IDC_EDIT_BEST_DIMS,51,66,28,11,ES_AUTOHSCROLL
+d652 2
+d857 1
+a857 1
+        BOTTOMMARGIN, 122
+d1025 2
+a1026 2
+ FILEVERSION 2,0,0,83
+ PRODUCTVERSION 2,0,0,83
+d1042 1
+a1042 1
+            VALUE "FileVersion", "2, 0, 0, 83"
+d1047 1
+a1047 1
+            VALUE "ProductVersion", "2, 0, 0, 83"
+d1098 1
+a1098 1
+    ID_APP_ABOUT            "About WClust (2.0.0.83)\nAbout"
+@
+
+
+1.33
+log
+@v82, added precise time control for eeg
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.82",IDC_STATIC,64,7,91,8,
+d630 1
+a630 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 103
+d636 4
+a639 4
+    DEFPUSHBUTTON   "Set Options",IDOK,40,77,58,14
+    CONTROL         "Fast",IDC_CHECK_FAST_KLD,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,52,42,31,12
+    PUSHBUTTON      "Cancel",IDCANCEL,105,77,50,14
+d642 1
+a642 1
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,8,119,49
+d644 1
+a644 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,39,60,125,15
+d647 5
+d855 1
+a855 1
+        BOTTOMMARGIN, 96
+d1023 2
+a1024 2
+ FILEVERSION 2,0,0,82
+ PRODUCTVERSION 2,0,0,82
+d1040 1
+a1040 1
+            VALUE "FileVersion", "2, 0, 0, 82"
+d1045 1
+a1045 1
+            VALUE "ProductVersion", "2, 0, 0, 82"
+d1096 1
+a1096 1
+    ID_APP_ABOUT            "About WClust (2.0.0.82)\nAbout"
+@
+
+
+1.32
+log
+@version 81
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.81",IDC_STATIC,64,7,91,8,
+d400 1
+a400 1
+    EDITTEXT        IDC_EDITEEGPLAYSPEED,347,292,32,12,ES_AUTOHSCROLL | 
+d403 1
+a403 1
+                    UDS_AUTOBUDDY | UDS_ARROWKEYS | WS_GROUP,379,294,11,10
+d405 2
+d1018 2
+a1019 2
+ FILEVERSION 2,0,0,81
+ PRODUCTVERSION 2,0,0,81
+d1035 1
+a1035 1
+            VALUE "FileVersion", "2, 0, 0, 81"
+d1040 1
+a1040 1
+            VALUE "ProductVersion", "2, 0, 0, 81"
+d1091 1
+a1091 1
+    ID_APP_ABOUT            "About WClust (2.0.0.81)\nAbout"
+@
+
+
+1.31
+log
+@added single nearest neighbor search to avoid range searches, got rid of some options in cluster quality options, since not needed anymore, v80
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.80",IDC_STATIC,64,7,91,8,
+d1016 2
+a1017 2
+ FILEVERSION 2,0,0,80
+ PRODUCTVERSION 2,0,0,80
+d1033 1
+a1033 1
+            VALUE "FileVersion", "2, 0, 0, 80"
+d1038 1
+a1038 1
+            VALUE "ProductVersion", "2, 0, 0, 80"
+d1089 1
+a1089 1
+    ID_APP_ABOUT            "About WClust (2.0.0.80)\nAbout"
+@
+
+
+1.30
+log
+@v79
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.79",IDC_STATIC,64,7,91,8,
+d628 1
+a628 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 196, 154
+d634 4
+a637 10
+    DEFPUSHBUTTON   "Set Options",IDOK,40,126,58,14
+    CONTROL         "Fast (more memory)",IDC_CHECK_FAST_KLD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,50,79,12
+    EDITTEXT        IDC_EDITNNKLD,63,76,37,13,ES_AUTOHSCROLL | ES_NUMBER | 
+                    WS_GROUP
+    CONTROL         "",IDC_SPINNNKLD,"msctls_updown32",UDS_SETBUDDYINT | 
+                    UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS | 
+                    WS_GROUP,101,76,11,11
+    GROUPBOX        "NumNearestNeighbors",IDC_STATIC,49,63,81,30
+    PUSHBUTTON      "Cancel",IDCANCEL,105,126,50,14
+d639 2
+a640 2
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,38,107,13
+    GROUPBOX        "KLDiv Options",IDC_STATIC_K,37,16,119,91
+d642 1
+a642 1
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,39,109,125,15
+d644 1
+a644 1
+                    BS_AUTOCHECKBOX | WS_TABSTOP,52,29,90,12
+d848 1
+a848 1
+        BOTTOMMARGIN, 147
+d1016 2
+a1017 2
+ FILEVERSION 2,0,0,79
+ PRODUCTVERSION 2,0,0,79
+d1033 1
+a1033 1
+            VALUE "FileVersion", "2, 0, 0, 79"
+d1038 1
+a1038 1
+            VALUE "ProductVersion", "2, 0, 0, 79"
+d1089 1
+a1089 1
+    ID_APP_ABOUT            "About WClust (2.0.0.79)\nAbout"
+@
+
+
+1.29
+log
+@version 78
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.78",IDC_STATIC,64,7,91,8,
+d402 2
+a403 3
+    CONTROL         "",IDC_SPINEEGPLAYSPEED,"msctls_updown32",
+                    UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | 
+                    UDS_ARROWKEYS | WS_GROUP,379,294,11,10
+d1022 2
+a1023 2
+ FILEVERSION 2,0,0,78
+ PRODUCTVERSION 2,0,0,78
+d1039 1
+a1039 1
+            VALUE "FileVersion", "2, 0, 0, 78"
+d1044 1
+a1044 1
+            VALUE "ProductVersion", "2, 0, 0, 78"
+d1095 1
+a1095 1
+    ID_APP_ABOUT            "About WClust (2.0.0.78)\nAbout"
+@
+
+
+1.28
+log
+@v77
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.77",IDC_STATIC,64,7,91,8,
+d1023 2
+a1024 2
+ FILEVERSION 2,0,0,77
+ PRODUCTVERSION 2,0,0,77
+d1040 1
+a1040 1
+            VALUE "FileVersion", "2, 0, 0, 77"
+d1045 1
+a1045 1
+            VALUE "ProductVersion", "2, 0, 0, 77"
+d1096 1
+a1096 1
+    ID_APP_ABOUT            "About WClust (2.0.0.77)\nAbout"
+@
+
+
+1.27
+log
+@added ComputeClusterQuality to Cluster menu, v76
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.76",IDC_STATIC,64,7,91,8,
+d1023 2
+a1024 2
+ FILEVERSION 2,0,0,76
+ PRODUCTVERSION 2,0,0,76
+d1040 1
+a1040 1
+            VALUE "FileVersion", "2, 0, 0, 76"
+d1045 1
+a1045 1
+            VALUE "ProductVersion", "2, 0, 0, 76"
+d1096 1
+a1096 1
+    ID_APP_ABOUT            "About WClust (2.0.0.76)\nAbout"
+@
+
+
+1.26
+log
+@added export raw spikes to text
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.75",IDC_STATIC,64,7,91,8,
+d967 2
+d1023 2
+a1024 2
+ FILEVERSION 2,0,0,75
+ PRODUCTVERSION 2,0,0,75
+d1040 1
+a1040 1
+            VALUE "FileVersion", "2, 0, 0, 75"
+d1045 1
+a1045 1
+            VALUE "ProductVersion", "2, 0, 0, 75"
+d1096 1
+a1096 1
+    ID_APP_ABOUT            "About WClust (2.0.0.75)\nAbout"
+d1219 1
+@
+
+
+1.25
+log
+@v75, updated sample batch quality text file dialog
+@
+text
+@d985 2
+a986 1
+        MENUITEM "&Export",                     ID_TOOLS_EXPORT
+d1216 1
+@
+
+
+1.24
+log
+@started adding video code
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.74",IDC_STATIC,64,7,91,8,
+d625 2
+a626 2
+    LTEXT           "First line in box above is just format description (shouldn't be in batch file!!)",
+                    IDC_STATIC_SAMP_B_TXT,169,118,247,14
+d1020 2
+a1021 2
+ FILEVERSION 2,0,0,74
+ PRODUCTVERSION 2,0,0,74
+d1037 1
+a1037 1
+            VALUE "FileVersion", "2, 0, 0, 74"
+d1042 1
+a1042 1
+            VALUE "ProductVersion", "2, 0, 0, 74"
+d1093 1
+a1093 1
+    ID_APP_ABOUT            "About WClust (2.0.0.74)\nAbout"
+@
+
+
+1.23
+log
+@v74, updated eeg gains gui, added play speed control for eeg
+@
+text
+@d365 1
+a365 1
+IDD_TIME_EV DIALOGEX 0, 0, 500, 308
+d371 4
+a374 4
+    DEFPUSHBUTTON   "OK",IDOK,440,265,53,14
+    PUSHBUTTON      "Cancel",IDCANCEL,440,285,53,14
+    SCROLLBAR       IDC_SCROLL_TIME,7,200,425,11,WS_TABSTOP
+    EDITTEXT        IDC_EDIT_TIME,350,230,42,12,ES_RIGHT | ES_AUTOHSCROLL
+d376 1
+a376 1
+                    392,230,11,12
+d384 1
+a384 1
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,280,220,60,60
+d386 1
+a386 1
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,100,220,60,60
+d389 1
+a389 1
+    COMBOBOX        IDC_CMB_ORIG_NEW,440,200,53,59,CBS_DROPDOWNLIST | 
+d391 1
+a391 1
+    COMBOBOX        IDC_CMB_ROOM,100,285,60,72,CBS_DROPDOWNLIST | WS_VSCROLL | 
+d393 1
+a393 1
+    COMBOBOX        IDC_CMB_ARENA,280,285,60,73,CBS_DROPDOWN | WS_VSCROLL | 
+d395 6
+a400 6
+    PUSHBUTTON      "&Play",IDC_TE_PLAY,351,245,35,14
+    PUSHBUTTON      "&Clear",IDC_TE_CLEAR,389,244,35,14
+    PUSHBUTTON      "max",IDC_MAX,406,230,19,12
+    PUSHBUTTON      "&Take Pict",IDC_TE_TAKE_PICT,440,220,53,14
+    PUSHBUTTON      "Set EEG Gains",IDC_BUTTON_SET_GAINS,347,279,76,12
+    EDITTEXT        IDC_EDITEEGPLAYSPEED,347,261,32,12,ES_AUTOHSCROLL | 
+d404 2
+a405 1
+                    UDS_ARROWKEYS | WS_GROUP,379,263,11,10
+d654 12
+d736 1
+a736 1
+        BOTTOMMARGIN, 301
+d857 8
+@
+
+
+1.22
+log
+@v73
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.73",IDC_STATIC,64,7,91,8,
+d368 1
+a368 1
+CAPTION "Dialog"
+d395 2
+a396 2
+    PUSHBUTTON      "&Play",IDC_TE_PLAY,350,250,35,14
+    PUSHBUTTON      "&Clear",IDC_TE_CLEAR,390,250,35,14
+d399 6
+a404 1
+    PUSHBUTTON      "Set EEG Gains",IDC_BUTTON_SET_GAINS,350,267,76,12
+d598 1
+a598 1
+IDD_DIALOG1 DIALOGEX 0, 0, 186, 95
+d601 1
+a601 1
+CAPTION "Set EEG Gains"
+d604 8
+a611 4
+    DEFPUSHBUTTON   "Set EEG Gains",IDOK,37,66,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,93,66,50,14
+    EDITTEXT        IDC_EDIT_EEG_GAIN,39,36,104,24,ES_AUTOHSCROLL
+    LTEXT           "Set EEG Gains Below",IDC_STATIC,57,20,66,13
+d821 1
+a821 1
+    IDD_DIALOG1, DIALOG
+d824 1
+a824 1
+        RIGHTMARGIN, 179
+d826 1
+a826 1
+        BOTTOMMARGIN, 88
+d999 2
+a1000 2
+ FILEVERSION 2,0,0,73
+ PRODUCTVERSION 2,0,0,73
+d1016 1
+a1016 1
+            VALUE "FileVersion", "2, 0, 0, 73"
+d1021 1
+a1021 1
+            VALUE "ProductVersion", "2, 0, 0, 73"
+d1072 1
+a1072 1
+    ID_APP_ABOUT            "About WClust (2.0.0.73)\nAbout"
+@
+
+
+1.21
+log
+@v72
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.72",IDC_STATIC,64,7,91,8,
+d990 2
+a991 2
+ FILEVERSION 2,0,0,72
+ PRODUCTVERSION 2,0,0,72
+d1007 1
+a1007 1
+            VALUE "FileVersion", "2, 0, 0, 72"
+d1012 1
+a1012 1
+            VALUE "ProductVersion", "2, 0, 0, 72"
+d1063 1
+a1063 1
+    ID_APP_ABOUT            "About WClust (2.0.0.72)\nAbout"
+@
+
+
+1.20
+log
+@version 70, updated gui to include options to specify which computations to perform for cluster quality measurements
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.70",IDC_STATIC,64,7,91,8,
+d990 2
+a991 2
+ FILEVERSION 2,0,0,70
+ PRODUCTVERSION 2,0,0,70
+d1007 1
+a1007 1
+            VALUE "FileVersion", "2, 0, 0, 70"
+d1012 1
+a1012 1
+            VALUE "ProductVersion", "2, 0, 0, 70"
+d1063 1
+a1063 1
+    ID_APP_ABOUT            "About WClust (2.0.0.70)\nAbout"
+@
+
+
+1.19
+log
+@added option (default) to compute inter-cluster kldiv and add that to cluster vs background kldiv, v69
+@
+text
+@d230 1
+a230 1
+    PUSHBUTTON      "C-INF",IDC_BUTTON_CINF,281,231,23,14
+d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.69",IDC_STATIC,64,7,91,8,
+d619 1
+a619 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 186, 106
+d622 1
+a622 1
+CAPTION "WClust - Set KLD Options"
+d625 1
+a625 1
+    DEFPUSHBUTTON   "Set KLD Options",IDOK,31,78,62,14
+d627 2
+a628 2
+                    BS_AUTOCHECKBOX | WS_TABSTOP,51,27,79,12
+    EDITTEXT        IDC_EDITNNKLD,63,54,37,13,ES_AUTOHSCROLL | ES_NUMBER | 
+d632 10
+a641 5
+                    WS_GROUP,101,55,11,11
+    GROUPBOX        "NumNearestNeighbors",IDC_STATIC,49,41,81,30
+    PUSHBUTTON      "Cancel",IDCANCEL,101,78,50,14
+    CONTROL         "Compute inter-cluster KLDiv",IDC_CHECK_INTER_KLD,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,51,14,107,13
+d831 1
+a831 1
+        RIGHTMARGIN, 179
+d833 1
+a833 1
+        BOTTOMMARGIN, 99
+d936 1
+a936 1
+        MENUITEM "Set KLD Options",             ID_CLUSTER_SETKLDOPTIONS
+d990 2
+a991 2
+ FILEVERSION 2,0,0,69
+ PRODUCTVERSION 2,0,0,69
+d1007 1
+a1007 1
+            VALUE "FileVersion", "2, 0, 0, 69"
+d1012 1
+a1012 1
+            VALUE "ProductVersion", "2, 0, 0, 69"
+d1063 1
+a1063 1
+    ID_APP_ABOUT            "About WClust (2.0.0.69)\nAbout"
+d1184 1
+a1184 1
+    ID_CLUSTER_SETKLDOPTIONS "Set KLDiv Options"
+@
+
+
+1.18
+log
+@v68
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.68",IDC_STATIC,64,7,91,8,
+d619 1
+a619 1
+IDD_DIALOG_KLD_DLG_OPT DIALOGEX 0, 0, 186, 95
+d625 1
+a625 1
+    DEFPUSHBUTTON   "Set KLD Options",IDOK,31,67,62,14
+d627 2
+a628 2
+                    BS_AUTOCHECKBOX | WS_TABSTOP,51,16,75,12
+    EDITTEXT        IDC_EDITNNKLD,63,43,37,13,ES_AUTOHSCROLL | ES_NUMBER | 
+d632 5
+a636 3
+                    WS_GROUP,101,44,11,11
+    GROUPBOX        "NumNearestNeighbors",IDC_STATIC,49,30,81,30
+    PUSHBUTTON      "Cancel",IDCANCEL,101,67,50,14
+d828 1
+a828 1
+        BOTTOMMARGIN, 88
+d985 2
+a986 2
+ FILEVERSION 2,0,0,68
+ PRODUCTVERSION 2,0,0,68
+d1002 1
+a1002 1
+            VALUE "FileVersion", "2, 0, 0, 68"
+d1007 1
+a1007 1
+            VALUE "ProductVersion", "2, 0, 0, 68"
+d1058 1
+a1058 1
+    ID_APP_ABOUT            "About WClust (2.0.0.68)\nAbout"
+@
+
+
+1.17
+log
+@got rid of __wclust__.cfg and replaced with gui controls
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.67",IDC_STATIC,64,7,91,8,
+d983 2
+a984 2
+ FILEVERSION 2,0,0,67
+ PRODUCTVERSION 2,0,0,67
+d1000 1
+a1000 1
+            VALUE "FileVersion", "2, 0, 0, 67"
+d1005 1
+a1005 1
+            VALUE "ProductVersion", "2, 0, 0, 67"
+d1056 1
+a1056 1
+    ID_APP_ABOUT            "About WClust (2.0.0.67)\nAbout"
+@
+
+
+1.16
+log
+@updated version in menu
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.66",IDC_STATIC,64,7,91,8,
+d619 18
+d820 8
+d929 1
+d983 2
+a984 2
+ FILEVERSION 2,0,0,66
+ PRODUCTVERSION 2,0,0,66
+d1000 1
+a1000 1
+            VALUE "FileVersion", "2, 0, 0, 66"
+d1005 1
+a1005 1
+            VALUE "ProductVersion", "2, 0, 0, 66"
+d1056 1
+a1056 1
+    ID_APP_ABOUT            "About WClust (2.0.0.66)\nAbout"
+d1177 1
+@
+
+
+1.15
+log
+@updated version to 66, get rid of spike drawing in rate dialog
+@
+text
+@d1029 1
+a1029 1
+    ID_APP_ABOUT            "About latest/greatest WClust (2.0.0.64)\nAbout"
+@
+
+
+1.14
+log
+@v65
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.65",IDC_STATIC,64,7,91,8,
+d552 1
+a552 1
+IDD_DLG_RATE DIALOGEX 0, 0, 282, 268
+d557 2
+a558 2
+    DEFPUSHBUTTON   "Confirm Ratings",IDOK,76,240,123,14
+    COMBOBOX        IDC_COMBO_RATE,76,224,123,76,CBS_DROPDOWNLIST | 
+d561 4
+a564 4
+    GROUPBOX        "Rating",IDC_STATIC,75,193,124,28
+    LTEXT           "Poor",IDC_STATIC,155,209,18,9
+    LTEXT           "Fair",IDC_STATIC,133,209,21,9
+    LTEXT           "Good",IDC_STATIC,109,209,18,9
+d566 1
+a566 1
+                    WS_TABSTOP,113,199,12,10
+d568 1
+a568 1
+                    WS_TABSTOP,135,199,12,10
+d570 1
+a570 1
+                    WS_TABSTOP,155,199,12,10
+d774 1
+a774 1
+        RIGHTMARGIN, 275
+d776 1
+a776 1
+        BOTTOMMARGIN, 261
+d956 2
+a957 2
+ FILEVERSION 2,0,0,65
+ PRODUCTVERSION 2,0,0,65
+d973 1
+a973 1
+            VALUE "FileVersion", "2, 0, 0, 65"
+d978 1
+a978 1
+            VALUE "ProductVersion", "2, 0, 0, 65"
+@
+
+
+1.13
+log
+@version 63, added option for user to select whether to load EEG data from BPF file
+@
+text
+@d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.63",IDC_STATIC,64,7,91,8,
+d956 2
+a957 2
+ FILEVERSION 2,0,0,63
+ PRODUCTVERSION 2,0,0,63
+d973 1
+a973 1
+            VALUE "FileVersion", "2, 0, 0, 63"
+d978 1
+a978 1
+            VALUE "ProductVersion", "2, 0, 0, 63"
+d1029 1
+a1029 1
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+@
+
+
+1.12
+log
+@update to version 62
+@
+text
+@d306 1
+a306 1
+    GROUPBOX        "PCA Options",IDC_STATIC,167,18,75,120
+d313 2
+d323 1
+a323 1
+    LTEXT           "WClust version 2.0.0.62",IDC_STATIC,64,7,91,8,
+d956 2
+a957 2
+ FILEVERSION 2,0,0,62
+ PRODUCTVERSION 2,0,0,62
+d973 1
+a973 1
+            VALUE "FileVersion", "2, 0, 0, 62"
+d978 1
+a978 1
+            VALUE "ProductVersion", "2, 0, 0, 62"
+@
+
+
+1.11
+log
+@version 61, added sample batch file dialog
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.61",IDC_STATIC,64,7,91,8,
+d954 2
+a955 2
+ FILEVERSION 2,0,0,61
+ PRODUCTVERSION 2,0,0,61
+d971 1
+a971 1
+            VALUE "FileVersion", "2, 0, 0, 61"
+d976 1
+a976 1
+            VALUE "ProductVersion", "2, 0, 0, 61"
+@
+
+
+1.10
+log
+@-> version 60
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.60",IDC_STATIC,64,7,91,8,
+d603 14
+d792 8
+d926 1
+d954 2
+a955 2
+ FILEVERSION 2,0,0,60
+ PRODUCTVERSION 2,0,0,60
+d971 1
+a971 1
+            VALUE "FileVersion", "2, 0, 0, 60"
+d976 1
+a976 1
+            VALUE "ProductVersion", "2, 0, 0, 60"
+d1141 7
+@
+
+
+1.9
+log
+@version 59
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.59",IDC_STATIC,64,7,91,8,
+d931 2
+a932 2
+ FILEVERSION 2,0,0,59
+ PRODUCTVERSION 2,0,0,59
+d948 1
+a948 1
+            VALUE "FileVersion", "2, 0, 0, 59"
+d953 1
+a953 1
+            VALUE "ProductVersion", "2, 0, 0, 59"
+@
+
+
+1.8
+log
+@to version 58
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.58",IDC_STATIC,64,7,91,8,
+d931 2
+a932 2
+ FILEVERSION 2,0,0,58
+ PRODUCTVERSION 2,0,0,58
+d948 1
+a948 1
+            VALUE "FileVersion", "2, 0, 0, 58"
+d953 1
+a953 1
+            VALUE "ProductVersion", "2, 0, 0, 58"
+@
+
+
+1.7
+log
+@added eeg gain setting
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.57",IDC_STATIC,64,7,91,8,
+d931 2
+a932 2
+ FILEVERSION 2,0,0,57
+ PRODUCTVERSION 2,0,0,57
+d948 1
+a948 1
+            VALUE "FileVersion", "2, 0, 0, 57"
+d953 1
+a953 1
+            VALUE "ProductVersion", "2, 0, 0, 57"
+@
+
+
+1.6
+log
+@v56
+@
+text
+@d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.56",IDC_STATIC,64,7,91,8,
+d363 1
+a363 1
+IDD_TIME_EV DIALOG  0, 0, 500, 308
+d367 1
+a367 1
+FONT 8, "MS Sans Serif"
+d397 1
+d591 12
+d770 8
+d931 2
+a932 2
+ FILEVERSION 2,0,0,56
+ PRODUCTVERSION 2,0,0,56
+d948 1
+a948 1
+            VALUE "FileVersion", "2, 0, 0, 56"
+d953 1
+a953 1
+            VALUE "ProductVersion", "2, 0, 0, 56"
+@
+
+
+1.5
+log
+@updated to version 55, updated about box
+@
+text
+@d320 2
+a321 2
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,10,21,20
+    LTEXT           "WClust version 2.0.0.55",IDC_STATIC,64,7,91,8,
+d910 2
+a911 2
+ FILEVERSION 2,0,0,55
+ PRODUCTVERSION 2,0,0,55
+d927 1
+a927 1
+            VALUE "FileVersion", "2, 0, 0, 55"
+d932 1
+a932 1
+            VALUE "ProductVersion", "2, 0, 0, 55"
+@
+
+
+1.4
+log
+@version->54, added button to calculate cluster info
+@
+text
+@d315 1
+a315 1
+IDD_ABOUTBOX DIALOGEX 0, 0, 202, 90
+d320 2
+a321 2
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,10,20,20
+    LTEXT           "WClust version 2.0.0.54",IDC_STATIC,64,7,91,8,
+d323 1
+a323 1
+    DEFPUSHBUTTON   "OK",IDOK,75,63,50,14,WS_GROUP
+d329 1
+d527 3
+a529 4
+STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | DS_NOIDLEMSG | 
+    DS_SETFOREGROUND | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | 
+    WS_SYSMENU
+EXSTYLE WS_EX_TOPMOST | WS_EX_APPWINDOW
+d636 1
+a636 1
+        BOTTOMMARGIN, 83
+d882 1
+a882 1
+        MENUITEM "Quality Run",                 ID_BATCH_QUALITYRUN
+d910 2
+a911 2
+ FILEVERSION 2,0,0,54
+ PRODUCTVERSION 2,0,0,54
+d927 1
+a927 1
+            VALUE "FileVersion", "2, 0, 0, 54"
+d932 1
+a932 1
+            VALUE "ProductVersion", "2, 0, 0, 54"
+@
+
+
+1.3
+log
+@update to version 53, added dlg for auto noise check
+@
+text
+@d200 2
+a201 2
+    PUSHBUTTON      "&New Cluster",IDC_NEWPOLY,280,230,59,14
+    PUSHBUTTON      "Noi&se Off",IDC_MAKE_NOISE_BTN,349,230,45,15
+d230 1
+d321 1
+a321 1
+    LTEXT           "WClust version 2.0.0.53",IDC_STATIC,64,7,91,8,
+d910 2
+a911 2
+ FILEVERSION 2,0,0,53
+ PRODUCTVERSION 2,0,0,53
+d927 1
+a927 1
+            VALUE "FileVersion", "2, 0, 0, 53"
+d932 1
+a932 1
+            VALUE "ProductVersion", "2, 0, 0, 53"
+@
+
+
+1.2
+log
+@update
+@
+text
+@d320 1
+a320 1
+    LTEXT           "WClust version 2.0.0.52",IDC_STATIC,64,7,91,8,
+d325 1
+a325 1
+    LTEXT           "Copyright (c) 2002-2007, Bio-Signal Group Corp.",
+d569 20
+d748 8
+d876 6
+d909 2
+a910 2
+ FILEVERSION 2,0,0,52
+ PRODUCTVERSION 2,0,0,52
+d926 1
+a926 1
+            VALUE "FileVersion", "2, 0, 0, 52"
+d928 1
+a928 1
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2007"
+d931 1
+a931 1
+            VALUE "ProductVersion", "2, 0, 0, 52"
+d1095 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a0 1
+// $Id$ 
+d319 3
+a321 2
+    ICON            IDR_MAINFRAME,IDC_STATIC,5,10,21,20
+    LTEXT           "WClust version 2.0",IDC_STATIC,75,5,70,8,SS_NOPREFIX
+d832 1
+d875 2
+a876 2
+ FILEVERSION 2,0,0,49
+ PRODUCTVERSION 2,0,0,49
+d892 1
+a892 1
+            VALUE "FileVersion", "2, 0, 0, 49"
+d897 1
+a897 1
+            VALUE "ProductVersion", "2, 0, 0, 49"
+@

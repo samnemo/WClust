@@ -1,0 +1,839 @@
+head	1.12;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.12
+date	2008.08.28.04.07.09;	author samn;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.07.10.03.28.19;	author samn;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.05.16.18.24.06;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.04.24.23.42.25;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.04.24.05.27.04;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.04.11.22.26.36;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.04.10.03.41.22;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.03.19.15.07.46;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.01.23.23.39.39;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.01.10.05.35.29;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.10.00.46.51;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.29.30;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.12
+log
+@use C that maximizes iso-i(bg,inter) when determining # of clusters for entropy reduction clustering
+@
+text
+@// $Id: DialList.cpp,v 1.11 2008/07/10 03:28:19 samn Exp $ 
+// DialList.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "wclust.h"
+#include "DialList.h"
+#include ".\diallist.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CDialList dialog
+
+
+CDialList::CDialList(CWnd* pParent /*=NULL*/)
+	: cdxCSizingDialog(CDialList::IDD, pParent)
+{
+	//{{AFX_DATA_INIT(CDialList)
+	//}}AFX_DATA_INIT
+}
+
+
+void CDialList::DoDataExchange(CDataExchange* pDX)
+{
+	cdxCSizingDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CDialList)
+	DDX_Control(pDX, IDCANCEL, m_wndCancel);
+	DDX_Control(pDX, IDOK, m_wndOK);
+	DDX_Control(pDX, IDC_LIST1, m_wndList);
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CDialList, cdxCSizingDialog)
+	//{{AFX_MSG_MAP(CDialList)
+	ON_WM_SHOWWINDOW()
+	ON_LBN_SELCHANGE(IDC_LIST1, OnSelchangeList1)
+	ON_LBN_DBLCLK(IDC_LIST1, OnDblclkList1)
+	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDOK, OnBnClickedOk)
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CDialList message handlers
+
+BOOL CDialList::OnInitDialog() 
+{
+	cdxCSizingDialog::OnInitDialog();
+	
+	RestoreWindowPosition(_T("Main\\ListWindow")); 
+
+	AddSzControlEx( m_wndList,exIgnore,exMaximum,exIgnore,exMaximum);
+	AddSzControl( m_wndOK,mdRepos,mdNone);
+	AddSzControl( m_wndCancel,mdRepos,mdNone);
+		
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CDialList::AddItem(int iAxX,int iAxY,int iCl,char* str)
+{
+	if(str)
+	{
+		m_wndList.AddString(str);
+		AxStackX.push_back(iAxX); 
+		AxStackY.push_back(iAxY);
+		ClStack.push_back(iCl);
+		ListNum++;
+	}
+}
+
+void CDialList::Clear()
+{
+	AxStackX.clear(); //AxStackX.empty();//?? empty just checks if the deque is empty
+	AxStackY.clear(); //AxStackY.empty();
+	ClStack.clear(); //ClStack.empty();
+	ListNum=0;
+}
+
+void CDialList::OnShowWindow(BOOL bShow, UINT nStatus) 
+{
+	cdxCSizingDialog::OnShowWindow(bShow, nStatus);
+
+	MY_STACK::iterator Index,indProj;
+
+	char toWrite[4196];
+
+	Clear();
+
+	int iC = 1;
+
+	int which = m_MainDataStack->whichDraw;
+
+	vector<ClusterInfo>& vInfo = m_MainClusters->m_vInfo[which];
+
+	char* strStar = "*********************************************************";
+
+	if(which == CLUST_USER)
+	{	
+		if (m_MainClusters->m_BndrStack.begin()+1 != m_MainClusters->m_BndrStack.end())
+		{
+			for (Index = m_MainClusters->m_BndrStack.begin()+1; Index != m_MainClusters->m_BndrStack.end(); Index++,iC++)
+			{
+				CBoundary *bndry;
+				bndry = (CBoundary*) *Index;
+
+				AddItem(0,0,0,strStar);
+				
+				if(bndry->m_bNoise)
+					sprintf(toWrite,"NoiseCluster %d",bndry->m_Numb);
+				else
+					sprintf(toWrite,"Cluster %d",bndry->m_Numb);
+
+				AddItem(0,0,0,toWrite);				
+				AddItem(0,0,0,"{");
+
+				for (indProj = bndry->m_ProjStack.begin(); indProj != bndry->m_ProjStack.end(); indProj++)
+				{
+					CProjection *proj;
+					proj = (CProjection*) *indProj;
+					
+					CString *strT1,*strT2;
+
+					strT1 = m_MainDataStack->GetAxesName(proj->m_AxesX);
+					strT2 = m_MainDataStack->GetAxesName(proj->m_AxesY);
+					
+					sprintf(toWrite,"   %s, %s",*strT1,*strT2);
+
+					AddItem(proj->m_AxesX,proj->m_AxesY,bndry->m_Numb,toWrite);
+				}
+
+				//only write info stats for non-noise clusters
+				//info stats of noise clusters are meaningless
+				if(!bndry->m_bNoise)
+				{	if(vInfo.size()>iC)
+					{	sprintf(toWrite,"   NumLoadedSpikes = %d",vInfo[iC].m_iSz); AddItem(0,0,bndry->m_Numb,toWrite);
+						sprintf(toWrite,"   TotalKLD = %.2f ",vInfo[iC].m_fBGInfoGain+vInfo[iC].m_fInterClustGain);
+						AddItem(0,0,bndry->m_Numb,toWrite);
+						if(m_MainClusters->m_oCQO.m_bInterKLD)
+						{	sprintf(toWrite,"   BGKLD=%.2f  InterKLD=%.2f  ClosestClusterID=%d",
+								vInfo[iC].m_fBGInfoGain,vInfo[iC].m_fInterClustGain,vInfo[iC].m_iClosestID);
+							AddItem(0,0,bndry->m_Numb,toWrite);
+						}
+						if(m_MainClusters->m_oCQO.m_bFastKLD)
+						{	sprintf(toWrite,"   KNNCC=%.4f",vInfo[iC].m_fPrctKNNInClust);
+							AddItem(0,0,bndry->m_Numb,toWrite);
+						}
+						if(m_MainClusters->m_oCQO.m_bSilhouette)
+						{	sprintf(toWrite,"   SilhouetteWidth=%.4f",vInfo[iC].m_fSilhouetteWidth);
+							AddItem(0,0,bndry->m_Numb,toWrite);
+						}
+					}
+					if(m_MainClusters->m_oCQO.m_bIsolationDist && vInfo.size()>iC)
+					{	sprintf(toWrite,"   IsolationDist = %.2f ",vInfo[iC].m_dIsolationDist);
+						AddItem(0,0,bndry->m_Numb,toWrite);
+					}
+					if(m_MainClusters->m_oCQO.m_bLRatio && vInfo.size()>iC)
+					{	sprintf(toWrite,"   LRatio = %g ",vInfo[iC].m_dLRatio);
+						AddItem(0,0,bndry->m_Numb,toWrite);
+					}
+					CCluster& oC = *m_MainClusters;
+					if(oC.m_oCQO.m_bFindBestDims && oC.m_vBestDims.Rows()>=iC)
+					{	A2D<int>& vBestDims = oC.m_vBestDims;
+						int iD = 0, iBestDims = oC.m_oCQO.m_iBestDims;
+						MY_STR_STACK& vAxes = m_MainDataStack->m_AxesStack;
+						sprintf(toWrite,"      Best %d dims{   Entropy  Mean  Stdev  Min  Max  Range",iBestDims);AddItem(0,0,0,toWrite);
+						for(iD=iBestDims-1;iD>=0;iD--)
+						{	sprintf(toWrite,"         %s", (*vAxes[vBestDims[iC][iD]]).GetBuffer() );
+							if(m_MainDataStack->m_MainMean.size()>=iD)
+							{	char tmp[1024];
+								sprintf(tmp,"     %.2f    %.2f    %.2f   %.2f   %.2f   %.2f",
+												m_MainDataStack->m_MainEntropy[vBestDims[iC][iD]+1],
+												m_MainDataStack->m_MainMean[vBestDims[iC][iD]+1],
+												m_MainDataStack->m_MainStdev[vBestDims[iC][iD]+1],
+												m_MainDataStack->m_MainMin[vBestDims[iC][iD]+1],
+												m_MainDataStack->m_MainMax[vBestDims[iC][iD]+1],
+												m_MainDataStack->m_MainRange[vBestDims[iC][iD]+1]); 
+								strcat(toWrite,tmp);
+							}
+							AddItem(0,0,0,toWrite); 
+						}
+						AddItem(0,0,0,"   }");
+					}
+				}	
+				AddItem(0,0,0,"}");
+			}
+		}
+	}
+	else
+	{
+		int iC = 1;
+		int iClusts = which == CLUST_ORIG ? m_MainDataStack->m_NumOriginalCl : m_MainClusters->m_pNumClusts[which];
+
+		for (iC = 1; iC <= iClusts; iC++)
+		{
+			AddItem(0,0,0,strStar);
+			
+			sprintf(toWrite,"Cluster %d",iC);
+			AddItem(0,0,0,toWrite);
+			
+			AddItem(0,0,0,"{");
+
+			if(vInfo.size()>iC)
+			{	sprintf(toWrite,"   NumLoadedSpikes = %d",vInfo[iC].m_iSz); AddItem(0,0,0,toWrite);
+				sprintf(toWrite,"   TotalKLD = %.2f ",vInfo[iC].m_fBGInfoGain+vInfo[iC].m_fInterClustGain);
+				AddItem(0,0,0,toWrite);
+
+				if(m_MainClusters->m_oCQO.m_bInterKLD)
+				{	sprintf(toWrite,"   BGKLD=%.2f  InterKLD=%.2f  ClosestClusterID=%d",
+							vInfo[iC].m_fBGInfoGain,vInfo[iC].m_fInterClustGain,vInfo[iC].m_iClosestID);
+					AddItem(0,0,0,toWrite);
+				}
+				if(m_MainClusters->m_oCQO.m_bFastKLD)
+				{	sprintf(toWrite,"   KNNCC=%.4f",vInfo[iC].m_fPrctKNNInClust); AddItem(0,0,0,toWrite);
+				}
+				if(m_MainClusters->m_oCQO.m_bSilhouette)
+				{	sprintf(toWrite,"   SilhouetteWidth=%.4f",vInfo[iC].m_fSilhouetteWidth); AddItem(0,0,0,toWrite);
+				}
+			}
+			if(m_MainClusters->m_oCQO.m_bIsolationDist && vInfo.size()>iC)
+			{	sprintf(toWrite,"   IsolationDist = %.2f ",vInfo[iC].m_dIsolationDist);
+				AddItem(0,0,0,toWrite);
+			}
+			if(m_MainClusters->m_oCQO.m_bLRatio && vInfo.size()>iC)
+			{	sprintf(toWrite,"   LRatio = %g ",vInfo[iC].m_dLRatio);
+				AddItem(0,0,0,toWrite);
+			}
+			AddItem(0,0,0,"}");
+		}
+	}
+	HICON pom1 = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	CWnd::SetIcon(pom1,true);
+}
+
+void CDialList::OnOK() 
+{
+	StoreWindowPosition(_T("Main\\ListWindow")); 	
+	cdxCSizingDialog::OnOK();
+}
+
+void CDialList::OnSelchangeList1() 
+{
+	int i = m_wndList.GetCurSel();
+
+	AxX = AxStackX[i];
+	AxY = AxStackY[i];
+	Cl =  ClStack[i];
+}
+
+void CDialList::OnDblclkList1() 
+{
+	OnOK();
+}
+
+void CDialList::OnBnClickedOk()
+{
+	OnOK();
+}
+@
+
+
+1.11
+log
+@added LRatio to display list
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.10 2008/05/16 18:24:06 samn Exp $ 
+d144 1
+a144 1
+						if(m_MainClusters->m_bInterKLD)
+d149 1
+a149 1
+						if(m_MainClusters->m_bFastKLD)
+d153 1
+a153 1
+						if(m_MainClusters->m_bSilhouette)
+d158 1
+a158 1
+					if(m_MainClusters->m_bIsolationDist && vInfo.size()>iC)
+d162 1
+a162 1
+					if(m_MainClusters->m_bLRatio && vInfo.size()>iC)
+d167 1
+a167 1
+					if(oC.m_bFindBestDims && oC.m_vBestDims.Rows()>=iC)
+d169 1
+a169 1
+						int iD = 0, iBestDims = oC.m_iBestDims;
+d213 1
+a213 1
+				if(m_MainClusters->m_bInterKLD)
+d218 1
+a218 1
+				if(m_MainClusters->m_bFastKLD)
+d221 1
+a221 1
+				if(m_MainClusters->m_bSilhouette)
+d225 1
+a225 1
+			if(m_MainClusters->m_bIsolationDist && vInfo.size()>iC)
+d229 1
+a229 1
+			if(m_MainClusters->m_bLRatio && vInfo.size()>iC)
+@
+
+
+1.10
+log
+@add dimension stats to output window when finding best dims
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.9 2008/04/24 23:42:25 samn Exp $ 
+d140 1
+a140 2
+				{
+					if(vInfo.size()>iC)
+d158 6
+a163 3
+					if(m_MainClusters->m_vIsolationDist[which].size()>iC)
+					{	double ISD = m_MainClusters->m_vIsolationDist[which][iC][0]; //isolation distance
+						sprintf(toWrite,"   IsolationDist = %.2f ",ISD);
+d225 6
+a230 5
+			if(m_MainClusters->m_vIsolationDist[which].size()>iC)
+			{
+				double ISD = m_MainClusters->m_vIsolationDist[which][iC][0]; //isolation distance
+
+				sprintf(toWrite,"   IsolationDist = %.2f ",ISD);
+a232 1
+
+@
+
+
+1.9
+log
+@added # of spikes to display list
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.8 2008/04/24 05:27:04 samn Exp $ 
+d164 24
+a187 1
+				}			
+@
+
+
+1.8
+log
+@added silhouette width
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.7 2008/04/11 22:26:36 samn Exp $ 
+d99 2
+d141 3
+a143 3
+					if(m_MainClusters->m_vInfo[which].size()>iC)
+					{	sprintf(toWrite,"   TotalKLD = %.2f ",m_MainClusters->m_vInfo[which][iC].m_fBGInfoGain+
+							m_MainClusters->m_vInfo[which][iC].m_fInterClustGain);
+d147 1
+a147 3
+								m_MainClusters->m_vInfo[which][iC].m_fBGInfoGain,
+								m_MainClusters->m_vInfo[which][iC].m_fInterClustGain,
+								m_MainClusters->m_vInfo[which][iC].m_iClosestID);
+d151 1
+a151 1
+						{	sprintf(toWrite,"   KNNCC=%.4f",m_MainClusters->m_vInfo[which][iC].m_fPrctKNNInClust);
+d155 1
+a155 1
+						{	sprintf(toWrite,"   SilhouetteWidth=%.4f",m_MainClusters->m_vInfo[which][iC].m_fSilhouetteWidth);
+d183 3
+a185 4
+			if(m_MainClusters->m_vInfo[which].size()>iC)
+			{
+				sprintf(toWrite,"   TotalKLD = %.2f ",m_MainClusters->m_vInfo[which][iC].m_fBGInfoGain+
+					m_MainClusters->m_vInfo[which][iC].m_fInterClustGain);
+d190 1
+a190 3
+							m_MainClusters->m_vInfo[which][iC].m_fBGInfoGain,
+							m_MainClusters->m_vInfo[which][iC].m_fInterClustGain,
+							m_MainClusters->m_vInfo[which][iC].m_iClosestID);
+d194 1
+a194 2
+				{	sprintf(toWrite,"   KNNCC=%.4f",m_MainClusters->m_vInfo[which][iC].m_fPrctKNNInClust);
+					AddItem(0,0,0,toWrite);
+d197 1
+a197 2
+				{	sprintf(toWrite,"   SilhouetteWidth=%.4f",m_MainClusters->m_vInfo[which][iC].m_fSilhouetteWidth);
+					AddItem(0,0,0,toWrite);
+@
+
+
+1.7
+log
+@added KNNCC
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.6 2008/04/10 03:41:22 samn Exp $ 
+d154 4
+d200 4
+@
+
+
+1.6
+log
+@use ClusterInfo to display diff types of KLDIV
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.5 2008/03/19 15:07:46 samn Exp $ 
+d150 4
+d192 4
+@
+
+
+1.5
+log
+@added isolation distance to display
+@
+text
+@d1 1
+a1 1
+// $Id: DialList.cpp,v 1.4 2008/01/23 23:39:39 samn Exp $ 
+d140 2
+a141 4
+					{
+						double KLD = m_MainClusters->m_vInfo[which][iC][0]; //continuous multi-dim kldiv
+
+						sprintf(toWrite,"   KLD = %.2f ",KLD);
+d143 7
+d152 1
+a152 3
+					{
+						double ISD = m_MainClusters->m_vIsolationDist[which][iC][0]; //isolation distance
+
+d177 2
+a178 3
+				double KLD = m_MainClusters->m_vInfo[which][iC][0]; //continuous multi-dim kldiv
+			
+				sprintf(toWrite,"   KLD = %.2f  ",KLD);
+d180 8
+@
+
+
+1.4
+log
+@only calc cluster info gain when user wants to
+@
+text
+@d1 217
+a217 200
+// $Id$ 
+// DialList.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "wclust.h"
+#include "DialList.h"
+#include ".\diallist.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CDialList dialog
+
+
+CDialList::CDialList(CWnd* pParent /*=NULL*/)
+	: cdxCSizingDialog(CDialList::IDD, pParent)
+{
+	//{{AFX_DATA_INIT(CDialList)
+	//}}AFX_DATA_INIT
+}
+
+
+void CDialList::DoDataExchange(CDataExchange* pDX)
+{
+	cdxCSizingDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CDialList)
+	DDX_Control(pDX, IDCANCEL, m_wndCancel);
+	DDX_Control(pDX, IDOK, m_wndOK);
+	DDX_Control(pDX, IDC_LIST1, m_wndList);
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CDialList, cdxCSizingDialog)
+	//{{AFX_MSG_MAP(CDialList)
+	ON_WM_SHOWWINDOW()
+	ON_LBN_SELCHANGE(IDC_LIST1, OnSelchangeList1)
+	ON_LBN_DBLCLK(IDC_LIST1, OnDblclkList1)
+	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDOK, OnBnClickedOk)
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CDialList message handlers
+
+BOOL CDialList::OnInitDialog() 
+{
+	cdxCSizingDialog::OnInitDialog();
+	
+	RestoreWindowPosition(_T("Main\\ListWindow")); 
+
+	AddSzControlEx( m_wndList,exIgnore,exMaximum,exIgnore,exMaximum);
+	AddSzControl( m_wndOK,mdRepos,mdNone);
+	AddSzControl( m_wndCancel,mdRepos,mdNone);
+		
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CDialList::AddItem(int iAxX,int iAxY,int iCl,char* str)
+{
+	if(str)
+	{
+		m_wndList.AddString(str);
+		AxStackX.push_back(iAxX); 
+		AxStackY.push_back(iAxY);
+		ClStack.push_back(iCl);
+		ListNum++;
+	}
+}
+
+void CDialList::Clear()
+{
+	AxStackX.clear(); //AxStackX.empty();//?? empty just checks if the deque is empty
+	AxStackY.clear(); //AxStackY.empty();
+	ClStack.clear(); //ClStack.empty();
+	ListNum=0;
+}
+
+void CDialList::OnShowWindow(BOOL bShow, UINT nStatus) 
+{
+	cdxCSizingDialog::OnShowWindow(bShow, nStatus);
+
+	MY_STACK::iterator Index,indProj;
+
+	char toWrite[4196];
+
+	Clear();
+
+	int iC = 1;
+
+	int which = m_MainDataStack->whichDraw;
+
+	char* strStar = "*********************************************************";
+
+	if(which == CLUST_USER)
+	{	
+		if (m_MainClusters->m_BndrStack.begin()+1 != m_MainClusters->m_BndrStack.end())
+		{
+			for (Index = m_MainClusters->m_BndrStack.begin()+1; Index != m_MainClusters->m_BndrStack.end(); Index++,iC++)
+			{
+				CBoundary *bndry;
+				bndry = (CBoundary*) *Index;
+
+				AddItem(0,0,0,strStar);
+				
+				if(bndry->m_bNoise)
+					sprintf(toWrite,"NoiseCluster %d",bndry->m_Numb);
+				else
+					sprintf(toWrite,"Cluster %d",bndry->m_Numb);
+
+				AddItem(0,0,0,toWrite);				
+				AddItem(0,0,0,"{");
+
+				for (indProj = bndry->m_ProjStack.begin(); indProj != bndry->m_ProjStack.end(); indProj++)
+				{
+					CProjection *proj;
+					proj = (CProjection*) *indProj;
+					
+					CString *strT1,*strT2;
+
+					strT1 = m_MainDataStack->GetAxesName(proj->m_AxesX);
+					strT2 = m_MainDataStack->GetAxesName(proj->m_AxesY);
+					
+					sprintf(toWrite,"   %s, %s",*strT1,*strT2);
+
+					AddItem(proj->m_AxesX,proj->m_AxesY,bndry->m_Numb,toWrite);
+				}
+
+				//only write info stats for non-noise clusters
+				//info stats of noise clusters are meaningless
+				if(!bndry->m_bNoise && m_MainClusters->m_vInfo[which].size()>iC)
+				{
+					double KLD = m_MainClusters->m_vInfo[which][iC][0]; //continuous multi-dim kldiv
+
+					sprintf(toWrite,"   KLD = %.2f ",KLD);
+					AddItem(0,0,bndry->m_Numb,toWrite);
+				}			
+				AddItem(0,0,0,"}");
+			}
+		}
+	}
+	else
+	{
+		int iC = 1;
+		int iClusts = which == CLUST_ORIG ? m_MainDataStack->m_NumOriginalCl : m_MainClusters->m_pNumClusts[which];
+
+		for (iC = 1; iC <= iClusts; iC++)
+		{
+			AddItem(0,0,0,strStar);
+			
+			sprintf(toWrite,"Cluster %d",iC);
+			AddItem(0,0,0,toWrite);
+			
+			AddItem(0,0,0,"{");
+
+			if(m_MainClusters->m_vInfo[which].size()>iC)
+			{
+				double KLD = m_MainClusters->m_vInfo[which][iC][0]; //continuous multi-dim kldiv
+			
+				sprintf(toWrite,"   KLD = %.2f  ",KLD);
+				AddItem(0,0,0,toWrite);
+			}
+
+			AddItem(0,0,0,"}");
+		}
+	}
+	HICON pom1 = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	CWnd::SetIcon(pom1,true);
+}
+
+void CDialList::OnOK() 
+{
+	StoreWindowPosition(_T("Main\\ListWindow")); 	
+	cdxCSizingDialog::OnOK();
+}
+
+void CDialList::OnSelchangeList1() 
+{
+	int i = m_wndList.GetCurSel();
+
+	AxX = AxStackX[i];
+	AxY = AxStackY[i];
+	Cl =  ClStack[i];
+}
+
+void CDialList::OnDblclkList1() 
+{
+	OnOK();
+}
+
+void CDialList::OnBnClickedOk()
+{
+	OnOK();
+}
+@
+
+
+1.3
+log
+@only write KLD to list, only calc cluster info when have to
+@
+text
+@d137 1
+a137 1
+				if(!bndry->m_bNoise)
+a138 3
+					if(m_MainClusters->m_vInfo[which].size()<=iC)
+						m_MainClusters->CalcClusterInfo(*m_MainDataStack,false);
+
+a152 3
+		if(m_MainClusters->m_vInfo[which].size()<=iClusts)
+			m_MainClusters->CalcClusterInfo(*m_MainDataStack,false);
+
+d162 3
+a164 1
+			double KLD = m_MainClusters->m_vInfo[which][iC][0]; //continuous multi-dim kldiv
+d166 3
+a168 2
+			sprintf(toWrite,"   KLD = %.2f  ",KLD);
+			AddItem(0,0,0,toWrite);
+@
+
+
+1.2
+log
+@cleaned up, only display continuous kldiv (non-symmetric so faster)
+@
+text
+@a94 2
+	m_MainClusters->CalcClusterInfo(*m_MainDataStack,false);
+
+a98 3
+	extern int pBins[4];
+	const int iNumBins = pBins[2];
+
+d139 4
+a142 2
+					double KLD = m_MainClusters->m_vInfo[which][iC][0], //continuous multi-dim kldiv
+					      WKLD = m_MainClusters->m_vInfo[which][iC][1]; //weighted continuous multi-dim kldiv
+d144 1
+a144 1
+					sprintf(toWrite,"   I = %.2f  WI = %.2f  ",KLD,WKLD);
+d155 4
+d168 1
+a168 2
+			double KLD = m_MainClusters->m_vInfo[which][iC][0], //continuous multi-dim kldiv
+					WKLD = m_MainClusters->m_vInfo[which][iC][1]; //weighted continuous multi-dim kldiv
+d170 1
+a170 1
+			sprintf(toWrite,"   KLD = %.2f  WKLD = %.2f  ",KLD,WKLD);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+/* $Id$ */
+a105 5
+	AddItem(0,0,0,strStar);
+	sprintf(toWrite,"Using %d bins for all following calculations.",iNumBins);
+	AddItem(0,0,0,toWrite);
+	AddItem(0,0,0,strStar);
+
+d144 2
+a145 6
+					double I = m_MainClusters->m_vInfo[which][iC][0], //inclusive info gain
+					     dIN = m_MainClusters->m_vInfo[which][iC][1], //normalized inclusive info gain
+						  UD = m_MainClusters->m_vInfo[which][iC][2], //ud info gain
+						 UDN = m_MainClusters->m_vInfo[which][iC][3], //normalized ud info gain
+						   E = m_MainClusters->m_vInfo[which][iC][4], //entropy
+					      EN = m_MainClusters->m_vInfo[which][iC][5]; //normalized entropy
+d147 1
+a147 1
+					sprintf(toWrite,"   I = %.2f  IN = %.2f  UD = %.2f  UDN = %.2f  E = %.2f  EN = %.2f",I,dIN,UD,UDN,E,EN);
+d167 2
+a168 6
+			double I = m_MainClusters->m_vInfo[which][iC][0], //inclusive info gain
+				 dIN = m_MainClusters->m_vInfo[which][iC][1], //normalized inclusive info gain
+				  UD = m_MainClusters->m_vInfo[which][iC][2], //ud info gain
+			     UDN = m_MainClusters->m_vInfo[which][iC][3], //normalized ud info gain
+				   E = m_MainClusters->m_vInfo[which][iC][4], //entropy
+			      EN = m_MainClusters->m_vInfo[which][iC][5]; //normalized entropy
+d170 1
+a170 1
+			sprintf(toWrite,"   I = %.2f  IN = %.2f  UD = %.2f  UDN = %.2f  E = %.2f EN = %.2f",I,dIN,UD,UDN,E,EN);
+@

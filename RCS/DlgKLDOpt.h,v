@@ -1,0 +1,267 @@
+head	1.10;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.10
+date	2009.06.24.18.08.19;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.07.10.03.28.54;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.05.16.03.17.52;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.04.25.05.02.20;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.04.24.05.27.30;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.04.22.21.31.52;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.14.21.48.01;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.03.19.15.11.30;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.03.17.22.14.45;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.03.06.19.47.25;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.10
+log
+@added option to use default dims in iso-i (peak,energy)
+@
+text
+@// $Id: DlgKLDOpt.h,v 1.9 2008/07/10 03:28:54 samn Exp $ 
+#pragma once
+#include "afxcmn.h"
+#include "afxwin.h"
+
+
+// DlgKLDOpt dialog
+
+class DlgKLDOpt : public CDialog
+{
+	DECLARE_DYNAMIC(DlgKLDOpt)
+
+public:
+	DlgKLDOpt(CWnd* pParent = NULL);   // standard constructor
+	virtual ~DlgKLDOpt();
+
+// Dialog Data
+	enum { IDD = IDD_DIALOG_KLD_DLG_OPT };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	virtual BOOL OnInitDialog();
+	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+
+	DECLARE_MESSAGE_MAP()
+public:
+	int m_iNNToFind;
+	BOOL m_bFast;
+	BOOL m_bInterKLD;
+	BOOL m_bIsolationDist;
+	BOOL m_bDoKLDiv;
+	BOOL m_bFindBestDims;
+	int m_iBestSliceD;
+	BOOL m_bSilhouette;
+	int m_iNumBestDims;
+	CEdit m_editBestDims;
+	CButton m_checkBestDims;
+	afx_msg void OnBnClickedCheckFindBestDims();
+	CButton m_btnSetNumBestDims;
+	afx_msg void OnBnClickedButtonSetNumBestDims();
+	CButton m_checkInter;
+	CButton m_checkFast;
+	afx_msg void OnBnClickedCheckInterKld();
+	afx_msg void OnBnClickedCheckFastKld();
+	CButton m_checkSilh;
+	afx_msg void OnBnClickedCheckSilhouetteWidth();
+	afx_msg void OnBnClickedRadio1dSlice();
+	afx_msg void OnBnClickedRadio2dSlices();
+	CButton m_radSlice1D;
+	CButton m_radSlice2D;
+	BOOL m_bNormKLD;
+	BOOL m_bLRatio;
+	BOOL m_bUseDefDims;
+	CButton m_checkUseDefDims;
+	afx_msg void OnBnClickedCheckKldDefaultDims();
+};
+@
+
+
+1.9
+log
+@added LRatio
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.8 2008/05/16 03:17:52 samn Exp $ 
+d54 3
+@
+
+
+1.8
+log
+@added option to normalize data (or not) before kldiv
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.7 2008/04/25 05:02:20 samn Exp $ 
+d53 1
+@
+
+
+1.7
+log
+@added option for 1D vs 2D slices to find best dims
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.6 2008/04/24 05:27:30 samn Exp $ 
+d52 1
+@
+
+
+1.6
+log
+@added silhouette width
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.5 2008/04/22 21:31:52 samn Exp $ 
+d34 1
+d48 4
+@
+
+
+1.5
+log
+@added options for finding best dimensions (uses max of 1D kldiv over dimensions for each cluster)
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.4 2008/04/14 21:48:01 samn Exp $ 
+d34 1
+d45 2
+@
+
+
+1.4
+log
+@got rid of some no longer needed options
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.3 2008/03/19 15:11:30 samn Exp $ 
+d4 1
+d23 3
+d33 11
+@
+
+
+1.3
+log
+@added option for isolation dist and kldiv (cluster vs background)
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.2 2008/03/17 22:14:45 samn Exp $ 
+a23 1
+	CSpinButtonCtrl m_spinBtn;
+a24 1
+	afx_msg void OnDeltaposSpinnnkld(NMHDR *pNMHDR, LRESULT *pResult);
+@
+
+
+1.2
+log
+@added option (default) to compute inter-cluster kldiv and add that to cluster vs background kldiv
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.h,v 1.1 2008/03/06 19:47:25 samn Exp $ 
+d29 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 29
+a29 28
+// $Id$ 
+#pragma once
+#include "afxcmn.h"
+
+
+// DlgKLDOpt dialog
+
+class DlgKLDOpt : public CDialog
+{
+	DECLARE_DYNAMIC(DlgKLDOpt)
+
+public:
+	DlgKLDOpt(CWnd* pParent = NULL);   // standard constructor
+	virtual ~DlgKLDOpt();
+
+// Dialog Data
+	enum { IDD = IDD_DIALOG_KLD_DLG_OPT };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+public:
+	CSpinButtonCtrl m_spinBtn;
+	int m_iNNToFind;
+	afx_msg void OnDeltaposSpinnnkld(NMHDR *pNMHDR, LRESULT *pResult);
+	BOOL m_bFast;
+};
+@

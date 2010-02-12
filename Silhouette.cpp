@@ -1,0 +1,68 @@
+// $Id: Silhouette.cpp,v 1.2 2008/05/08 14:28:41 samn Exp $ 
+#include "stdafx.h"
+#include "Silhouette.h"
+#include "WCMath.h"
+#include "Log.h"
+
+prob_t AvgVec2ClustDist(vector<float>& vFloat,int iCols,int iRows,vector<int>& vClustIDs,vector<int>& vCounts,A2D<int>& vBestDims,int iBestDims,int iMyID,int iYouClust)
+{
+	int iV = 0 , iMyClust = vClustIDs[iMyID] , idx = 0;
+	if(iYouClust==iMyClust && vCounts[iMyClust] < 2) 
+		return 0.0;
+	float* pMe = &vFloat[iCols*iMyID];
+	vector<double> vVals;
+	if(iMyClust==iYouClust)
+		vVals.resize(vCounts[iMyClust]-1);
+	else
+		vVals.resize(vCounts[iYouClust]);
+	for(;iV<iRows;iV++)
+	{
+		if(vClustIDs[iV]!=iYouClust || iV==iMyID)
+			continue;
+		float* pYou = &vFloat[iCols*iV];
+		int iDim = 0;
+		double dSum = 0.0 , dVal = 0.0;
+		for(;iDim<iBestDims;iDim++)
+		{	dVal = pMe[vBestDims[iMyClust][iDim]]-pYou[vBestDims[iMyClust][iDim]];
+			dSum += dVal * dVal;
+		}
+		vVals[idx++] = sqrt(dSum);
+	}
+	return Avg(vVals);
+}
+
+bool Silhouette(vector<float>& vFloat,int iCols,int iRows,vector<int>& vClustIDs,vector<int>& vCounts,int iClusts,vector<ClusterInfo>& vCI,A2D<int>& vBestDims,int iBestDims,const CUPDUPDATA* pUp)
+{
+	int iC1 = 1;
+	CString str;
+	for(;iC1<=iClusts;iC1++)
+	{	str.Format("Computing Silhouette Width of Cluster %d",iC1);
+		pUp->SetProgress(str);
+		int iV = 0 , idx = 0;
+		vector<double> vSilClust(vCounts[iC1]);
+		for(;iV<iRows;iV++)
+		{	if(iV%100==0)
+			{
+				str.Format("Computing Silhouette Width of Cluster %d",iC1);
+				pUp->SetProgress(str,(double)100.0*idx/vCounts[iC1]);
+			}
+			if(vClustIDs[iV]!=iC1)
+				continue;
+			double A = AvgVec2ClustDist(vFloat,iCols,iRows,vClustIDs,vCounts,vBestDims,iBestDims,iV,iC1);//intra
+			double B = DBL_MAX;//min inter
+			int iC2 = 1;
+			for(;iC2<=iClusts;iC2++)
+			{
+				if(iC2==iC1 || !vCounts[iC2])
+					continue;
+				double dTmp = AvgVec2ClustDist(vFloat,iCols,iRows,vClustIDs,vCounts,vBestDims,iBestDims,iV,iC2);
+				if(dTmp < B)
+					B = dTmp;
+			}
+			vSilClust[idx++] = (B-A)/ (A > B ? A : B);
+		}
+		vCI[iC1].m_fSilhouetteWidth=Avg(vSilClust);
+		Write2Log("Clust %d Silhouette Width = %.4f",iC1,vCI[iC1].m_fSilhouetteWidth);
+	}
+	return true;
+}

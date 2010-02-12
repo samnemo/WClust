@@ -1,0 +1,84 @@
+-------------------------------------------------------------------------
+              = KDB-tree Library =
+                    ver. 1.0  February 4, 2005
+-------------------------------------------------------------------------
+          Copyright 2005, The University of Maryland at College Park
+          Department of Computer Science and UMIACS
+          Beomseok Nam (bsnam@cs.umd.edu)
+          http://www.cs.umd.edu/~bsnam/shtree
+
+-------------------------------------------------------------------------
+
+DESCRIPTION OF SOURCE CODE FILES
+================================
+
+The algorithm of KDB-tree multidimensional indexing structure is described 
+in [1]. This distribution of the software contains the following files:
+
+(1) .[hC] files
+    decl.h                : defines global macros
+    Rect.h  Rect.C        : definition of Rect class for bounding box object
+    Point.h Point.C       : definition of Point class for point object
+    memsl.h Queue.C       : definition of queue for the query result
+    KDBTree.h KDBTree.C   : API definition
+    KDBNode.h KDBNode.C   : definition of KDB-tree internal node
+    DataNode.h DataNode.C : definition of KDB-tree data node 
+    Node.h Node.C         : abstract Node class
+    shtree.C              : main() 
+
+(2) Makefile
+
+(3) README file
+
+(4) data files
+
+
+COMPILING THE CODE
+==================
+    $make
+
+
+KDB-Tree API's 
+================
+ (1) void KDBTreeCreate(const char *dumpfile, int dim, int pageSize, int leafSize);
+
+     creates an KDB-tree and returns an KDB-tree handle. 
+     char* dumpfile : index file name to be created.
+     int dim        : the number of dimension.
+     int pageSize   : disk page size. ex) 4096 or 8192
+     int leafSize   : the size of data blocks, pointed by a leaf node of the tree. For example,
+                      data chunk information, image file name, etc.
+
+ (2) int KDBTreeOpen(const char *dumpfile); // loading from disk
+
+     opens an KDB-tree and returns an KDB-tree handle.
+     char* dumpfile : index file name to be opened.
+
+ (3) void KDBTreeStore(float pt[], char* data);
+
+     inserts a point and data block into an KDB-tree.
+     float pt[] : bounding box information.
+     char* data        : pointer to a data block. 
+
+ (4) int KDBTreeDelete(float pt[]);
+
+     deletes a point and data block from an KDB-tree.
+     float pt[] : bounding box information.
+
+ (5) int KDBTreeRangeQuery(float lb[], float hb[], KDBTreeResult* res);
+
+     submits a range query into an KDB-tree.
+     float lb[] : lower bound of query range.
+     float lb[] : higher bound of query range.
+     KDBTreeResult* res    : pointer to a list of query results. 
+
+ (6) int KDBTreeResultGetNext(KDBTreeResult *res, KDBTreeRecord* record);
+
+     gets one query result from a list of query result.
+     KDBTreeResult* res    : pointer to a list of query results. 
+     KDBTreeRecord* record : pointer to a query result.
+
+ (7) void KDBTreeClose();
+
+     closes an KDB-tree.
+

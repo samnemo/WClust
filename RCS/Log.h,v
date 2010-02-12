@@ -1,0 +1,176 @@
+head	1.7;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.7
+date	2009.01.28.21.40.57;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.08.11.20.45.36;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.05.06.02.24.50;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.24.23.40.27;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.04.22.21.33.33;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.03.19.15.09.04;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.02.02.21.21.11;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.7
+log
+@added sig for GetDateTime
+@
+text
+@// $Id: Log.h,v 1.6 2008/08/11 20:45:36 samn Exp $ 
+#ifndef LOG_H
+#define LOG_H
+
+#include <vector>
+#include "A2D.h"
+
+using namespace std;
+
+bool Write2Log(const char* cstr,...);
+bool Write2LogPlain(const char* cstr,...);
+bool WriteVec2Log(vector<int>& v);
+bool WriteVec2Log(vector<float>& v);
+bool WriteVec2Log(vector<double>& v);
+bool WriteMat2Log(vector<vector<float> >& m);
+bool WriteMat2Log(vector<vector<double> >& m);
+bool WriteMat2Log(A2D<float>& m);
+bool WriteMat2Log(A2D<int>& m);
+string GetDateTime(time_t t);
+
+//stupid log file class
+struct LogF
+{
+	FILE* m_fp;
+	LogF()
+		:m_fp(0)
+	{}
+	FILE* Open()
+	{
+		m_fp=fopen("wclust_.log","a+");
+		return m_fp;
+	}
+	void Close()
+	{	if(m_fp)
+		{	fclose(m_fp);
+			m_fp=0;
+		}
+	}
+	~LogF()
+	{	Close();
+	}
+};
+
+#endif
+@
+
+
+1.6
+log
+@added Write2LogPlain
+@
+text
+@d1 1
+a1 1
+// $Id: Log.h,v 1.5 2008/05/06 02:24:50 samn Exp $ 
+d19 1
+@
+
+
+1.5
+log
+@added int version of writevec2log
+@
+text
+@d1 1
+a1 1
+// $Id: Log.h,v 1.4 2008/04/24 23:40:27 samn Exp $ 
+d11 1
+@
+
+
+1.4
+log
+@added LogF
+@
+text
+@d1 1
+a1 1
+// $Id: Log.h,v 1.3 2008/04/22 21:33:33 samn Exp $ 
+d11 1
+@
+
+
+1.3
+log
+@added WriteMat2Log for A2D (float,int)
+@
+text
+@d1 1
+a1 1
+// $Id: Log.h,v 1.2 2008/03/19 15:09:04 samn Exp $ 
+d18 23
+@
+
+
+1.2
+log
+@added funcs for writing vectors,matrices to log file
+@
+text
+@d1 1
+a1 1
+// $Id: Log.h,v 1.1 2008/02/02 21:21:11 samn Exp $ 
+d6 1
+d15 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 15
+a15 7
+// $Id$ 
+#ifndef LOG_H
+#define LOG_H
+
+bool Write2Log(const char* cstr,...);
+
+#endif
+@

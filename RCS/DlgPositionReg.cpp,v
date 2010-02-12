@@ -1,0 +1,328 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.2
+date	2008.01.23.23.37.57;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.29.05;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.2
+log
+@added saving state to dialog class
+@
+text
+@// $Id$ 
+// DlgPositionReg.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "wclust.h"
+#include "DlgPositionReg.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+// CDlgPositionReg dialog
+
+
+CDlgPositionReg::CDlgPositionReg(CWnd* pParent /*=NULL*/)
+	: CDialog(CDlgPositionReg::IDD, pParent),
+	  m_type(0),
+	  m_param(16.0f)
+{
+	//{{AFX_DATA_INIT(CDlgPositionReg)
+	m_Edit = 20.0f;
+	//}}AFX_DATA_INIT
+}
+
+
+void CDlgPositionReg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CDlgPositionReg)
+	DDX_Text(pDX, IDC_EDIT, m_Edit);
+	DDV_MinMaxFloat(pDX, m_Edit, 1.f, 1000.f);
+	//}}AFX_DATA_MAP
+}
+
+
+BEGIN_MESSAGE_MAP(CDlgPositionReg, CDialog)
+	//{{AFX_MSG_MAP(CDlgPositionReg)
+	ON_WM_SHOWWINDOW()
+	ON_BN_CLICKED(IDC_RADIO_SYNC, OnRadioSync)
+	ON_BN_CLICKED(IDC_RADIO_CONST, OnRadioConst)
+	ON_BN_CLICKED(IDC_RADIO_OTHER, OnRadioOther)
+	ON_BN_CLICKED(IDC_RADIO_WITHOUT, OnRadioWithout)
+	//}}AFX_MSG_MAP
+END_MESSAGE_MAP()
+
+/////////////////////////////////////////////////////////////////////////////
+// CDlgPositionReg message handlers
+
+void CDlgPositionReg::DisableConst()
+{
+	CWnd::GetDlgItem(IDC_16_7)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_20)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_33_3)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_40)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_100)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_EDIT)->EnableWindow(false);
+}
+
+void CDlgPositionReg::InitUI()
+{
+	switch(m_type)
+	{
+	case 0:
+	case 4:
+		OnRadioWithout();
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
+		break;
+	case 1:
+		OnRadioSync();
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->SetCheck(true);
+		break;
+	case 2:
+		OnRadioConst();
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_CONST))->SetCheck(true);
+		break;
+	case 3:
+		OnRadioOther();
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_OTHER))->SetCheck(true);
+		break;
+	}
+}
+
+BOOL CDlgPositionReg::OnInitDialog() 
+{
+	CDialog::OnInitDialog();
+
+	InitUI();
+		
+	CWnd::UpdateData(false);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	              // EXCEPTION: OCX Property Pages should return FALSE
+}
+
+
+void CDlgPositionReg::OnShowWindow(BOOL bShow, UINT nStatus) 
+{
+	CDialog::OnShowWindow(bShow, nStatus);
+	
+	static bool bFirst = true;
+	if(bFirst)
+	{
+		if ( !(m_MainDataStack->InBpfExist & 3) )
+		{
+			CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(false);
+			((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->SetCheck(true);
+		}
+		else
+		{
+			CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(true);
+			((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
+		}
+		bFirst=false;
+	}
+	else
+	{
+		InitUI();
+	}
+}
+
+void CDlgPositionReg::OnRadioSync() 
+{
+	DisableConst();
+}
+
+void CDlgPositionReg::OnRadioConst() 
+{
+	CWnd::GetDlgItem(IDC_16_7)->EnableWindow(true);
+	CWnd::GetDlgItem(IDC_20)->EnableWindow(true);
+	CWnd::GetDlgItem(IDC_33_3)->EnableWindow(true);
+	CWnd::GetDlgItem(IDC_40)->EnableWindow(true);
+	CWnd::GetDlgItem(IDC_100)->EnableWindow(true);
+	CWnd::GetDlgItem(IDC_EDIT)->EnableWindow(false);
+
+	if(m_param==16.0f)
+		((CButton*) CWnd::GetDlgItem(IDC_16_7))->SetCheck(1);
+	else if(m_param==20.0f)
+		((CButton*) CWnd::GetDlgItem(IDC_20))->SetCheck(1);
+	else if(m_param==33.0f)
+		((CButton*) CWnd::GetDlgItem(IDC_33_3))->SetCheck(1);
+	else if(m_param==40.0f)
+		((CButton*) CWnd::GetDlgItem(IDC_40))->SetCheck(1);
+	else if(m_param==100.0f)
+		((CButton*) CWnd::GetDlgItem(IDC_100))->SetCheck(1);
+}
+
+void CDlgPositionReg::OnRadioOther() 
+{
+	DisableConst();
+	CWnd::GetDlgItem(IDC_EDIT)->EnableWindow(true);
+}
+
+void CDlgPositionReg::OnRadioWithout() 
+{
+	DisableConst();
+}
+
+void CDlgPositionReg::OnOK() 
+{
+	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->GetCheck())
+	{
+		m_type = 1;
+	}
+	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_CONST))->GetCheck())
+	{
+		m_type = 2;
+		if (((CButton*) CWnd::GetDlgItem(IDC_16_7))->GetCheck())
+			m_param = 16.0f;
+		if (((CButton*) CWnd::GetDlgItem(IDC_20))->GetCheck())
+			m_param = 20.0f;
+		if (((CButton*) CWnd::GetDlgItem(IDC_33_3))->GetCheck())
+			m_param = 33.0f;
+		if (((CButton*) CWnd::GetDlgItem(IDC_40))->GetCheck())
+			m_param = 40.0f;
+		if (((CButton*) CWnd::GetDlgItem(IDC_100))->GetCheck())
+			m_param = 100.0f;
+	}
+	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_OTHER))->GetCheck())
+	{
+		m_type = 3;
+		UpdateData(true);
+		m_param = m_Edit;
+	}
+	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->GetCheck())
+	{
+		m_type = 4;
+	}
+	
+	m_MainDataStack->m_MainSyncStack.OrganizeSync(m_type, m_param);
+
+	CDialog::OnOK();
+}
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+/* $Id$ */
+d20 3
+a22 1
+	: CDialog(CDlgPositionReg::IDD, pParent)
+d25 1
+a25 1
+	m_Edit = 0.0f;
+d53 1
+a53 1
+BOOL CDlgPositionReg::OnInitDialog() 
+a54 3
+	CDialog::OnInitDialog();
+	
+	((CButton*) CWnd::GetDlgItem(IDC_16_7))->SetCheck(true);
+d61 32
+a92 2
+	
+	m_Edit = 20;
+d104 2
+a105 1
+	if ( ! (m_MainDataStack->InBpfExist & 3) )
+d107 11
+a117 2
+		CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(false);
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->SetCheck(true);
+d119 3
+a121 3
+	else{
+		CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(true);
+		((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
+d127 1
+a127 6
+	CWnd::GetDlgItem(IDC_16_7)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_20)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_33_3)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_40)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_100)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_EDIT)->EnableWindow(false);
+d138 11
+d153 1
+a153 5
+	CWnd::GetDlgItem(IDC_16_7)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_20)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_33_3)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_40)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_100)->EnableWindow(false);
+d159 1
+a159 6
+	CWnd::GetDlgItem(IDC_16_7)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_20)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_33_3)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_40)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_100)->EnableWindow(false);
+	CWnd::GetDlgItem(IDC_EDIT)->EnableWindow(false);
+a163 2
+	char type = 0;
+	float param;
+d166 1
+a166 1
+		type = 1;
+d170 1
+a170 1
+		type = 2;
+d172 1
+a172 1
+			param = (float) 16;
+d174 1
+a174 1
+			param = (float) 20;
+d176 1
+a176 1
+			param = (float) 33;
+d178 1
+a178 1
+			param = (float) 40;
+d180 1
+a180 1
+			param = (float) 100;
+d184 1
+a184 1
+		type = 3;
+d186 1
+a186 1
+		param = m_Edit;
+d190 1
+a190 1
+		type = 4;
+a191 1
+
+d193 1
+a193 1
+	m_MainDataStack->m_MainSyncStack.OrganizeSync(type, param);
+@

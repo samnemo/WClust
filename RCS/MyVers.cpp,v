@@ -1,0 +1,878 @@
+head	1.40;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.40
+date	2009.06.24.18.07.20;	author samn;	state Exp;
+branches;
+next	1.39;
+
+1.39
+date	2009.06.22.03.57.07;	author samn;	state Exp;
+branches;
+next	1.38;
+
+1.38
+date	2009.01.28.21.39.43;	author samn;	state Exp;
+branches;
+next	1.37;
+
+1.37
+date	2009.01.23.00.56.06;	author samn;	state Exp;
+branches;
+next	1.36;
+
+1.36
+date	2008.11.27.20.05.06;	author samn;	state Exp;
+branches;
+next	1.35;
+
+1.35
+date	2008.09.16.01.49.52;	author samn;	state Exp;
+branches;
+next	1.34;
+
+1.34
+date	2008.08.28.04.06.05;	author samn;	state Exp;
+branches;
+next	1.33;
+
+1.33
+date	2008.08.17.05.27.16;	author samn;	state Exp;
+branches;
+next	1.32;
+
+1.32
+date	2008.08.11.20.47.09;	author samn;	state Exp;
+branches;
+next	1.31;
+
+1.31
+date	2008.07.28.18.11.40;	author samn;	state Exp;
+branches;
+next	1.30;
+
+1.30
+date	2008.07.24.18.47.58;	author samn;	state Exp;
+branches;
+next	1.29;
+
+1.29
+date	2008.07.15.03.44.54;	author samn;	state Exp;
+branches;
+next	1.28;
+
+1.28
+date	2008.07.10.15.54.17;	author samn;	state Exp;
+branches;
+next	1.27;
+
+1.27
+date	2008.07.10.03.32.01;	author samn;	state Exp;
+branches;
+next	1.26;
+
+1.26
+date	2008.06.13.15.33.42;	author samn;	state Exp;
+branches;
+next	1.25;
+
+1.25
+date	2008.06.03.16.11.17;	author samn;	state Exp;
+branches;
+next	1.24;
+
+1.24
+date	2008.05.16.18.23.30;	author samn;	state Exp;
+branches;
+next	1.23;
+
+1.23
+date	2008.05.16.03.18.43;	author samn;	state Exp;
+branches;
+next	1.22;
+
+1.22
+date	2008.05.08.14.28.04;	author samn;	state Exp;
+branches;
+next	1.21;
+
+1.21
+date	2008.05.06.02.19.05;	author samn;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2008.04.25.22.04.50;	author samn;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2008.04.24.23.41.55;	author samn;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.04.24.05.28.01;	author samn;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.04.22.21.32.52;	author samn;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.04.18.05.35.35;	author samn;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.04.17.17.52.39;	author samn;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.04.14.21.48.45;	author samn;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.04.11.22.26.24;	author samn;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.04.10.03.42.47;	author samn;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.04.09.04.57.02;	author samn;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.04.07.03.41.48;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.03.30.02.13.41;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.03.27.22.21.44;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.03.26.03.58.47;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.03.21.03.46.47;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.03.19.15.06.15;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.03.17.22.14.14;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.03.16.21.34.43;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.03.06.19.44.56;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.03.05.19.43.32;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.40
+log
+@v107
+@
+text
+@// $Id: MyVers.cpp,v 1.39 2009/06/22 03:57:07 samn Exp $ 
+#include "stdafx.h"
+#include "MyVers.h"
+
+HRESULT LastError () {
+   HRESULT hr = HRESULT_FROM_WIN32(GetLastError());
+   if (SUCCEEDED(hr)) 
+      return E_FAIL;
+   return hr;
+}
+
+// This little function emits an error message based on WIN32 error messages
+void EmitErrorMsg (HRESULT hr) {
+   char szMsg[1024];
+   FormatMessage( 
+      FORMAT_MESSAGE_FROM_SYSTEM, 
+      NULL,
+      hr,
+      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+      szMsg,
+      1024,
+      NULL 
+      );
+        printf("%s\n",szMsg);
+}
+
+
+// This function gets the file version info structure
+HRESULT GetFileVersion (char *filename, VS_FIXEDFILEINFO *pvsf) {
+   DWORD dwHandle;
+   DWORD cchver = GetFileVersionInfoSize(filename,&dwHandle);
+   if (cchver == 0)
+      return LastError();
+   char* pver = new char[cchver];
+   BOOL bret = GetFileVersionInfo(filename,dwHandle,cchver,pver);
+   if (!bret)
+      return LastError();
+   UINT uLen;
+   void *pbuf;
+   bret = VerQueryValue(pver,"\\",&pbuf,&uLen);
+   if (!bret)
+      return LastError();
+   memcpy(pvsf,pbuf,sizeof(VS_FIXEDFILEINFO));
+   delete[] pver;
+   return S_OK;
+} 
+
+CString GetWClustVersionString()
+{
+	CString strV("2.0.0.107");
+	return strV;
+}
+@
+
+
+1.39
+log
+@added autoclustering batch, som-clustering, v106
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.38 2009/01/28 21:39:43 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.106");
+@
+
+
+1.38
+log
+@v105
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.37 2009/01/23 00:56:06 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.105");
+@
+
+
+1.37
+log
+@v104
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.36 2008/11/27 20:05:06 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.104");
+@
+
+
+1.36
+log
+@updated to v103
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.35 2008/09/16 01:49:52 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.103");
+@
+
+
+1.35
+log
+@v102
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.34 2008/08/28 04:06:05 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.102");
+@
+
+
+1.34
+log
+@v101
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.33 2008/08/17 05:27:16 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.101");
+@
+
+
+1.33
+log
+@v100
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.32 2008/08/11 20:47:09 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.100");
+@
+
+
+1.32
+log
+@v99
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.31 2008/07/28 18:11:40 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.99");
+@
+
+
+1.31
+log
+@v98
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.30 2008/07/24 18:47:58 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.98");
+@
+
+
+1.30
+log
+@v97
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.29 2008/07/15 03:44:54 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.97");
+@
+
+
+1.29
+log
+@v96
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.28 2008/07/10 15:54:17 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.96");
+@
+
+
+1.28
+log
+@make sure extra user-added dimensions know their index when loading from .cl file, v95
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.27 2008/07/10 03:32:01 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.95");
+@
+
+
+1.27
+log
+@v94 , added LRatio
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.26 2008/06/13 15:33:42 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.94");
+@
+
+
+1.26
+log
+@v93
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.25 2008/06/03 16:11:17 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.93");
+@
+
+
+1.25
+log
+@v92
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.24 2008/05/16 18:23:30 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.92");
+@
+
+
+1.24
+log
+@v91
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.23 2008/05/16 03:18:43 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.91");
+@
+
+
+1.23
+log
+@v90
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.22 2008/05/08 14:28:04 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.90");
+@
+
+
+1.22
+log
+@v89
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.21 2008/05/06 02:19:05 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.89");
+@
+
+
+1.21
+log
+@v88
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.20 2008/04/25 22:04:50 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.88");
+@
+
+
+1.20
+log
+@v86
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.19 2008/04/24 23:41:55 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.86");
+@
+
+
+1.19
+log
+@v85
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.18 2008/04/24 05:28:01 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.85");
+@
+
+
+1.18
+log
+@added silhouette width, v84
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.17 2008/04/22 21:32:52 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.84");
+@
+
+
+1.17
+log
+@version 83 , added options for finding best dimensions for each cluster for computing kldiv
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.16 2008/04/18 05:35:35 samn Exp $ 
+d50 1
+a50 1
+	CString strV("2.0.0.83");
+@
+
+
+1.16
+log
+@v82
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.15 2008/04/17 17:52:39 samn Exp $ 
+d49 2
+a50 8
+{	HRESULT ret;
+	VS_FIXEDFILEINFO vsf1;
+	vsf1.dwProductVersionLS;
+	CString strV("");
+	if(SUCCEEDED((ret=GetFileVersion("./WClust.exe",&vsf1))))
+		strV.Format("2.0.0.%d",vsf1.dwProductVersionLS);
+	else
+		strV.Format("2.0.0.82");
+@
+
+
+1.15
+log
+@version 81
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.14 2008/04/14 21:48:45 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.81");
+@
+
+
+1.14
+log
+@version 80
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.13 2008/04/11 22:26:24 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.80");
+@
+
+
+1.13
+log
+@v79
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.12 2008/04/10 03:42:47 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.79");
+@
+
+
+1.12
+log
+@version 78
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.11 2008/04/09 04:57:02 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.78");
+@
+
+
+1.11
+log
+@v77
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.10 2008/04/07 03:41:48 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.77");
+@
+
+
+1.10
+log
+@v76
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.9 2008/03/30 02:13:41 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.76");
+@
+
+
+1.9
+log
+@v75
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.8 2008/03/27 22:21:44 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.75");
+@
+
+
+1.8
+log
+@v74, updated eeg gains gui, added play speed control for eeg, fixed incorrect eeg channel text
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.7 2008/03/26 03:58:47 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.74");
+@
+
+
+1.7
+log
+@v73
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.6 2008/03/21 03:46:47 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.73");
+@
+
+
+1.6
+log
+@v72
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.5 2008/03/19 15:06:15 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.72");
+@
+
+
+1.5
+log
+@update to 70
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.4 2008/03/17 22:14:14 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.70");
+@
+
+
+1.4
+log
+@v 69
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.3 2008/03/16 21:34:43 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.69");
+@
+
+
+1.3
+log
+@v 68
+@
+text
+@d1 58
+a58 58
+// $Id: MyVers.cpp,v 1.2 2008/03/06 19:44:56 samn Exp $ 
+#include "stdafx.h"
+#include "MyVers.h"
+
+HRESULT LastError () {
+   HRESULT hr = HRESULT_FROM_WIN32(GetLastError());
+   if (SUCCEEDED(hr)) 
+      return E_FAIL;
+   return hr;
+}
+
+// This little function emits an error message based on WIN32 error messages
+void EmitErrorMsg (HRESULT hr) {
+   char szMsg[1024];
+   FormatMessage( 
+      FORMAT_MESSAGE_FROM_SYSTEM, 
+      NULL,
+      hr,
+      MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+      szMsg,
+      1024,
+      NULL 
+      );
+        printf("%s\n",szMsg);
+}
+
+
+// This function gets the file version info structure
+HRESULT GetFileVersion (char *filename, VS_FIXEDFILEINFO *pvsf) {
+   DWORD dwHandle;
+   DWORD cchver = GetFileVersionInfoSize(filename,&dwHandle);
+   if (cchver == 0)
+      return LastError();
+   char* pver = new char[cchver];
+   BOOL bret = GetFileVersionInfo(filename,dwHandle,cchver,pver);
+   if (!bret)
+      return LastError();
+   UINT uLen;
+   void *pbuf;
+   bret = VerQueryValue(pver,"\\",&pbuf,&uLen);
+   if (!bret)
+      return LastError();
+   memcpy(pvsf,pbuf,sizeof(VS_FIXEDFILEINFO));
+   delete[] pver;
+   return S_OK;
+} 
+
+CString GetWClustVersionString()
+{	HRESULT ret;
+	VS_FIXEDFILEINFO vsf1;
+	vsf1.dwProductVersionLS;
+	CString strV("");
+	if(SUCCEEDED((ret=GetFileVersion("./WClust.exe",&vsf1))))
+		strV.Format("2.0.0.%d",vsf1.dwProductVersionLS);
+	else
+		strV.Format("2.0.0.68");
+	return strV;
+}
+@
+
+
+1.2
+log
+@version -> 67
+@
+text
+@d1 1
+a1 1
+// $Id: MyVers.cpp,v 1.1 2008/03/05 19:43:32 samn Exp $ 
+d56 1
+a56 1
+		strV.Format("2.0.0.67");
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d56 1
+a56 1
+		strV.Format("2.0.0.66");
+@

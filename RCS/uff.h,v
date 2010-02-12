@@ -1,0 +1,78 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.01.05.15.04.04;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* $Id$ */
+
+#ifndef UFF_IN
+#define UFF_IN
+
+#include "bpf.h"
+
+#define DRDB_BYTE_0			2
+#define DRDB_BYTE_1			0
+#define DRDB_REC_TYPE_OFFSET		2
+#define DRDB_REC_SIZE_OFFSET		4
+#define HEADER_BYTE_0			1
+#define HEADER_BYTE_1			0
+#define HEADER_DRDB_SIZE_OFFSET		16
+#define HEADER_SIZE			2048
+#define MAX_CLUSTS_PER_PROBE		12
+#define MAX_PROBES			32
+#define STEREO_CHANNELS			2
+#define TET_CHANNELS			4
+#define PAD_BYTES			2
+#define POS_REC_RED_X_OFFSET		6
+#define POS_REC_RED_Y_OFFSET		7
+#define POS_REC_GREEN_X_OFFSET		8
+#define POS_REC_GREEN_Y_OFFSET		9
+#define RECORD_PROBE_OFFSET		1
+#define RECORD_TIME_STAMP_OFFSET	2
+#define RECORD_TYPE_OFFSET		0
+#define SPK_REC_CLUST_OFFSET		6
+#define SU_CR_SAMP_FREQ_OFFSET		10	
+#define SU_CR_SAMPS_OFFSET		68
+#define SU_CR_VALID_SAMPS_OFFSET	8
+#define SU_MAX_NUM_CR			8
+#define SU_SPIKE_OFFSET			24
+#define SU_SPIKE_SIZE			32
+#define SU_SE_SPIKE_OFFSET		24
+#define SU_SE_SPIKE_SIZE		32
+#define SU_QT_SPIKE_OFFSET		24
+#define SU_QT_SPIKE_SIZE		32
+#define UFF_CREATE_DATE_OFFSET		512
+#define UFF_FILE_DESC_LEN		128
+#define UFF_FILE_DESC_OFFSET		448
+#define EV_FLAG_REC_TYPE_OFFSET		6
+#define BW_MAX_AD			2047
+#define BW_MIN_AD			-2048
+
+#define CONTINUOUS_DATA_REC		'R'
+#define POSITION_REC			'P'
+#define	SINGLE_ELECTRODE_SPIKE_REC	'E'
+#define STEREOTRODE_SPIKE_REC		'S'
+#define TETRODE_SPIKE_REC		'U'
+#define EVENT_FLAG_REC			'B'
+
+#endif
+
+@

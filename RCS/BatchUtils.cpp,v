@@ -1,0 +1,368 @@
+head	1.8;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.8
+date	2009.06.25.04.03.33;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2009.06.24.18.00.56;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2009.06.22.03.55.46;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.08.17.05.26.57;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.10.03.43.56;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.03.30.02.13.31;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.10.18.43.13;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.10.00.50.17;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.8
+log
+@more batch modes
+@
+text
+@// $Id: BatchUtils.cpp,v 1.7 2009/06/24 18:00:56 samn Exp $ 
+#include "stdafx.h"
+#include "BatchUtils.h"
+#include "FileUtils.h"
+#include "StringUtils.h"
+
+using namespace std;
+
+void ParseRatings(vector<string>& vstr,vector<double>& vrate)
+{
+	vrate.push_back(0); //for background cluster
+	int i = 0, isz = vstr.size();
+	for(i=0;i<isz;i++)
+		vrate.push_back(atof(vstr[i].c_str()));
+}
+
+void ParseRatings(string& str,vector<string>& vstr)
+{
+	string strDelim("[],");
+	Split(str,strDelim,vstr);
+}
+
+void ParseRatings(string& str,vector<double>& vrate)
+{
+	vector<string> vstr;
+	ParseRatings(str,vstr);
+	ParseRatings(vstr,vrate);
+}
+
+bool ParseQBatchLines(vector<string>& vstr, vector<BatchRec>& vqb,int& iBatchMode)
+{
+	iBatchMode = BATCH_QUAL_USER; //quality of user-made clusters
+
+	int iSz = vstr.size(), i = 0;
+	if(!iSz) return false;
+	bool bRead = false;
+	string strDelim("\t");
+	
+	string strBaseDir(vstr[0]);//first line is base directory from which all else is relative
+	if(strBaseDir[strBaseDir.size()-1] != '\\')
+		strBaseDir += '\\';
+	
+	for(i=1;i<iSz;i++)
+	{
+		vector<string> vtoks;
+		Split(vstr[i],strDelim,vtoks);
+		if(vtoks.size()>=6)
+		{
+			bRead = true;
+			BatchRec oB;
+			oB.strBPF =   strBaseDir + vtoks[0];
+			if(!stricmp(vtoks[0].c_str(),"orig"))//quality of original cluster values 
+				iBatchMode = BATCH_QUAL_ORIG;    //(auto-clustered, or saved by user without .cl)
+			oB.strCL =    strBaseDir + vtoks[1];
+			oB.iTetrode = atoi(vtoks[2].c_str());
+			oB.dPrct =    atof(vtoks[3].c_str());
+			oB.outCL =    strBaseDir + vtoks[4];
+			ParseRatings(vtoks[5],oB.vRatings);
+			oB.bReadyToRun = true;
+			vqb.push_back(oB);
+		}
+	}
+	return bRead;
+}
+
+bool ParseTSBatchLines(vector<string>& vstr, vector<BatchRec>& vb)
+{
+	int iSz = vstr.size(), i = 0;
+	if(!iSz) return false;
+	bool bRead = false;
+	string strDelim("\t");
+	
+	string strBaseDir(vstr[0]);//first line is base directory from which all else is relative
+	if(strBaseDir[strBaseDir.size()-1] != '\\')
+		strBaseDir += '\\';
+	
+	for(i=1;i<iSz;i++)
+	{
+		vector<string> vtoks;
+		Split(vstr[i],strDelim,vtoks);
+		if(vtoks.size()>=2)
+		{
+			bRead = true;
+			BatchRec oB;
+			oB.strBPF =   strBaseDir + vtoks[0]; //input BPF
+			oB.outBPF =    strBaseDir + vtoks[1]; //output BPF
+			oB.bReadyToRun = true;
+			vb.push_back(oB);
+		}
+	}
+	return bRead;
+}
+
+bool ParseACBatchLines(vector<string>& vstr, vector<BatchRec>& vb)
+{
+	int iSz = vstr.size(), i = 0;
+	if(!iSz) return false;
+	bool bRead = false;
+	string strDelim("\t");
+	
+	string strBaseDir(vstr[0]);//first line is base directory from which all else is relative
+	if(strBaseDir[strBaseDir.size()-1] != '\\')
+		strBaseDir += '\\';
+	
+	for(i=1;i<iSz;i++)
+	{	vector<string> vtoks;
+		Split(vstr[i],strDelim,vtoks);		
+		if(vtoks.size()>=7)
+		{	BatchRec oB;
+			oB.strBPF =   strBaseDir + vtoks[0]; //input BPF
+			oB.outBPF =    strBaseDir + vtoks[1]; //output BPF
+			oB.iACType = atoi(vtoks[2].c_str());
+			if(oB.iACType==CLUST_KM || oB.iACType==CLUST_KK)
+			{		
+				oB.iMinClust = atoi(vtoks[3].c_str());
+				oB.iMaxClust = atoi(vtoks[4].c_str());
+				oB.iIters = atoi(vtoks[5].c_str());
+				if(oB.iACType==CLUST_KM)
+					oB.iDBIters = atoi(vtoks[6].c_str());
+				else if(oB.iACType==CLUST_KK)
+					oB.iMaxKKClust = atoi(vtoks[6].c_str());
+				oB.bAutoC = true;
+				oB.bReadyToRun = true;
+				vb.push_back(oB);
+				bRead = true;
+			}
+		}
+	}
+	return bRead;
+}
+@
+
+
+1.7
+log
+@allow batch with klustakwik or kmeans
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.cpp,v 1.6 2009/06/22 03:55:46 samn Exp $ 
+d30 1
+a30 1
+bool ParseQBatchLines(vector<string>& vstr, vector<BatchRec>& vqb)
+d32 2
+d52 2
+@
+
+
+1.6
+log
+@added auto-clustering batch
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.cpp,v 1.5 2008/08/17 05:26:57 samn Exp $ 
+d103 3
+a105 4
+		Split(vstr[i],strDelim,vtoks);
+		if(vtoks.size()>=6)
+		{	bRead = true;
+			BatchRec oB;
+d108 15
+a122 7
+			oB.iMinClust = atoi(vtoks[2].c_str());
+			oB.iMaxClust = atoi(vtoks[3].c_str());
+			oB.iDBIters = atoi(vtoks[4].c_str());
+			oB.iIters = atoi(vtoks[5].c_str());
+			oB.bAutoC = true;
+			oB.bReadyToRun = true;
+			vb.push_back(oB);
+a126 1
+
+@
+
+
+1.5
+log
+@added batch mode for adjusting timestamps in bpfs
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.cpp,v 1.4 2008/04/10 03:43:56 samn Exp $ 
+d90 31
+@
+
+
+1.4
+log
+@added checks for success in batch mode
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.cpp,v 1.3 2008/03/30 02:13:31 samn Exp $ 
+d30 1
+a30 1
+bool ParseQBatchLines(vector<string>& vstr, vector<QBatchRec>& vqb)
+d48 1
+a48 1
+			QBatchRec oB;
+d62 28
+@
+
+
+1.3
+log
+@allow doubles for user ratings, first line of batch file is now base directory so easier to read batch txt files
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d55 1
+@
+
+
+1.2
+log
+@changed format of batch files for cluster quality measurement
+@
+text
+@d1 60
+a60 54
+// $Id$ 
+#include "stdafx.h"
+#include "BatchUtils.h"
+#include "FileUtils.h"
+#include "StringUtils.h"
+
+using namespace std;
+
+void ParseRatings(vector<string>& vstr,vector<int>& vrate)
+{
+	vrate.push_back(0); //for background cluster
+	int i = 0, isz = vstr.size();
+	for(i=0;i<isz;i++)
+		vrate.push_back(atoi(vstr[i].c_str()));
+}
+
+void ParseRatings(string& str,vector<string>& vstr)
+{
+	string strDelim("[],");
+	Split(str,strDelim,vstr);
+}
+
+void ParseRatings(string& str,vector<int>& vrate)
+{
+	vector<string> vstr;
+	ParseRatings(str,vstr);
+	ParseRatings(vstr,vrate);
+}
+
+bool ParseQBatchLines(vector<string>& vstr, vector<QBatchRec>& vqb)
+{
+	int iSz = vstr.size(), i = 0;
+	bool bRead = false;
+	string strDelim("\t");
+	for(i=0;i<iSz;i++)
+	{
+		vector<string> vtoks;
+		Split(vstr[i],strDelim,vtoks);
+		if(vtoks.size()>=6)
+		{
+			bRead = true;
+			QBatchRec oB;
+			oB.strBPF =   vtoks[0];
+			oB.strCL =    vtoks[1];
+			oB.iTetrode = atoi(vtoks[2].c_str());
+			oB.dPrct =    atof(vtoks[3].c_str());
+			oB.outCL =    vtoks[4];
+			ParseRatings(vtoks[5],oB.vRatings);
+			vqb.push_back(oB);
+		}
+	}
+	return bRead;
+}
+
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 1
+d7 24
+a30 1
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<QBatchRec>& vqb)
+d34 2
+a35 1
+	while(i<iSz)
+d37 3
+a39 1
+		if(i+4<iSz)
+d43 6
+a48 5
+			oB.strBPF =   vstr[i];
+			oB.strCL =    vstr[i+1];
+			oB.iTetrode = atoi(vstr[i+2].c_str());
+			oB.dPrct =    atof(vstr[i+3].c_str());
+			oB.outCL =    vstr[i+4];
+a49 1
+			i+=5;
+a50 1
+		else break;
+@

@@ -1,0 +1,606 @@
+head	1.14;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.14
+date	2009.06.24.18.08.00;	author samn;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2009.06.22.03.52.39;	author samn;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.07.10.03.28.40;	author samn;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.06.03.16.03.11;	author samn;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.05.16.18.22.18;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.05.16.03.17.46;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.04.25.05.02.10;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.04.24.23.43.16;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.04.24.05.26.58;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.04.22.21.31.19;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.14.21.47.55;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.03.19.15.12.05;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.03.17.22.14.37;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.03.06.19.44.28;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.14
+log
+@added option to use default dims of iso-i (peak,energy)
+@
+text
+@// $Id: DlgKLDOpt.cpp,v 1.13 2009/06/22 03:52:39 samn Exp $ 
+// DlgKLDOpt.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "WClust.h"
+#include "DlgKLDOpt.h"
+#include ".\dlgkldopt.h"
+
+
+// DlgKLDOpt dialog
+
+IMPLEMENT_DYNAMIC(DlgKLDOpt, CDialog)
+DlgKLDOpt::DlgKLDOpt(CWnd* pParent /*=NULL*/)
+	: CDialog(DlgKLDOpt::IDD, pParent)
+	, m_iNNToFind(1)
+	, m_bFast(FALSE)
+	, m_bInterKLD(TRUE)
+	, m_bIsolationDist(FALSE)
+	, m_bDoKLDiv(TRUE)
+	, m_bFindBestDims(TRUE)
+	, m_iNumBestDims(8)
+	, m_bSilhouette(FALSE)
+	, m_iBestSliceD(2)
+	, m_bNormKLD(TRUE)
+	, m_bLRatio(FALSE)
+	, m_bUseDefDims(FALSE)
+{
+	m_editBestDims.SetWindowText("8");
+}
+
+DlgKLDOpt::~DlgKLDOpt()
+{
+}
+
+void DlgKLDOpt::OnShowWindow(BOOL bShow, UINT nStatus)
+{
+	CDialog::OnShowWindow(bShow,nStatus);
+}
+
+BOOL DlgKLDOpt::OnInitDialog()
+{
+	CDialog::OnInitDialog();
+	CString str;
+	str.Format("%d",m_iNumBestDims);
+	m_editBestDims.SetWindowText(str);
+	if(m_checkBestDims.GetCheck()==BST_CHECKED)
+	{
+		m_checkUseDefDims.SetCheck(BST_UNCHECKED);
+		m_bUseDefDims = FALSE;
+	}
+	else if(m_checkBestDims.GetCheck()==BST_UNCHECKED || !m_bFindBestDims)
+	{
+		m_editBestDims.EnableWindow(FALSE);
+		m_btnSetNumBestDims.EnableWindow(FALSE);
+	}
+	if(m_bSilhouette)
+	{
+		m_checkSilh.EnableWindow(TRUE);
+		m_checkSilh.SetCheck(BST_CHECKED);
+	}
+	if(m_iBestSliceD == 1)
+	{
+		m_radSlice1D.SetCheck(BST_CHECKED);
+		m_radSlice2D.SetCheck(BST_UNCHECKED);
+	}
+	else
+	{
+		m_radSlice2D.SetCheck(BST_CHECKED);
+		m_radSlice1D.SetCheck(BST_UNCHECKED);
+	}
+	if(m_bUseDefDims)
+	{
+		m_checkUseDefDims.SetCheck(BST_CHECKED);
+	}
+	return TRUE;
+}
+
+void DlgKLDOpt::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+	DDX_Check(pDX, IDC_CHECK_FAST_KLD, m_bFast);
+	DDX_Check(pDX, IDC_CHECK_INTER_KLD, m_bInterKLD);
+	DDX_Check(pDX, IDC_CHECK_ISOLATION_D, m_bIsolationDist);
+	DDX_Check(pDX, IDC_CHECK_KLD_DO, m_bDoKLDiv);
+	DDX_Check(pDX, IDC_CHECK_FIND_BEST_DIMS, m_bFindBestDims);
+	DDX_Control(pDX, IDC_EDIT_BEST_DIMS, m_editBestDims);
+	DDX_Control(pDX, IDC_CHECK_FIND_BEST_DIMS, m_checkBestDims);
+	DDX_Control(pDX, IDC_BUTTON_SET_NUM_BEST_DIMS, m_btnSetNumBestDims);
+	DDX_Control(pDX, IDC_CHECK_INTER_KLD, m_checkInter);
+	DDX_Control(pDX, IDC_CHECK_FAST_KLD, m_checkFast);
+	DDX_Control(pDX, IDC_CHECK_SILHOUETTE_WIDTH, m_checkSilh);
+	DDX_Control(pDX, IDC_RADIO_1D_SLICE, m_radSlice1D);
+	DDX_Control(pDX, IDC_RADIO_2D_SLICES, m_radSlice2D);
+	DDX_Check(pDX, IDC_CHECK_NORM, m_bNormKLD);
+	DDX_Check(pDX, IDC_CHECK_LRATIO, m_bLRatio);
+	DDX_Check(pDX, IDC_CHECK_KLD_DEFAULT_DIMS, m_bUseDefDims);
+	DDX_Control(pDX, IDC_CHECK_KLD_DEFAULT_DIMS, m_checkUseDefDims);
+}
+
+
+BEGIN_MESSAGE_MAP(DlgKLDOpt, CDialog)
+	ON_BN_CLICKED(IDC_CHECK_FIND_BEST_DIMS, OnBnClickedCheckFindBestDims)
+	ON_BN_CLICKED(IDC_BUTTON_SET_NUM_BEST_DIMS, OnBnClickedButtonSetNumBestDims)
+	ON_BN_CLICKED(IDC_CHECK_INTER_KLD, OnBnClickedCheckInterKld)
+	ON_BN_CLICKED(IDC_CHECK_FAST_KLD, OnBnClickedCheckFastKld)
+	ON_BN_CLICKED(IDC_CHECK_SILHOUETTE_WIDTH, OnBnClickedCheckSilhouetteWidth)
+	ON_BN_CLICKED(IDC_RADIO_1D_SLICE, OnBnClickedRadio1dSlice)
+	ON_BN_CLICKED(IDC_RADIO_2D_SLICES, OnBnClickedRadio2dSlices)
+	ON_BN_CLICKED(IDC_CHECK_KLD_DEFAULT_DIMS, OnBnClickedCheckKldDefaultDims)
+END_MESSAGE_MAP()
+
+
+// DlgKLDOpt message handlers
+
+
+void DlgKLDOpt::OnBnClickedCheckFindBestDims()
+{
+	// TODO: Add your control notification handler code here
+	if(m_checkBestDims.GetCheck()==BST_CHECKED)
+	{
+		m_bFast = FALSE;
+		m_checkFast.SetCheck(BST_UNCHECKED);
+		m_btnSetNumBestDims.EnableWindow(TRUE);
+		m_editBestDims.EnableWindow(TRUE);
+		m_bUseDefDims = FALSE; 
+		m_checkUseDefDims.SetCheck(BST_UNCHECKED);
+	}
+	else
+	{
+		m_btnSetNumBestDims.EnableWindow(FALSE);
+		m_editBestDims.EnableWindow(FALSE);
+	}
+}
+
+void DlgKLDOpt::OnBnClickedButtonSetNumBestDims()
+{
+	// TODO: Add your control notification handler code here
+	CString str;
+	m_editBestDims.GetWindowText(str);
+	try
+	{
+		int iTmp = atoi(str);
+		if(iTmp < 1)
+		{
+			MessageBox("Must enter positive number!","WClust - error",MB_ICONERROR);
+			return;
+		}
+		else if(iTmp > 24)
+		{
+			MessageBox("Must enter number <= 24!","WClust - error",MB_ICONERROR);
+			return;
+		}
+		m_iNumBestDims = iTmp;
+	}
+	catch(...)
+	{
+		MessageBox("Must enter a positive integer!","WClust - error",MB_ICONERROR);
+	}
+}
+
+void DlgKLDOpt::OnBnClickedCheckInterKld()
+{
+	// TODO: Add your control notification handler code here
+	m_bInterKLD = m_checkInter.GetCheck()==BST_CHECKED;
+}
+
+void DlgKLDOpt::OnBnClickedCheckFastKld()
+{
+	// TODO: Add your control notification handler code here
+	if(m_checkFast.GetCheck()==BST_CHECKED)
+	{
+		m_checkBestDims.SetCheck(BST_UNCHECKED);
+		m_bFindBestDims = FALSE;
+		m_btnSetNumBestDims.EnableWindow(FALSE);
+		m_editBestDims.EnableWindow(FALSE);
+	}
+}
+
+void DlgKLDOpt::OnBnClickedCheckSilhouetteWidth()
+{
+	// TODO: Add your control notification handler code here
+	m_bSilhouette = m_checkSilh.GetCheck()==BST_CHECKED;
+}
+
+void DlgKLDOpt::OnBnClickedRadio1dSlice()
+{
+	// TODO: Add your control notification handler code here
+	m_iBestSliceD = 1;
+	m_radSlice2D.SetCheck(BST_UNCHECKED);
+}
+
+void DlgKLDOpt::OnBnClickedRadio2dSlices()
+{
+	// TODO: Add your control notification handler code here
+	m_iBestSliceD = 2;
+	m_radSlice1D.SetCheck(BST_UNCHECKED);
+}
+
+void DlgKLDOpt::OnBnClickedCheckKldDefaultDims()
+{
+	// TODO: Add your control notification handler code here
+	m_bUseDefDims = m_checkUseDefDims.GetCheck()==BST_CHECKED;
+	if(m_bUseDefDims)
+	{
+		m_checkBestDims.SetCheck(BST_UNCHECKED);
+		m_bFindBestDims = FALSE;
+		m_btnSetNumBestDims.EnableWindow(FALSE);
+		m_editBestDims.EnableWindow(FALSE);
+	}
+}
+@
+
+
+1.13
+log
+@allow calc. of silhouette width even when not finding best 2D slices
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.12 2008/07/10 03:28:40 samn Exp $ 
+d27 1
+d47 6
+a52 1
+	if(m_checkBestDims.GetCheck()==BST_UNCHECKED || !m_bFindBestDims)
+d72 4
+d97 2
+d110 1
+d126 2
+d199 13
+@
+
+
+1.12
+log
+@added LRatio
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.11 2008/06/03 16:03:11 samn Exp $ 
+a49 1
+		m_checkSilh.EnableWindow(FALSE);
+d51 1
+a51 1
+	else if(m_bSilhouette)
+a112 1
+		m_checkSilh.EnableWindow(TRUE);
+a117 3
+		m_checkSilh.SetCheck(BST_UNCHECKED);
+		m_bSilhouette = FALSE;
+		m_checkSilh.EnableWindow(FALSE);
+a161 3
+		m_bSilhouette = FALSE;
+		m_checkSilh.SetCheck(BST_UNCHECKED);
+		m_checkSilh.EnableWindow(FALSE);
+@
+
+
+1.11
+log
+@turn normalization of data before computing kldiv on as default
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.10 2008/05/16 18:22:18 samn Exp $ 
+d26 1
+d87 1
+@
+
+
+1.10
+log
+@turned off normalization by default
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.9 2008/05/16 03:17:46 samn Exp $ 
+d25 1
+a25 1
+	, m_bNormKLD(FALSE)
+@
+
+
+1.9
+log
+@added option to normalize data (or not) before kldiv
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.8 2008/04/25 05:02:10 samn Exp $ 
+d25 1
+a25 1
+	, m_bNormKLD(TRUE)
+@
+
+
+1.8
+log
+@added option for 1D vs 2D slices to find best dims
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.7 2008/04/24 23:43:16 samn Exp $ 
+d25 1
+d85 1
+@
+
+
+1.7
+log
+@allow inter cluster kldiv even when finding best dims
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.6 2008/04/24 05:26:58 samn Exp $ 
+d24 1
+d55 10
+d82 2
+d93 2
+d174 14
+@
+
+
+1.6
+log
+@added silhouette width option
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.5 2008/04/22 21:31:19 samn Exp $ 
+d17 1
+a17 1
+	, m_bFast(TRUE)
+a90 1
+		m_bInterKLD = FALSE;
+a91 1
+		m_checkInter.SetCheck(BST_UNCHECKED);
+d136 1
+a136 10
+	if(m_checkInter.GetCheck()==BST_CHECKED)
+	{
+		m_checkBestDims.SetCheck(BST_UNCHECKED);
+		m_bFindBestDims = FALSE;
+		m_btnSetNumBestDims.EnableWindow(FALSE);
+		m_editBestDims.EnableWindow(FALSE);
+		m_bSilhouette = FALSE;
+		m_checkSilh.SetCheck(BST_UNCHECKED);
+		m_checkSilh.EnableWindow(FALSE);
+	}
+@
+
+
+1.5
+log
+@added options to find best dimensions and specify how many (default==8) turned off interclust and fast mode
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.4 2008/04/14 21:47:55 samn Exp $ 
+d23 1
+d43 1
+a43 1
+	if(m_checkBestDims.GetCheck()==BST_UNCHECKED)
+d47 6
+d70 1
+d79 1
+d97 1
+d103 3
+d144 3
+d159 3
+d164 6
+@
+
+
+1.4
+log
+@got rid of some no longer needed options
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.3 2008/03/19 15:12:05 samn Exp $ 
+d21 2
+d24 1
+d31 19
+d57 6
+d67 4
+d76 69
+@
+
+
+1.3
+log
+@added option for isolation dist and kldiv (cluster vs background)
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.2 2008/03/17 22:14:37 samn Exp $ 
+d16 1
+a16 1
+	, m_iNNToFind(5)
+a21 1
+	m_spinBtn.SetRange(1,100);
+a30 3
+	DDX_Control(pDX, IDC_SPINNNKLD, m_spinBtn);
+	DDX_Text(pDX, IDC_EDITNNKLD, m_iNNToFind);
+	DDV_MinMaxInt(pDX, m_iNNToFind, 1, 100);
+a38 1
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPINNNKLD, OnDeltaposSpinnnkld)
+a43 16
+void DlgKLDOpt::OnDeltaposSpinnnkld(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	*pResult = 0;
+	if(pNMUpDown->iDelta > 0)
+		if(m_spinBtn.GetPos()-pNMUpDown->iDelta>=1) 
+			pNMUpDown->iDelta *= -1; 
+		else 
+			pNMUpDown->iDelta=0;
+	else if(pNMUpDown->iDelta < 0)
+		if(m_spinBtn.GetPos()+pNMUpDown->iDelta<=100)
+			pNMUpDown->iDelta *= -1;
+		else
+			pNMUpDown->iDelta = 0;
+}
+@
+
+
+1.2
+log
+@added option (default) to compute inter-cluster kldiv and add that to cluster vs background kldiv
+@
+text
+@d1 1
+a1 1
+// $Id: DlgKLDOpt.cpp,v 1.1 2008/03/06 19:44:28 samn Exp $ 
+d19 2
+d37 2
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 60
+a60 58
+// $Id$ 
+// DlgKLDOpt.cpp : implementation file
+//
+
+#include "stdafx.h"
+#include "WClust.h"
+#include "DlgKLDOpt.h"
+#include ".\dlgkldopt.h"
+
+
+// DlgKLDOpt dialog
+
+IMPLEMENT_DYNAMIC(DlgKLDOpt, CDialog)
+DlgKLDOpt::DlgKLDOpt(CWnd* pParent /*=NULL*/)
+	: CDialog(DlgKLDOpt::IDD, pParent)
+	, m_iNNToFind(5)
+	, m_bFast(TRUE)
+{
+	m_spinBtn.SetRange(1,100);
+}
+
+DlgKLDOpt::~DlgKLDOpt()
+{
+}
+
+void DlgKLDOpt::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_SPINNNKLD, m_spinBtn);
+	DDX_Text(pDX, IDC_EDITNNKLD, m_iNNToFind);
+	DDV_MinMaxInt(pDX, m_iNNToFind, 1, 100);
+	DDX_Check(pDX, IDC_CHECK_FAST_KLD, m_bFast);
+}
+
+
+BEGIN_MESSAGE_MAP(DlgKLDOpt, CDialog)
+	ON_NOTIFY(UDN_DELTAPOS, IDC_SPINNNKLD, OnDeltaposSpinnnkld)
+END_MESSAGE_MAP()
+
+
+// DlgKLDOpt message handlers
+
+void DlgKLDOpt::OnDeltaposSpinnnkld(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMUPDOWN pNMUpDown = reinterpret_cast<LPNMUPDOWN>(pNMHDR);
+	// TODO: Add your control notification handler code here
+	*pResult = 0;
+	if(pNMUpDown->iDelta > 0)
+		if(m_spinBtn.GetPos()-pNMUpDown->iDelta>=1) 
+			pNMUpDown->iDelta *= -1; 
+		else 
+			pNMUpDown->iDelta=0;
+	else if(pNMUpDown->iDelta < 0)
+		if(m_spinBtn.GetPos()+pNMUpDown->iDelta<=100)
+			pNMUpDown->iDelta *= -1;
+		else
+			pNMUpDown->iDelta = 0;
+}
+@

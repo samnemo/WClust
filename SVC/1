@@ -1,0 +1,26 @@
+
+Usage: ./svc -q (0,+inf) -C (0,+inf) -b [0,1] -k2,6 -e [1,2] -c [1, N] -l [0-2] -f <dataset-filename> -D <detail-filename> -r [1, N] -o [0, N] -t [1,N] -s (0,1]
+
+	 -q: the kernel width value must be a real value greater than zero - DEFAULT: auto
+	 -C: the soft margin constant must be a real value greater than zero - DEFAULT: 1
+	 -b: the BSV Clustering Policy - DEFAULT: 1
+		 0 for classic policy
+		 1 for enhanced policy (aim to get better results)
+	 -k: the Kernel Type - DEFAULT: 2
+		 2 for Gaussian Kernel (K(x,y) = exp(-gamma * ||x-y||^2))
+		 6 for Laplacian Kernel (K(x,y) = exp(-gamma*|x-y|_1)) 
+	 -e: the Euclidean Measure to use in vector-distance measurement - DEFAULT: 2
+		 1 for L1 distance (sum |x_i - y_i|) 
+		 2 for L2 distance (sum sqrt(||x_i - y_i||^2)) 
+	 -l: the cluster labeling algorithm type - DEFAULT: 0
+		 2 for Hybrid Cone Cluster Labeling
+		 0 for Cone Cluster Labeling
+		 1 for Complete Graph Cluster Labeling
+	 -c: the number of cluster to request must be an integer value greater than zero
+	 -f: the filename of the dataset file, in LIBSVM format
+	 -D: the filename of the file to store detailed clusters assignment
+	 -r: the number of runs to perform - DEFAULT: 100000
+	 -o: the labels offset (i.e. the label of the first class) - DEFAULT: 1
+	 -s: the softening constant for kernel width generation - DEFAULT: 1
+	 -t: the minimum clusters cardinality - DEFAULT: 2
+

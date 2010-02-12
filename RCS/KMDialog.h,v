@@ -1,0 +1,123 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2008.09.16.01.42.01;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.06.17;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.2
+log
+@updated dialog to be easier to use
+@
+text
+@// $Id$ 
+#pragma once
+#include "afxwin.h"
+
+
+// KMDialog dialog
+
+class KMDialog : public CDialog
+{
+	DECLARE_DYNAMIC(KMDialog)
+
+public:
+	KMDialog(CWnd* pParent = NULL);   // standard constructor
+	virtual ~KMDialog();
+
+	int MinClust(){ return m_iMinClusts; }
+	int MaxClust(){ return m_iMaxClusts; }
+	int Iters(){ return m_iIters; }
+	int DBIters(){ return m_iDBIters; }
+	bool Normalize(){ return (bool) m_iNormalizeData; }
+	bool Medians(){ return (bool) m_iUseMedians; }
+
+// Dialog Data
+	enum { IDD = IDD_KM_DIALOG };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	virtual BOOL OnInitDialog();
+
+	int m_iMinClusts;
+	int m_iMaxClusts;
+	int m_iIters;
+	int m_iDBIters;
+	int m_iNormalizeData;
+	int m_iUseMedians;
+
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
+	CEdit m_winMinC;
+	CEdit m_winMaxC;
+	CEdit m_winNumIter;
+	CEdit m_winDBIter;
+	CButton m_btnNorm;
+	CButton m_btnMed;
+};
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 46
+a46 38
+/* $Id$ */
+#pragma once
+
+
+// KMDialog dialog
+
+class KMDialog : public CDialog
+{
+	DECLARE_DYNAMIC(KMDialog)
+
+public:
+	KMDialog(CWnd* pParent = NULL);   // standard constructor
+	virtual ~KMDialog();
+
+	int MinClust(){ return m_iMinClusts; }
+	int MaxClust(){ return m_iMaxClusts; }
+	int Iters(){ return m_iIters; }
+	int DBIters(){ return m_iDBIters; }
+	bool Normalize(){ return (bool) m_iNormalizeData; }
+	bool Medians(){ return (bool) m_iUseMedians; }
+
+// Dialog Data
+	enum { IDD = IDD_KM_DIALOG };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	int m_iMinClusts;
+	int m_iMaxClusts;
+	int m_iIters;
+	int m_iDBIters;
+	int m_iNormalizeData;
+	int m_iUseMedians;
+
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
+};
+@

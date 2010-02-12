@@ -1,0 +1,14 @@
+offset = 0
+
+at save bpf:
+pc1 : 21: -0.58132339
+pc2 : 22: -1.9879177
+pc3 : 23: -0.65943933
+
+at load orig bpf:
+pc1 : 21: -.1477
+pc2 : 22: -.0615
+pc3 : 23: -.0148
+
+diff values!!
+

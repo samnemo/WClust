@@ -1,0 +1,79 @@
+head	1.3;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.3
+date	2008.08.11.20.50.17;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.07.10.03.30.57;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.03.19.15.06.34;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.3
+log
+@use doubles
+@
+text
+@// $Id: IsolationDist.h,v 1.2 2008/07/10 03:30:57 samn Exp $ 
+#ifndef ISOLATION_DIST
+#define ISOLATION_DIST
+
+#include <vector>
+
+using namespace std;
+
+//compute Isolation Distance
+float IsolationDist(vector<int>& vClustIDs,int iClustID,vector<double>& vFloat,int iRows,int iCols);
+
+//compute L-Ratio of a cluster
+float LRatio(vector<int>& vClustIDs,int iClustID,vector<double>& vFloat,int iRows,int iCols);
+
+#endif
+@
+
+
+1.2
+log
+@added LRatio
+@
+text
+@d1 1
+a1 1
+// $Id: IsolationDist.h,v 1.1 2008/03/19 15:06:34 samn Exp $ 
+d10 1
+a10 1
+float IsolationDist(vector<int>& vClustIDs,int iClustID,vector<float >& vFloat,int iRows,int iCols);
+d13 1
+a13 1
+float LRatio(vector<int>& vClustIDs,int iClustID,vector<float >& vFloat,int iRows,int iCols);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d9 1
+d12 3
+@

@@ -1,0 +1,30 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.03.19.15.19.20;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@// $Id$ 
+#include "nrutil_nr.h"
+
+//#include "nrutil_tnt.h"
+
+//#include "nrutil_mtl.h"
+@

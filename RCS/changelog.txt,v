@@ -1,0 +1,468 @@
+head	1.5;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.5
+date	2009.06.24.18.26.15;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2009.06.24.18.22.58;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2009.06.22.04.37.03;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2009.06.22.04.31.33;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2009.03.25.21.27.31;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.5
+log
+@up
+@
+text
+@ $Id: changelog.txt,v 1.4 2009/06/24 18:22:58 samn Exp $ 
+** version 96
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>,
+William Lytton <billl@@neurosim.downstate.edu>
+date	Tue, Jul 15, 2008 at 12:18 AM
+subject	WClust - V96
+mailed-by	gmail.com
+	
+hide details 7/15/08 [WClust_V96.zip,08jul14_cat_waveforms_norm_energy_haar_wavelets_b.GIF,08jul14_cat_waveforms_norm_energy_haar_wavelets_c.GIF,08jul14_cat_waveforms_norm_energy_haar_wavelets_725ttx_a.GIF,08jul12_cat_waveforms_norm_energy_PC1-4.gif,08jul12_cat_waveforms_norm_energy_combination_of_PC1-4.gif]
+	
+	
+Reply
+	
+	
+The follow changes were made to this version of WClust:
+
+1)  When performing PCA on concatenated waveforms, C,  C is normalized by Energy(C)
+This gives better results as we've seen...
+
+2) Don't use Valley for entropy reduction clustering (Valley-V was already not used)
+
+3) Allow saving of auto-clustering results (waveform cluster IDs) to output BPF files. This is controlled by the drop-down list (i.e. when displaying k-means results and then saving to BPF, the k-means IDs will be saved, etc.). Before saving, when its not displaying manual clustering results, the user is asked if they'd like to save the corresponding IDs.
+
+4) Added option to add Haar wavelet coefficients as extra dimensions. This is done in same way as other dimensions are added by user (i.e. voltage at specific time). The user will need to enter the # of coefficients to add as dimensions (up to a maximum of NUM_SAMPLES*NUM_CHANNELS for the corresponding BPF file). The wavelet decomposition is performed on the concatenated normalized waveforms (same as PCA as we're now doing it for concatenated waveforms...). I attached some figs of results. Users will be allowed to define clusters manually on these wavelet dimensions same as any other dimensions and be able to save to .cl files and read them back in...Note that some wavelet dimensions have very little variance so will be useless. Others are good at separating.
+
+5) Allow use of KlustaKwik. Should be better now, but not so great yet, because I don't yet allow user to select max # of clusters, etc. KlustaKwik will be performed on dimensions Harris uses (Energy, Normalized-PC1) X 4
+
+6) When performing PCA for isolation distance / L-ratio purposes, the waveforms (which are not concatenated) are first up-sampled using splines and then peak-aligned. This gives a bit better results...and also takes longer.
+
+7) Bugs associated with 1-6.
+
+8) I also added some figs showing the PCs of concatenated waveforms. Looks like there is typically a maximum amplitude on a single channel , so that seems like a good way to discriminate between cells.
+
+Let me know any questions/comments or if you find any bugs.
+
+I'll be away until ~7/23 and probably without a laptop + compiler.
+
+Sam
+
+** version 97
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>
+cc	Eun Hye Park <eunhye.park@@downstate.edu>,
+William Lytton <billl@@neurosim.downstate.edu>
+date	Thu, Jul 24, 2008 at 2:53 PM
+subject	WClust - V97
+mailed-by	gmail.com
+	
+hide details 7/24/08 [WClust_V97.zip]
+	
+	
+Reply
+	
+	
+This version of WClust allows performing entropy reduction clustering (auto) on large bpf files, with 100% of points loaded.
+
+Let me know if you notice any problems.
+
+Sam
+	WClust_V97.zip
+548K   Download   
+
+** version 98
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>,
+Eun Hye Park <eunhye.park@@downstate.edu>,
+William Lytton <billl@@neurosim.downstate.edu>
+date	Mon, Jul 28, 2008 at 2:22 PM
+subject	WClust - V98
+mailed-by	gmail.com
+	
+hide details 7/28/08 [WClust_V98.zip]
+	
+	
+Reply
+	
+	
+This version of WClust fixes the problem with opening EunHye's BPF file : 07-08-Glu.bpf . The problem was bad sync values (-128) , that resulted in
+writing to an index out of bounds in a pointer...not sure why there are such Sync values or if something in the recording setup changed,
+but for now I just make sure the index is in bounds, and if it's not, I don't write to the histogram.
+
+Sam
+	WClust_V98.zip
+547K   Download   
+
+** version 99
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>
+date	Mon, Aug 11, 2008 at 6:54 PM
+subject	WClust - V99
+mailed-by	gmail.com
+	
+hide details 8/11/08 [matlab_spikes.zip,WClust_V99.zip]
+	
+	
+Reply
+	
+	
+Not sure this went through last time since I got some gmail error.
+This version uses energy same as Schmitzer-Torbert.
+Also allows importing of spikes from text file as in attached matlab_spikes.zip.
+1st line is # of channels.
+2nd is # of samples per spike.
+Rest of lines are: cluster ID followed by spike waveforms with channels * samples numbers
+Sam
+2 attachments  Download all attachments  
+	matlab_spikes.zip
+1330K   Download  
+	WClust_V99.zip
+
+** version 100
+
+	from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>,
+Andre Fenton <afenton@@biosignalgroup.com>
+date	Sun, Aug 17, 2008 at 5:14 PM
+subject	WClust - V100
+mailed-by	gmail.com
+	
+hide details 8/17/08 [tsbatch.txt,WClust_V100.zip]
+	
+	
+Reply
+	
+	
+I added a batch mode to perform timestamp adjustment. I think its working correctly but please check if
+things look ok. I assume the time units of Vertex's SetTimeMax()  and SetTimeStamp are the same.
+
+I attached a sample batch file. To use it go to the menu in WClust under batch and select "TimeStamp...".
+Then WClust will ask you for a text file similar to the one attached.
+
+The first line in the .txt file is the base directory. All succeeding lines are input bpfs in that base directory followed
+by a tab ('\t') character, followed by an output bpf file (relative to base directory).
+
+WClust will then go through the tetrodes in the BPFs and adjust the spike timestamps, then save to the output bpfs.
+
+Its best to save output BPFs to a different directory to avoid over-writing originals.
+
+Let me know if you find any problems...
+Sam
+
+
+2 attachments  Download all attachments  
+	tsbatch.txt
+1K   Open as a Google document   View   Download  
+	WClust_V100.zip
+
+** version 101
+
+from	sam n <samnemo@@gmail.com>
+to	Heekyung Lee <heekyung.lee@@downstate.edu>,
+Eun Hye Park <eunhye.park@@downstate.edu>
+cc	William Lytton <billl@@neurosim.downstate.edu>,
+Andre Fenton <aafenton@@gmail.com>
+date	Thu, Aug 28, 2008 at 12:17 AM
+subject	WClust - V101
+mailed-by	gmail.com
+	
+hide details 8/28/08 [WClust_V101.zip]
+	
+	
+Reply
+	
+	
+Since Heekyung and Eun-Hye complained about # of clusters being picked
+in a bad way by entropy reduction clustering...
+this version of WClust does a better job of determining the optimal #
+of clusters when performing entropy reduction clustering.
+You enter the parameters same as before...
+Let me know if its working as you like or if you find problems.
+(the way it works is by maximizing the average Iso-I(BG,Inter) for
+each possible # of clusters in the range you enter -- be sure to
+specify
+numiterations as a # >= 4 and numclusterations as a # >= 4 as well for
+best possible results).
+Sam
+	WClust_V101.zip
+598K   Download   
+
+** version 102
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>
+date	Mon, Sep 15, 2008 at 9:52 PM
+subject	WClust - V102
+mailed-by	gmail.com
+	
+hide details 9/15/08 [WClust_V102.zip]
+	
+	
+Reply
+	
+	
+This version has a bug fix for entropy reduction clustering as well as an improved interface for K-Means clustering.
+Let me know if you notice any problems.
+Sam
+	WClust_V102.zip
+639K   Download   
+
+** version 103
+
+	from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>
+cc	William Lytton <billl@@neurosim.downstate.edu>
+date	Thu, Nov 27, 2008 at 4:45 PM
+subject	WClust - v103
+mailed-by	gmail.com
+	
+hide details 11/27/08 [WClust_V103.zip,bmc_bioinformatics_8_3.pdf]
+	
+	
+Reply
+	
+	
+Updated version of WClust attached.
+
+Changes:
+
+ 1) added FLAME clustering - see attached paper -- it tends to over-split clusters but prelim. tests show it does better than k-means as measured by Iso-I (and k-means is better than current version of entropy-reduction clustering ... need to fix that).
+      To use FLAME clustering, from menu , Cluster -> FLAME clustering.
+      Distance Type can be selected by pressing up/down when you highlight it. It determines how distance is calculated between vectors.
+Epsilon is used for convergence : smaller epsilon means it will take longer and should give better results.
+Outlier thresh determines which points are considered  outliers.  Its in units of standard deviations above/below the mean.
+KNNPrct determines % of points to use for determining support objects (see paper).    
+
+ 2) don't use Valleys at all in auto-clustering
+
+Let me know if you have questions.
+
+Sam
+2 attachments  Scanning for viruses...  
+	WClust_V103.zip
+645K  
+	bmc_bioinformatics_8_3.pdf
+1258K   View   
+
+** version 104
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>
+cc	Heekyung Lee <heekyung.lee@@downstate.edu>
+date	Thu, Jan 22, 2009 at 9:00 PM
+subject	WClust V 104
+mailed-by	gmail.com
+	
+hide details Jan 22 [WClust_V104.zip]
+	
+	
+Reply
+	
+	
+Here's the fix for viewing Heekyung's mouse data: when the spike sampling frequency is <= 0, it will be set to 32KHz so EEG trace can be displayed.
+
+Sam
+
+	WClust_V104.zip
+590K   Download   
+
+** version 105
+
+from	sam n <samnemo@@gmail.com>
+to	Andre Fenton <aafenton@@gmail.com>,
+William Lytton <billl@@neurosim.downstate.edu>
+date	Wed, Jan 28, 2009 at 5:56 PM
+subject	WClust - V105
+mailed-by	gmail.com
+	
+hide details Jan 28 [WClust_V105.zip]
+	
+	
+Reply
+	
+	
+I added note-taking for experiments when a user opens a BPF file.
+
+Let me know if you or users have comments.
+
+Sam
+	WClust_V105.zip
+541K   Download  
+
+** version 106
+
+1. self-organizing map clustering added. still in testing mode.
+
+2. allow calculation of silhouette width , even when find best 2D slices mode is off.
+this can save time, if want to get an estimate of cluster quality. in this case, all
+the dimensions will be used.
+
+
+3. I added auto-clustering batch. this procedure, available under the batch menu takes a text file
+as input and parses it to determine which BPF files to cluster. it will then go through ALL the
+spikes of ALL the tetrodes of the file and cluster them with k-means clustering. the user can
+specify the minimum and maximum # of clusters in a BPF file (applies to all tetrodes). then the
+k-means will perform clustering on the range, and pick the # of clusters that maximizes the
+davies-bouldin index (DB) between pairs of clusters. the DB-index is: (dii + djj) / dij, for all
+pairs of clusters i,j. dii is the average intracluster distance of all pairs of elements in the
+cluster. dij is the average intercluster distance between pairs of elements in the two clusters.
+
+Here is an example batch file for auto-clustering (see attached):
+
+C:\Users\samn\Documents\neurosim\spikeclust
+
+test.bpf    out\testover.bpf    2    6    30    100
+
+7-25-TTX.bpf    out\7-25-TTX.bpf    4    6    30    100
+
+
+
+First line is the base directory.
+
+Next lines are the files to process. First field is input BPF file. 2nd field is output BPF
+file. Then comes the min # of clusters, max # of clusters, # of iterations to determine optimal
+# of clusters, and # of iterations to perform k-means once optimal # of clusters has been
+determined. All the fields are separated by tabs ('\t').
+
+I used DB-index instead of Iso-I since thats how the k-means code was already setup, but later
+I'll add options to perform different clustering algorithms, etc. In the current form, it takes a
+lot of memory (i.e., on a file with 1e6 spikes) and will probably run slowly...Memory is an issue
+since all the spikes are loaded. Alternatively, I can make it load a fraction of spikes, and the
+remainder will get classified according to the cluster identities of the nearest neighboring
+spikes...
+
+Anyway...I made these changes so we could check Eunhye's clustering results and make sure we get
+same output when we run with k-means (because a few clusters were of low quality).
+
+Sorry, I didn't describe procedure for selecting optimal # of clusters correctly. It really tries
+to minimize the DB-index (minimize intra-cluster-dispersion / inter-cluster-dispersion)
+
+** version 107
+
+1. allow calculation of Iso-I with default parameters (peak,energy) instead of forcing search on
+best 2D slices. search for best slices is still default.
+
+2. use pearson correlation distance in k-means, since that gives better results than euclidean
+distance on clusters with correlated dimensions. best if can put in mahalanobis distance for
+use in k-means, since thats what its specifically intended for.
+
+3. added low-amplitude spike on all 4 tetrodes noise detection: the user sets a minimum value
+for which a spike is considered to occur. the value selected should be between -10,10 , since
+those are the normalized voltage values used in wclust. a spike will be considered noise if
+none of the voltages on all four wires crosses that threshold. saturation detection works as
+normal. users shouldnt create their own noise clusters. this noise detection may help some
+of the clustering algorithms and users who ignore these low-amplitude spikes.
+
+4. added options for klustakwik clustering. variables are min cluster, max cluster, max possible
+cluster, num iterations. klustakwik iterates by starting with a fixed # of clusters in the range of min
+cluster to max cluster. it then runs the clustering on the data, and may split clusters if that
+gives an improved score, but only up to max possible clusters. for each starting # of clusters,
+the data is randomly initialized with num iteration times, to avoid local maxima problem.
+klustakwik tends to oversplit, so to avoid over-oversplitting, should start with min clusters=2,
+max clusters=5, and max possible clusters < 20 (or whatever the max possible single units that
+can ever be found). in addition, some of the clusters klustakwik finds will clearly be noise.
+checking their quality is then important with iso-i or silhouette width and discarding the
+low-quality ones. klustakwik uses all the features that are currently in memory but excludes
+valley-v,valley,peak-v. num iterations should be at least 10 or more. its ok to have max possible
+clusters a little higher than real # of single-units expected, since some of the clusters
+will be noise.
+
+5. added option to run klustakwik vs kmeans in auto-clustering batch. the new format for batch files is:
+
+base directory
+
+inbpf	outbpf	clusteringalgorithm	minclusters	maxclusters	iterations	maxpossibleclusters   <-- for klustakwik
+inbpf	outbpf	clusteringalgorithm	minclusters	maxclusters	iterations	dbiterations        <-- for kmeans
+
+
+clusteringalgorithm can be either 5 for klustakwik or 2 for kmeans
+
+@
+
+
+1.4
+log
+@v107
+@
+text
+@d1 1
+a1 1
+ $Id: changelog.txt,v 1.3 2009/06/22 04:37:03 samn Exp $ 
+d361 3
+a363 1
+valley-v,valley,peak-v.
+@
+
+
+1.3
+log
+@correction on DB-index
+@
+text
+@d1 1
+a1 1
+ $Id: changelog.txt,v 1.2 2009/06/22 04:31:33 samn Exp $ 
+d334 39
+@
+
+
+1.2
+log
+@v106
+@
+text
+@d1 1
+a1 1
+ $Id: changelog.txt,v 1.1 2009/03/25 21:27:31 samn Exp $ 
+d331 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+ $Id$ 
+d287 44
+@

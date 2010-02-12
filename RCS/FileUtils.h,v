@@ -1,0 +1,121 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.4
+date	2009.06.24.18.01.15;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2009.01.28.21.40.37;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.10.00.51.07;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.09.23.37.53;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.4
+log
+@added GetFilesInDir
+@
+text
+@// $Id: FileUtils.h,v 1.3 2009/01/28 21:40:37 samn Exp $ 
+#ifndef FILE_UTILS_H
+#define FILE_UTILS_H
+
+#include <string>
+#include <vector>
+
+std::string GetFileExt(std::string& strPath);
+CString GetFileExt(CString& strPath);
+std::string GetFileName(std::string& strPath,bool bGetExt);
+CString GetFileName(CString& strPath,bool bGetExt);
+CString GetFilePath(CString& strPath,bool bGetExt);
+CString GetDir(CString& strFilePath);
+bool GetLines(FILE* fp,std::vector<std::string>& vstr);
+bool GetLines(char* fname,std::vector<std::string>& vstr);
+bool FileExists(const char* fname);
+long FileSize(const char* fname);
+
+//path is directory, ext is file type extension, vfiles will have full path of each file found
+//returns true on success
+bool GetFilesInDir(std::string& path,std::string& ext,std::vector<std::string>& vfiles);
+
+#endif
+@
+
+
+1.3
+log
+@added FileExists, FileSize
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d19 4
+@
+
+
+1.2
+log
+@moved batch stuff to batchutils.h
+@
+text
+@d1 19
+a19 17
+// $Id$ 
+#ifndef FILE_UTILS_H
+#define FILE_UTILS_H
+
+#include <string>
+#include <vector>
+
+std::string GetFileExt(std::string& strPath);
+CString GetFileExt(CString& strPath);
+std::string GetFileName(std::string& strPath,bool bGetExt);
+CString GetFileName(CString& strPath,bool bGetExt);
+CString GetFilePath(CString& strPath,bool bGetExt);
+CString GetDir(CString& strFilePath);
+bool GetLines(FILE* fp,std::vector<std::string>& vstr);
+bool GetLines(char* fname,std::vector<std::string>& vstr);
+
+#endif
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a16 11
+struct QBatchRec
+{
+	std::string strBPF;
+	std::string strCL;
+	int iTetrode;
+	double dPrct;
+	std::string outCL;
+};
+
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<QBatchRec>& vqb);
+
+@

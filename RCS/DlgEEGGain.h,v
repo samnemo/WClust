@@ -1,0 +1,119 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2008.03.27.22.20.01;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.13.02.44.05;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.2
+log
+@v74, updated eeg gains gui, added play speed control for eeg
+@
+text
+@// $Id: DlgEEGGain.h,v 1.1 2008/01/13 02:44:05 samn Exp $ 
+#pragma once
+#include "afxwin.h"
+#include <vector>
+#include <string>
+#include "afxcmn.h"
+#include "ColorComboBox.h"
+
+using namespace std;
+
+// DlgEEGGain dialog
+
+class DlgEEGGain : public CDialog
+{
+	DECLARE_DYNAMIC(DlgEEGGain)
+
+public:
+	DlgEEGGain(CWnd* pParent,
+		vector<double>& vEEGGains,
+		vector<string>& vEEGNames,
+		CPaletteStack* pPal);
+	virtual ~DlgEEGGain();
+
+	CString m_cstrEEGGain;
+	vector<double> m_vEEGGains;
+	vector<string> m_vEEGNames;
+
+// Dialog Data
+	enum { IDD = IDD_DIALOG_EEG_GAINS };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	// Generated message map functions
+	//{{AFX_MSG(CEditDlg)
+	virtual BOOL OnInitDialog();
+	afx_msg void OnShowWindow(BOOL bShow, UINT nStatus);
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedCancel();
+	afx_msg void OnBnClickedOk();
+	CColorComboBox m_comboEEG;
+	double m_dCurGain;
+	afx_msg void OnDeltaposSpineeggain(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnCbnSelchangeComboEegGainChan();
+	CSpinButtonCtrl m_spinEEGGain;
+	CString m_strCurGain;
+	CEdit m_editEEGGain;
+	afx_msg void OnEnKillfocusEditeeggain();
+};
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 51
+a51 29
+// $Id$ 
+#pragma once
+#include "afxwin.h"
+
+
+// DlgEEGGain dialog
+
+class DlgEEGGain : public CDialog
+{
+	DECLARE_DYNAMIC(DlgEEGGain)
+
+public:
+	DlgEEGGain(CWnd* pParent = NULL);   // standard constructor
+	virtual ~DlgEEGGain();
+
+	CString m_cstrEEGGain;
+
+// Dialog Data
+	enum { IDD = IDD_DIALOG1 };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+public:
+	CEdit m_EditEEGGain;
+	afx_msg void OnBnClickedCancel();
+	afx_msg void OnBnClickedOk();
+};
+@

@@ -1,0 +1,4 @@
+echo "Creating an KDB-tree..."
+kdbtree 2 raw.dat index.idx 0
+echo "Searching an KDB-tree..."
+kdbtree 2 query.in index.idx 1

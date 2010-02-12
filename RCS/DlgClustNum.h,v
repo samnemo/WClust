@@ -1,0 +1,48 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2008.01.05.15.07.03;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* $Id$ */
+#pragma once
+
+
+// CDlgClustNum dialog
+
+class CDlgClustNum : public CDialog
+{
+	DECLARE_DYNAMIC(CDlgClustNum)
+
+public:
+	CDlgClustNum(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CDlgClustNum();
+
+// Dialog Data
+	enum { IDD = IDD_DLG_CLUST_NUM };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
+};
+@

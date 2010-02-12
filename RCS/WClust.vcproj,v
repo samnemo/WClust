@@ -1,0 +1,1541 @@
+head	1.21;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.21
+date	2009.06.24.18.06.04;	author samn;	state Exp;
+branches;
+next	1.20;
+
+1.20
+date	2009.06.22.04.25.09;	author samn;	state Exp;
+branches;
+next	1.19;
+
+1.19
+date	2009.01.28.21.42.14;	author samn;	state Exp;
+branches;
+next	1.18;
+
+1.18
+date	2008.11.27.20.17.39;	author samn;	state Exp;
+branches;
+next	1.17;
+
+1.17
+date	2008.08.11.20.53.53;	author samn;	state Exp;
+branches;
+next	1.16;
+
+1.16
+date	2008.05.06.02.25.36;	author samn;	state Exp;
+branches;
+next	1.15;
+
+1.15
+date	2008.04.24.04.54.56;	author samn;	state Exp;
+branches;
+next	1.14;
+
+1.14
+date	2008.04.09.04.56.10;	author samn;	state Exp;
+branches;
+next	1.13;
+
+1.13
+date	2008.04.07.03.38.35;	author samn;	state Exp;
+branches;
+next	1.12;
+
+1.12
+date	2008.04.01.06.09.00;	author samn;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2008.03.29.03.13.01;	author samn;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2008.03.19.15.08.10;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.03.06.19.48.11;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.03.05.19.44.23;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.02.02.21.21.56;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.01.13.02.45.16;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.01.10.19.06.10;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.01.10.00.51.41;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.01.09.23.38.45;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.07.05.26.15;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.30.29;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.21
+log
+@added klustakwik options
+@
+text
+@<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.10"
+	Name="WClust"
+	SccProjectName=""
+	SccLocalPath=""
+	Keyword="MFCProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory=".\Debug"
+			IntermediateDirectory=".\Debug"
+			ConfigurationType="1"
+			UseOfMFC="1"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="C:\Users\samn\Documents\neurosim"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="stdafx.h"
+				PrecompiledHeaderFile=".\Debug/WClust.pch"
+				AssemblerListingLocation=".\Debug/"
+				ObjectFile=".\Debug/"
+				ProgramDataBaseFileName=".\Debug/"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib vfw32.lib winmm.lib"
+				OutputFile="WClust.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories=""
+				GenerateDebugInformation="TRUE"
+				ProgramDatabaseFile=".\Debug/WClust.pdb"
+				SubSystem="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_DEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Debug/WClust.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="_DEBUG"
+				Culture="1029"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory=".\Release"
+			IntermediateDirectory=".\Release"
+			ConfigurationType="1"
+			UseOfMFC="1"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				GlobalOptimizations="TRUE"
+				InlineFunctionExpansion="1"
+				EnableIntrinsicFunctions="TRUE"
+				ImproveFloatingPointConsistency="TRUE"
+				FavorSizeOrSpeed="1"
+				AdditionalIncludeDirectories="C:\Users\samn\Documents\neurosim"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				StringPooling="TRUE"
+				RuntimeLibrary="0"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="3"
+				PrecompiledHeaderThrough="stdafx.h"
+				PrecompiledHeaderFile=".\Release/WClust.pch"
+				AssemblerListingLocation=".\Release/"
+				ObjectFile=".\Release/"
+				ProgramDataBaseFileName=".\Release/"
+				BrowseInformation="1"
+				WarningLevel="3"
+				SuppressStartupBanner="TRUE"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib vfw32.lib LAPACK.lib BLAS.lib extras.lib matgen.lib"
+				OutputFile="WClust.exe"
+				LinkIncremental="1"
+				SuppressStartupBanner="TRUE"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile=".\Release/WClust.pdb"
+				SubSystem="2"
+				TargetMachine="1"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="NDEBUG"
+				MkTypLibCompatible="TRUE"
+				SuppressStartupBanner="TRUE"
+				TargetEnvironment="1"
+				TypeLibraryName=".\Release/WClust.tlb"
+				HeaderFileName=""/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				PreprocessorDefinitions="NDEBUG"
+				Culture="1029"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"/>
+			<Tool
+				Name="VCWebDeploymentTool"/>
+			<Tool
+				Name="VCManagedWrapperGeneratorTool"/>
+			<Tool
+				Name="VCAuxiliaryManagedWrapperGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<File
+				RelativePath=".\APClustDialog.cpp">
+			</File>
+			<File
+				RelativePath=".\apcluster.cpp">
+			</File>
+			<File
+				RelativePath=".\AviReader.cpp">
+			</File>
+			<File
+				RelativePath=".\BatchUtils.cpp">
+			</File>
+			<File
+				RelativePath=".\CBmpFile.cpp">
+			</File>
+			<File
+				RelativePath="cdxCSizingDialog.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="ChooseClDlg.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="Cluster.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\color.cpp">
+			</File>
+			<File
+				RelativePath="ColorComboBox.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\combination.cpp">
+			</File>
+			<File
+				RelativePath="DialList.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="DlgAddWCP.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\DlgAutoDeNoise.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgBin.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgClustNum.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgEEGGain.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgExpNotes.cpp">
+			</File>
+			<File
+				RelativePath="DlgFileInfo.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\DlgFLClust.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgKLDOpt.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgKlustaKwik.cpp">
+			</File>
+			<File
+				RelativePath="DlgPositionReg.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\DlgSampBatchF.cpp">
+			</File>
+			<File
+				RelativePath=".\DlgSOM.cpp">
+			</File>
+			<File
+				RelativePath="DlgWcpNotFound.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\EClustDlg.cpp">
+			</File>
+			<File
+				RelativePath="EditDlg.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="EditSpikes.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="EEG.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="EEGStack.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\FileUtils.cpp">
+			</File>
+			<File
+				RelativePath=".\HashHist.cpp">
+			</File>
+			<File
+				RelativePath=".\Hist.cpp">
+			</File>
+			<File
+				RelativePath=".\InfoT.cpp">
+			</File>
+			<File
+				RelativePath=".\IsolationDist.cpp">
+			</File>
+			<File
+				RelativePath=".\KDTree.cpp">
+			</File>
+			<File
+				RelativePath=".\KMDialog.cpp">
+			</File>
+			<File
+				RelativePath=".\Log.cpp">
+			</File>
+			<File
+				RelativePath="MainFrm.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="MyObj.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\MyVers.cpp">
+			</File>
+			<File
+				RelativePath=".\pca.cpp">
+			</File>
+			<File
+				RelativePath=".\Ppm.cpp">
+			</File>
+			<File
+				RelativePath=".\RateDlg.cpp">
+			</File>
+			<File
+				RelativePath="SelectTT.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="SetDial.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\ShowXYSpikeDialog.cpp">
+			</File>
+			<File
+				RelativePath=".\Silhouette.cpp">
+			</File>
+			<File
+				RelativePath=".\simple_haar.cpp">
+			</File>
+			<File
+				RelativePath="StdAfx.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"
+						UsePrecompiledHeader="1"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						UsePrecompiledHeader="1"
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\StringUtils.cpp">
+			</File>
+			<File
+				RelativePath="Sync.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="SyncStack.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="TimeEv.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\UPDialog.cpp">
+			</File>
+			<File
+				RelativePath="Vertex.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\VideoDlg.cpp">
+			</File>
+			<File
+				RelativePath="WClust.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="WClust.rc">
+			</File>
+			<File
+				RelativePath="WClustDoc.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="WClustView.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="0"
+						PreprocessorDefinitions=""
+						BasicRuntimeChecks="3"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						Optimization="2"
+						PreprocessorDefinitions=""
+						BrowseInformation="1"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\WCMath.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h;hpp;hxx;hm;inl">
+			<File
+				RelativePath=".\A2D.h">
+			</File>
+			<File
+				RelativePath=".\APClustDialog.h">
+			</File>
+			<File
+				RelativePath=".\apcluster.h">
+			</File>
+			<File
+				RelativePath=".\AutoCProgDlg.h">
+			</File>
+			<File
+				RelativePath=".\AviReader.h">
+			</File>
+			<File
+				RelativePath=".\BatchUtils.h">
+			</File>
+			<File
+				RelativePath=".\BBox.h">
+			</File>
+			<File
+				RelativePath=".\CBmpFile.h">
+			</File>
+			<File
+				RelativePath="cdxCSizingDialog.h">
+			</File>
+			<File
+				RelativePath="ChooseClDlg.h">
+			</File>
+			<File
+				RelativePath="Cluster.h">
+			</File>
+			<File
+				RelativePath="ClusteringInfoDlg.h">
+			</File>
+			<File
+				RelativePath=".\color.h">
+			</File>
+			<File
+				RelativePath="ColorComboBox.h">
+			</File>
+			<File
+				RelativePath=".\combination.h">
+			</File>
+			<File
+				RelativePath="DialList.h">
+			</File>
+			<File
+				RelativePath="DlgAddWCP.h">
+			</File>
+			<File
+				RelativePath=".\DlgAutoDeNoise.h">
+			</File>
+			<File
+				RelativePath=".\DlgBin.h">
+			</File>
+			<File
+				RelativePath=".\DlgClustNum.h">
+			</File>
+			<File
+				RelativePath=".\DlgEEGGain.h">
+			</File>
+			<File
+				RelativePath=".\DlgExpNotes.h">
+			</File>
+			<File
+				RelativePath="DlgFileInfo.h">
+			</File>
+			<File
+				RelativePath=".\DlgFLClust.h">
+			</File>
+			<File
+				RelativePath=".\DlgKLDOpt.h">
+			</File>
+			<File
+				RelativePath=".\DlgKlustaKwik.h">
+			</File>
+			<File
+				RelativePath="DlgPositionReg.h">
+			</File>
+			<File
+				RelativePath=".\DlgSampBatchF.h">
+			</File>
+			<File
+				RelativePath=".\DlgSOM.h">
+			</File>
+			<File
+				RelativePath="DlgWcpNotFound.h">
+			</File>
+			<File
+				RelativePath=".\EClustDlg.h">
+			</File>
+			<File
+				RelativePath="EditDlg.h">
+			</File>
+			<File
+				RelativePath="EditSpikes.h">
+			</File>
+			<File
+				RelativePath="EEG.h">
+			</File>
+			<File
+				RelativePath="EEGStack.h">
+			</File>
+			<File
+				RelativePath=".\FileUtils.h">
+			</File>
+			<File
+				RelativePath=".\HashHist.h">
+			</File>
+			<File
+				RelativePath=".\Hist.h">
+			</File>
+			<File
+				RelativePath=".\InfoT.h">
+			</File>
+			<File
+				RelativePath=".\IsolationDist.h">
+			</File>
+			<File
+				RelativePath=".\KDTree.h">
+			</File>
+			<File
+				RelativePath=".\KMDialog.h">
+			</File>
+			<File
+				RelativePath=".\Log.h">
+			</File>
+			<File
+				RelativePath="MainFrm.h">
+			</File>
+			<File
+				RelativePath="MyObj.h">
+			</File>
+			<File
+				RelativePath=".\MyVers.h">
+			</File>
+			<File
+				RelativePath=".\pca.h">
+			</File>
+			<File
+				RelativePath=".\PPM.H">
+			</File>
+			<File
+				RelativePath=".\RateDlg.h">
+			</File>
+			<File
+				RelativePath="Resource.h">
+			</File>
+			<File
+				RelativePath=".\ScopedTimer.h">
+			</File>
+			<File
+				RelativePath="SelectTT.h">
+			</File>
+			<File
+				RelativePath="SetDial.h">
+			</File>
+			<File
+				RelativePath=".\ShowXYSpikeDialog.h">
+			</File>
+			<File
+				RelativePath=".\Silhouette.h">
+			</File>
+			<File
+				RelativePath=".\simple_haar.h">
+			</File>
+			<File
+				RelativePath="StdAfx.h">
+			</File>
+			<File
+				RelativePath=".\StringUtils.h">
+			</File>
+			<File
+				RelativePath="Sync.h">
+			</File>
+			<File
+				RelativePath="SyncStack.h">
+			</File>
+			<File
+				RelativePath="TimeEv.h">
+			</File>
+			<File
+				RelativePath=".\UPDialog.h">
+			</File>
+			<File
+				RelativePath="Vertex.h">
+			</File>
+			<File
+				RelativePath=".\VideoDlg.h">
+			</File>
+			<File
+				RelativePath="WClust.h">
+			</File>
+			<File
+				RelativePath="WClustDoc.h">
+			</File>
+			<File
+				RelativePath="WClustView.h">
+			</File>
+			<File
+				RelativePath=".\WCMath.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath="res\00000.bmp">
+			</File>
+			<File
+				RelativePath="res\0000FF.bmp">
+			</File>
+			<File
+				RelativePath="res\009090.bmp">
+			</File>
+			<File
+				RelativePath="res\0090F0.bmp">
+			</File>
+			<File
+				RelativePath="res\00F090.bmp">
+			</File>
+			<File
+				RelativePath="res\00F0F0.bmp">
+			</File>
+			<File
+				RelativePath="res\00ff0.bmp">
+			</File>
+			<File
+				RelativePath="res\00FF00.bmp">
+			</File>
+			<File
+				RelativePath="res\900090.bmp">
+			</File>
+			<File
+				RelativePath="res\9000F0.bmp">
+			</File>
+			<File
+				RelativePath="res\909000.bmp">
+			</File>
+			<File
+				RelativePath="res\909090.bmp">
+			</File>
+			<File
+				RelativePath="res\9090F0.bmp">
+			</File>
+			<File
+				RelativePath="res\90F000.bmp">
+			</File>
+			<File
+				RelativePath="res\90F090.bmp">
+			</File>
+			<File
+				RelativePath="res\bitmap1.bmp">
+			</File>
+			<File
+				RelativePath="res\CCCCCC.bmp">
+			</File>
+			<File
+				RelativePath="res\F00090.bmp">
+			</File>
+			<File
+				RelativePath="res\F000F0.bmp">
+			</File>
+			<File
+				RelativePath="res\F09000.bmp">
+			</File>
+			<File
+				RelativePath="res\F09090.bmp">
+			</File>
+			<File
+				RelativePath="res\F0F000.bmp">
+			</File>
+			<File
+				RelativePath="res\ff0000.bmp">
+			</File>
+			<File
+				RelativePath="res\Toolbar.bmp">
+			</File>
+			<File
+				RelativePath="res\WClust.ico">
+			</File>
+			<File
+				RelativePath="res\WClust.rc2">
+			</File>
+			<File
+				RelativePath="res\WClustDoc.ico">
+			</File>
+		</Filter>
+		<Filter
+			Name="KlustaKwik"
+			Filter="">
+			<File
+				RelativePath=".\KlustaKwik\Array.h">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\KK.cpp">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\KK.h">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\KlustaKwik.cpp">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\KlustaKwik.h">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\KlustaSave.h">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\param.cpp">
+			</File>
+			<File
+				RelativePath=".\KlustaKwik\param.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="CDNAClust"
+			Filter="">
+			<File
+				RelativePath=".\CDNAClust\cluster.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)/$(InputName)1.obj"/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\CDNAClust\cluster.h">
+			</File>
+			<File
+				RelativePath=".\CDNAClust\data.cpp">
+			</File>
+			<File
+				RelativePath=".\CDNAClust\data.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="nr"
+			Filter="">
+			<File
+				RelativePath=".\nr\lubksb.cpp">
+			</File>
+			<File
+				RelativePath=".\nr\ludcmp.cpp">
+			</File>
+			<File
+				RelativePath=".\nr\nr.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrtypes.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrtypes_lib.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrtypes_nr.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrutil.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrutil_mtl.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrutil_nr.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrutil_tnt.h">
+			</File>
+			<File
+				RelativePath=".\nr\nrutil_val.h">
+			</File>
+			<File
+				RelativePath=".\nr\print_array.h">
+			</File>
+			<File
+				RelativePath=".\nr\pythag.cpp">
+			</File>
+			<File
+				RelativePath=".\nr\svdcmp.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="pcatest"
+			Filter="">
+			<File
+				RelativePath=".\diag.cpp">
+			</File>
+			<File
+				RelativePath=".\diag.hpp">
+			</File>
+			<File
+				RelativePath=".\Lapack.h">
+			</File>
+			<File
+				RelativePath=".\pca2.cpp">
+			</File>
+			<File
+				RelativePath=".\pca2.hpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="flame"
+			Filter="">
+			<File
+				RelativePath=".\flame\flame.cpp">
+			</File>
+			<File
+				RelativePath=".\flame\flame.h">
+			</File>
+		</Filter>
+		<File
+			RelativePath="ReadMe.txt">
+		</File>
+	</Files>
+	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="WClust.rc"/>
+	</Globals>
+</VisualStudioProject>
+@
+
+
+1.20
+log
+@added SOM
+@
+text
+@d334 3
+d829 3
+@
+
+
+1.19
+log
+@added notes dialog
+@
+text
+@d356 3
+d832 3
+@
+
+
+1.18
+log
+@added flame clustering files to project
+@
+text
+@d306 3
+d811 3
+@
+
+
+1.17
+log
+@added hashhist
+@
+text
+@d25 1
+d96 1
+d325 3
+d811 3
+d1146 10
+@
+
+
+1.16
+log
+@added other version of pca (NR)
+@
+text
+@d95 1
+a95 1
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
+d449 3
+d836 3
+@
+
+
+1.15
+log
+@added Silhouette .cpp,.h
+@
+text
+@d112 1
+a112 1
+				AdditionalDependencies="version.lib vfw32.lib"
+d251 3
+d779 3
+d1106 25
+@
+
+
+1.14
+log
+@got rid of AviFile,CAviFile
+@
+text
+@d555 3
+d878 3
+@
+
+
+1.13
+log
+@added InfoT .h,.cpp to project
+@
+text
+@a162 3
+				RelativePath=".\AviFile.cpp">
+			</File>
+			<File
+a751 3
+				RelativePath=".\CAviFile.h">
+			</File>
+			<File
+@
+
+
+1.12
+log
+@added haar wavelet code
+@
+text
+@d452 3
+d833 3
+@
+
+
+1.11
+log
+@started adding video code
+@
+text
+@d555 3
+d875 3
+@
+
+
+1.10
+log
+@added isolationdist and nr files
+@
+text
+@d41 1
+a41 1
+				AdditionalDependencies="version.lib"
+d45 1
+d93 1
+d112 1
+a112 1
+				AdditionalDependencies="version.lib"
+d116 1
+d163 6
+d172 3
+d658 3
+d740 3
+d749 6
+d893 3
+@
+
+
+1.9
+log
+@added gui for KLD options
+@
+text
+@d440 3
+d803 3
+d1022 40
+@
+
+
+1.8
+log
+@added version files to project
+@
+text
+@d311 3
+d767 3
+@
+
+
+1.7
+log
+@added DlgSampBatchF, Log .h,.cpp
+@
+text
+@d41 1
+d110 1
+d484 3
+d809 3
+@
+
+
+1.6
+log
+@added eeg gain settings
+@
+text
+@d328 3
+d441 3
+d762 3
+d795 3
+@
+
+
+1.5
+log
+@added StringUtils.cpp to project
+@
+text
+@d287 3
+d747 3
+@
+
+
+1.4
+log
+@added BatchUtils .h,.cpp
+@
+text
+@d544 3
+@
+
+
+1.3
+log
+@added FileUtils,StringUtils
+@
+text
+@d158 3
+d702 3
+@
+
+
+1.2
+log
+@update to add files for auto noise checker
+@
+text
+@d420 3
+d759 3
+d804 3
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d275 3
+d723 3
+@

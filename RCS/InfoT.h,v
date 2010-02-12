@@ -1,0 +1,406 @@
+head	1.10;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.10
+date	2008.08.11.20.46.58;	author samn;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2008.05.06.02.20.52;	author samn;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2008.04.25.05.02.58;	author samn;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2008.04.24.23.40.50;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2008.04.22.21.30.44;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.04.17.17.55.19;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.04.11.22.27.52;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.04.10.03.43.25;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.04.09.04.58.15;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.04.07.03.41.23;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.10
+log
+@added HashHist KLDivSym
+@
+text
+@// $Id: InfoT.h,v 1.9 2008/05/06 02:20:52 samn Exp $ 
+#ifndef INFOT_H
+#define INFOT_H
+
+#include "Hist.h"
+#include "HashHist.h"
+
+//calculates kldiv from p to q using previously computed nearest neighbors
+//this version assumes both p and q have ids of iClustIDP and iClustIDQ
+//this means q is not the 'background' cluster but an actual cluster!!
+prob_t FastKLDivPQ(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,int iClustIDQ,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+
+//calculates kldiv from p to notp using previously computed nearest neighbors
+//this version assumes p is an actual cluster and notp is
+//the complement of p == 'background' cluster -- doesn't have it's own ID!!
+prob_t FastKLDivPNOTP(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+
+//calculates kldiv from notp to p using previously computed nearest neighbors
+//notp is the complement of p -- or the background cluster relative to p -- doesn't have it's own ID!
+prob_t FastKLDivNOTPP(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+
+//calculates (symmetric) resistor average of kldiv. (kldiv(p,q)*kldiv(q,p))/(kldiv(p,q)+kldiv(q,p))
+//here both p and q are actual clusters with proper IDs.
+//neither p nor q is a 'background' cluster relative to the other
+prob_t FastKLDivSymPQ(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,int iClustIDQ,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+
+//calculates (symmetric) resistor average of kldiv between p and not p
+//here p is an actual cluster with proper ID and not p is the background cluster relative to p
+prob_t FastKLDivSymPNOTP(KDTreeHist& p,KDTreeHist& notp,Neighbor** pNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+
+//thread to calculate minimum inter-cluster kldiv for each cluster and add it to Clusters.m_vInfo
+bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>& vClustIDs,vector<int>& vClustCounts,int iClusts,bool bFast,Neighbor** vnn,int WhichDraw,const CUPDUPDATA* pUp,int iNNToFind,vector<int>& vNCount,vector<float>& vFloat,int iRows,int iCols);
+
+//get prct of iNNToFind neighbors that have same cluster for each cluster
+bool NeighborClustCount(Neighbor** vNeighbors,vector<int>& vClustIDs,vector<ClusterInfo>& vPrct,int iNNToFind,int iClusts);
+
+//use probability approximations to calculate kldiv of each dimension independently (returns sum over dimensions)
+prob_t KLDivApproxExclusiveProb(Hist& p,Hist& q);
+
+//kldiv
+//bAllowZeroQDist is used for when you don't want to allow any zero distances for
+//probability calculations of elements in distribution q. this is not generally useful
+//for distributions containing different elements, but if q is the FULL background distribution
+//bAllowZeroQDist should be set to false. default == true and is whats used for standard KLDiv
+//calculations of cluster quality
+prob_t KLDiv(KDTreeHist& p,KDTreeHist& q,bool bAllowZeroQDist=true);
+//symmetric kldiv
+prob_t KLDivSym(KDTreeHist& p,KDTreeHist& q);
+prob_t KLDivSym(HashHist& P,HashHist& Q);
+//kldiv
+prob_t KLDiv(Hist& p,Hist& q);
+//resistor average
+prob_t ResistorAvg(prob_t& p,prob_t& q);
+//symmetrized form of KL-divergence
+prob_t ResistorAvg(Hist& p,Hist& q);
+
+//vZeroes = vector of dimensions that shouldn't contribute to calculations
+//vZeroes[i] == 1 , iff you want to exclude dimension i
+void CalcUDDist(vector< vector<Hist> >& vDistribs,int iClusts,vector<prob_t>& vcInf,vector< vector<prob_t> >& vcInfInter,vector<int>& vCounts,int iElems,vector<int>& vZeroes,bool bUseCounts);
+
+void CalcRDist(vector< vector<Hist> >& vDistribs,int iClusts,vector<prob_t>& vcInf,vector< vector<prob_t> >& vcInfInter);
+
+void CalcUDDist(vector< KDTreeHist >& vDistribs,vector< KDTreeHist >& vCompDistribs,int iClusts,vector<prob_t>& vcInf,vector< vector<prob_t> >& vcInfInter,vector<int>& vCounts);
+
+//entropy using previously computed nearest neighbors
+prob_t Entropy(KDTreeHist& oTree,vector< Neighbor >& vNeighbors,int iClustID,vector<int>& vClustIDs);
+
+void CalcEXInfo(vector< vector< Hist> >& vDistribs,vector<prob_t>& vcInf,int iClusts,int iDim,vector<int>& vCounts,int iElems);
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                FindBestDims                                                          //
+//                 find best dimensions for each cluster using KLDIV of 1 or 2 dimensional slices and ranking           //
+//                                                                                                                      //
+//  vFloat is full data matrix                                                                                          //
+//  iClusts == # of clusters                                                                                            //
+//  iCols == full # of dimensions                                                                                       //
+//  iBestDims == desired # of dimensions after selection                                                                //
+//  vCounts == vector of # of vectors in a cluster                                                                      //
+//  vClustIDs == cluster IDs for each vector                                                                            //
+//  vBestDims == stores best dimensions for all clusters                                                                //
+//  vKLDivs == stores kldiv values when using 1D slices                                                                 //
+//  b1D == true iff user wants 1D slices to estimate best dimensions                                                    //
+//  vAxes == names of dimensions                                                                                        //
+//  pUp == GUI progress control                                                                                         //
+//                                                                                                                      //
+bool FindBestDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,                       //
+				  vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<prob_t>& vKLDivs,bool b1D,MY_STR_STACK& vAxes,         //
+				  const CUPDUPDATA* pUp);                                                                               //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,
+					vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<KLD2D>& vKLDivs,MY_STR_STACK& vAxes,
+					const CUPDUPDATA* pUp);
+bool FindBest1DDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,
+					vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<prob_t>& vKLDivs,MY_STR_STACK& vAxes,
+					const CUPDUPDATA* pUp);
+
+//vZeroes = vector of dimensions that shouldn't contribute to calculations
+//vZeroes[i] == 1 , iff you want to exclude dimension i
+template< class T >
+void CalcUDDist(vector< TreeHist<T> >& vDistribs,int iClusts,vector<prob_t>& vcInf,vector< vector<prob_t> >& vcInfInter,vector<int>& vCounts,int iElems,vector<int>& vZeroes,bool bUseCounts)
+{
+	if(vDistribs.size() != iClusts + 2) return;
+
+	vcInf = vector<prob_t>(iClusts+1);
+
+	vcInfInter = vector< vector<prob_t> >(iClusts+1);
+	int iC=1;
+	for(iC=1;iC<=iClusts;iC++) vcInfInter[iC] = vector<prob_t>(iClusts+1);
+
+	//uniqueness from full distribution for each cluster
+	int iC1=1,iC2=1;
+	for(iC1=1;iC1<=iClusts;iC1++)
+		vcInf[iC1] = KLDiv(vDistribs[iC1],vDistribs[iClusts+1]);
+
+	//inter-cluster distinction measures, KL divergence between
+	//a cluster and cluster+other_cluster
+	for(iC1=1;iC1<=iClusts;iC1++)
+	{
+		for(iC2=1;iC2<=iClusts;iC2++)
+		{
+			if(iC1==iC2)
+				vcInfInter[iC1][iC2]=0.0;
+			else
+			{
+				TreeHist<T> oTmp = vDistribs[iC1];
+				oTmp.Add(vDistribs[iC2]);
+				vcInfInter[iC1][iC2] += KLDiv(vDistribs[iC1],oTmp);
+			}				
+		}
+	}
+	//add smallest inter-cluster KL-div
+	for(iC1=1;iC1<=iClusts;iC1++)
+	{
+		prob_t dMinInter = 9e10;
+		bool bFound = false;
+		if(vCounts[iC1])
+		for(iC2=1;iC2<=iClusts;iC2++)
+		{
+			if(iC1 != iC2 && vCounts[iC2] && vcInfInter[iC1][iC2] < dMinInter)
+			{
+				dMinInter = vcInfInter[iC1][iC2];
+				bFound = true;
+			}
+		}
+		if(bFound)
+			vcInf[iC1] += dMinInter;
+	}
+
+	if(bUseCounts)
+	{
+		for(iC1=1;iC1<=iClusts;iC1++)
+		{
+			vcInf[iC1] = ( (prob_t)vCounts[iC1] / iElems) * vcInf[iC1];
+		}
+	}
+}
+
+template< class T >
+prob_t KLDiv(TreeHist<T>& p,TreeHist<T>& q)
+{
+	prob_t d = 0.0;
+
+	int i = 0;
+
+	prob_t eps = 1e-40;
+
+	typename std::map< vpwrap<T>, int>::iterator PIT = p.Begin();
+	for(;PIT!=p.End();PIT++)
+	{
+		prob_t pp = p.GetITProb(PIT);
+		if(pp<=eps) 
+			continue;
+		
+		prob_t qp = q.GetVProb(PIT->first.p_);
+		
+		if(qp<=eps) 
+			continue;
+		
+		d += pp * ( log2(pp) - log2(qp) );
+	}
+	return d;
+}
+
+
+#endif
+@
+
+
+1.9
+log
+@use vRange in finding best dimensions to avoid noise/ground
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.8 2008/04/25 05:02:58 samn Exp $ 
+d6 1
+d41 6
+a46 1
+prob_t KLDiv(KDTreeHist& p,KDTreeHist& q);
+d49 1
+@
+
+
+1.8
+log
+@added option for 1D vs 2D slices to find best dims
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.7 2008/04/24 23:40:50 samn Exp $ 
+d83 1
+a83 1
+bool FindBest2DDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,
+@
+
+
+1.7
+log
+@adding 2D slices to find best dims
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.6 2008/04/22 21:30:44 samn Exp $ 
+d83 6
+@
+
+
+1.6
+log
+@added FindBestDims function header
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.5 2008/04/17 17:55:19 samn Exp $ 
+d31 1
+a31 1
+bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>& vClustIDs,int iClusts,bool bFast,Neighbor** vnn,int WhichDraw,const CUPDUPDATA* pUp,int iNNToFind,vector<int>& vNCount);
+d63 20
+a82 1
+bool FindBestDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<prob_t>& v1DKLDivs,const CUPDUPDATA* pUp);
+@
+
+
+1.5
+log
+@updated Entropy with KDTreeHist
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.4 2008/04/11 22:27:52 samn Exp $ 
+d63 2
+@
+
+
+1.4
+log
+@added NeighborClustCount
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.3 2008/04/10 03:43:25 samn Exp $ 
+d59 1
+a59 1
+prob_t Entropy(KDTreeHist& oTree,vector<vector< Neighbor > >& vNeighbors,int iClustID,vector<int>& vClustIDs);
+@
+
+
+1.3
+log
+@added comments, got rid of unused function declarations, correctly calculate kldiv from p to q
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.2 2008/04/09 04:58:15 samn Exp $ 
+d33 3
+@
+
+
+1.2
+log
+@started experimenting with faster version of finding knn
+@
+text
+@d1 1
+a1 1
+// $Id: InfoT.h,v 1.1 2008/04/07 03:41:23 samn Exp $ 
+d8 8
+a15 3
+//version with Neighbor** uses less memory since doesn't use many vectors
+prob_t FastKLDiv(KDTreeHist& p,KDTreeHist& q,vector<vector< Neighbor > >& vNeighbors,int iClustIDP,vector<int>& vClustIDs);
+prob_t FastKLDiv(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+d18 2
+a19 2
+prob_t FastKLDivC(KDTreeHist& p,KDTreeHist& notp,vector<vector< Neighbor > >& vNeighbors,int iClustIDP,vector<int>& vClustIDs);
+prob_t FastKLDivC(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+d22 3
+a24 2
+prob_t FastKLDivSym(KDTreeHist& p,KDTreeHist& q,vector<vector< Neighbor > >& vNeighbors,int iClustIDP,int iClustIDQ,vector<int>& vClustIDs);
+prob_t FastKLDivSym(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,int iClustIDQ,vector<int>& vClustIDs,int iNNToFind,vector<int>& vNCount);
+d27 1
+a27 1
+prob_t FastKLDivSymPNOTP(KDTreeHist& p,KDTreeHist& notp,vector<vector< Neighbor > >& vNeighbors,int iClustIDP,vector<int>& vClustIDs);
+a30 1
+bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>& vClustIDs,int iClusts,bool bFast,vector< vector<Neighbor> >& vnn,int WhichDraw,const CUPDUPDATA* pUp);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d10 1
+a10 1
+prob_t FastKLDiv(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind);
+d14 1
+a14 1
+prob_t FastKLDivC(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind);
+d18 1
+a18 1
+prob_t FastKLDivSym(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustIDP,int iClustIDQ,vector<int>& vClustIDs,int iNNToFind);
+d22 1
+a22 1
+prob_t FastKLDivSymPNOTP(KDTreeHist& p,KDTreeHist& notp,Neighbor** pNeighbors,int iClustIDP,vector<int>& vClustIDs,int iNNToFind);
+d26 1
+a26 1
+bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>& vClustIDs,int iClusts,bool bFast,Neighbor** vnn,int WhichDraw,const CUPDUPDATA* pUp,int iNNToFind);
+@

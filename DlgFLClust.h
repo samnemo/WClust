@@ -1,0 +1,36 @@
+// $Id: DlgFLClust.h,v 1.1 2008/11/27 20:06:14 samn Exp $ 
+#pragma once
+#include "afxwin.h"
+#include "ColorComboBox.h"
+
+// CDlgFLClust dialog
+
+class CDlgFLClust : public CDialog
+{
+	DECLARE_DYNAMIC(CDlgFLClust)
+
+public:
+	CDlgFLClust(CWnd* pParent = NULL);   // standard constructor
+	virtual ~CDlgFLClust();
+
+// Dialog Data
+	enum { IDD = IDD_DIALOG_FL };
+
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+
+	// Generated message map functions
+	//{{AFX_MSG(CDlgFLClust)
+	virtual BOOL OnInitDialog();
+	//}}AFX_MSG
+
+	DECLARE_MESSAGE_MAP()
+public:
+	CEdit m_wndIterFL; int m_iIter;
+	CEdit m_wndEpsFL; float m_fEps;
+	CEdit m_wndKNNPrctFL; float m_fKNNPrct;
+	afx_msg void OnBnClickedOk();
+	CColorComboBox m_cmbDistT; int m_iDistT;
+	CEdit m_wndOutTH; float m_fOutTH;
+	afx_msg void OnCbnSelchangeComboFlDtt();
+};

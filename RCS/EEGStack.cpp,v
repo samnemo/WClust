@@ -1,0 +1,576 @@
+head	1.6;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.6
+date	2008.04.09.04.57.26;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2008.03.27.22.20.27;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.03.26.03.57.05;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.03.16.21.34.33;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.01.13.02.43.43;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.14.59.45;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.6
+log
+@added some comments
+@
+text
+@// $Id: EEGStack.cpp,v 1.5 2008/03/27 22:20:27 samn Exp $ 
+// EEGStack.cpp: implementation of the CEEGStack class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "wclust.h"
+#include "EEGStack.h"
+#include "Hist.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CEEGStack::CEEGStack()
+{
+	NUM_CHANNELS = 0;
+	NUM_SAMPLES = 0;
+	FREQUENCY = 0;
+}
+
+CEEGStack::~CEEGStack()
+{
+	SetEmpty();
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::AddEEG(CEEG *toStore)
+{
+	eegStack.push_back(toStore);
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::SetParams(char numChannels, short numSamples)
+{
+	NUM_CHANNELS = numChannels;
+	NUM_SAMPLES = numSamples;
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::SetEmpty()
+{
+	MY_EEG_STACK::iterator index;
+	CEEG *eeg;
+	for ( index = eegStack.begin(); index != eegStack.end(); index++)
+	{
+		eeg = (CEEG*) *index;
+		eeg->SetEmpty();
+		delete eeg;
+	}
+	NUM_CHANNELS = 0;
+	NUM_SAMPLES = 0;
+	eegStack.clear();
+}
+
+//////////////////////////////////////////////////////////////////////
+char CEEGStack::LoadEEG(CFile *file)
+{
+	const int iBufferSz = NUM_CHANNELS * NUM_SAMPLES;
+	int TS;
+	vector<short> buffer(iBufferSz);
+	file->Read(&TS,4);
+	file->Read(&buffer[0], iBufferSz * sizeof(short) );
+		
+	CEEG* newEEG = new CEEG();
+	newEEG->SetTimeStamp(TS);
+	newEEG->SetMyPalette(m_PalStack);
+
+	newEEG->SetEEG(buffer);
+	AddEEG(newEEG);
+
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::DrawEEG( CDC *pDC, CRect drawWin, int startTS, int timeWindow, unsigned int params, vector<double>& vGainList)
+{
+	timeWindow *= 10;
+	int minT,maxT;	
+	int indexEEG = eegStack.size() / 2 ; // start at middle of stack
+	int increment = indexEEG;
+	minT = 0; maxT = eegStack.size() - 1;
+	char finishedFind = 0;
+	while (increment > 0) // find index into eegStack that corresponds to startTS timestamp 
+	{					  // this is done with binary search
+		if ( startTS > ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+		{
+			minT = indexEEG;
+			increment = (maxT - minT)/2;
+			indexEEG += increment;
+		}
+		else{
+			if ( startTS < ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+			{
+				maxT = indexEEG;
+				increment = (maxT - minT)/2;
+				indexEEG -= increment;
+			}
+			else{
+				// ==
+				finishedFind = 1;
+				increment = 0;
+			}
+		}
+	}
+	if ( ! finishedFind )
+	{
+		indexEEG = minT;
+		if ( startTS > ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+		{
+			indexEEG = maxT;
+		}
+		else indexEEG = minT;
+	}
+
+	// Draw
+	int x1,x2;
+	char fine = 0;
+	float ratioTS = (float)drawWin.Width() / (float)timeWindow;
+	int indexFirst = indexEEG;
+	if (indexEEG >= eegStack.size()) //??
+	{
+		indexEEG = eegStack.size();
+		fine = 1;
+	}
+//	if ( ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() >= startTS )
+	{ 
+		unsigned char	toDraw = 0;
+		unsigned char	bite = 4;
+		for ( int i = 0; i < NUM_CHANNELS; i++ )
+		{
+			if ( params & ( bite << i ) )
+				toDraw++;
+		}
+		int	ySize1EEG = drawWin.Height() / toDraw;
+
+		if ( indexEEG > 0 )
+		{
+			indexEEG--;
+		}
+		
+		double dGainSum = 0.0;
+		vector<int> vHeights(NUM_CHANNELS);
+		for(i=0;i<NUM_CHANNELS;i++)
+		{	if( !(params & ( bite << i ))) // if channel shouldn't be drawn
+				continue;
+			dGainSum += vGainList[i];
+		}
+		for(i=0;i<NUM_CHANNELS;i++)
+			vHeights[i]=(vGainList[i]/dGainSum)*drawWin.Height();
+
+		while ( ! fine && ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() < startTS + timeWindow)
+		{	// draw from startTS until startTS+timeWindow units
+			{
+				x1 = drawWin.left + ratioTS * (((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() - startTS);
+				x2 = drawWin.left + ratioTS * (((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() - startTS + NUM_SAMPLES*10000/FREQUENCY); //350 ~ 4000
+
+				int	yWin = 0, yPos = 0;
+				CRect eegWin;
+				
+				char iCurCh = 0;
+				for (  iCurCh = 0; iCurCh < NUM_CHANNELS; iCurCh++ )	//draw portion of each eeg channel
+				{	if ( params & ( bite << iCurCh ) )
+					{
+						eegWin.left = x1;
+						eegWin.right = x2;
+						eegWin.top = drawWin.top + yPos;
+						eegWin.bottom = drawWin.top + yPos + vHeights[iCurCh];
+						((CEEG*) *(eegStack.begin() + indexEEG))->DrawEEG(pDC,eegWin,drawWin,iCurCh,NUM_SAMPLES,vGainList[iCurCh]);
+						yWin++;
+						yPos += vHeights[iCurCh];
+					}
+				}
+			}
+			indexEEG++;
+			if (indexEEG >= eegStack.size())
+			{
+				indexEEG = 0;//--;
+				fine = 1;
+			}
+		}
+	}
+//	char a[200];
+//	sprintf(a,"%d  %d " ,startTS, startTS + timeWindow);
+//	pDC->TextOut(10,30,a);
+}
+
+//////////////////////////////////////////////////////////////////////
+int	CEEGStack::GetFirstTimeStamp()
+{
+	if ( *eegStack.begin() != NULL )
+		return ((CEEG*) *eegStack.begin())->GetTimeStamp();
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+int	CEEGStack::GetLastTimeStamp()
+{
+	if ( *(eegStack.end()-1) != NULL )
+		return ((CEEG*) *(eegStack.end()-1))->GetTimeStamp();
+	return 0;
+}
+@
+
+
+1.5
+log
+@v74, updated eeg gains gui, added play speed control for eeg, fixed incorrect eeg channel text
+@
+text
+@d1 1
+a1 1
+// $Id: EEGStack.cpp,v 1.4 2008/03/26 03:57:05 samn Exp $ 
+d86 1
+a86 1
+	int indexEEG = eegStack.size() / 2 ; 
+d90 2
+a91 2
+	while (increment > 0)
+	{
+d127 1
+a127 1
+	if (indexEEG >= eegStack.size())
+d151 1
+a151 1
+		{	if( !(params & ( bite << i )))
+d159 1
+a159 1
+		{
+d168 1
+a168 1
+				for (  iCurCh = 0; iCurCh < NUM_CHANNELS; iCurCh++ )
+@
+
+
+1.4
+log
+@updated scaling of eeg
+@
+text
+@d1 1
+a1 1
+// $Id: EEGStack.cpp,v 1.3 2008/03/16 21:34:33 samn Exp $ 
+d82 1
+a82 1
+void CEEGStack::DrawEEG( CDC *pDC, CRect drawWin, int startTS, int timeWindow, unsigned int params, vector<double>& vGainList )
+d148 9
+a156 1
+		double dGainSum = Sum(vGainList);
+d167 3
+a169 9
+				int iMaxCh = toDraw, iCurCh = 0;
+				double dGainSum=Sum(vGainList,0,iMaxCh);
+				vector<int> vHeights(iMaxCh);
+				for(iCurCh=0;iCurCh<iMaxCh;iCurCh++)
+					vHeights[iCurCh]=(vGainList[iCurCh]/dGainSum)*drawWin.Height();
+				iCurCh=0;
+				for ( char nextCh = 0; nextCh < NUM_CHANNELS; nextCh++ )
+				{
+					if ( params & ( bite << nextCh ) )
+d175 1
+a175 1
+						((CEEG*) *(eegStack.begin() + indexEEG))->DrawEEG(pDC,eegWin,drawWin,nextCh,NUM_SAMPLES,vGainList[iCurCh]);
+a177 1
+						iCurCh++;
+@
+
+
+1.3
+log
+@update for variable eeg frequency in bpf file
+@
+text
+@d1 207
+a207 207
+// $Id: EEGStack.cpp,v 1.2 2008/01/13 02:43:43 samn Exp $ 
+// EEGStack.cpp: implementation of the CEEGStack class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "wclust.h"
+#include "EEGStack.h"
+#include "Hist.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CEEGStack::CEEGStack()
+{
+	NUM_CHANNELS = 0;
+	NUM_SAMPLES = 0;
+	FREQUENCY = 0;
+}
+
+CEEGStack::~CEEGStack()
+{
+	SetEmpty();
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::AddEEG(CEEG *toStore)
+{
+	eegStack.push_back(toStore);
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::SetParams(char numChannels, short numSamples)
+{
+	NUM_CHANNELS = numChannels;
+	NUM_SAMPLES = numSamples;
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::SetEmpty()
+{
+	MY_EEG_STACK::iterator index;
+	CEEG *eeg;
+	for ( index = eegStack.begin(); index != eegStack.end(); index++)
+	{
+		eeg = (CEEG*) *index;
+		eeg->SetEmpty();
+		delete eeg;
+	}
+	NUM_CHANNELS = 0;
+	NUM_SAMPLES = 0;
+	eegStack.clear();
+}
+
+//////////////////////////////////////////////////////////////////////
+char CEEGStack::LoadEEG(CFile *file)
+{
+	const int iBufferSz = NUM_CHANNELS * NUM_SAMPLES;
+	int TS;
+	vector<short> buffer(iBufferSz);
+	file->Read(&TS,4);
+	file->Read(&buffer[0], iBufferSz * sizeof(short) );
+		
+	CEEG* newEEG = new CEEG();
+	newEEG->SetTimeStamp(TS);
+	newEEG->SetMyPalette(m_PalStack);
+
+	newEEG->SetEEG(buffer);
+	AddEEG(newEEG);
+
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+void CEEGStack::DrawEEG( CDC *pDC, CRect drawWin, int startTS, int timeWindow, unsigned int params, vector<double>& vGainList )
+{
+	timeWindow *= 10;
+	int minT,maxT;	
+	int indexEEG = eegStack.size() / 2 ; 
+	int increment = indexEEG;
+	minT = 0; maxT = eegStack.size() - 1;
+	char finishedFind = 0;
+	while (increment > 0)
+	{
+		if ( startTS > ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+		{
+			minT = indexEEG;
+			increment = (maxT - minT)/2;
+			indexEEG += increment;
+		}
+		else{
+			if ( startTS < ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+			{
+				maxT = indexEEG;
+				increment = (maxT - minT)/2;
+				indexEEG -= increment;
+			}
+			else{
+				// ==
+				finishedFind = 1;
+				increment = 0;
+			}
+		}
+	}
+	if ( ! finishedFind )
+	{
+		indexEEG = minT;
+		if ( startTS > ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() )
+		{
+			indexEEG = maxT;
+		}
+		else indexEEG = minT;
+	}
+
+	// Draw
+	int x1,x2;
+	char fine = 0;
+	float ratioTS = (float)drawWin.Width() / (float)timeWindow;
+	int indexFirst = indexEEG;
+	if (indexEEG >= eegStack.size())
+	{
+		indexEEG = eegStack.size();
+		fine = 1;
+	}
+//	if ( ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() >= startTS )
+	{ 
+		unsigned char	toDraw = 0;
+		unsigned char	bite = 4;
+		for ( int i = 0; i < NUM_CHANNELS; i++ )
+		{
+			if ( params & ( bite << i ) )
+				toDraw++;
+		}
+		int	ySize1EEG = drawWin.Height() / toDraw;
+
+		if ( indexEEG > 0 )
+		{
+			indexEEG--;
+		}
+		
+		double dGainSum = Sum(vGainList);
+
+		while ( ! fine && ((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() < startTS + timeWindow )
+		{
+			{
+				x1 = drawWin.left + ratioTS * (((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() - startTS);
+				x2 = drawWin.left + ratioTS * (((CEEG*) *(eegStack.begin() + indexEEG))->GetTimeStamp() - startTS + NUM_SAMPLES*10000/FREQUENCY); //350 ~ 4000
+
+				int	yWin = 0, yPos = 0;
+				CRect eegWin;
+				
+				int iMaxCh = toDraw, iCurCh = 0;
+				double dGainSum=Sum(vGainList,0,iMaxCh);
+				vector<int> vHeights(iMaxCh);
+				for(iCurCh=0;iCurCh<iMaxCh;iCurCh++)
+					vHeights[iCurCh]=(vGainList[iCurCh]/dGainSum)*drawWin.Height();
+				iCurCh=0;
+				for ( char nextCh = 0; nextCh < NUM_CHANNELS; nextCh++ )
+				{
+					if ( params & ( bite << nextCh ) )
+					{
+						eegWin.left = x1;
+						eegWin.right = x2;
+						eegWin.top = drawWin.top + yPos;
+						eegWin.bottom = drawWin.top + yPos + vHeights[iCurCh];
+						((CEEG*) *(eegStack.begin() + indexEEG))->DrawEEG(pDC,eegWin,drawWin,nextCh,NUM_SAMPLES);
+						yWin++;
+						yPos += vHeights[iCurCh];
+						iCurCh++;
+					}
+				}
+			}
+			indexEEG++;
+			if (indexEEG >= eegStack.size())
+			{
+				indexEEG = 0;//--;
+				fine = 1;
+			}
+		}
+	}
+//	char a[200];
+//	sprintf(a,"%d  %d " ,startTS, startTS + timeWindow);
+//	pDC->TextOut(10,30,a);
+}
+
+//////////////////////////////////////////////////////////////////////
+int	CEEGStack::GetFirstTimeStamp()
+{
+	if ( *eegStack.begin() != NULL )
+		return ((CEEG*) *eegStack.begin())->GetTimeStamp();
+	return 0;
+}
+
+//////////////////////////////////////////////////////////////////////
+int	CEEGStack::GetLastTimeStamp()
+{
+	if ( *(eegStack.end()-1) != NULL )
+		return ((CEEG*) *(eegStack.end()-1))->GetTimeStamp();
+	return 0;
+}
+@
+
+
+1.2
+log
+@added eeg gain settings
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d65 1
+a65 1
+	const int iBufferSz = NUM_CHANNELS * 1000;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+/* $Id$ */
+d9 1
+d82 1
+a82 1
+void CEEGStack::DrawEEG( CDC *pDC, CRect drawWin, int startTS, int timeWindow, unsigned int params )
+d147 3
+d156 1
+a156 1
+				int	yWin = 0;
+d158 7
+d171 2
+a172 2
+						eegWin.top = drawWin.top + yWin * ySize1EEG;
+						eegWin.bottom = drawWin.top + ( yWin + 1 ) * ySize1EEG;
+d175 2
+@

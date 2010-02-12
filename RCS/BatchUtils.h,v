@@ -1,0 +1,219 @@
+head	1.7;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.7
+date	2009.06.25.04.03.21;	author samn;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2009.06.24.18.01.47;	author samn;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2009.06.22.03.55.38;	author samn;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2008.08.17.05.27.09;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.04.10.03.44.04;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.03.30.02.12.57;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.10.00.49.17;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.7
+log
+@more batch modes
+@
+text
+@// $Id: BatchUtils.h,v 1.6 2009/06/24 18:01:47 samn Exp $ 
+#ifndef BATCH_UTILS
+#define BATCH_UTILS
+
+#include <string>
+#include <vector>
+
+#define     CLUST_USER      0
+#define     CLUST_ORIG      1
+#define     CLUST_KM        2
+#define     CLUST_INFO      3
+#define     CLUST_AP        4
+#define     CLUST_KK        5
+#define     CLUST_FL        6
+#define     CLUST_MAX       7
+
+#define     BATCH_OFF			0
+#define		BATCH_QUAL_USER		1
+#define		BATCH_TSA			2
+#define		BATCH_AUTO_CLUST	3
+#define		BATCH_QUAL_ORIG		4
+
+static const char* CStrClustNames[7] = {
+	"Your new",
+	"Original",
+	"K-means",
+	"Entropy-reduction",
+	"Affinity propagation",
+	"KlustaKwik",
+	"F.L.A.M.E."
+};
+
+//batch record for processing cluster quality measurement & time-stamp adjustment batches
+struct BatchRec
+{
+	std::string strBPF;        //input .bpf file path
+	std::string strCL;         //input .cl file path
+	int iTetrode;              //tetrode to load points from
+	double dPrct;              //fraction of points to load from bpf
+	std::string outCL;         //output .cl file path
+	std::string outBPF;
+	std::vector<double> vRatings; //cluster ratings -- 0==unknown,1==poor,2==fair,3==good
+	                              //                     1.5==poor-fair,2.5==fair-good
+	bool bReadyToRun;			//true iff loaded bpf,cl file successfully
+
+	bool bAutoC;				//whether batch is autoclustering
+	int iMinClust;				//min # of clusters
+	int iMaxClust;				//max # of clusters
+	int iDBIters;				//# of iterations to check optimal # of clusters (for k-means)
+	int iIters;					//# of iterations
+	int iMaxKKClust;			//max possible # of clusters (for klustakwik)
+	int iACType;				//clustering algorithm to use
+};
+
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<BatchRec>& vqb,int& iBatchMode);
+bool ParseTSBatchLines(std::vector<std::string>& vstr, std::vector<BatchRec>& vb);
+bool ParseACBatchLines(std::vector<std::string>& vstr, std::vector<BatchRec>& vb);
+
+#endif
+@
+
+
+1.6
+log
+@allow batch with klustakwik or kmeans
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.h,v 1.5 2009/06/22 03:55:38 samn Exp $ 
+d17 6
+d55 1
+a55 1
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<BatchRec>& vqb);
+@
+
+
+1.5
+log
+@added auto-clustering batch
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.h,v 1.4 2008/08/17 05:27:09 samn Exp $ 
+d8 19
+d43 4
+a46 2
+	int iDBIters;				//# of iterations to check optimal # of clusters
+	int iIters;					//# of iterations of k-means
+@
+
+
+1.4
+log
+@added batch mode for adjusting timestamps in bpfs
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.h,v 1.3 2008/04/10 03:44:04 samn Exp $ 
+d20 6
+d30 1
+@
+
+
+1.3
+log
+@added checks for success in batch mode
+@
+text
+@d1 1
+a1 1
+// $Id: BatchUtils.h,v 1.2 2008/03/30 02:12:57 samn Exp $ 
+d8 2
+a9 2
+//batch record for processing cluster quality measurement batches
+struct QBatchRec
+d16 1
+d22 2
+a23 1
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<QBatchRec>& vqb);
+@
+
+
+1.2
+log
+@allow double for user ratings
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d18 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 22
+a22 21
+// $Id$ 
+#ifndef BATCH_UTILS
+#define BATCH_UTILS
+
+#include <string>
+#include <vector>
+
+//batch record for processing cluster quality measurement batches
+struct QBatchRec
+{
+	std::string strBPF;        //input .bpf file path
+	std::string strCL;         //input .cl file path
+	int iTetrode;              //tetrode to load points from
+	double dPrct;              //fraction of points to load from bpf
+	std::string outCL;         //output .cl file path
+	std::vector<int> vRatings; //cluster ratings
+};
+
+bool ParseQBatchLines(std::vector<std::string>& vstr, std::vector<QBatchRec>& vqb);
+
+#endif
+@

@@ -1,0 +1,461 @@
+head	1.4;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.4
+date	2008.08.11.20.54.36;	author samn;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2008.07.28.18.12.00;	author samn;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2008.07.15.03.47.58;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.05.06.02.24.04;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.4
+log
+@modified debug output, negate principal components after svd so will be consistent with matlab princomp
+@
+text
+@// $Id: pca2.cpp,v 1.3 2008/07/28 18:12:00 samn Exp $ 
+#include "stdafx.h"
+#include <vector>
+#include <fstream>
+#include <algorithm>
+#include "diag.hpp"
+#include "pca2.hpp"
+//#include "gzstream.hpp"
+//#include "svd.hpp"
+#include "nr\nr.h"
+#include "WCMath.h"
+#include "CDNAClust\cluster.h"
+#include "Log.h"
+using namespace std;
+
+PCA::PCA(int dim) {
+  init(dim);
+}
+
+void PCA::init(int dim)
+{
+  dim_=dim;
+  mean_=vector<double>(dim_,0.0);
+  //covariance_.Init(dim_,dim_);
+  covariance_=A2D<double>(dim_,dim_);
+  covariance_.Fill(0.0);
+  counter_=0;
+}
+
+void PCA::save(const string &filename) const{
+  /*ogzstream ofs; ofs.open(filename.c_str());
+  if(!ofs.good()) {
+    ERR << "[PCA::save] Cannot write PCA to '" << filename << "'."<< endl;
+  } else {
+    ofs << dim_ << " " <<dim_ << endl;
+    ofs << "mean "  ;
+    for(int i=0;i<dim_;++i) {
+      ofs << mean_[i] << " "; }
+    ofs << endl;
+
+    for(int y=0;y<dim_;++y) {
+      ofs << y;
+      for(int x=0;x<dim_;++x) {
+        ofs << " " << covariance_[y][x];
+      }
+      ofs << endl;
+    }
+    ofs << -1 << endl;
+  }*/
+}
+
+void PCA::load(const string &filename) {
+  /*igzstream ifs; ifs.open(filename.c_str());
+  int dimy, dimx, posy;
+
+  if(!ifs.good()) {
+    ERR << "[PCA::load] Cannot open '"<<filename<<"' to read PCA." << endl;
+  } else {
+    ifs >> dimx >> dimy;
+    if(dimx==dimy) dim_=dimx;
+    else ERR << "[PCA::load] Strange: PCA not square: dimx="<< dimx << " dimy=" << dimy << endl;
+    ::std::string tmpstr;
+    ifs >> tmpstr;
+    mean_=vector<PCA_T>(dimy);
+    for(int i=0;i<dimy;++i) {
+      ifs >> mean_[i];
+    }
+    covariance_=vector< vector<PCA_T> >(dimy,vector<PCA_T>(dimx,0.0));
+    for(int y=0;y<dimy;++y) {
+      ifs >> posy;
+      if(posy!=y) {ERR << "[PCA::load] Strangeness in reading PCA." << endl;}
+      for(int x=0;x<dimx;++x) {
+        ifs >> covariance_[y][x];
+      }
+    }
+    ifs >> posy;
+    if(posy!=-1) {ERR << "[PCA::load] Reading PCA was strange. Did not end with -1." << endl;}
+  }*/
+}
+
+void PCA::dataEnd() {
+  int i,j;
+  
+  for(i=0;i<dim_;++i) mean_[i]/=counter_;
+
+  for(i=0;i<dim_;++i)
+    for(j=0;j<dim_;++j) 
+      covariance_[i][j]/=counter_;
+
+  for(i=0;i<dim_;++i) 
+    for(j=0;j<dim_;++j) 
+      covariance_[i][j]-=mean_[i]*mean_[j];
+}
+
+void PCA::calcPCA() {
+
+  vector<double> w(dim_);
+  A2D<double> v(dim_,dim_);
+  v.Fill(0.0);
+/*
+  double** cov = covariance_.GetP();
+  Write2LogPlain("covariance:\n");
+  for(int i=0;i<dim_;i++){ for(int j=0;j<dim_;j++){
+	  Write2LogPlain("%.4f ",cov[i][j]);
+  } Write2LogPlain("\n");}
+*/
+  int ierr = 0;
+  svd(w.size(),w.size(),covariance_.GetP(),&w[0],v.GetP(),&ierr);
+
+  //negate PCs so will be consistent with Matlab
+  for(int i=0;i<dim_;i++) for(int j=0;j<dim_;j++){
+	  covariance_[i][j]=-covariance_[i][j];
+  }
+
+  //NR::svdcmp(covariance_, w, v);
+/*
+  Write2LogPlain("Eigenvalues: ");
+  for(unsigned int i=0;i<w.size();++i) {
+    Write2LogPlain("%g ",w[i]);
+  } Write2LogPlain("\n");
+  Write2LogPlain("sum of eigenvalues = %g",Sum(w));
+
+  Write2LogPlain("transform before sorting:\n");
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+	  Write2LogPlain(" %g",covariance_[i][j]);
+  }Write2LogPlain("\n");
+  }
+*/
+  vector< pair<double, vector<double> > > toSort;
+  for(unsigned int i=0;i<w.size();++i) {
+    vector<double> tmp(dim_);
+    for(int j=0;j<dim_;++j) tmp[j]=covariance_[j][i];
+    toSort.push_back(pair<double,vector<double> >(w[i],tmp));
+  }
+
+  sort(toSort.rbegin(),toSort.rend());
+
+  for(unsigned int i=0;i<toSort.size();++i) {
+    copy(toSort[i].second.begin(),toSort[i].second.end(),covariance_[i]);
+    w[i]=toSort[i].first;
+  }
+/*
+  Write2LogPlain("Eigenvalues: ");
+  for(unsigned int i=0;i<w.size();++i) {
+    Write2LogPlain("%g ",w[i]);
+  } Write2LogPlain("\n");
+  Write2LogPlain("sum of eigenvalues = %g",Sum(w));
+
+  Write2LogPlain("transform after sorting:\n");
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+	  Write2LogPlain(" %g",covariance_[i][j]);
+  }Write2LogPlain("\n");
+  }
+*/
+  const bool bSave = false;
+  if(bSave)
+  {	FILE* fp = fopen("__pcs.txt","w");
+	for(int r=0;r<covariance_.Rows();r++){
+	  for(int c=0;c<covariance_.Cols();c++)
+		  fprintf(fp,"%g ",covariance_[r][c]);
+	  fprintf(fp,"\n");
+	}
+	fclose(fp);
+  }
+
+  eigenvalues_=w;
+
+}
+
+const int PCA::dim() const {
+  return dim_;
+}
+
+const vector<double> & PCA::mean() const {
+  return mean_;
+}
+
+const A2D<double>& PCA::covariance() const {
+  return covariance_;
+}
+
+const int PCA::counter() const {
+  return counter_;
+}
+@
+
+
+1.3
+log
+@dont output PCs to file
+@
+text
+@d1 1
+a1 1
+// $Id: pca2.cpp,v 1.2 2008/07/15 03:47:58 samn Exp $ 
+d100 7
+a106 1
+
+d110 5
+d116 14
+a129 17
+
+//  DBG(50) << "Eigenvalues: " ;
+//  for(unsigned int i=0;i<w.size();++i) {
+//    BLINK(50) << w[i] << " ";
+//  }
+//  BLINK(50) << endl;
+
+//  DBGI(50,{
+      //DBG(50) << "transform before sorting:" << endl;
+//      for(int i=0;i<dim_;++i) {
+//        for(int j=0;j<dim_;++j) {
+//          BLINK(50) << " " << covariance_[i][j] ;
+//        }
+//        BLINK(50) << endl;
+//      }
+//    });
+
+d143 14
+a156 14
+//  DBG(50) << "Eigenvalues: " ;
+  //for(unsigned int i=0;i<w.size();++i) {
+    //BLINK(50) << w[i] << " ";
+//  }
+  //BLINK(50) << endl;
+
+//  DBG(50) << "transform after sorting:" << endl;
+  //for(int i=0;i<dim_;++i) {
+//    for(int j=0;j<dim_;++j) {
+      //BLINK(50) << " " << covariance_[i][j] ;
+//    }
+//    BLINK(50)  << endl;
+  //}
+
+@
+
+
+1.2
+log
+@use CDNA\cluster.cpp's svd , use double instead of float, move some funcs to .h as template funcs
+@
+text
+@d1 1
+a1 1
+// $Id: pca2.cpp,v 1.1 2008/05/06 02:24:04 samn Exp $ 
+d149 1
+a149 1
+  const bool bSave = true;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+// $Id$ 
+d12 2
+d17 1
+a17 20
+  dim_=dim;
+  mean_=vector<PCA_T>(dim_,0.0);
+  covariance_=vector< vector<PCA_T> >(dim_,vector<PCA_T>(dim_,0.0));
+  counter_=0;
+}
+
+void PCA::putData(const vector<PCA_T> &in) {
+  ++counter_;
+  PCA_T tmp;
+
+  for(int i=0;i<dim_;++i) {
+    mean_[i]+=in[i];
+  }
+
+  for(int i=0;i<dim_;++i) {
+    tmp=in[i];
+    for(int j=0;j<dim_;++j) {
+      covariance_[i][j]+=tmp*in[j];
+    }
+  }
+d20 1
+a20 1
+void PCA::putData(A2D< PCA_T >& vData)
+d22 6
+a27 10
+	counter_ = vData.Rows();
+	mean_ = vector<PCA_T>(dim_,0.0);
+	CovarMat(vData,counter_,dim_,covariance_,mean_);
+}
+
+void PCA::putData(const ::std::vector< std::vector< PCA_T > >& vData)
+{
+	counter_ = vData.size();
+	mean_ = vector<PCA_T>(dim_,0.0);
+	CovarMat<PCA_T>(vData,counter_,dim_,covariance_,mean_);
+d82 3
+a84 3
+  for(int i=0;i<dim_;++i) {
+    mean_[i]/=counter_;
+  }
+d86 2
+a87 2
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+a88 2
+    }
+  }
+d90 2
+a91 2
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+a92 2
+    }
+  }
+d97 24
+a120 22
+  vector<PCA_T> w(dim_);
+  vector< vector<PCA_T> > v(dim_, vector<PCA_T>(dim_,0));
+
+  //svd(covariance_,w,v);
+
+    NR::svdcmp(covariance_, w, v);
+
+  DBG(50) << "Eigenvalues: " ;
+  for(unsigned int i=0;i<w.size();++i) {
+    BLINK(50) << w[i] << " ";
+  }
+  BLINK(50) << endl;
+
+  DBGI(50,{
+      DBG(50) << "transform before sorting:" << endl;
+      for(int i=0;i<dim_;++i) {
+        for(int j=0;j<dim_;++j) {
+          BLINK(50) << " " << covariance_[i][j] ;
+        }
+        BLINK(50) << endl;
+      }
+    });
+d122 1
+a122 1
+  vector< pair<PCA_T, vector<PCA_T> > > toSort;
+d124 1
+a124 1
+    vector<PCA_T> tmp(dim_);
+d126 1
+a126 1
+    toSort.push_back(pair<PCA_T,vector<PCA_T> >(w[i],tmp));
+d132 1
+a132 1
+    covariance_[i]=toSort[i].second;
+d135 23
+a157 12
+  DBG(50) << "Eigenvalues: " ;
+  for(unsigned int i=0;i<w.size();++i) {
+    BLINK(50) << w[i] << " ";
+  }
+  BLINK(50) << endl;
+
+  DBG(50) << "transform after sorting:" << endl;
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+      BLINK(50) << " " << covariance_[i][j] ;
+    }
+    BLINK(50)  << endl;
+d168 1
+a168 1
+const vector<PCA_T> & PCA::mean() const {
+d172 1
+a172 1
+const vector< vector <PCA_T> > & PCA::covariance() const {
+a178 47
+
+const vector<PCA_T> PCA::transform(const vector<PCA_T> &in, int dim) const {
+  if(dim==0) dim=in.size();
+  vector<PCA_T> result(dim,0.0);
+  DBG(20) << "Transforming to dim " << dim << endl;
+
+  for(int i=0;i<dim;++i) {
+    for(unsigned int j=0;j<in.size();++j) {
+      result[i]+=covariance_[i][j]*(in[j]-mean_[j]);
+    }
+  }
+  return result;
+}
+
+void PCA::transform(PCA_T* in,int insz, PCA_T* out, int dim) const {
+  if(dim==0) dim=insz;
+  DBG(20) << "Transforming to dim " << dim << endl;
+
+  for(int i=0;i<dim;++i) {
+    out[i]=0.0;
+    for(unsigned int j=0;j<insz;++j) {
+      out[i]+=covariance_[i][j]*(in[j]-mean_[j]);
+    }
+  }
+}
+
+
+
+
+/** as PCA-matrices are rotation matrices, for this calculation it is
+ *  not necessary to explicitly invert them, but instead it holds:
+ *
+ *   M^{-1}=transpose(M), and thus M×transpose(M)=Id
+ */
+const vector<PCA_T> PCA::backTransform(vector<PCA_T> in) const {
+  if(int(in.size()) < dim_) { in.resize(dim_,0);} // zeropadding
+  vector<PCA_T> result(dim_,0.0);
+  DBG(20) << "Backtransforming" << endl;
+
+  for(int i=0;i<dim_;++i) {
+    for(int j=0;j<dim_;++j) {
+      result[i]+=covariance_[j][i]*in[j];
+    }
+    result[i]+=mean_[i];
+  }
+  return result;
+}
+@

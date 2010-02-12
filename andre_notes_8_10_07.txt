@@ -1,0 +1,74 @@
+Hi sam,
+notes:
+1) You killed the Time parameter. It is VERY valuable to a user but it is not used for clustering. Please put it back, but, perhaps obviously, do not try to cluster on it.
+
+Fixed
+
+2) I don't see any effect of the Cluster->Show Spike X,Y dialog
+
+You need to set that to yes before loading spikes. Then when spikes are loaded,
+the X,Y will be shown as dimensions on the scatter plots (the last two
+dimensions). I'm not sure the X,Y values are extracted correctly, though.
+
+3) PC1,2,3 - as you pointed out PC1 is related to amplitude or Energy. It is claimed in the literature that it is more sensible to normalize each voltage measurement by the waveform energy and THEN apply PCA so that Energy, and the PCs will measure uncorrelated things.
+
+I have been normalizing the voltage measurements by their energy before
+doing the principle component analysis. However, PC1 on tetrode 1 can still be
+correlated with PC1 on tetrode 2, since they both code for amplitude. PC1
+on tetrode 1 won't be correlated with PC2 on tetrode 1 though.
+
+4) How are the results of the Information measures output for detailed evaluation? In other words how can you formally study 1) what the optimal binning is? 2) whether or not they are effective? etc. I see you are focussing on auto clustering (it is obviously more interesting) but you're not finishing the simple first step i.e. figuring out how to measure how good a job has been done by any clustering method.) 
+
+When you save to .cl files, the information gain is output as a string. 
+
+For example : 
+
+%%BEGIN CLUSTER_INFORMATION_GAIN
+// %InformationGain.0 ( ClusterId 10binInfoI 20binInfoI 30binInfoI 40binInfoI 10binInfoE 20binInfoE 30binInfoE 40binInfoE 10binInfoI/E 20binInfoI/E 30binInfoI/E 40binInfoI/E 10binInfoUD 20binInfoUD 30binInfoUD 40binInfoUD )
+%InformationGain.0 ( 1 44.21850 49.95203 50.86453 51.74090 59.45941 69.67783 70.14901 71.72296 0.74368 0.71690 0.72509 0.72140 44.21850 49.95203 50.86453 51.74090  )
+etc.
+
+These values are only stored when the user manually creates clusters and they are not output for the auto-clustering.
+
+I also mentioned before that the UD information measure will be maximal if there is a single point in a cluster. This seems to be a problem for the DB-measure as well...
+
+
+5) It seems that info increases with the number of bins. I do not understand why. Can you understand why? I've not looked at your code.
+
+I don't know why. I think the best way to understand this is to visualize the
+distributions graphically. I may do this within WClust or save the distributions and view them graphically with python.
+
+However, as a guess it seems that when you take a small # of bins, the majority of points in the distribution will be centered in 1 or two bins (right near the mean). The distributions will have a higher chance of having empty bins. As a result the KL-divergence will have more terms that equal zero, sum (p(i) * log(p(i)/q(i) ), i.e. p(i) will be equal to zero more often. If you take more bins, the values will "spread" out more and there will be less bins with zero elements. As the number of bins increases to infiniti, what would happen? Each element would have a probability of zero...that's why I was wondering if there is a way to estimate a continuous probability distribution on a computer without using bins...probably not because you need to take a range of values to get non-zero probability which is similar to a bin...
+
+
+6) The auto clustering (most types) take forever on my computer. This is especially true, for example, if I don't fill in the auto clustering parameters because I changed my mind. It seems there is no way to change one's mind and not auto cluster once you select the option. It would be practical to allow a cancel button and an abort button to stop the algorithm it it goes on intolerably long.
+
+I forgot to mention that to run a single iteration of K-means clustering you can set the minclusters equal to the maxclusters when it asks you for parameters and the number of iterations to 1. This will take about 1 second to complete. The long times for K-means come from first computing the optimal number of clusters with several hundred (user defined) number of iterations for each potential cluster number and then checking the davies-bouldin index (which tries to measure compactness and separation of clusters geometrically) and then iterating hundreds of times to find a good solution on the chosen # of clusters (based on the DB-index).
+
+I implemented the DB-index so we could compare our new clustering method against a standard one.
+
+The exclusive information gain optimization also takes forever, literally, because of the problem of "no-convergence" I mentioned before. This seems to happen because of the points oscillating between clusters forever. I was going to put in a check for previous states having occurred (as the cDNA library does) to fix that problem.
+
+Anyway, I can put a cancel button in, but I'm not an expert in Win32 GUI programming so it may take longer than you expect. In order to have a cancel
+button, I'd need to have each clustering algorithm's main loop update the
+GUI periodically - i.e. progress bar, or have a second GUI thread control the
+clustering algorithm thread, and terminate it if the cancel button is pressed.
+Come to think of it, this second choice may not be as hard as I thought...
+
+
+7) What is UD? Is it what I refer to as uniqueness? Info gain between our cluster and the nearest neighbour cluster? Whatever it is,
+it is always equal exactly to the value I (distinctiveness, or info gain between our cluster and all recorded spikes). As a result I don't think you are calculating cluster "distinctiveness" and "uniqueness" correctly.
+
+UD is the uniqueness/distinctiveness measure. This means the sum of info gain between a cluster and the full distribution plus the info gain between a cluster and the nearest neighbor cluster.
+
+I haven't ever seen the UD value exactly equal to the I value. I see them
+differ by as much as 40% sometimes.
+
+8) Just to be thorough, I'm pointing out the "noise management" we discussed isn't in there yet.
+
+I made that lower priority because it is less interesting.
+
+I'm going to UCLA in a few hours and will be offline (hiking from Sunday to wednesday). I'll have my PC so I can play with new versions of wclust on the road.
+
+Best,
+Andre

@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@// @;
+
+
+1.1
+date	2008.03.19.15.18.38;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@// $Id$ 
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+// Function used to stall exit in Borland C++Builder
+
+void nrexit(void)
+{
+        cin.get();
+        return;
+}
+
+#pragma exit nrexit
+@

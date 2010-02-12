@@ -1,0 +1,20 @@
+Info entered by samn @ 21/Jun/2009:14:55:11
+
+Experiment information: date=Sunday, June 21, 2009
+
+Animal information:
+	type=
+	weight=
+	age=
+	sex=
+	details=
+
+Input information:
+	Input 1: type=, time=, amount=, location=
+	Input 2: type=, time=, amount=, location=
+	Input 3: type=, time=, amount=, location=
+	Input 4: type=, time=, amount=, location=
+
+Experiment additional information:
+
+

@@ -1,0 +1,51 @@
+#if !defined(AFX_COLORCOMBOBOX_H__C3FD1A20_6F20_11D7_99E5_EBE79774647C__INCLUDED_)
+#define AFX_COLORCOMBOBOX_H__C3FD1A20_6F20_11D7_99E5_EBE79774647C__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+// ColorComboBox.h : header file
+//
+#include "MyObj.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// CColorComboBox window
+
+
+// WARNING: After initializing window, where a ColorComboBox
+// is used, you might to use SetPalette method!
+class CColorComboBox : public CComboBox
+{
+protected:
+	CPaletteStack	*m_palStack;
+	bool			isInitialized;
+// Construction
+public:
+	CColorComboBox();
+	void SetPalette(CPaletteStack *pal) { m_palStack = pal; isInitialized = true; };
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CColorComboBox)
+	public:
+	virtual void DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct);
+	//}}AFX_VIRTUAL
+
+public:
+	virtual ~CColorComboBox();
+
+	// Generated message map functions
+protected:
+	//{{AFX_MSG(CColorComboBox)
+		// NOTE - the ClassWizard will add and remove member functions here.
+	//}}AFX_MSG
+
+	DECLARE_MESSAGE_MAP()
+};
+
+/////////////////////////////////////////////////////////////////////////////
+
+//{{AFX_INSERT_LOCATION}}
+// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
+
+#endif // !defined(AFX_COLORCOMBOBOX_H__C3FD1A20_6F20_11D7_99E5_EBE79774647C__INCLUDED_)

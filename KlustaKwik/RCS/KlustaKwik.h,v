@@ -1,0 +1,112 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	2009.06.24.17.58.46;	author samn;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2008.01.05.15.38.22;	author samn;	state Exp;
+branches;
+next	;
+
+
+desc
+@""
+@
+
+
+1.2
+log
+@load/save from memory, use typedefs
+@
+text
+@// $Id$ 
+#include <stdio.h>
+#include <stdlib.h>
+#include "param.h"
+#include "Array.h"
+#include <fstream>
+#include <iostream>
+#include <math.h>
+#include <time.h>
+#include <stdarg.h>
+#include <vector>
+#include <stdexcept>
+#include "../UPDialog.h"
+#include "../A2D.h"
+
+void export_model(FILE *fp);	// Finish writing model to save it
+
+void SetupParams(int argc, char **argv);
+void Error(char *fmt, ...);
+void Output(char *fmt, ...);
+int irand(int min, int max);
+FILE *fopen_safe(char *fname, char *mode);
+void MatPrint(FILE *fp, float *Mat, int nRows, int nCols);
+int Cholesky(float *m_In, float *m_Out, int D);
+void TriSolve(float *M, float *x, float *Out, int D);
+int kk_main(int argc, char **argv,A2D<float>& Dat,std::vector<int>& vIDs,int& iMaxClust,const CUPDUPDATA* pUp);
+
+void SaveOutput(const IArray &OutputClass,std::vector<int>& vIDs,int& iMaxClust);
+
+// PARAMETERS
+extern char FileBase[];
+extern int ElecNo;
+extern int MinClusters; // Min and MaxClusters includes cluster 1, the noise cluster
+extern int MaxClusters;
+extern int MaxPossibleClusters; // splitting can't make it exceed this
+extern int nStarts; // number of times to start count from each number of clusters
+extern int RandomSeed;
+extern char Debug;
+extern int Verbose;
+extern char UseFeatures[];
+extern int DistDump;
+extern float DistThresh; // Points with at least this much difference from 
+			// the best do not get E-step recalculated - and that's most of them
+extern int FullStepEvery;		// But there is always a full estep this every this many iterations
+extern float ChangedThresh;	// Or if at least this fraction of points changed class last time
+extern char Log;
+extern char Screen;	// log output to screen
+extern int MaxIter; // max interations
+extern char StartCluFile[];
+
+extern float PenaltyMix;	// amount of BIC to use as penalty, rather than AIC
+
+// for saving model
+class KlustaSave;	// forward declaration
+extern KlustaSave kSv;	                // group info for describing best cluster
+extern int fSaveModel;		// If TRUE, writes cluster info to .model file
+extern FILE *pModelFile;		// Output file if fSaveModel
+
+extern int SplitEvery; // allow cluster splitting every this many iterations
+
+// GLOBAL VARIABLES
+extern FILE *logfp, *Distfp;
+extern float HugeScore;
+
+extern const double PI;
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 1
+a1 1
+/* $Id$ */
+d14 1
+d26 1
+a26 1
+int kk_main(int argc, char **argv,const CUPDUPDATA* pUp);
+d28 1
+a28 1
+void SaveOutput(const Array<int> &OutputClass);
+@
