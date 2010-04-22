@@ -772,6 +772,9 @@
 				RelativePath=".\BBox.h">
 			</File>
 			<File
+				RelativePath=".\bpf.h">
+			</File>
+			<File
 				RelativePath=".\CBmpFile.h">
 			</File>
 			<File

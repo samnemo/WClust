@@ -3196,6 +3196,38 @@ int CVerxStack::GetBPFHeader(char *buffer, int nRead, char *errChar)
 			bpf.KEY_EVENT_SIZE = GetNumber(pdest);
 		}
 	}
+
+	// INPUT_EVENT_TYPE
+	pdest = strstr(formatInf,INPUT_EVENT_ID);
+	if ( pdest == NULL )
+	{	}
+	else
+	{	// INPUT_EVENT_RECORD_FORMAT
+		bpf.INPUT_EVENT_TYPE = GetType(pdest);
+		pdest = strstr(pdest,INPUT_EVENT_RECORD_FORMAT);
+		if ( pdest == NULL )
+			return 0;
+		else
+		{
+			bpf.INPUT_EVENT_SIZE = GetNumber(pdest);
+		}
+	}
+
+	// OUTPUT_EVENT_TYPE
+	pdest = strstr(formatInf,OUTPUT_EVENT_ID);
+	if ( pdest == NULL )
+	{	}
+	else
+	{	// OUTPUT_EVENT_RECORD_FORMAT
+		bpf.OUTPUT_EVENT_TYPE = GetType(pdest);
+		pdest = strstr(pdest,OUTPUT_EVENT_RECORD_FORMAT);
+		if ( pdest == NULL )
+			return 0;
+		else
+		{
+			bpf.OUTPUT_EVENT_SIZE = GetNumber(pdest);
+		}
+	}
 	
 	// Find END_HEADER
 	pdest = strstr(buffer, HEADER_END_LABEL);
@@ -3401,6 +3433,22 @@ int CVerxStack::LoadBPF(CFile *file, char *buffer, int nRead, char *errChar, lon
 			InBpfExist |= 2;
 			m_i += bpf.ROOM_POSITION_SIZE;
 		}		
+		else if ( m_Identif == bpf.INPUT_EVENT_TYPE )
+		{	// INPUT		
+			isLoaded = 1;
+			*errChar = 'I'; *errOffset = m_i;
+			dLastType = 'I'; dLastPos = m_i;
+			
+			m_i += bpf.INPUT_EVENT_SIZE;
+		}
+		else if ( m_Identif == bpf.OUTPUT_EVENT_TYPE )
+		{	// OUTPUT
+			isLoaded = 1;
+			*errChar = 'O'; *errOffset = m_i;
+			dLastType = 'O'; dLastPos = m_i;
+			
+			m_i += bpf.OUTPUT_EVENT_SIZE;
+		}
 		
 		if ( isLoaded == 0 )
 		{
@@ -3666,6 +3714,16 @@ int CVerxStack::LoadBPF(CFile *file, char *buffer, int nRead, char *errChar, lon
 			}
 			m_i += bpf.TETRODE_SIZE;
 		} // end loading T param
+		else if ( m_Identif == bpf.INPUT_EVENT_TYPE ) 
+		{	// INPUT EVENT
+			isLoaded = 1;
+			m_i += bpf.INPUT_EVENT_SIZE;
+		}
+		else if ( m_Identif == bpf.OUTPUT_EVENT_TYPE )
+		{	// OUTPUT EVENT
+			isLoaded = 1;
+			m_i += bpf.OUTPUT_EVENT_SIZE;
+		}
 	
 		if ( isLoaded == 0 )
 		{

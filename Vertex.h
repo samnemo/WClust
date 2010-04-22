@@ -39,6 +39,8 @@ struct sBPF {
 	int		ROOM_POSITION_SIZE;                      
 	int		ARENA_POSITION_SIZE;
 	int		KEY_EVENT_SIZE;
+	int		INPUT_EVENT_SIZE;
+	int		OUTPUT_EVENT_SIZE;
 
 	// Identifiers
 	char	ARENA_POSITION_TYPE;
@@ -49,6 +51,8 @@ struct sBPF {
 	char	TETRODE_TYPE;
 	char	SYNC_TYPE;
 	int		KEY_EVENT_TYPE;
+	int		INPUT_EVENT_TYPE;
+	int		OUTPUT_EVENT_TYPE;
 
 	vector<string> vEEGNames;
 

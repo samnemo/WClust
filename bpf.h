@@ -56,6 +56,8 @@
 #define ROOM_POSITION_BPF_REC_TYPE                      'R'
 #define ARENA_POSITION_BPF_REC_TYPE                     'A'
 #define KEY_EVENT_REC_TYPE								'K'
+#define INPUT_EVENT_BPF_REC_TYPE                        'I'
+#define OUTPUT_EVENT_BPF_REC_TYPE                       'O'
 
 #define EEG_BPF_REC_SIZE                                4005
 #define SINGLE_BPF_REC_SIZE                             71
@@ -64,10 +66,12 @@
 #define SYNC_BPF_REC_SIZE                               2005
 #define ROOM_POSITION_BPF_REC_SIZE                      9
 #define ARENA_POSITION_BPF_REC_SIZE                     9
-#define KEY_EVENT_BPF_REC_SIZE                     9
+#define KEY_EVENT_BPF_REC_SIZE							9
+#define INPUT_EVENT_BPF_REC_SIZE                        7
+#define OUTPUT_EVENT_BPF_REC_SIZE                       7
 
-#define	BPF_SPIKE_OFFSET				7
-#define	BPF_SPIKE_SIZE					64
+#define	BPF_SPIKE_OFFSET								7
+#define	BPF_SPIKE_SIZE									64
 
 #define EEG_ID                                          "%EegIdentifier."
 #define EEG_RECORD_FORMAT                               "%EegRecordFormat."
@@ -85,19 +89,23 @@
 #define ARENA_POSITION_RECORD_FORMAT                    "%ArenaPositionRecordFormat."
 #define KEY_EVENT_ID									"%KeyEventIdentifier."
 #define KEY_EVENT_RECORD_FORMAT							"%KeyEventRecordFormat."
+#define INPUT_EVENT_ID                                  "%InputEventIdentifier."
+#define INPUT_EVENT_RECORD_FORMAT                       "%InputEventRecordFormat."
+#define OUTPUT_EVENT_ID                                 "%OutputEventIdentifier."
+#define OUTPUT_EVENT_RECORD_FORMAT                      "%OutputEventRecordFormat."
 
-#define	BPF_RECORD_TIME_STAMP_OFFSET			1
-#define BPF_RECORD_PROBE_OFFSET				5
-#define BPF_SPK_REC_CLUST_OFFSET			6
-#define BPF_SYNC_PROBE					31
-#define	BPF_POS_REC_X_OFFSET       			5 
-#define BPF_POS_REC_Y_OFFSET 				6 
-#define BPF_POS_REC_ANG_OFFSET				7
+#define	BPF_RECORD_TIME_STAMP_OFFSET					1
+#define BPF_RECORD_PROBE_OFFSET							5
+#define BPF_SPK_REC_CLUST_OFFSET						6
+#define BPF_SYNC_PROBE									31
+#define	BPF_POS_REC_X_OFFSET       						5 
+#define BPF_POS_REC_Y_OFFSET 							6 
+#define BPF_POS_REC_ANG_OFFSET							7
 
-#define	BPF_MIN_AD					-32768
-#define	BPF_MAX_AD					32768
+#define	BPF_MIN_AD										-32768
+#define	BPF_MAX_AD										32768
 
-#define	ROOM_FRAME					1
-#define	ARENA_FRAME					2
+#define	ROOM_FRAME										1
+#define	ARENA_FRAME										2
 #endif
 
