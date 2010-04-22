@@ -24,7 +24,7 @@ static char THIS_FILE[] = __FILE__;
 CEditDlg::CEditDlg(CWnd* pParent)
 	: cdxCSizingDialog(CEditDlg::IDD, pParent),
 	  m_bNoiseMode(false),
-	  m_pRDlg(0)
+	  m_pRDlg(0),m_Dragging(0),m_InDrawArea(0)
 {
 	//{{AFX_DATA_INIT(CEditDlg)
 	//}}AFX_DATA_INIT
@@ -59,9 +59,9 @@ void CEditDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_HIDEPOLY, m_wndHidePoly);
 	DDX_Control(pDX, IDC_DRAWPOLY, m_wndDrawPoly);
 	DDX_Control(pDX, IDC_MAKE_NOISE_BTN, m_NoiseButton);
-	//}}AFX_DATA_MAP
 	DDX_Control(pDX, IDC_BUTTON_RATE, m_BtnRate);
 	DDX_Control(pDX, IDC_BUTTON_CINF, m_BtnCInf);
+	//}}AFX_DATA_MAP
 }
 
 
@@ -100,10 +100,10 @@ BEGIN_MESSAGE_MAP(CEditDlg, cdxCSizingDialog)
 	ON_CBN_SELCHANGE(IDC_CMB_ORIG_NEW, OnSelchangeCmbOrigNew)
 	ON_WM_CLOSE()
 	ON_BN_CLICKED(IDC_MAKE_NOISE_BTN, OnBnClickedMakeNoiseBtn)
-	//}}AFX_MSG_MAP
 	ON_NOTIFY(UDN_DELTAPOS, IDC_SPIN_Y, OnDeltaposSpinY)
 	ON_BN_CLICKED(IDC_BUTTON_RATE, OnBnClickedButtonRate)
 	ON_BN_CLICKED(IDC_BUTTON_CINF, OnBnClickedButtonCinf)
+	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -455,7 +455,6 @@ void CEditDlg::OnPaint()
 	}
 }
 
-
 void CEditDlg::OnHScroll(UINT nSBCode, UINT nPos, CScrollBar* pScrollBar) 
 {
 	char msg[1024];
@@ -597,7 +596,6 @@ void CEditDlg::CheckComboClust()
 	m_wndComboClust.SetCurSel(1);
 }
 
-
 void CEditDlg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
 	cdxCSizingDialog::OnShowWindow(bShow, nStatus);
@@ -634,7 +632,6 @@ void CEditDlg::OnShowWindow(BOOL bShow, UINT nStatus)
 	CWnd::SetIcon(pom1,true);
 }
 
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 void CEditDlg::OnNewpoly() 
@@ -649,7 +646,7 @@ void CEditDlg::OnNewpoly()
 		m_First=1;
 		m_Dragging=0;
 		m_TwoLines=0;
-		m_IsVisible=0;
+		m_IsVisible=0; 
 	
 		m_NewPoly = new CBoundary(m_MainPalette);
 		m_NewProj = new CProjection(m_MainPalette);
@@ -674,8 +671,6 @@ void CEditDlg::OnNewpoly()
 	}
 }
 
-
-
 void CEditDlg::OnDrawpoly() 
 {
 	m_MainDataStack->whichDraw = CLUST_USER;
@@ -688,7 +683,7 @@ void CEditDlg::OnDrawpoly()
 		m_First=1;
 		m_Dragging=0;
 		m_TwoLines=0;
-		m_IsVisible=0;
+		m_IsVisible=0; 
 		
 		int Selected=m_wndComboClust.GetCurSel();
 		Selected = (Selected == 0) ? 255 : (Selected - 1);		
@@ -715,12 +710,14 @@ void CEditDlg::OnDrawpoly()
 	}
 }
 
-
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-
 void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point) 
 {
+#ifdef _DEBUG
+	Write2Log("OnLButtonDown m_State%d m_Dragging%d",m_State,m_Dragging);
+#endif
+
 	CClientDC dc(this); // device context for painting
 
 	CPoint m_point,m_ClientPoint;
@@ -744,7 +741,7 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 	
 	// Selecting view area (ZOOM)
 	if (m_State==10) 
-	{ 
+	{	
 		if (m_InDrawArea)
 		{
 			CRect iRect; 
@@ -771,7 +768,7 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		if (m_First)
 		{	
 			if (m_InDrawArea)	
-			{
+			{	
 				//Mouse Cursor
 				CRect iRect,jRect;
 				CWnd::GetWindowRect(iRect);
@@ -799,7 +796,7 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		{	
 			m_Dragging=1;
 			if (m_TwoLines!=1)
-			{
+			{	
 				dc.SetROP2(R2_NOT);
 				dc.MoveTo(m_Origin);
 				dc.LineTo(m_OldPoint);
@@ -808,16 +805,16 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 				m_OldPoint=point;
 			}
 			else
-			{
+			{	
 				if (m_IsVisible)
-				{
+				{	
 					dc.SetROP2(R2_NOT);
 					dc.MoveTo(m_TempPoint);
 					dc.LineTo(m_OldPoint);
 					dc.LineTo(m_Origin);
 					m_IsVisible=0;
 				}
-				CVect2D *m_v1,*m_v2,*m_v3;
+				CVect2D *m_v1,*m_v2;
 				m_v1=(CVect2D*)*m_NewProj->m_Vect2DStack.begin();
 				m_v2=(CVect2D*)*(m_NewProj->m_Vect2DStack.end()-1);
 					
@@ -825,18 +822,17 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 				x=m_MyView->m_DataArea.GetLeft()+m_ClientPoint.x*m_MyView->m_DataArea.GetSizeX()/m_rect.Width();
 				y=m_MyView->m_DataArea.GetBottom()+m_ClientPoint.y*m_MyView->m_DataArea.GetSizeY()/m_rect.Height();
 				if (m_StoringMode)
-					{ float z; z=x; x=y;y=z;}
+					{ float z; z=x; x=y;y=z; }
 			
-				CPoint2D *m_p1,*m_p2;
-				m_v3= new CVect2D();
+				CPoint2D *m_p1,*m_p2;				
 				m_p1= (CPoint2D*)*m_NewProj->m_Pnt2DStack.begin();
 				m_p2= (CPoint2D*)*(m_NewProj->m_Pnt2DStack.end()-1);
+				std::auto_ptr<CVect2D> m_v3(new CVect2D());
 				m_v3->Make(m_p1,m_p2);
-
-				delete m_v3;
-				if (m_v1->IsIn(x,y)&&m_v2->IsIn(x,y)&&m_v3->IsIn(x,y))
+								
+				if (m_v1->IsIn(x,y) && m_v2->IsIn(x,y) && m_v3->IsIn(x,y))
 				{
-					m_IsVisible=1;
+					m_IsVisible=1; 
 					m_OldPoint=point;
 					dc.SetROP2(R2_NOT);
 					dc.MoveTo(m_TempPoint);
@@ -848,7 +844,7 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 		
 		// Storing first point of polygon
 		if (m_NewProj->m_Count==0)
-		{
+		{	
 			if (m_State==1 && m_InDrawArea || m_State==2 && m_InDrawArea /* && flag*/)
 			{
 				float x,y;
@@ -873,7 +869,6 @@ void CEditDlg::OnLButtonDown(UINT nFlags, CPoint point)
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
-
 void CEditDlg::OnMouseMove(UINT nFlags, CPoint point) 
 {
 	CClientDC dc(this);
@@ -928,7 +923,7 @@ void CEditDlg::OnMouseMove(UINT nFlags, CPoint point)
 		else
 		{
 			if (m_Dragging==1)
-			{
+			{	
 				if (m_TwoLines!=1)
 				{
 					dc.SetROP2(R2_NOT);
@@ -941,14 +936,14 @@ void CEditDlg::OnMouseMove(UINT nFlags, CPoint point)
 				else
 				{
 					if (m_IsVisible)
-					{
+					{	
 						dc.SetROP2(R2_NOT);
 						dc.MoveTo(m_TempPoint);
 						dc.LineTo(m_OldPoint);
 						dc.LineTo(m_Origin);
 						m_IsVisible=0;
 					}
-					CVect2D *m_v1,*m_v2,*m_v3;
+					CVect2D *m_v1,*m_v2;
 					m_v1=(CVect2D*)*m_NewProj->m_Vect2DStack.begin();
 					m_v2=(CVect2D*)*(m_NewProj->m_Vect2DStack.end()-1);
 					
@@ -958,23 +953,20 @@ void CEditDlg::OnMouseMove(UINT nFlags, CPoint point)
 					if (m_StoringMode)
 						{ float z; z=x; x=y;y=z;}
 			
-					CPoint2D *m_p1,*m_p2;
-					m_v3= new CVect2D();
+					CPoint2D *m_p1,*m_p2;					
 					m_p1= (CPoint2D*)*m_NewProj->m_Pnt2DStack.begin();
 					m_p2= (CPoint2D*)*(m_NewProj->m_Pnt2DStack.end()-1);
+					std::auto_ptr<CVect2D> m_v3(new CVect2D());
 					m_v3->Make(m_p1,m_p2);
 
-	
-					delete m_v3;
-					if (m_v1->IsIn(x,y)&&m_v2->IsIn(x,y)&&m_v3->IsIn(x,y))
-					{
+					if (m_v1->IsIn(x,y) && m_v2->IsIn(x,y) && m_v3->IsIn(x,y))
+					{	
 						m_IsVisible=1;
 						m_OldPoint=point;
 						dc.SetROP2(R2_NOT);
 						dc.MoveTo(m_TempPoint);
 						dc.LineTo(m_OldPoint);
 						dc.LineTo(m_Origin);
-										
 					}
 				}
 			}
@@ -982,6 +974,7 @@ void CEditDlg::OnMouseMove(UINT nFlags, CPoint point)
 	}
 	cdxCSizingDialog::OnMouseMove(nFlags, point);
 }
+
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////
@@ -993,6 +986,10 @@ void CEditDlg::OnMouseMove(UINT nFlags, CPoint point)
 ///////////////////////////////////////////////////////
 void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point) 
 {
+#ifdef _DEBUG
+	Write2Log("OnLButtonUp m_State%d m_Dragging%d m_IsVisible%d",m_State,m_Dragging,m_IsVisible);
+#endif
+
 	CClientDC dc(this);
 	CPoint m_point,m_ClientPoint;
 	// Set cross cursor
@@ -1011,7 +1008,7 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 	
 	// Selecting view area (ZOOM)
 	if (m_State==10&&m_Dragging)
-	{
+	{	
 		dc.SetROP2(R2_NOT);
 		dc.MoveTo(m_Origin);
 		dc.LineTo(m_Origin.x,m_OldPoint.y);
@@ -1051,15 +1048,15 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 
 	// Drawing polygon
 	if (m_State==1 || m_State==2)
-	{
+	{	
 		// Drawing
 		if (m_Dragging)
-		{
+		{	
 			if (m_IsVisible)
-			{
+			{	
 				//m_First=0;
 				if (point!=m_Origin)
-				{
+				{	
 					dc.SetROP2(R2_NOT);
 					dc.MoveTo(m_Origin);
 					dc.LineTo(m_OldPoint);
@@ -1076,9 +1073,9 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 
 
 		if (m_NewProj->m_Count>2)
-		{
+		{	
 			if (m_IsVisible)//&&(point!=m_TempPoint)&&(point!=m_Origin))
-			{
+			{	
 				float x,y;
 				x=m_MyView->m_DataArea.GetLeft()+m_ClientPoint.x*m_MyView->m_DataArea.GetSizeX()/m_rect.Width();
 				y=m_MyView->m_DataArea.GetBottom()+m_ClientPoint.y*m_MyView->m_DataArea.GetSizeY()/m_rect.Height();
@@ -1106,13 +1103,14 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 					m_NewProj->AddVect2Dinv(vect);
 
 				}
-			}else MessageBeep(0);
+			}
+			else MessageBeep(0);
 		}
 
 		if (m_NewProj->m_Count==2)
-		{	
+		{				
 			if ( (point != m_TempPoint) && (point!=m_Origin) )
-			{
+			{	
 				float x,y,x1,y1,x2,y2;
 				x=m_MyView->m_DataArea.GetLeft()+m_ClientPoint.x*m_MyView->m_DataArea.GetSizeX()/m_rect.Width();
 				y=m_MyView->m_DataArea.GetBottom()+m_ClientPoint.y*m_MyView->m_DataArea.GetSizeY()/m_rect.Height();
@@ -1159,7 +1157,7 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 					m_NewProj->AddVect2D(m_vect2);
 				}
 
-				m_IsVisible=0;
+				m_IsVisible=0; 
 				m_TwoLines=1;
 				m_Origin=point;
 				m_Dragging=0;
@@ -1168,7 +1166,7 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 		};
 
 		if ( (m_NewProj->m_Count == 1) )
-		{
+		{	
 //			m_First=0;
 			if (point!=m_Origin && ((abs(point.x - m_Origin.x) > 2) || (abs(point.y - m_Origin.y) > 2)))
 			{
@@ -1203,6 +1201,10 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 
 void CEditDlg::OnRButtonDown(UINT nFlags, CPoint point) 
 {
+#ifdef _DEBUG
+	Write2Log("OnRButtonDown m_State%d m_Dragging%d",m_State,m_Dragging);
+#endif
+
 	if (m_State==10)
 	{
 		m_State = 0;

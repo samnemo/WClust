@@ -103,6 +103,8 @@ public:
 	CButton	m_wndHidePoly;
 	CButton	m_wndDrawPoly;
 	CButton m_NoiseButton;
+	CButton m_BtnRate;
+	CButton m_BtnCInf;
 	//}}AFX_DATA
 
 
@@ -153,14 +155,15 @@ protected:
 	afx_msg void OnClose();
 	afx_msg LRESULT OnGoodbye(WPARAM wParam, LPARAM lParam);
 	afx_msg void OnBnClickedMakeNoiseBtn();
+	afx_msg void OnDeltaposSpinY(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnBnClickedButtonRate();
+	afx_msg void OnBnClickedButtonCinf();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnDeltaposSpinY(NMHDR *pNMHDR, LRESULT *pResult);
-	CButton m_BtnRate;
-	afx_msg void OnBnClickedButtonRate();
-	CButton m_BtnCInf;
-	afx_msg void OnBnClickedButtonCinf();
+
+
+
 
 	friend class CWClustView;
 };
