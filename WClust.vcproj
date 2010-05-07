@@ -3,6 +3,7 @@
 	ProjectType="Visual C++"
 	Version="7.10"
 	Name="WClust"
+	ProjectGUID="{5F159258-C43D-4509-8141-3C6C25E393C7}"
 	SccProjectName=""
 	SccLocalPath=""
 	Keyword="MFCProj">
@@ -23,7 +24,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="C:\Users\samn\Documents\neurosim"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;INSTANTIATE_TEMPLATES"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="3"
@@ -39,7 +40,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="version.lib vfw32.lib winmm.lib"
+				AdditionalDependencies="version.lib vfw32.lib winmm.lib blas.lib lapack.lib"
 				OutputFile="WClust.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
@@ -94,7 +95,7 @@
 				ImproveFloatingPointConsistency="TRUE"
 				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="C:\Users\samn\Documents\neurosim"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;INSTANTIATE_TEMPLATES"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
@@ -111,7 +112,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="version.lib vfw32.lib LAPACK.lib BLAS.lib extras.lib matgen.lib"
+				AdditionalDependencies="version.lib vfw32.lib lapack.lib blas.lib extras.lib matgen.lib"
 				OutputFile="WClust.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
@@ -1172,6 +1173,244 @@
 			</File>
 			<File
 				RelativePath=".\flame\flame.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="ica"
+			Filter="">
+			<File
+				RelativePath=".\ica\average.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\average.h">
+			</File>
+			<File
+				RelativePath=".\ica\bin_search_tree.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\bin_search_tree.h">
+			</File>
+			<File
+				RelativePath=".\ica\center_data.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\center_data.h">
+			</File>
+			<File
+				RelativePath=".\ica\ContrastFunctions.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\ContrastFunctions.h">
+			</File>
+			<File
+				RelativePath=".\ica\ConvolutionFilter.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\ConvolutionFilter.h">
+			</File>
+			<File
+				RelativePath=".\ica\covariance.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\covariance.h">
+			</File>
+			<File
+				RelativePath=".\ica\CWMacGlue.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\DataFormat.h">
+			</File>
+			<File
+				RelativePath=".\ica\DataReader.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\DataReader.h">
+			</File>
+			<File
+				RelativePath=".\ica\DataWriter.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\DataWriter.h">
+			</File>
+			<File
+				RelativePath=".\ica\eigenstuff.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\eigenstuff.h">
+			</File>
+			<File
+				RelativePath=".\ica\EpochMarkedSimpleBinary.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\EpochMarkedSimpleBinary.h">
+			</File>
+			<File
+				RelativePath=".\ica\FastICANew.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\FastICANew.h">
+			</File>
+			<File
+				RelativePath=".\ica\FastICASettings.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\FastICASettings.h">
+			</File>
+			<File
+				RelativePath=".\ica\FilterConstants.h">
+			</File>
+			<File
+				RelativePath=".\ica\FilterFactory.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\FilterFactory.h">
+			</File>
+			<File
+				RelativePath=".\ica\FilterOptions.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\FilterOptions.h">
+			</File>
+			<File
+				RelativePath=".\ica\index_array.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\index_array.h">
+			</File>
+			<File
+				RelativePath=".\ica\index_node.h">
+			</File>
+			<File
+				RelativePath=".\ica\InfomaxNew.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\InfomaxNew.h">
+			</File>
+			<File
+				RelativePath=".\ica\InfomaxSettings.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\InfomaxSettings.h">
+			</File>
+			<File
+				RelativePath=".\ica\LAPACKWrapper.h">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixOperations.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixOperations.h">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixReader.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixReader.h">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixWriter.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\MatrixWriter.h">
+			</File>
+			<File
+				RelativePath=".\ica\MersenneTwister.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\MersenneTwister.h">
+			</File>
+			<File
+				RelativePath=".\ica\MPIWrapper.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\MPIWrapper.h">
+			</File>
+			<File
+				RelativePath=".\ica\NICFilter.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\NICFilter.h">
+			</File>
+			<File
+				RelativePath=".\ica\NicMatrix.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\NicMatrix.h">
+			</File>
+			<File
+				RelativePath=".\ica\NicVector.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\NicVector.h">
+			</File>
+			<File
+				RelativePath=".\ica\PartitionedDataset.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\PartitionedDataset.h">
+			</File>
+			<File
+				RelativePath=".\ica\ProgramTools.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\ProgramTools.h">
+			</File>
+			<File
+				RelativePath=".\ica\RangeGenerator.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\RangeGenerator.h">
+			</File>
+			<File
+				RelativePath=".\ica\RingBlock.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\RingBlock.h">
+			</File>
+			<File
+				RelativePath=".\ica\SimpleCLParser.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\SimpleCLParser.h">
+			</File>
+			<File
+				RelativePath=".\ica\Sobi.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\Sobi.h">
+			</File>
+			<File
+				RelativePath=".\ica\SortComponents.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\SortComponents.h">
+			</File>
+			<File
+				RelativePath=".\ica\sphering_matrix.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\sphering_matrix.h">
+			</File>
+			<File
+				RelativePath=".\ica\StaticGainFilter.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\StaticGainFilter.h">
+			</File>
+			<File
+				RelativePath=".\ica\TypeIdentifier.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\TypeIdentifier.h">
+			</File>
+			<File
+				RelativePath=".\ica\version.cpp">
+			</File>
+			<File
+				RelativePath=".\ica\version.h">
+			</File>
+			<File
+				RelativePath=".\ica\WinHeader.h">
 			</File>
 		</Filter>
 		<File
