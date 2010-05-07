@@ -3172,7 +3172,7 @@ bool EntropyClustThread(const CUPDUPDATA* pCUPDUPData)
 	if(iMinClust == iMaxClust)
 	{
 		*pEntropy = pDoc->m_MainClusters.EntropyInfoClust(pDoc->m_MainDataStack,iClusts,iIters,pCUPDUPData,dErrPrct);
-		// /**pEntropy =*/ pDoc->m_MainClusters.EntropyInfoClustKDTree(pDoc->m_MainDataStack,iClusts,iIters,pCUPDUPData);
+		 ///**pEntropy =*/ pDoc->m_MainClusters.EntropyInfoClustKDTree(pDoc->m_MainDataStack,iClusts,iIters,pCUPDUPData);
 		pCUPDUPData->SetProgress("Finishing EntropyInfoClust",100);
 	}
 	else
