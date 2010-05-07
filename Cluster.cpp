@@ -23,6 +23,7 @@
 #include "InfoT.h"
 #include "Silhouette.h"
 #include "flame\flame.h"
+#include "ica\FastICANew.h"
 
 using namespace std;
 
@@ -2208,15 +2209,384 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 }
 #endif
 //#ifdef ORIGINAL
+
+vector<hprob> CCluster::ICAClust(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData)
+{
+	FastICASettings<double> fics;
+	fics.maximumIterations = iIters;
+	fics.maximumRetries = iIters;
+	fics.convergenceTolerance = 1e-4;
+	fics.initializationType = FastICASettings<double>::RANDOM;
+	fics.contrastFunction = ContrastFunction<double>::HYPERBOLIC_TAN; // HyperbolicTan<double>();
+
+	int iDims=DataStack.GetAutoClusteringDimension() , iD=0;
+
+	m_pNumClusts[CLUST_INFO] = iClust;
+
+	int iRows = 0, iCols = 0,i,j,k;
+	int** pBinData = DataStack.GetVBinIDs<int>(true,iRows,iCols,30); // ,true);
+	AutoFree2D<int> AFData(pBinData);
+
+	//    int m_channels; // rows of data
+    //    int m_samples;  // columns of data
+	NicMatrix<double> d(8,iRows);
+	for(i=0;i<iRows;i++)
+	{	k=0;
+		for(j=0;j<=3;j++,k++) d(k,i) = pBinData[i][j];
+		for(j=16;j<=19;j++,k++) d(k,i) = pBinData[i][j];
+	}
+
+	FastICANew<double> fica(fics,&d);
+
+	fica.runFastICA();
+
+	NicMatrix<double> md;
+
+	fica.mixingMatrix(md);
+
+	vector<hprob> vvv;
+	return vvv;
+}
+
+
 #if 1
 
+int Sum(A2D<int>& oB)
+{
+	int i,j,rows=oB.Rows(),cols=oB.Cols(),sum=0;
+	for(i=0;i<rows;i++)
+	{	for(j=0;j<cols;j++)
+		{
+			sum += oB[i][j];
+		}
+	}
+	return sum;
+}
+
+hprob Entropy(A2D<int>& oB,bool b1D=false,bool bSpace=false)
+{
+	int xb,yb,rows,cols;
+	hprob de=0.0,sum=(double)Sum(oB);
+	if(sum<=0.0) return 0.0;
+	rows=oB.Rows(); cols=oB.Cols();
+
+	if(b1D)
+	{	hprob p1,p2,de1=0.0,de2=0.0;
+		if(bSpace)
+		{
+			vector<int> vTmp1,vTmp2;
+			for(yb=0;yb<rows;yb++)
+			{	p1 = 0.0;
+				vTmp1.resize(rows);
+				//for(xb=0;xb<cols;xb++) if
+				//for(xb=0;xb<cols;xb++) p1 += oB[yb][xb];
+				//if(p1>0.) { p1/=sum; de1 -= p1 * log2(p1); }
+			}
+		}
+		else
+		{	for(yb=0;yb<rows;yb++)
+			{	p1 = 0.0;
+				for(xb=0;xb<cols;xb++) p1 += oB[yb][xb];
+				if(p1>0.) { p1/=sum; de1 -= p1 * log2(p1); }
+			}
+			for(xb=0;xb<cols;xb++)
+			{	p2 = 0.0;
+				for(yb=0;yb<rows;yb++) p2 += oB[yb][xb];			
+				if(p2>0.) { p2/=sum; de2 -= p2 * log2(p2); }
+			}
+		}
+		return de1+de2;
+	}
+	else
+	{	for(yb=0;yb<rows;yb++)
+		{	for(xb=0;xb<cols;xb++)
+			{	if(oB[yb][xb]>0)
+				{	hprob p = oB[yb][xb] / sum;
+					de -= p * log2(p);
+				}
+			}
+		}
+	}
+	return de;
+}
+
+inline void RemoveVertex(A2D<int>& oB,int* pb)
+{
+	oB[pb[1]][pb[0]]--;
+}
+
+inline void AddVertex(A2D<int>& oB,int* pb)
+{
+	oB[pb[1]][pb[0]]++;
+}
+
+//typedef std::pair<double,int> PP;
+
+inline void AddVertex (vector< set< pair<int,double> > >& vSets,A2D<float>& vFloat,int iV)
+{
+	int i;
+	for(i=0;i<2;i++)//vFloat.Cols();i++)
+		vSets[i].insert(pair<int,double>(iV,vFloat[iV][i]));
+}
+
+inline void RemoveVertex (vector< set< pair<int,double> > >& vSets,A2D<float>& vFloat,int iV)
+{
+	int i;
+	set< pair<int,double> >::iterator IT;
+	for(i=0;i<2;i++)//vFloat.Cols();i++)
+		if((IT=vSets[i].find(pair<int,double>(iV,vFloat[iV][i])))!=vSets[i].end())
+			vSets[i].erase(IT);
+}
+
+hprob Entropy (set< pair<int, double> >& vS)
+{
+	if(vS.size()<2) return 1e9;
+	vector<double> vtmp(vS.size());
+	hprob de = 0.0;
+	set< pair<int, double> >::iterator IT;
+	int i=0;
+	for(IT=vS.begin();IT!=vS.end();IT++,i++)
+		vtmp[i]=IT->second;
+	sort(vtmp.begin(),vtmp.end());
+	double sz=vtmp.size(), dif=0.0;
+	for(i=1;i<vtmp.size();i++)
+	{	// dif = (sz+1.0)*(vtmp[i]-vtmp[i-1]);
+		//dif = (vtmp[i]-vtmp[i-1])*(vtmp[i]-vtmp[i-1])*(sz+1.0);
+		dif = (vtmp[i]-vtmp[i-1]);
+		// if(dif > 1e-3) de += log2(dif);
+		de += dif;
+		//de = MAX(de,dif);
+		//Write2LogPlain("%g-%g=%g\n",vtmp[i],vtmp[i-1],vtmp[i]-vtmp[i-1]);
+	}
+	return de/(sz-1.0);
+}
+
+hprob Entropy (vector< set< pair<int,double> > >& vSets)
+{
+	int i; hprob de=0.0;
+	for(i=0;i<vSets.size();i++){
+		//Write2LogPlain("dim%d\n",i);
+		de += Entropy(vSets[i]);}
+	return de;
+}
+
+vector<hprob> CCluster::EntropyInfoClust2(CVerxStack& DataStack,int iClusts,int iAlgorithmRuns,const CUPDUPDATA* pCUPDUPData,double dErrProb)
+{
+	char str[1024];
+	sprintf(str,"EntropyInfoClust: iClusts=%d iAlgRuns=%d Sz=%d",iClusts,iAlgorithmRuns,DataStack.m_VerxStack.size());
+	ScopedTimer S(str);
+	extern int pBins[4];
+	/*const*/ int iBins = pBins[2]; //initialized to 30, but may be modified by user
+	int k = 0;
+	int iDims=DataStack.GetAutoClusteringDimension() , iD=0;
+	iDims = 8;
+	vector< hprob > vInfo(iClusts+1);
+	m_pNumClusts[CLUST_INFO] = iClusts;
+	vector<int> vClustIDsBest(DataStack.NumNonNoiseVertices());
+	int iRows = 0, iCols = 0;
+	//best entropy of clusters found
+	vector<hprob> vcEntropyBest(iClusts+1,MAX_PROB_T / (iClusts+1));
+	int iNNVertices = DataStack.NumNonNoiseVertices(), iRun = 0;
+	iBins=2;
+	PCA oPCA(iDims);
+	A2D<float> vFloat;
+	vector<float> vRange;
+	bool bTmp = DataStack.m_bNormFloatV;
+	DataStack.m_bNormFloatV = false; 
+	DataStack.GetFloat2D(iRows,iCols,vFloat,vRange,true);
+	DataStack.m_bNormFloatV = bTmp;
+	int i,j;
+	oPCA.putData(vFloat);
+	oPCA.dataEnd();
+	oPCA.calcPCA();
+	A2D<float> vPCA;
+	vPCA.Init(iRows,2); Write2Log("PCA:");
+	for(i=0;i<iRows;i++) {
+		oPCA.transform(vFloat[i],iDims,vPCA[i],2);
+		//Write2LogPlain("%g %g\n",vPCA[i][0],vPCA[i][1]);
+	}
+	vector<double> vMin,vMax;
+	vMin.resize(vFloat.Cols()); vMax.resize(vFloat.Cols());
+	fill(vMin.begin(),vMin.end(),1e5); fill(vMax.begin(),vMax.end(),-1e5);
+	if(0) for(i=0;i<iRows;i++)
+	{	for(j=0;j<2;j++)
+		{	vMin[j] = MIN(vMin[j],vPCA[i][j]);
+			vMax[j] = MAX(vMax[j],vPCA[i][j]);
+		}
+	}
+	else for(i=0;i<iRows;i++)
+	{	for(j=0;j<2;j++)
+		{	vMin[j] = MIN(vMin[j],vFloat[i][j]);
+			vMax[j] = MAX(vMax[j],vFloat[i][j]);
+		}
+	}
+	vector< A2D<int> > vB(iClusts+1);
+	//vector< A2D<double> > vC(iClusts+1);
+	vector< vector< set< pair<int,double> > > > vSets(iClusts+1);
+	for(i=1;i<=iClusts;i++) vSets[i]=vector< set< pair<int,double> > >(2);
+
+	for(iRun = 0; iRun < iAlgorithmRuns && !pCUPDUPData->ShouldTerminate(); iRun++, iBins++)
+	{	for(i=1;i<=iClusts;i++){
+			vB[i].Init(iBins+1,iBins+1);
+			vB[i].Fill(0);}
+		char msg[1024];
+		sprintf(msg,"Entropy reduction iteration %d of %d for %d clusters",iRun+1,iAlgorithmRuns,iClusts);
+		pCUPDUPData->SetProgress(msg,99.0*(hprob)iRun/iAlgorithmRuns);
+		//entropy of clusters
+		vector<hprob> vcEntropy(iClusts+1);
+		vector<int> vClustIDs(iNNVertices), vCounts(iClusts+1,0);
+		if(iRun==0) randomassign(iClusts,vClustIDs.size(),&vClustIDs[0]);
+		//make it 1-based indexing and init counts
+		//if(true || iRun == 0)
+		if(iRun==0)
+		{	for(k=0;k<vClustIDs.size();k++)
+			{	vClustIDs[k]++;
+				vCounts[vClustIDs[k]]++;
+			}
+			if(1){
+				for(i=0;i<vFloat.Rows();i++) 
+					for(j=0;j<vFloat.Cols();j++) {
+						vFloat[i][j] -= vMin[j];
+						vFloat[i][j] /= (vMax[j]-vMin[j]);
+						vFloat[i][j] *= 10.0;
+					}
+			}
+		}
+		else
+		{	for(k=0;k<vClustIDs.size();k++)
+			{	if(vClustIDsBest[k]==0){ vClustIDs[k]=0; continue; }
+				vClustIDs[k]++;
+				vCounts[vClustIDs[k]]++;
+			}
+			vCounts[0]=0;
+		}
+		k=0;		
+		A2D<int> vDisc(iRows,2);
+		//A2D<double> vDat(iRows,2);
+		if(0){
+			for(i=0;i<vClustIDs.size();i++) //fill distributions once
+			{	int xb,yb;
+				if(0){
+				xb = MIN(MAX(iBins,0),iBins * ((vPCA[i][0] - vMin[0]) / (vMax[0]-vMin[0])));
+				yb = MIN(MAX(iBins,0),iBins * ((vPCA[i][1] - vMin[1]) / (vMax[1]-vMin[1])));}
+				else{
+					xb = MIN(MAX(iBins,0),iBins * ((vFloat[i][0] - vMin[0]) / (vMax[0]-vMin[0])));
+					yb = MIN(MAX(iBins,0),iBins * ((vFloat[i][1] - vMin[1]) / (vMax[1]-vMin[1])));
+				}
+				vDisc[i][0]=xb; vDisc[i][1]=yb;
+				vB[vClustIDs[i]][yb][xb]++;
+			}
+		}
+		else{
+			for(i=0;i<vClustIDs.size();i++) //fill distributions once
+			{	//vDat[i][0]=vFloat[i][0]; vDat[i][1]=vFloat[i][1];
+				//for(j=0;j<2;j++) vSets[vClustIDs[i]][j].insert(pair<int,double>(i,vFloat[i][j]));
+				//double val = (vFloat[i][j] - vMin[j]) / (vMax[j]-vMin[j]);
+				for(j=0;j<2;j++) {
+					double val = vFloat[i][j];
+					vSets[vClustIDs[i]][j].insert(pair<int,double>(i,val));
+				}
+			}
+		}
+		fill(vcEntropy.begin(),vcEntropy.end(),0);
+		//for(i=1;i<=iClusts;i++) vcEntropy[i]=((double)vCounts[i]/(double)iRows)*Entropy(vB[i]);
+		for(i=1;i<=iClusts;i++) vcEntropy[i]=((double)vCounts[i]/(double)iRows)*Entropy(vSets[i]);
+		int iIter = 0, iPeriod = 10, iV = 0;		
+		vector<int> vSaved(vClustIDs.size());
+		k = 0;
+		hprob dSumE = Sum(vcEntropy), dLastSumE = dSumE;
+		while(true)
+		{	if(pCUPDUPData->ShouldTerminate()) break;			
+			if (iIter % iPeriod == 0) /* Save the current cluster assignments */
+			{	vSaved = vClustIDs;
+				if (iPeriod < INT_MAX / 2) iPeriod *= 2;
+			}
+			++iIter;
+			bool bMoved = false;
+			int iV = 0, iJnk = 0;
+			for(iV=0;iV<vClustIDs.size();iV++,iJnk++)
+			{	if(iJnk % 200 == 0)
+				{	sprintf(msg,"Iteration %d of %d for %d clusters, sub-iteration %d",iRun+1,iAlgorithmRuns,iClusts,iIter);
+					pCUPDUPData->SetProgress(msg,99.0*iJnk / vClustIDs.size());
+				}
+				int iOrig = vClustIDs[iV] , iT = 1;
+				if(vCounts[iOrig] <= 1) continue; //don't make any empty clusters
+				vector<hprob> vEntropySums(iClusts+1);			
+				vEntropySums[iOrig] = Sum(vcEntropy);
+				//RemoveVertex(vB[iOrig],vDisc[iV]);
+				RemoveVertex(vSets[iOrig],vFloat,iV);
+				//hprob origsum = ((vCounts[iOrig] - 1.0)/(hprob)iRows) * Entropy(vB[iOrig]);
+				hprob origsum = ((vCounts[iOrig] - 1.0)/(hprob)iRows) * Entropy(vSets[iOrig]);//vB[iOrig]);
+				for(iT=1;iT<=iClusts;iT++)
+				{	if(iT == iOrig) continue;
+					//AddVertex(vB[iT],vDisc[iV]); //move vertex INTO temporary distribution
+					AddVertex(vSets[iT],vFloat,iV);
+					vector<hprob> vEntropyTemp(vcEntropy);
+					//vEntropyTemp[iT] =    ((vCounts[iT] + 1.0)/(hprob)iRows) * Entropy(vB[iT]);
+					vEntropyTemp[iT] =    ((vCounts[iT] + 1.0)/(hprob)iRows) * Entropy(vSets[iT]);
+					vEntropyTemp[iOrig] = origsum; 					
+					vEntropySums[iT] = Sum(vEntropyTemp);					
+					//RemoveVertex(vB[iT],vDisc[iV]); //move vertex OUT of temporary distribution
+					RemoveVertex(vSets[iT],vFloat,iV); //move vertex OUT of temporary distribution
+				}
+				//AddVertex(vB[iOrig],vDisc[iV]);
+				AddVertex(vSets[iOrig],vFloat,iV);
+				//now see if moving the vertex to a different cluster had any reduction in entropy
+				int iMinInd = iOrig; hprob dMinEntropy = vEntropySums[iOrig];
+				for(iT=1;iT<=iClusts;iT++)
+				{	if(iT==iOrig) continue;
+					if(vEntropySums[iT] < dMinEntropy)
+					{	dMinEntropy = vEntropySums[iT];
+						iMinInd = iT;
+					}
+				}
+				if(iMinInd != iOrig)
+				{	//AddVertex(vB[iMinInd],vDisc[iV]); //move vertex INTO destination distribution
+					AddVertex(vSets[iMinInd],vFloat,iV); //move vertex INTO destination distribution
+					vCounts[iMinInd]++;
+					//vcEntropy[iMinInd] = ( (hprob)vCounts[iMinInd] / (hprob)iRows) * Entropy(vB[iMinInd]);
+					vcEntropy[iMinInd] = ( (hprob)vCounts[iMinInd] / (hprob)iRows) * Entropy(vSets[iMinInd]);
+					//RemoveVertex(vB[iOrig],vDisc[iV]); //move vertex OUT of original distribution
+					RemoveVertex(vSets[iOrig],vFloat,iV); //move vertex OUT of original distribution
+					vCounts[iOrig]--;
+					//vcEntropy[iOrig] = ( (hprob)vCounts[iOrig] / (hprob)iRows) * Entropy(vB[iOrig]);
+					vcEntropy[iOrig] = ( (hprob)vCounts[iOrig] / (hprob)iRows) * Entropy(vSets[iOrig]);
+					vClustIDs[iV] = iMinInd;
+					bMoved = true;
+				}
+			}			
+			if(!bMoved) break; //didn't move any vertices, so done
+			int i = 0;
+			for (i = 0; i < vClustIDs.size(); i++)
+				if (vSaved[i]!=vClustIDs[i]) break;
+			if (i==vClustIDs.size())
+			{ 	Write2Log("SameSolution Final iIter=%d",iIter); break; }// Identical solution found; break out of this loop			
+			dSumE = Sum(vcEntropy);
+		}
+		if(Sum(vcEntropy) < Sum(vcEntropyBest))
+		{	vcEntropyBest = vcEntropy; vClustIDsBest = vClustIDs; }
+	}
+	int iV = 0;
+	MY_STACK::iterator Index;
+	for(Index=DataStack.m_VerxStack.begin();Index!=DataStack.m_VerxStack.end();Index++)
+	{	CVertex* vertex = (CVertex*)*Index;
+		if(vertex->GetNoise())continue;
+		vertex->SetInfoClust(vClustIDsBest[iV]);
+		iV++;
+	}
+	return vcEntropyBest;
+}
+
 vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int iAlgorithmRuns,const CUPDUPDATA* pCUPDUPData,double dErrProb)
-{	char str[1024];
+{	
+	///return ICAClust(DataStack,iClusts,iAlgorithmRuns,pCUPDUPData);
+
+	char str[1024];
 	sprintf(str,"EntropyInfoClust: iClusts=%d iAlgRuns=%d Sz=%d",iClusts,iAlgorithmRuns,DataStack.m_VerxStack.size());
 	ScopedTimer S(str);
 
 	extern int pBins[4];
-	const int iBins = pBins[2]; //initialized to 30, but may be modified by user
+	/*const*/ int iBins = pBins[2]; //initialized to 30, but may be modified by user
 	int k = 0;
 
 	int iDims=DataStack.GetAutoClusteringDimension() , iD=0;
@@ -2228,8 +2598,6 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 	vector<int> vClustIDsBest(DataStack.NumNonNoiseVertices());
 
 	int iRows = 0, iCols = 0;
-	int** pBinData = DataStack.GetVBinIDs<int>(true,iRows,iCols,iBins); // ,true);
-	AutoFree2D<int> AFData(pBinData);
 
 	//best entropy of clusters found
 	vector<hprob> vcEntropyBest(iClusts+1,MAX_PROB_T / (iClusts+1));
@@ -2245,13 +2613,38 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 	for(k=12;k<=15;k++) vZeroes[k]=1; // skips Valley-V
 	k=0;
 
+	for(k=2;k<=19;k++) vZeroes[k]=1;
+
 	//fill distributions once
 	vector< vector< Hist > > vDistribs;
 
 	double dminprct = 0.1;
 
-	for(iRun = 0; iRun < iAlgorithmRuns && !pCUPDUPData->ShouldTerminate(); iRun++)
+	iBins=2;
+
+	int iDIter = 0;
+
+	//for(iDIter=0;iDIter<6;iDIter++)
 	{
+		for(k=0;k<iDims;k++) vZeroes[k]=1;
+		//int xx1 = rand()%4;
+		//int xx2 = rand()%4;
+		//vZeroes[]=vZeroes[xx2]=0;
+		//vZeroes[iDIter]=0;
+		int xx,yy,zz=0;
+		xx=0; yy=1;
+		for(xx=0;xx<4 && zz<iDIter;xx++) {
+			yy=xx+1;
+			for(;yy<4 && zz<iDIter;yy++,zz++);
+		}
+		vZeroes[xx]=vZeroes[yy]=0;
+
+	for(iRun = 0; iRun < iAlgorithmRuns && !pCUPDUPData->ShouldTerminate(); iRun++, iBins++)
+	{
+
+		int** pBinData = DataStack.GetVBinIDs<int>(true,iRows,iCols,iBins); // ,true);
+		AutoFree2D<int> AFData(pBinData);
+
 		char msg[1024];
 		sprintf(msg,"Entropy reduction iteration %d of %d for %d clusters",iRun+1,iAlgorithmRuns,iClusts);
 		pCUPDUPData->SetProgress(msg,99.0*(hprob)iRun/iAlgorithmRuns);
@@ -2260,9 +2653,10 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 
 		vector<int> vClustIDs(iNNVertices), vCounts(iClusts+1,0);
 
-		randomassign(iClusts,vClustIDs.size(),&vClustIDs[0]);
+		if(iRun==0) randomassign(iClusts,vClustIDs.size(),&vClustIDs[0]);
 		//make it 1-based indexing and init counts
-		if(true || iRun == 0)
+		//if(true || iRun == 0)
+		if(iRun==0)
 		{	for(k=0;k<vClustIDs.size();k++)
 			{
 				vClustIDs[k]++;
@@ -2505,59 +2899,7 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 		}
 	}
 
-	if(0)
-	{	int ID1=0,ID2=0,SZ=vClustIDsBest.size(),D,iDist;
-		vector<int> vTMPIDs(vClustIDsBest); const int NN = 100;
-		vector<pair<int,int> > vDist(NN,pair<int,int>(0,0));
-		vector<int> vCNT(iClusts+1);
-		for(ID1=0;ID1<SZ;ID1++)
-		{	for(D=0;D<NN;D++) { vDist[D].first=-1; vDist[D].second=-1; }
-			for(ID2=0;ID2<SZ;ID2++)
-			{	if(ID1==ID2)continue;
-				D=0; iDist=0;
-				for(D=0;D<iDims;D++)
-				{	if(vZeroes[D]!=0)continue;
-					int Dif = (pBinData[ID1][D]-pBinData[ID2][D]);
-					iDist += Dif*Dif;
-				}
-				for(D=0;D<NN;D++) 
-				{	if(vDist[D].first==-1)
-					{	vDist[D].first=ID2;
-						vDist[D].second=iDist;
-						break;
-					}
-					else if(vDist[D].second > iDist)
-					{
-						int D2 = NN-1;
-						for(;D2>D;D2--)vDist[D2]=vDist[D2-1];
-						vDist[D].first=ID2; vDist[D].second=iDist;
-						break;
-					}
-				}
-			}
-			fill(vCNT.begin(),vCNT.end(),0);
-			for(D=0;D<NN;D++)
-			{	if(vDist[D].first>0)
-					vCNT[vClustIDsBest[vDist[D].first]]++;
-			}
-			int iMaxC = GetMaxIndex(vCNT);
-			if(iMaxC != vClustIDsBest[ID1] && iMaxC>0)
-			{	vTMPIDs[ID1]=iMaxC; //bMoved=true;
-			}
-		}int iV;
-		for(iV=0;iV<vClustIDsBest.size();iV++)	//reassign to new distributions, update counts
-		{	if(vTMPIDs[iV]!=vClustIDsBest[iV])
-			{//	RemoveVertex(vDistribs[vClustIDsBest[iV]],pBinData[iV],iDims);
-			//	AddVertex(vDistribs[vTMPIDs[iV]],pBinData[iV],iDims);
-//				vCounts[vClustIDsBest[iV]]--;
-//				vCounts[vTMPIDs[iV]]++;
-				vClustIDsBest[iV]=vTMPIDs[iV];
-			}
-		}
-		//for(D=1;D<=iClusts;D++)
-		//	vcEntropy[D] = ( (hprob)vCounts[D] / (hprob)iRows) * SumEntropy(vDistribs[D],vZeroes);
 	}
-
 	int iV = 0;
 	MY_STACK::iterator Index;
 	for(Index=DataStack.m_VerxStack.begin();Index!=DataStack.m_VerxStack.end();Index++)
@@ -3413,6 +3755,8 @@ vector<double> CCluster::EntropyInfoClustKDTree(CVerxStack& DataStack,int iClust
 
 		double dSumE = Sum(vcEntropy), dLastSumE = dSumE;
 
+		vector<int> vreassign(vClustIDs.size());
+
 		while(true)
 		{
 			if(pCUPDUPData->ShouldTerminate()) break;
@@ -3429,6 +3773,8 @@ vector<double> CCluster::EntropyInfoClustKDTree(CVerxStack& DataStack,int iClust
 			bool bMoved = false;
 
 			int iV = 0, iJnk = 0;
+
+			vreassign=vClustIDs;
 
 			for(iV=0;iV<vClustIDs.size();iV++,iJnk++)
 			{
@@ -3487,24 +3833,28 @@ vector<double> CCluster::EntropyInfoClustKDTree(CVerxStack& DataStack,int iClust
 
 				if(iMinInd != iOrig)
 				{
-					//move vertex INTO destination distribution
-					vClustIDs[iV]=iMinInd;
-					vCounts[iMinInd]++;
-					vTree[iMinInd].SetData(vFloat,vClustIDs,vCounts[iMinInd],iDims,iMinInd);
-					vcEntropy[iMinInd]=((double)vCounts[iMinInd]/(double)iRows)*Entropy(vTree[iMinInd],vnn,iMinInd,vClustIDs);
+					vreassign[iV]=iMinInd;
+					bMoved=true;
+					if(0)
+					{
+						//move vertex INTO destination distribution
+						vClustIDs[iV]=iMinInd;
+						vCounts[iMinInd]++;
+						vTree[iMinInd].SetData(vFloat,vClustIDs,vCounts[iMinInd],iDims,iMinInd);
+						vcEntropy[iMinInd]=((double)vCounts[iMinInd]/(double)iRows)*Entropy(vTree[iMinInd],vnn,iMinInd,vClustIDs);
 
-					//move vertex OUT of original distribution
-					vCounts[iOrig]--;
-					vTree[iOrig].SetData(vFloat,vClustIDs,vCounts[iOrig],iDims,iOrig);
-					vcEntropy[iOrig]=((double)vCounts[iOrig]/(double)iRows)*Entropy(vTree[iOrig],vnn,iOrig,vClustIDs);
+						//move vertex OUT of original distribution
+						vCounts[iOrig]--;
+						vTree[iOrig].SetData(vFloat,vClustIDs,vCounts[iOrig],iDims,iOrig);
+						vcEntropy[iOrig]=((double)vCounts[iOrig]/(double)iRows)*Entropy(vTree[iOrig],vnn,iOrig,vClustIDs);
 
-					bMoved = true;
+						bMoved = true;
 
-					double dSumTmp = Sum(vcEntropy);
-
-					dSumTmp = dSumTmp;
+						double dSumTmp = Sum(vcEntropy);
+						dSumTmp = dSumTmp;
+					}
 				}
-				else
+				//else
 				{
 					vTree[iOrig].SetData(vFloat,vClustIDs,vCounts[iOrig],iDims,iOrig);
 				}
@@ -3512,6 +3862,17 @@ vector<double> CCluster::EntropyInfoClustKDTree(CVerxStack& DataStack,int iClust
 
 			//didn't move any vertices, so done
 			if(!bMoved) break;
+			else
+			{	vClustIDs=vreassign;
+				int iT;
+				for(iT=1;iT<=iClusts;iT++) vCounts[iT]=0;
+				for(iV=0;iV<vClustIDs.size();iV++)
+					vCounts[vClustIDs[iV]]++;
+				for(iT=1;iT<=iClusts;iT++) {
+					vTree[iT].SetData(vFloat,vClustIDs,vCounts[iT],iDims,iT);
+					vcEntropy[iT]=((double)vCounts[iT]/(double)iRows)*Entropy(vTree[iT],vnn,iT,vClustIDs);
+				}
+			}
 
 			int i = 0;
 			for (i = 0; i < vClustIDs.size(); i++)

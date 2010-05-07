@@ -248,7 +248,9 @@ public:
 	bool CalcClusterInfo(CVerxStack& DataStack,bool bSymmetric,HWND wnd=0);
 	void GetClusterInfo();
 	//entropy reduction info clustering
+	vector<double> ICAClust(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData);
 	vector<double> EntropyInfoClust(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData,double dErrProb);
+	vector<double> EntropyInfoClust2(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData,double dErrProb);
 	vector<prob_t> EntropyInfoClustMD(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData);
 	vector<double> EntropyInfoClustKDTree(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData);
 	vector<double> EntropyInfoClustKDTree2(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData);
