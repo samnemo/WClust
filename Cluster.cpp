@@ -2586,7 +2586,7 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 	ScopedTimer S(str);
 
 	extern int pBins[4];
-	/*const*/ int iBins = pBins[2]; //initialized to 30, but may be modified by user
+	const int iBins = pBins[2]; //initialized to 30, but may be modified by user
 	int k = 0;
 
 	int iDims=DataStack.GetAutoClusteringDimension() , iD=0;
@@ -2613,19 +2613,21 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 	for(k=12;k<=15;k++) vZeroes[k]=1; // skips Valley-V
 	k=0;
 
-	for(k=2;k<=19;k++) vZeroes[k]=1;
+	// for(k=2;k<=19;k++) vZeroes[k]=1;
 
 	//fill distributions once
 	vector< vector< Hist > > vDistribs;
 
 	double dminprct = 0.1;
 
-	iBins=2;
+	// iBins=2;
 
-	int iDIter = 0;
+	// int iDIter = 0;
 
 	//for(iDIter=0;iDIter<6;iDIter++)
 	{
+#ifdef DONTCOMPILE
+		if(false){
 		for(k=0;k<iDims;k++) vZeroes[k]=1;
 		//int xx1 = rand()%4;
 		//int xx2 = rand()%4;
@@ -2637,9 +2639,10 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 			yy=xx+1;
 			for(;yy<4 && zz<iDIter;yy++,zz++);
 		}
-		vZeroes[xx]=vZeroes[yy]=0;
+		vZeroes[xx]=vZeroes[yy]=0;}
+#endif
 
-	for(iRun = 0; iRun < iAlgorithmRuns && !pCUPDUPData->ShouldTerminate(); iRun++, iBins++)
+	for(iRun = 0; iRun < iAlgorithmRuns && !pCUPDUPData->ShouldTerminate(); iRun++)
 	{
 
 		int** pBinData = DataStack.GetVBinIDs<int>(true,iRows,iCols,iBins); // ,true);
