@@ -23,7 +23,7 @@
 #include "InfoT.h"
 #include "Silhouette.h"
 #include "flame\flame.h"
-#include "ica\FastICANew.h"
+//#include "ica\FastICANew.h"
 
 using namespace std;
 
@@ -2210,6 +2210,7 @@ vector<hprob> CCluster::EntropyInfoClust(CVerxStack& DataStack,int iClusts,int i
 #endif
 //#ifdef ORIGINAL
 
+/*
 vector<hprob> CCluster::ICAClust(CVerxStack& DataStack,int iClust,int iIters,const CUPDUPDATA* pCUPDUPData)
 {
 	FastICASettings<double> fics;
@@ -2247,7 +2248,7 @@ vector<hprob> CCluster::ICAClust(CVerxStack& DataStack,int iClust,int iIters,con
 	vector<hprob> vvv;
 	return vvv;
 }
-
+*/
 
 #if 1
 
