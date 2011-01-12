@@ -412,8 +412,7 @@ CString GetClusterInfoString(CVerxStack& MainDataStack,CCluster& MainClusters,HW
 		//all other points as background distribution -- 
 		//also resistor avg. of inter-cluster KL-divergence for each cluster and corresponding closets
 		//cluster ID, iff not using inter clust kldiv, these values will be 0
-		CString strInfo( "%%BEGIN CLUSTER_INFORMATION_GAIN\n// %%InformationGain.0 ( ClusterId TotalKLDiv BGKLDiv InterKLDiv ClosestClusterID ");
-		CString strTmp;
+		strInfo = "%%BEGIN CLUSTER_INFORMATION_GAIN\n// %%InformationGain.0 ( ClusterId TotalKLDiv BGKLDiv InterKLDiv ClosestClusterID ";
 		strTmp.Format("%dNNCC SilhouetteWidth NumLoadedSpikes )\n",MainClusters.m_oCQO.m_iNNToFind);
 		strInfo += strTmp;
 		unsigned int iC=0;
