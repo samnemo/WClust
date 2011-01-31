@@ -87,7 +87,7 @@ bool FindBestDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vect
 				  vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<prob_t>& vKLDivs,bool b1D,MY_STR_STACK& vAxes,         //
 				  const CUPDUPDATA* pUp);                                                                               //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-bool FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,
+int FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,
 					vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<KLD2D>& vKLDivs,MY_STR_STACK& vAxes,
 					const CUPDUPDATA* pUp);
 bool FindBest1DDims(vector<float>& vFloat,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,

@@ -47,6 +47,6 @@ HRESULT GetFileVersion (char *filename, VS_FIXEDFILEINFO *pvsf) {
 
 CString GetWClustVersionString()
 {
-	CString strV("2.0.0.111");
+	CString strV("2.0.0.112");
 	return strV;
 }

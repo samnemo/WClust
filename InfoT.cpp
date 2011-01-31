@@ -1031,10 +1031,9 @@ float KLDivSym1D(vector<float>& vFloat,vector<int>& vClustIDs,vector<int>& vCoun
 	return KLDivSym(o1DTClust,o1DTComp);
 }
 
-bool FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<KLD2D>& vKLDivs,MY_STR_STACK& vAxes,const CUPDUPDATA* pUp)
+int FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int iCols,int iBestDims,vector<int>& vCounts,vector<int>& vClustIDs,A2D<int>& vBestDims,A2D<KLD2D>& vKLDivs,MY_STR_STACK& vAxes,const CUPDUPDATA* pUp)
 {	vBestDims.Init(iClusts+1,iBestDims);//each cluster will get iBestDims to perform multidimensional kldiv on later
 	bool bInit = false;
-	//vKLDivs.Init(iClusts+1,iBestDims);
 	int iC = 1 , iRows = vClustIDs.size() , iTot = iClusts*IntegerSum(iCols-1);
 	double dJnk = 0.0;
 	const float fMinRange = 0.009; //min range for a dimension to be usable
@@ -1158,18 +1157,12 @@ bool FindBest2DDims(vector<float>& vFloat,vector<float>& vRange,int iClusts,int 
 				*/
 			}
 		}
-#if 0
-		Write2Log("\nClust%d 2D kldiv pairs(best 16) info follows:\n",iC);
-		LogF F;
-		FILE* fp = F.Open();
-		int y=iK-16>=0?iK-16:0;
-		for(;y<iK;y++)
-		{	fprintf(fp,"pair%d D1=%s D2=%s kld=%.4f\n",
-				y,*vAxes[vKLDivTmp[y].m_iD1],*vAxes[vKLDivTmp[y].m_iD2],vKLDivTmp[y].m_kld);
-		} fprintf(fp,"\n\n");
-#endif
+		if(iFound < iBestDims) {
+			Write2Log("FindBest2DDims WARN: Clust %d, only found %d of %d best dims.",iC,iFound,iBestDims);
+			return iFound;
+		}
 	}
-	return true;
+	return iBestDims;
 }
 
 prob_t MaxAbsCorr(vector<vector<prob_t> >& vCorrelMat,int* vBestDims,int iDim,int iBestDims)

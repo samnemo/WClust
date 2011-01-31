@@ -1566,9 +1566,14 @@ bool CIThread(const CUPDUPDATA* pUp)
 					Write2Log("\n\n");
 				}
 			}
-			else	//find best dims using 2D slices
-				FindBest2DDims(vFloat,vRange,iClusts,iCols,iBestDims,vCounts,vClustIDs,vBestDims,v2DKLDivs,
-							   DataStack.m_AxesStack,pUp);
+			else { int iBFound = 0; //find best dims using 2D slices
+				if((iBFound=FindBest2DDims(vFloat,vRange,iClusts,iCols,iBestDims,vCounts,vClustIDs,vBestDims,v2DKLDivs,
+				DataStack.m_AxesStack,pUp)) < iBestDims ) {
+					sprintf(msg,"CIThread ERR: Only found %d of %d best 2D dimensions! Please rerun cluster quality using %d dimensions (menu -> Cluster -> Set Cluster Quality Options -> Set Num Best Dims to %d).",iBFound,iBestDims,iBFound,iBFound);
+					Write2Log(msg);
+					MessageBox(0,msg,"WClust - error",MB_ICONERROR);
+					return false; 
+				} }
 			FillDistribs(vFloat,vDistribs,vCompDistribs,iClusts+1,vClustIDs,vCounts,iCols,vBestDims,iBestDims);
 			Write2Log("filled distribs");
 		}
