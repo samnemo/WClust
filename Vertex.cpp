@@ -4893,6 +4893,20 @@ int CVerxStack::StoreBPF(char *State,bool bTSAdjust)
 			IndexFile += bpf.KEY_EVENT_SIZE;
 			forStoreBPF_IndexFile = IndexFile;
 		}
+		if (m_Identif == bpf.INPUT_EVENT_TYPE) 
+		{
+			// INPUT_EVENT
+			isInFile = 1;
+			IndexFile += bpf.INPUT_EVENT_SIZE;
+			forStoreBPF_IndexFile = IndexFile;
+		}
+		if (m_Identif == bpf.OUTPUT_EVENT_TYPE) 
+		{
+			// OUTPUT_EVENT
+			isInFile = 1;
+			IndexFile += bpf.OUTPUT_EVENT_SIZE;
+			forStoreBPF_IndexFile = IndexFile;
+		}
 		
 		if (m_Identif == bpf.EEG_TYPE) 
 		{

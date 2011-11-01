@@ -52,10 +52,13 @@ bool Write2LogPlain(const char* cstr,...)
 		const char* fname = "wclust_.log";
 		FILE* fp = fopen(fname,"a+");
 		if(!fp)
-		{	MessageBox(0,"Couldn't write to wclust_.log!!!","WClust - error!",MB_ICONERROR);
+		{
+#ifdef _DEBUG
+			MessageBox(0,"Couldn't write to wclust_.log!!!","WClust - error!",MB_ICONERROR);
 			int iRet = _access("wclust_.log",02);
 			if(iRet==0) MessageBox(0,"Have access to write","Wclust",MB_ICONINFORMATION);
 			else  MessageBox(0,"Don't have access to write wclust_.log ! ! !","Wclust",MB_ICONERROR);
+#endif
 			return false;
 		}
 
@@ -74,7 +77,10 @@ bool Write2LogPlain(const char* cstr,...)
 		return true;
 	}
 	catch(...)
-	{	MessageBox(0,"Exception in Write2Log!!!","Wclust - error",MB_ICONERROR);
+	{	
+#ifdef _DEBUG
+		MessageBox(0,"Exception in Write2Log!!!","Wclust - error",MB_ICONERROR);
+#endif
 		return false;
 	}
 }
@@ -87,10 +93,13 @@ bool Write2Log(const char* cstr,...)
 		const char* fname = "wclust_.log";
 		FILE* fp = fopen(fname,"a+");
 		if(!fp)
-		{	MessageBox(0,"Couldn't write to wclust_.log!!!","WClust - error!",MB_ICONERROR);
+		{
+#ifdef _DEBUG
+			MessageBox(0,"Couldn't write to wclust_.log!!!","WClust - error!",MB_ICONERROR);
 			int iRet = _access("wclust_.log",02);
 			if(iRet==0) MessageBox(0,"Have access to write","Wclust",MB_ICONINFORMATION);
 			else  MessageBox(0,"Don't have access to write wclust_.log ! ! !","Wclust",MB_ICONERROR);
+#endif
 			return false;
 		}
 
@@ -109,7 +118,10 @@ bool Write2Log(const char* cstr,...)
 		return true;
 	}
 	catch(...)
-	{	MessageBox(0,"Exception in Write2Log!!!","Wclust - error",MB_ICONERROR);
+	{	
+#ifdef _DEBUG		
+		MessageBox(0,"Exception in Write2Log!!!","Wclust - error",MB_ICONERROR);
+#endif
 		return false;
 	}
 }

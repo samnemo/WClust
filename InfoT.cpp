@@ -143,7 +143,7 @@ prob_t FastKLDivPQ(KDTreeHist& p,KDTreeHist& q,Neighbor** vNeighbors,int iClustI
 	kldiv *= p.NumDims() / ((prob_t) p.NumElems() );
 	kldiv += log2( (prob_t)q.NumElems() / (p.NumElems()-1.0 ) );
 	//write some stats
-	Write2Log("FastKLDivPQ:kldiv=%.4f iSlow=%d iSlowP=%d iSlowQ=%d iFast=%d iFastP=%d iFastQ=%d",kldiv,iSlowP+iSlowQ,iSlowP,iSlowQ,iFastP+iFastQ,iFastP,iFastQ);
+	//Write2Log("FastKLDivPQ:kldiv=%.4f iSlow=%d iSlowP=%d iSlowQ=%d iFast=%d iFastP=%d iFastQ=%d",kldiv,iSlowP+iSlowQ,iSlowP,iSlowQ,iFastP+iFastQ,iFastP,iFastQ);
 	
 	return kldiv;
 }
@@ -245,7 +245,7 @@ prob_t FastKLDivPNOTP(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int i
 	kldiv *= p.NumDims() / ((prob_t) p.NumElems() );
 	kldiv += log2( (prob_t)notp.NumElems() / (p.NumElems()-1.0 ) );
 	//write some stats
-	Write2Log("FastKLDivPNOTP:kldiv=%.4f iSlow=%d iSlowP=%d iSlowNotP=%d iFast=%d iFastP=%d iFastNotP=%d",kldiv,iSlowP+iSlowNotP,iSlowP,iSlowNotP,iFastP+iFastNotP,iFastP,iFastNotP);
+	//Write2Log("FastKLDivPNOTP:kldiv=%.4f iSlow=%d iSlowP=%d iSlowNotP=%d iFast=%d iFastP=%d iFastNotP=%d",kldiv,iSlowP+iSlowNotP,iSlowP,iSlowNotP,iFastP+iFastNotP,iFastP,iFastNotP);
 	
 	return kldiv;
 }
@@ -349,7 +349,7 @@ prob_t FastKLDivNOTPP(KDTreeHist& p,KDTreeHist& notp,Neighbor** vNeighbors,int i
 	kldiv *= notp.NumDims() / ((prob_t) notp.NumElems() );
 	kldiv += log2( (prob_t)p.NumElems() / (notp.NumElems()-1.0 ) );
 
-	Write2Log("FastKLDivNOTPP:kldiv=%.4f iSlow=%d iSlowP=%d iSlowNP=%d iFast=%d iFastP=%d iFastNP=%d",kldiv,iSlowP+iSlowNP,iSlowP,iSlowNP,iFastP+iFastNP,iFastP,iFastNP);
+	//Write2Log("FastKLDivNOTPP:kldiv=%.4f iSlow=%d iSlowP=%d iSlowNP=%d iFast=%d iFastP=%d iFastNP=%d",kldiv,iSlowP+iSlowNP,iSlowP,iSlowNP,iFastP+iFastNP,iFastP,iFastNP);
 	
 	return kldiv;
 }
@@ -403,7 +403,7 @@ bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>&
 	try
 	{	CString msg;
 		vector< vector<prob_t> > vcInfInter(iClusts+1, vector<prob_t>(iClusts+1));		
-		Write2Log("Calculating inter-cluster KLDiv");
+		//Write2Log("Calculating inter-cluster KLDiv");
 		prob_t kldiv = 0.0f;
 		if(Clusters.m_oCQO.m_bFindBestDims)	//compute inter-clust kldiv using best dimensions
 		{	iTot = iClusts*iClusts;		//distances are not symmetrical since use different dimensions
@@ -412,11 +412,11 @@ bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>&
 				{	if(iC2==iC1) continue;
 					msg.Format("Calculating kldiv btwn clust %d and %d",iC1,iC2);
 					pUp->SetProgress(msg,100*(iCurr/static_cast<double>(iTot)));
-					Write2Log(msg);
+					//Write2Log(msg);
 					KDTreeHist oT; vector<float> vTmpData;	//make temporary tree
 					FillTree(vFloat,iRows,iCols,iC2,vClustCounts[iC2],vClustIDs,Clusters.m_vBestDims[iC1],Clusters.m_oCQO.m_iBestDims,oT,vTmpData);
 					vcInfInter[iC1][iC2]=KLDivSym(vDistribs[iC1],oT);
-					Write2Log("sym. kldiv from %d to %d = %.4f",iC1,iC2,vcInfInter[iC1][iC2]);
+					//Write2Log("sym. kldiv from %d to %d = %.4f",iC1,iC2,vcInfInter[iC1][iC2]);
 				}
 			}
 		}
@@ -425,12 +425,12 @@ bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>&
 			{	for(iC2=iC1+1;iC2<=iClusts && !pUp->ShouldTerminate();iC2++,iCurr++)
 				{	msg.Format("Calculating kldiv btwn clust %d and %d",iC1,iC2);
 					pUp->SetProgress(msg,100*(iCurr/static_cast<double>(iTot)));
-					Write2Log(msg);
+					//Write2Log(msg);
 					if(bFast)
 						vcInfInter[iC1][iC2]=vcInfInter[iC2][iC1]=FastKLDivSymPQ(vDistribs[iC1],vDistribs[iC2],vnn,iC1,iC2,vClustIDs,iNNToFind,vNCount);
 					else
 						vcInfInter[iC1][iC2]=vcInfInter[iC2][iC1]=KLDivSym(vDistribs[iC1],vDistribs[iC2]);
-					Write2Log("sym. kldiv from %d to %d = %.4f",iC1,iC2,vcInfInter[iC1][iC2]);
+					//Write2Log("sym. kldiv from %d to %d = %.4f",iC1,iC2,vcInfInter[iC1][iC2]);
 				}
 			}
 		}
@@ -447,8 +447,9 @@ bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>&
 			}
 			Clusters.m_vInfo[WhichDraw][iC1].m_fInterClustGain = min_int;
 			Clusters.m_vInfo[WhichDraw][iC1].m_iClosestID = min_ind;
-			Write2Log("Nearest kldiv from clust %d to %d is %.6f",iC1,min_ind,min_int);
+			//Write2Log("Nearest kldiv from clust %d to %d is %.6f",iC1,min_ind,min_int);
 		}
+		if(false) {
 		CString strTab("\ninter clust kldiv table\n") , strTmp;//write inter-cluster kldiv table to log for inspection...
 		for(iC1=1;iC1<=iClusts;iC1++)
 		{	for(iC2=1;iC2<=iClusts;iC2++)
@@ -457,7 +458,7 @@ bool InterClustKLD(CCluster& Clusters,vector<KDTreeHist>& vDistribs,vector<int>&
 			}
 			strTab += "\n";			
 		}
-		Write2Log(strTab);
+		Write2Log(strTab); }
 		}
 	} 
 	catch(...)
