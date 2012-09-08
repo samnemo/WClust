@@ -3591,6 +3591,8 @@ int CVerxStack::LoadBPF(CFile *file, char *buffer, int nRead, char *errChar, lon
 	int Index = 0;
 	int IndexSpike = (int) ( (float) PlusRand*rand()/32768);;
 	char isSpike = 0;
+	bool bRoomHasZ = bpf.ROOM_POSITION_SIZE > 8,
+		 bArenaHasZ = bpf.ARENA_POSITION_SIZE > 8;
 	
 	while ( m_i < dFileLength )
 	{
@@ -3602,13 +3604,13 @@ int CVerxStack::LoadBPF(CFile *file, char *buffer, int nRead, char *errChar, lon
 		if ( m_Identif == bpf.ARENA_POSITION_TYPE ) 
 		{	// Arena
 			isLoaded = 1;
-			m_MainSyncStack.LoadArena(file);
+			m_MainSyncStack.LoadArena(file,bArenaHasZ);
 			m_i += bpf.ARENA_POSITION_SIZE;
 		}
 		else if ( m_Identif == bpf.ROOM_POSITION_TYPE ) 
 		{	// Room
 			isLoaded = 1;
-			m_MainSyncStack.LoadRoom(file);
+			m_MainSyncStack.LoadRoom(file,bRoomHasZ);
 			m_i += bpf.ROOM_POSITION_SIZE;
 		}		
 		else if ( m_Identif == bpf.EEG_TYPE ) 

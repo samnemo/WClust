@@ -52,9 +52,9 @@ public:
 	void	DrawArenaRoom(CDC *pDC, CRect drawWin, int firstTS, int timeWin, char params, unsigned char *clView, int whichDraw);
 	void	FinishClustering();
 	void	LoadSync(CFile *from);
-	int		LoadArena(CFile *from);	// from BPF
+	int		LoadArena(CFile *from, bool hasZ = false);	// from BPF
 	int		LoadArenaFromDAT(FILE *from);
-	int		LoadRoom(CFile *from);	// from BPF
+	int		LoadRoom(CFile *from, bool hasZ = false);	// from BPF
 	int		LoadRoomFromDAT(FILE *from);
 	int		GetLoadedTS(int position);
 	void	NewPosFromUFF(int TS, unsigned char RedX, unsigned char RedY, unsigned char GreenX, unsigned char GreenY);

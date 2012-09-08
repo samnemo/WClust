@@ -607,7 +607,7 @@ void CSyncStack::SaveRoomFirst(CFile *fptr)
 }
 
 //////////////////////////////////////////////////////////////////////
-int CSyncStack::LoadArena(CFile *from)
+int CSyncStack::LoadArena(CFile *from, bool hasZ)
 {
 	int TS;
 	unsigned char X,Y,Z=0;
@@ -616,6 +616,7 @@ int CSyncStack::LoadArena(CFile *from)
 	from->Read(&TS,4);
 	from->Read(&X,1);
 	from->Read(&Y,1);
+	if(hasZ) from->Read(&Z,1);
 	from->Read(&Ang,2);
 
 	CSyncBPF *sync;
@@ -639,7 +640,7 @@ int CSyncStack::LoadArena(CFile *from)
 }
 
 //////////////////////////////////////////////////////////////////////
-int CSyncStack::LoadRoom(CFile *from)
+int CSyncStack::LoadRoom(CFile *from,bool hasZ)
 {
 	int TS;
 	unsigned char X,Y,Z=0;
@@ -648,6 +649,7 @@ int CSyncStack::LoadRoom(CFile *from)
 	from->Read(&TS,4);
 	from->Read(&X,1);
 	from->Read(&Y,1);
+	if(hasZ) from->Read(&Z,1);
 	from->Read(&Ang,2);
 	
 	CSyncBPF *sync;

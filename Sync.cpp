@@ -33,9 +33,11 @@ CSyncBPF::CSyncBPF(int TimeStmp) : CSync(TimeStmp)
 {
 	ArenaX = 0;
 	ArenaY = 0;
+	ArenaZ = 0;
 	ArenaAng = 0;
 	RoomX = 0;
 	RoomY = 0;
+	RoomZ = 0;
 	RoomAng = 0;
 	LoadedTimeStamp = 0;
 }
