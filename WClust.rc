@@ -323,12 +323,12 @@ CAPTION "About WClust"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,5,10,20,20
-    LTEXT           "WClust version 2.0.0.113",IDC_STATIC,64,7,91,8,
+    LTEXT           "WClust version 2.0.0.114",IDC_STATIC,64,7,91,8,
                     SS_NOPREFIX
     DEFPUSHBUTTON   "OK",IDOK,75,73,50,14,WS_GROUP
     LTEXT           "Anton Svrcek",IDC_STATIC,80,40,44,8
     LTEXT           "Andre Fenton",IDC_STATIC,80,30,44,8
-    LTEXT           "Copyright (c) 2002-2011, Bio-Signal Group Corp.",
+    LTEXT           "Copyright (c) 2002-2012, Bio-Signal Group Corp.",
                     IDC_STATIC,36,17,152,8
     LTEXT           "Sam Neymotin",IDC_STATIC,79,50,46,8
     LTEXT           "Bill Lytton",IDC_STATIC,86,60,31,13
@@ -1218,8 +1218,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,0,0,113
- PRODUCTVERSION 2,0,0,113
+ FILEVERSION 2,0,0,114
+ PRODUCTVERSION 2,0,0,114
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1235,12 +1235,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "WClust MFC Application"
-            VALUE "FileVersion", "2, 0, 0, 113"
+            VALUE "FileVersion", "2, 0, 0, 114"
             VALUE "InternalName", "WClust"
-            VALUE "LegalCopyright", "Copyright (C) 2002 - 2011"
+            VALUE "LegalCopyright", "Copyright (C) 2002 - 2012"
             VALUE "OriginalFilename", "WClust.EXE"
             VALUE "ProductName", "WClust Application"
-            VALUE "ProductVersion", "2, 0, 0, 113"
+            VALUE "ProductVersion", "2, 0, 0, 114"
         END
     END
     BLOCK "VarFileInfo"
@@ -1291,7 +1291,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_APP_ABOUT            "About WClust (2.0.0.113)\nAbout"
+    ID_APP_ABOUT            "About WClust (2.0.0.114)\nAbout"
     ID_APP_EXIT             "Quit the application;\nExit"
 END
 

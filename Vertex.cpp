@@ -3591,8 +3591,8 @@ int CVerxStack::LoadBPF(CFile *file, char *buffer, int nRead, char *errChar, lon
 	int Index = 0;
 	int IndexSpike = (int) ( (float) PlusRand*rand()/32768);;
 	char isSpike = 0;
-	bool bRoomHasZ = bpf.ROOM_POSITION_SIZE > 8,
-		 bArenaHasZ = bpf.ARENA_POSITION_SIZE > 8;
+	bool bRoomHasZ = bpf.ROOM_POSITION_SIZE > 9,
+		 bArenaHasZ = bpf.ARENA_POSITION_SIZE > 9;
 	
 	while ( m_i < dFileLength )
 	{

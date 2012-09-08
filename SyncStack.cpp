@@ -64,13 +64,9 @@ void CSyncStack::AddSync(CSync *toStore)
 //////////////////////////////////////////////////////////////////////
 int CSyncStack::GetTimeStamp(int position)
 {
-	MY_SYNC_STACK::iterator index;
-	index = SyncStack.begin()+position;
-	CSync *m;
-	int i;
-	m = (CSync*)*index;
-	i = m->GetTimeStamp(); 
-	return i;
+	MY_SYNC_STACK::iterator index = SyncStack.begin()+position;
+	CSync *m = (CSync*)*index;
+	return m->GetTimeStamp(); 
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -136,13 +132,9 @@ void CSyncStack::LoadSync(CFile *from)
 //////////////////////////////////////////////////////////////////////
 int CSyncStack::GetLoadedTS(int position)
 {
-	MY_SYNC_STACK::iterator index;
-	index = SyncStack.begin()+position;
-	CSyncBPF *m;
-	int i;
-	m = (CSyncBPF*) *index;
-	i = m->GetLoadedTS();
-	return i;
+	MY_SYNC_STACK::iterator index = SyncStack.begin()+position;
+	CSyncBPF *m = (CSyncBPF*) *index;
+	return m->GetLoadedTS();
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -232,7 +224,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 //	int TimeStamp0 = ((CSync*)*index)->GetTimeStamp();
 	
 	NoArena = 0;
-	FrameCount = 0; TimeStamp = -10000; ArenaX = 0; ArenaY = 0; ArenaZ = 0;
+	FrameCount=0; TimeStamp = -10000; ArenaX=ArenaY=ArenaZ=0;
 	char firstFrame = 0;
 	char secondFrame = 1;
 	char biValuedFrame = 0;
@@ -421,7 +413,7 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 	
 	NoRoom = 0;
 	
-	FrameCount = 0; TimeStamp = -10000; RoomX = 0; RoomY = 0; RoomZ = 0;
+	FrameCount=0; TimeStamp = -10000; RoomX=RoomY=RoomZ=0;
 	char firstFrame = 0;
 	char secondFrame = 1;
 	char biValuedFrame = 0;
@@ -431,7 +423,6 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 	vector<string> vstr;
 
 	do {
-
 		sync = (CSyncBPF*)*index;
 		lastFrameCount = FrameCount;
 		lastTimeStamp = TimeStamp;
@@ -555,54 +546,38 @@ void CSyncStack::Save()
 //////////////////////////////////////////////////////////////////////
 void CSyncStack::SaveArenaFirst(CFile *fptr)
 {
-	MY_SYNC_STACK::iterator index;
 	CSyncBPF *ms;
-	
-	int TS;
-	unsigned char XY;
-	short Ang;
-	index = SyncStack.begin();
-	for (int i = 0; i< NoArena; i++)
-	{
-		ms = (CSyncBPF*)*index;
-		fptr->Write("A",1);
-		TS = ms->GetTimeStamp();
-		fptr->Write(&TS,4);
-		XY = ms->GetArenaX();
-		fptr->Write(&XY,1);
-		XY = ms->GetArenaY();
-		fptr->Write(&XY,1);
-		Ang = ms->GetArenaAng();
-		fptr->Write(&Ang,2);
-
-		index++;
+	int TS, i;       // timestamp, loop index
+	unsigned char L; // location
+	short Ang;       // angle
+	MY_SYNC_STACK::iterator index = SyncStack.begin(); // record
+	for (i = 0; i< NoArena; i++,index++)
+	{	ms = (CSyncBPF*)*index;
+		fptr->Write("A",1); // Arena record identifier
+		TS = ms->GetTimeStamp(); fptr->Write(&TS,4);
+		L = ms->GetArenaX(); 	 fptr->Write(&L,1);
+		L = ms->GetArenaY();	 fptr->Write(&L,1);
+		L = ms->GetArenaZ();	 fptr->Write(&L,1);
+		Ang = ms->GetArenaAng(); fptr->Write(&Ang,2);
 	}
 }
 
 //////////////////////////////////////////////////////////////////////
 void CSyncStack::SaveRoomFirst(CFile *fptr)
 {
-	MY_SYNC_STACK::iterator index;
-	CSyncBPF *ms;
-	
-	int TS;
-	unsigned char XY;
-	short Ang;
-	index = SyncStack.begin();
-	for (int i = 0; i< NoRoom; i++)
-	{
-		ms = (CSyncBPF*)*index;
-		fptr->Write("R",1);
-		TS = ms->GetTimeStamp();
-		fptr->Write(&TS,4);
-		XY = ms->GetRoomX();
-		fptr->Write(&XY,1);
-		XY = ms->GetRoomY();
-		fptr->Write(&XY,1);
-		Ang = ms->GetRoomAng();
-		fptr->Write(&Ang,2);
-		
-		index++;
+	CSyncBPF *ms;	
+	int TS, i;       // timestamp, loop index
+	unsigned char L; // location
+	short Ang;       // angle
+	MY_SYNC_STACK::iterator index = SyncStack.begin(); // record
+	for (i = 0; i< NoRoom; i++,index++)
+	{	ms = (CSyncBPF*)*index;
+		fptr->Write("R",1); // Room record identifier
+		TS = ms->GetTimeStamp(); fptr->Write(&TS,4);
+		L = ms->GetRoomX();      fptr->Write(&L,1);
+		L = ms->GetRoomY();      fptr->Write(&L,1);
+		L = ms->GetRoomZ();      fptr->Write(&L,1);
+		Ang = ms->GetRoomAng();  fptr->Write(&Ang,2);
 	}
 }
 

@@ -1495,15 +1495,15 @@ void CWClustView::OnFileStoretobpfile()
 					if ( whatToStore & 1 )
 					{
 						fprintf(strFile,"%%ArenaPositionIdentifier.1 ('A')\n");
-						fprintf(strFile,"%%ArenaPositionRecordFormat.9 Identifier.1 100usTimestamp.4 ArenaX1.1 ");
-						fprintf(strFile,"ArenaY1.1 ArenaAng.2\n");
+						fprintf(strFile,"%%ArenaPositionRecordFormat.10 Identifier.1 100usTimestamp.4 ArenaX1.1 ");
+						fprintf(strFile,"ArenaY1.1 ArenaZ1.1 ArenaAng.2\n");
 					}				
 				
 					if ( whatToStore & 2 )
 					{
 						fprintf(strFile,"%%RoomPositionIdentifier.1 ('R')\n");
-						fprintf(strFile,"%%RoomPositionRecordFormat.9 Identifier.1 100usTimestamp.4 RoomX1.1 ");
-						fprintf(strFile,"RoomY1.1 RoomAng.2\n");
+						fprintf(strFile,"%%RoomPositionRecordFormat.10 Identifier.1 100usTimestamp.4 RoomX1.1 ");
+						fprintf(strFile,"RoomY1.1 RoomZ1.1 RoomAng.2\n");
 					}
 					fprintf(strFile,"%s",loadText);
 				}	

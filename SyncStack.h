@@ -60,7 +60,7 @@ public:
 	void	NewPosFromUFF(int TS, unsigned char RedX, unsigned char RedY, unsigned char GreenX, unsigned char GreenY);
 	void	OrganizeSync(char type, float param);
 	void	PrepareClustering();
-	void	Save();
+	void	Save(); // <<-- This is only for TESTING. In the final version this will NOT be used
 	void	SaveArenaFirst(CFile *fptr);
 	void	SaveRoomFirst(CFile *fptr);
 	void	SetMiddle(short middle_in) { middle = middle_in; }

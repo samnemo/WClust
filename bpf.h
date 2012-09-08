@@ -98,9 +98,9 @@
 #define BPF_RECORD_PROBE_OFFSET							5
 #define BPF_SPK_REC_CLUST_OFFSET						6
 #define BPF_SYNC_PROBE									31
-#define	BPF_POS_REC_X_OFFSET       						5 
-#define BPF_POS_REC_Y_OFFSET 							6 
-#define BPF_POS_REC_ANG_OFFSET							7
+#define	BPF_POS_REC_X_OFFSET       						5 // this not used in wclust?? 
+#define BPF_POS_REC_Y_OFFSET 							6 // this not used in wclust??
+#define BPF_POS_REC_ANG_OFFSET							7 // this not used in wclust?? may not be correct if Z present
 
 #define	BPF_MIN_AD										-32768
 #define	BPF_MAX_AD										32768
