@@ -139,41 +139,34 @@ int CSyncStack::GetLoadedTS(int position)
 
 //////////////////////////////////////////////////////////////////////
 int CSyncStack::LoadArenaFromDAT(FILE *from)
-{
+{	const int iBufSz = 16384;
 	int		isEOF;
-	
-	char	loadText[160];
+	char	loadText[iBufSz];
 	char	endHeader = 0;
 	char	*pdest;
-	char	Items = 0;
-	
-	// Indices from header
-	char	I_FrameCount		= (char) 255;
-	char	I_1msTimeStamp		= (char) 255;
-	char	I_RoomX				= (char) 255;
-	char	I_RoomY				= (char) 255;
-	char	I_RoomZ				= (char) 255;
-	char	I_FrameInfo			= (char) 255;
-	char	I_Angle				= (char) 255;
-
+	int	Items = 0;
+	// Indices from header ( -1 indicates not present )
+	int	I_FrameCount   = -1;
+	int	I_1msTimeStamp = -1;
+	int	I_RoomX		   = -1;
+	int	I_RoomY		   = -1;
+	int	I_RoomZ		   = -1;
+	int	I_FrameInfo	   = -1;
+	int	I_Angle		   = -1;
 	do
 	{	isEOF = fscanf(from,"%s",loadText);
 		if ( isEOF == EOF ) return 2;
-
 		// Checking for RECORD_FORMAT
 		if ( strstr(loadText, SAMPLE_LABEL) != NULL )
-		{
-			// '('
+		{	// '('
 			if ( strstr(loadText,"(") == NULL )
 			{	isEOF = fscanf(from,"%s",loadText);
 				if ( isEOF == EOF ) return 2;
 			}
-
 			if ( strstr(loadText, FRAME_COUNT_LABEL) != NULL )
 			{	I_FrameCount = Items;
 				Items++;
 			}
-			
 			// Extracting index of parameters from header
 			char ExtractDone = 0;
 			do 
@@ -206,8 +199,6 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 		if ( pdest != NULL ) endHeader = 1;
 	}while (endHeader == 0 && isEOF != EOF);
 
-	int LoadInt;
-
 	// see arena file *.dat 
 	int FrameCount, lastFrameCount;
 	int TimeStamp,lastTimeStamp;
@@ -216,20 +207,14 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 	int ArenaZ=0,lastArenaZ;	
 	short ArenaAng = 0;
 
-	MY_SYNC_STACK::iterator index;
 	CSyncBPF *sync;
-
-	index = SyncStack.begin();
-	
+	MY_SYNC_STACK::iterator index = SyncStack.begin();
 //	int TimeStamp0 = ((CSync*)*index)->GetTimeStamp();
-	
 	NoArena = 0;
 	FrameCount=0; TimeStamp = -10000; ArenaX=ArenaY=ArenaZ=0;
 	char firstFrame = 0;
 	char secondFrame = 1;
 	char biValuedFrame = 0;
-
-	const int iBufSz = 16384;
 	char cBuf[iBufSz];
 	vector<string> vstr;
 	
@@ -244,13 +229,14 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 		cBuf[0]=0;
 		fgets(cBuf,iBufSz,from);
 		Split(cBuf,string(" \t"),vstr);
+		int vsz = (int) vstr.size();
 
-		if(I_FrameCount < vstr.size())   FrameCount = atoi(vstr[I_FrameCount].c_str());
-		if(I_1msTimeStamp < vstr.size()) TimeStamp = 10 * atoi(vstr[I_1msTimeStamp].c_str());
-		if(I_RoomX < vstr.size())        ArenaX = atoi(vstr[I_RoomX].c_str());
-		if(I_RoomY < vstr.size())        ArenaY = atoi(vstr[I_RoomY].c_str());
-		if(I_RoomZ < vstr.size())        ArenaZ = atoi(vstr[I_RoomZ].c_str());
-		if(I_Angle < vstr.size())        ArenaAng = atoi(vstr[I_Angle].c_str());
+		if(I_FrameCount>-1 && I_FrameCount<vsz) FrameCount=atoi(vstr[I_FrameCount].c_str());
+		if(I_1msTimeStamp>-1 && I_1msTimeStamp<vsz) TimeStamp=10*atoi(vstr[I_1msTimeStamp].c_str());
+		if(I_RoomX>-1 && I_RoomX<vsz) ArenaX=atoi(vstr[I_RoomX].c_str());
+		if(I_RoomY>-1 && I_RoomY<vsz) ArenaY=atoi(vstr[I_RoomY].c_str());
+		if(I_RoomZ>-1 && I_RoomZ<vsz) ArenaZ=atoi(vstr[I_RoomZ].c_str());
+		if(I_Angle>-1 && I_Angle<vsz) ArenaAng=atoi(vstr[I_Angle].c_str());
 
 		if(feof(from)) isEOF = EOF;
 		
@@ -258,7 +244,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 		{	// 3th ...... nth
 			if ( FrameCount - lastFrameCount <= 1 )
 			{	// is in order i.e. 123... or 11223344...
-noAdd++;
+				noAdd++;
 				sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng);
 				sync->SetLoadedTS(TimeStamp);
 				NoArena++;
@@ -270,27 +256,23 @@ noAdd++;
 				do {
 					char j = 0;
 					do {
-noEmpty++;
+						noEmpty++;
 						sync->SetArena(0,0,0,0);
 						sync->SetLoadedTS(0);
 						NoArena++;
 						index++;
 						if ( index == SyncStack.end() )
-						{
-							stop = 1;
+						{	stop = 1;
 						}
 						else
-						{
-							sync = (CSyncBPF*)*index;
+						{	sync = (CSyncBPF*)*index;
 						}
 						j++;
 					} while ( j <= biValuedFrame && stop == 0);
 					i++;
 				} while ( i < FrameCount && stop == 0);
-				
 				if ( index != SyncStack.end() )
-				{
-noAdd++;
+				{	noAdd++;
 					sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng);
 					sync->SetLoadedTS(TimeStamp);
 					lastFrameCount = FrameCount;
@@ -299,10 +281,8 @@ noAdd++;
 				}
 			}
 		}
-
 		if ( secondFrame == 0 && isEOF != EOF )
-		{
-noAdd++;
+		{	noAdd++;
 			secondFrame = 1;
 			sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng);
 			sync->SetLoadedTS(TimeStamp);
@@ -312,8 +292,7 @@ noAdd++;
 				biValuedFrame = 1;
 		}
 		if ( firstFrame == 0 && isEOF != EOF )
-		{
-noAdd++;
+		{	noAdd++;
 			firstFrame = 1;
 			secondFrame = 0;
 			sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng);
@@ -321,31 +300,28 @@ noAdd++;
 			NoArena++;
 			index++;
 		}
-
 	} while ( isEOF != EOF && index != SyncStack.end() );
-lastFrame = FrameCount;	
+	lastFrame = FrameCount;	
 //	Save();
 	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////
 int CSyncStack::LoadRoomFromDAT(FILE *from)
-{
+{	const int iBufSz = 16384;
 	int		isEOF;
-	
-	char	loadText[160];
+	char	loadText[iBufSz];
 	char	endHeader = 0;
 	char	*pdest;
-	char	Items = 0;
-	
-	// Indices
-	char	I_FrameCount		= (char) 255;
-	char	I_1msTimeStamp		= (char) 255;
-	char	I_RoomX				= (char) 255;
-	char	I_RoomY				= (char) 255;
-	char	I_RoomZ				= (char) 255;
-	char	I_Angle				= (char) 255;
-	char	I_FrameInfo			= (char) 255;
+	int	Items = 0;
+	// Indices from header ( -1 indicates not present )
+	int	I_FrameCount   = -1;
+	int	I_1msTimeStamp = -1;
+	int	I_RoomX		   = -1;
+	int	I_RoomY		   = -1;
+	int	I_RoomZ		   = -1;
+	int	I_Angle		   = -1;
+	int	I_FrameInfo	   = -1;
 
 	do
 	{	isEOF = fscanf(from,"%s",loadText);
@@ -358,12 +334,10 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 			{	isEOF = fscanf(from,"%s",loadText);
 				if ( isEOF == EOF ) return 2;
 			}
-
 			if ( strstr(loadText, FRAME_COUNT_LABEL) != NULL )
 			{	I_FrameCount = Items;
 				Items++;
 			}
-			
 			// Extracting index of parameters from header
 			char ExtractDone = 0;
 			do {
@@ -393,7 +367,6 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 		if ( pdest != NULL ) endHeader = 1;
 	}while (endHeader == 0 && isEOF != EOF);
 
-	int			LoadInt;
 	CSyncBPF	*sync;
 
 	// see arena file *.dat 
@@ -405,20 +378,15 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 	short	RoomAng = 0;
 
 	short ArenaAng = 0;
-	MY_SYNC_STACK::iterator index;
-	index = SyncStack.begin();
+	MY_SYNC_STACK::iterator index = SyncStack.begin();
 	int TimeStamp0 = ((CSync*)*index)->GetTimeStamp();
-	
-	index = SyncStack.begin();
-	
+	index = SyncStack.begin(); // why reassigning to same value again??
 	NoRoom = 0;
 	
 	FrameCount=0; TimeStamp = -10000; RoomX=RoomY=RoomZ=0;
 	char firstFrame = 0;
 	char secondFrame = 1;
 	char biValuedFrame = 0;
-
-	const int iBufSz = 16384;
 	char cBuf[iBufSz];
 	vector<string> vstr;
 
@@ -433,13 +401,14 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 		cBuf[0]=0;
 		fgets(cBuf,iBufSz,from);
 		Split(cBuf,string(" \t"),vstr);
+		int vsz = (int) vstr.size();
 
-		if(I_FrameCount < vstr.size())   FrameCount = atoi(vstr[I_FrameCount].c_str());
-		if(I_1msTimeStamp < vstr.size()) TimeStamp = 10 * atoi(vstr[I_1msTimeStamp].c_str());
-		if(I_RoomX < vstr.size())        RoomX = atoi(vstr[I_RoomX].c_str());
-		if(I_RoomY < vstr.size())        RoomY = atoi(vstr[I_RoomY].c_str());
-		if(I_RoomZ < vstr.size())        RoomZ = atoi(vstr[I_RoomZ].c_str());
-		if(I_Angle < vstr.size())        RoomAng = atoi(vstr[I_Angle].c_str());
+		if(I_FrameCount>-1 && I_FrameCount<vsz) FrameCount=atoi(vstr[I_FrameCount].c_str());
+		if(I_1msTimeStamp>-1 && I_1msTimeStamp<vsz) TimeStamp=10*atoi(vstr[I_1msTimeStamp].c_str());
+		if(I_RoomX>-1 && I_RoomX<vsz) RoomX=atoi(vstr[I_RoomX].c_str());
+		if(I_RoomY>-1 && I_RoomY<vsz) RoomY=atoi(vstr[I_RoomY].c_str());
+		if(I_RoomZ>-1 && I_RoomZ<vsz) RoomZ=atoi(vstr[I_RoomZ].c_str());
+		if(I_Angle>-1 && I_Angle<vsz) RoomAng=atoi(vstr[I_Angle].c_str());
 
 		if(feof(from)) isEOF = EOF;
 
@@ -447,7 +416,7 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 		{	// 3th ...... nth
 			if ( FrameCount - lastFrameCount <= 1 )
 			{	// is in order i.e. 123... or 11223344...
-noAdd++;
+				noAdd++;
 				sync->SetRoom(RoomX,RoomY,RoomZ,RoomAng);
 				sync->SetLoadedTS(TimeStamp);
 				NoRoom++;
@@ -459,7 +428,7 @@ noAdd++;
 				do {
 					char j = 0;
 					do {
-noEmpty++;
+						noEmpty++;
 						sync->SetRoom(0,0,0,0);
 						sync->SetLoadedTS(0);
 						NoRoom++;
@@ -475,8 +444,7 @@ noEmpty++;
 					i++;
 				} while ( i < FrameCount && stop == 0);
 				if ( index != SyncStack.end() )
-				{
-noAdd++;
+				{	noAdd++;
 					sync->SetArena(RoomX,RoomY,RoomZ,RoomAng);
 					sync->SetLoadedTS(TimeStamp);
 					lastFrameCount = FrameCount;
@@ -486,8 +454,7 @@ noAdd++;
 			}
 		}
 		if ( secondFrame == 0 && isEOF != EOF )
-		{
-noAdd++;
+		{	noAdd++;
 			secondFrame = 1;
 			sync->SetRoom(RoomX,RoomY,RoomZ,RoomAng);
 			sync->SetLoadedTS(TimeStamp);
@@ -497,8 +464,7 @@ noAdd++;
 				biValuedFrame = 1;
 		}
 		if ( firstFrame == 0 && isEOF != EOF )
-		{
-noAdd++;
+		{	noAdd++;
 			firstFrame = 1;
 			secondFrame = 0;
 			sync->SetRoom(RoomX,RoomY,RoomZ,RoomAng);
@@ -507,7 +473,7 @@ noAdd++;
 			index++;
 		}
 	} while ( isEOF != EOF && index != SyncStack.end() );
-lastFrame = FrameCount;
+	lastFrame = FrameCount;
 	return 0;
 }
 
