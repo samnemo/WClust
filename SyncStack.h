@@ -52,17 +52,17 @@ public:
 	void	DrawArenaRoom(CDC *pDC, CRect drawWin, int firstTS, int timeWin, char params, unsigned char *clView, int whichDraw);
 	void	FinishClustering();
 	void	LoadSync(CFile *from);
-	int		LoadArena(CFile *from, bool hasZ = false);	// from BPF
-	int		LoadArenaFromDAT(FILE *from);
-	int		LoadRoom(CFile *from, bool hasZ = false);	// from BPF
-	int		LoadRoomFromDAT(FILE *from);
+	int		LoadArena(CFile *from, bool hasZ = false, bool hasAngXAngY = false); // reads arena record from BPF
+	int		LoadArenaFromDAT(FILE *from); // loads all arena data from .dat file - sync stack must be setup
+	int		LoadRoom(CFile *from, bool hasZ = false, bool hasAngXAngY = false);	 // reads room record from BPF
+	int		LoadRoomFromDAT(FILE *from); // loads all room data from .dat file  - sync stack must be setup
 	int		GetLoadedTS(int position);
 	void	NewPosFromUFF(int TS, unsigned char RedX, unsigned char RedY, unsigned char GreenX, unsigned char GreenY);
 	void	OrganizeSync(char type, float param);
 	void	PrepareClustering();
 	void	Save(); // <<-- This is only for TESTING. In the final version this will NOT be used
-	void	SaveArenaFirst(CFile *fptr);
-	void	SaveRoomFirst(CFile *fptr);
+	void	SaveArenaFirst(CFile *fptr); // saves arena x,y,angle,etc. to file
+	void	SaveRoomFirst(CFile *fptr);  // saves room x,y,angle,etc. to file
 	void	SetMiddle(short middle_in) { middle = middle_in; }
 	
 	// UFF methods

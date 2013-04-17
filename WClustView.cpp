@@ -1495,15 +1495,15 @@ void CWClustView::OnFileStoretobpfile()
 					if ( whatToStore & 1 )
 					{
 						fprintf(strFile,"%%ArenaPositionIdentifier.1 ('A')\n");
-						fprintf(strFile,"%%ArenaPositionRecordFormat.10 Identifier.1 100usTimestamp.4 ArenaX1.1 ");
-						fprintf(strFile,"ArenaY1.1 ArenaZ1.1 ArenaAng.2\n");
+						fprintf(strFile,"%%ArenaPositionRecordFormat.14 Identifier.1 100usTimestamp.4 ArenaX1.1 ");
+						fprintf(strFile,"ArenaY1.1 ArenaZ1.1 ArenaAng.2 ArenaAngX.2 ArenaAngY.2\n");
 					}				
 				
 					if ( whatToStore & 2 )
 					{
 						fprintf(strFile,"%%RoomPositionIdentifier.1 ('R')\n");
-						fprintf(strFile,"%%RoomPositionRecordFormat.10 Identifier.1 100usTimestamp.4 RoomX1.1 ");
-						fprintf(strFile,"RoomY1.1 RoomZ1.1 RoomAng.2\n");
+						fprintf(strFile,"%%RoomPositionRecordFormat.14 Identifier.1 100usTimestamp.4 RoomX1.1 ");
+						fprintf(strFile,"RoomY1.1 RoomZ1.1 RoomAng.2 RoomAngX.2 RoomAngY.2\n");
 					}
 					fprintf(strFile,"%s",loadText);
 				}	
@@ -2278,8 +2278,10 @@ void CWClustView::OnLoadArena()
 			fclose(fptr);
 			if ( error == 0 )
 				pDoc->m_MainDataStack.LoadedAdd |= 1;
-			if ( error == 2 )
+			else if ( error == 2 )
 				CWnd::MessageBox(TEXT("Error: Structure of arena file"),NULL,MB_ICONWARNING||MB_OK);
+			else if ( error == 3 )
+				CWnd::MessageBox(TEXT("Error: insufficient transitions in sync file. Can't load arena positions."),NULL,MB_ICONERROR);
 		}
 	}
 // TODO diagnostic
@@ -2306,7 +2308,7 @@ void CWClustView::OnLoadRoom()
 		fptr = fopen(dlg.GetPathName(),"r");
 		if ( fptr == NULL )
 		{
-			CWnd::MessageBox(TEXT("Error: Cannot open arena data file"),NULL,MB_ICONWARNING||MB_OK);
+			CWnd::MessageBox(TEXT("Error: Cannot open room data file"),NULL,MB_ICONWARNING||MB_OK);
 		}
 		else
 		{
@@ -2314,8 +2316,10 @@ void CWClustView::OnLoadRoom()
 			fclose(fptr);
 			if ( error == 0 )
 				pDoc->m_MainDataStack.LoadedAdd |= 2;
-			if ( error == 2 )
+			else if ( error == 2 )
 				CWnd::MessageBox(TEXT("Error: Structure of position file"),NULL,MB_ICONWARNING||MB_OK);
+			else if ( error == 3 )
+				CWnd::MessageBox(TEXT("Error: insufficient transitions in sync file. Can't load room positions."),NULL,MB_ICONERROR);
 		}
 	}
 }

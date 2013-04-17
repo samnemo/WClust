@@ -37,6 +37,8 @@ class CSyncBPF : public CSync
 	unsigned char	RoomX,RoomY,RoomZ;
 	short			RoomAng;
 	short			ArenaAng;
+	short			RoomAngX, RoomAngY;
+	short			ArenaAngX, ArenaAngY;
 public:	
 	CSyncBPF(int TimeStmp);
 	virtual ~CSyncBPF(); 
@@ -50,9 +52,13 @@ public:
 	unsigned char	GetRoomX(){ return RoomX; };
 	unsigned char	GetRoomY(){ return RoomY; };
 	unsigned char	GetRoomZ(){ return RoomZ; };
-	void			SetArena( unsigned char X, unsigned char Y, unsigned char Z, short Ang){ ArenaX=X; ArenaY=Y; ArenaZ=Z; ArenaAng=Ang;};
+	short			GetRoomAngX(){ return RoomAngX; };
+	short			GetRoomAngY(){ return RoomAngY; };
+	short			GetArenaAngX(){ return ArenaAngX; };
+	short			GetArenaAngY(){ return ArenaAngY; };
+	void			SetArena( unsigned char X, unsigned char Y, unsigned char Z, short Ang, short AngX, short AngY){ ArenaX=X; ArenaY=Y; ArenaZ=Z; ArenaAng=Ang; ArenaAngX=AngX; ArenaAngY=AngY;};
 	void			SetLoadedTS(int TS){ LoadedTimeStamp = TS; }; // from *.Dat
-	void			SetRoom( unsigned char X, unsigned char Y, unsigned char Z, short Ang){ RoomX=X; RoomY=Y; RoomZ=Z; RoomAng=Ang;};
+	void			SetRoom( unsigned char X, unsigned char Y, unsigned char Z, short Ang, short AngX, short AngY){ RoomX=X; RoomY=Y; RoomZ=Z; RoomAng=Ang; RoomAngX=AngX; RoomAngY=AngY;};
 };
 
 class CSyncUFF : public CSync
