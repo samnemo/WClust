@@ -8,6 +8,7 @@
 #include "SyncStack.h"
 #include "Sync.h"
 #include "StringUtils.h"
+#include "Log.h"
 #include <stdlib.h>
 
 #define		END_HEADER_LABEL		"%%END_HEADER"
@@ -316,8 +317,8 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 	} while ( isEOF != EOF && index != SyncStack.end() );
 	lastFrame = FrameCount;	
 //	Save();
-	if( !feof(from) && index == SyncStack.end() ) // signal that SyncStack does not match dat file
-		return 3;
+	if( !feof(from) && index == SyncStack.end() ) // Write to log that SyncStack does not match dat file
+		Write2Log("Warning: SycnStack size is %d, NoArena=%d, extra entries at end of DAT file.",SyncStack.size(),NoArena);
 	return 0; // success
 }
 
@@ -501,6 +502,8 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 		}
 	} while ( isEOF != EOF && index != SyncStack.end() );
 	lastFrame = FrameCount;
+	if( !feof(from) && index == SyncStack.end() ) // Write to log that SyncStack does not match dat file
+		Write2Log("Warning: SycnStack size is %d, NoRoom=%d, extra entries at end of DAT file.",SyncStack.size(),NoRoom);
 	return 0;
 }
 
