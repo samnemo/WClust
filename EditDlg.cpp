@@ -362,6 +362,9 @@ void CEditDlg::OnPaint()
 	case CLUST_KK:
 	case CLUST_FL:
 	default:
+		// draw user-defined clusters first (includes polygons)
+		m_MainClusters->Draw(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],1);
+		// then draw the auto-clustered points
 		m_MainDataStack->DrawAutoC(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],m_MyView->m_PointsSize,m_MainDataStack->whichDraw);
 		break;
 	}
@@ -638,7 +641,7 @@ void CEditDlg::OnNewpoly()
 {
 	if(UserCheating()) return;
 
-	m_MainDataStack->whichDraw = CLUST_USER;
+	// m_MainDataStack->whichDraw = CLUST_USER; // 2/19/2015 allow users to draw boundaries around auto-clustered points!!
 
 	if (m_State==0)
 	{
@@ -673,7 +676,7 @@ void CEditDlg::OnNewpoly()
 
 void CEditDlg::OnDrawpoly() 
 {
-	m_MainDataStack->whichDraw = CLUST_USER;
+	//m_MainDataStack->whichDraw = CLUST_USER; // 2/19/2015 allow users to draw boundaries around auto-clustered points!!
 
 	MY_STACK::iterator Index,IndProj;
 		
@@ -1357,8 +1360,8 @@ void CEditDlg::SetActiveButton()
 			axY=m_MyView->m_AxesX;
 		}
 
-		if((m_MainDataStack->whichDraw == CLUST_ORIG ||
-		   m_MainDataStack->whichDraw == CLUST_USER) &&
+		if(//(m_MainDataStack->whichDraw == CLUST_ORIG ||
+		   //m_MainDataStack->whichDraw == CLUST_USER) &&
 		   Selected < m_MainClusters->m_BndrStack.size())
 		{
 			Index = (m_MainClusters->m_BndrStack.begin()+Selected);
@@ -1703,7 +1706,7 @@ void CEditDlg::OnRemallpoly()
 				Selected++;
 			}
 //			m_wndComboClust.DeleteString(Selected+1);
-			m_MainDataStack->whichDraw = CLUST_USER;
+			// m_MainDataStack->whichDraw = CLUST_USER;
 			CheckComboClust();
 			m_MainClusters->Clustering(m_MainDataStack);
 			m_MainClusters->WantStore();
@@ -1740,7 +1743,7 @@ void CEditDlg::OnCopycluster()
 //		char pom[20];
 //		sprintf(pom,"cluster %d",newBndr->m_Numb);
 //		m_wndComboClust.AddString(pom);
-		m_MainDataStack->whichDraw = CLUST_USER;
+		// m_MainDataStack->whichDraw = CLUST_USER;
 		CheckComboClust();
 
 		for (IndProj=mainBndr->m_ProjStack.begin();IndProj!=mainBndr->m_ProjStack.end();IndProj++)
@@ -2013,7 +2016,7 @@ void CEditDlg::OnList()
 
 void CEditDlg::OnButUndo() 
 {
-	m_MainDataStack->whichDraw = CLUST_USER;
+	// m_MainDataStack->whichDraw = CLUST_USER;
 
 	m_MainClusters->UNDO();
 	m_MainClusters->Clustering(m_MainDataStack);

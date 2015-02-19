@@ -323,12 +323,12 @@ CAPTION "About WClust"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,5,10,20,20
-    LTEXT           "WClust version 2.0.0.117",IDC_STATIC,64,7,91,8,
+    LTEXT           "WClust version 2.0.0.118",IDC_STATIC,64,7,91,8,
                     SS_NOPREFIX
     DEFPUSHBUTTON   "OK",IDOK,75,73,50,14,WS_GROUP
     LTEXT           "Anton Svrcek",IDC_STATIC,80,40,44,8
     LTEXT           "Andre Fenton",IDC_STATIC,80,30,44,8
-    LTEXT           "Copyright (c) 2002-2013, Bio-Signal Group Corp.",
+    LTEXT           "Copyright (c) 2002-2015, Bio-Signal Group Corp.",
                     IDC_STATIC,36,17,152,8
     LTEXT           "Sam Neymotin",IDC_STATIC,79,50,46,8
     LTEXT           "Bill Lytton",IDC_STATIC,86,60,31,13
@@ -1291,7 +1291,7 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_APP_ABOUT            "About WClust (2.0.0.117)\nAbout"
+    ID_APP_ABOUT            "About WClust (2.0.0.118)\nAbout"
     ID_APP_EXIT             "Quit the application;\nExit"
 END
 

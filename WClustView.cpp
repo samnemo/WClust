@@ -650,6 +650,10 @@ void CWClustView::OnDraw(CDC* pDC)
 					case CLUST_KK:
 					case CLUST_FL:
 					default:
+
+						// first draw user-defined clusters (includes poly?)
+						pDoc->m_MainClusters.Draw(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],0);
+						// then auto-clust
 						pDoc->m_MainDataStack.DrawAutoC(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],m_MiniView[i*2+j].m_PointsSize,pDoc->m_MainDataStack.whichDraw);
 						break;
 					}
