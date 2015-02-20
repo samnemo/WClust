@@ -11,11 +11,18 @@ Build Log
 </h3>
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Command Lines
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000001.rsp" with contents
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000002.rsp" with contents
+[
+/Od /I "C:\Users\samn\Documents\neurosim" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "INSTANTIATE_TEMPLATES" /D "_MBCS" /FD /EHsc /RTC1 /MTd /Yu"stdafx.h" /Fp".\Debug/WClust.pch" /Fo".\Debug/" /Fd".\Debug/" /W3 /c /ZI /TP
+.\WClustView.cpp
+]
+Creating command line "cl.exe @c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000002.rsp /nologo"
+Creating temporary file "c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000003.rsp" with contents
 [
 /OUT:"WClust.exe" /INCREMENTAL:NO /NOLOGO /DELAYLOAD:"OleAcc.dll" /DEBUG /PDB:".\Debug/WClust.pdb" /SUBSYSTEM:WINDOWS /MACHINE:X86 version.lib vfw32.lib winmm.lib blas.lib lapack.lib DelayImp.lib DelayImp.lib
 .\Debug\APClustDialog.obj
 .\Debug\apcluster.obj
+.\Debug\APHull.obj
 .\Debug\AviReader.obj
 .\Debug\BatchUtils.obj
 .\Debug\CBmpFile.obj
@@ -90,14 +97,241 @@ Command Lines
 .\Debug\pca2.obj
 .\Debug\flame.obj
 ]
-Creating command line "link.exe @c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000001.rsp"
+Creating command line "link.exe @c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\RSP000003.rsp"
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Output Window
-</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Linking...
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+WClustView.cpp
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WCMath.h(35) : warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Vertex.h(720) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Cluster.h(53) : warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Cluster.h(54) : warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(16) : warning C4244: 'initializing' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(139) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(153) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(173) : warning C4305: 'initializing' : truncation from 'double' to 'const prob_t'
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(177) : warning C4244: '=' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(197) : warning C4305: 'initializing' : truncation from 'double' to 'const prob_t'
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(201) : warning C4244: '=' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(232) : warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(260) : warning C4018: '>' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(274) : warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(283) : warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(312) : warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(321) : warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(328) : warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(397) : warning C4244: '*=' : conversion from 'double' to 'float', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(651) : warning C4305: 'initializing' : truncation from 'double' to 'const prob_t'
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(654) : warning C4244: 'initializing' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1008) : warning C4244: 'return' : conversion from 'float' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1056) : warning C4244: '=' : conversion from 'float' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1073) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1112) : warning C4996: 'std::hash_compare<_Kty,_Pr>' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1112) : warning C4996: 'std::hash_map<_Kty,_Ty,_Tr>' was declared deprecated
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1113) : warning C4996: 'std::hash_compare<_Kty,_Pr>' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1127) : warning C4244: 'return' : conversion from 'hprob' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1128) : warning C4996: 'std::hash_map<_Kty,_Ty,_Tr>::iterator' was declared deprecated
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\hash_map(292) : see declaration of 'std::hash_map<_Kty,_Ty,_Tr>::iterator'
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1145) : warning C4018: '>=' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1158) : warning C4018: '>=' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1224) : warning C4244: 'argument' : conversion from 'hprob' to 'std::vector<_Ty>::size_type', possible loss of data
+        with
+        [
+            _Ty=double
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1240) : warning C4244: 'initializing' : conversion from 'hprob' to 'int', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1242) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1249) : warning C4996: 'std::hash_map<_Kty,_Ty,_Tr>::operator`[]'' was declared deprecated
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\hash_map(341) : see declaration of 'std::hash_map<_Kty,_Ty,_Tr>::operator`[]''
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1261) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1319) : warning C4244: '=' : conversion from 'hprob' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1363) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1398) : warning C4244: '+=' : conversion from 'hprob' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1437) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1497) : warning C4018: '<' : signed/unsigned mismatch
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\KMDialog.h(20) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\KMDialog.h(21) : warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(2882) : warning C4244: 'argument' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(2882) : warning C4244: 'argument' : conversion from 'double' to 'prob_t', possible loss of data
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3062) : warning C4101: 'pomT' : unreferenced local variable
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3606) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3608) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3609) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3610) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3612) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3613) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3615) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3616) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3617) : warning C4800: 'BOOL' : forcing value to bool 'true' or 'false' (performance warning)
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3694) : warning C4101: 'errOffset' : unreferenced local variable
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3695) : warning C4101: 'errChar' : unreferenced local variable
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(314) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(699) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(298) : while compiling class-template member function 'stdext::_Hash<_Traits>::_Pairib stdext::_Hash<_Traits>::insert(const stdext::_Hash<_Traits>::value_type &)'
+        with
+        [
+            _Traits=stdext::_Hmap_traits<int *,hprob,std::hash_compare<const int *,eqp>,std::allocator<std::pair<int *const ,hprob>>,false>
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\hash_map(276) : see reference to class template instantiation 'stdext::_Hash<_Traits>' being compiled
+        with
+        [
+            _Traits=stdext::_Hmap_traits<int *,hprob,std::hash_compare<const int *,eqp>,std::allocator<std::pair<int *const ,hprob>>,false>
+        ]
+        c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Hist.h(1112) : see reference to class template instantiation 'std::hash_map<_Kty,_Ty,_Tr>' being compiled
+        with
+        [
+            _Kty=int *,
+            _Ty=hprob,
+            _Tr=std::hash_compare<const int *,eqp>
+        ]
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(352) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(712) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(354) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(712) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(461) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(712) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(457) : while compiling class-template member function 'stdext::_Hash<_Traits>::iterator stdext::_Hash<_Traits>::lower_bound(const stdext::_Hash<_Traits>::key_type & )'
+        with
+        [
+            _Traits=stdext::_Hmap_traits<int *,hprob,std::hash_compare<const int *,eqp>,std::allocator<std::pair<int *const ,hprob>>,false>
+        ]
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(463) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(712) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(578) : warning C4996: 'std::hash_compare<_Kty,_Pr>::operator`()'' was declared deprecated
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(699) : see declaration of 'std::hash_compare<_Kty,_Pr>::operator`()''
+        with
+        [
+            _Kty=const int *,
+            _Pr=eqp
+        ]
+        c:\Program Files (x86)\Microsoft Visual Studio .NET 2003\Vc7\include\xhash(577) : while compiling class-template member function 'stdext::_Hash<_Traits>::size_type stdext::_Hash<_Traits>::_Hashval(const stdext::_Hash<_Traits>::key_type & ) const'
+        with
+        [
+            _Traits=stdext::_Hmap_traits<int *,hprob,std::hash_compare<const int *,eqp>,std::allocator<std::pair<int *const ,hprob>>,false>
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WCMath.h(219) : warning C4244: '-=' : conversion from 'std::allocator<_Ty>::value_type' to 'float', possible loss of data
+        with
+        [
+            _Ty=double
+        ]
+        c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\pca2.hpp(106) : see reference to function template instantiation 'void CovarMat<float,double,double>(A2D<T> &,int,int,A2D<double> &,std::vector<_Ty> &,bool)' being compiled
+        with
+        [
+            T=float,
+            _Ty=double
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WCMath.h(262) : warning C4244: '+=' : conversion from 'std::allocator<_Ty>::value_type' to 'float', possible loss of data
+        with
+        [
+            _Ty=double
+        ]
+c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WCMath.h(77) : warning C4018: '<' : signed/unsigned mismatch
+        c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\WClustView.cpp(3296) : see reference to function template instantiation 'T Sum<double>(std::vector<_Ty> &)' being compiled
+        with
+        [
+            T=double,
+            _Ty=double
+        ]
+Linking...
 LINK : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
 </pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
 Results
 </font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
 Build log was saved at "file://c:\Users\samn\Documents\neurosim\spikeclust\biosignalgroup_wclust\wclust_src\Debug\BuildLog.htm"
-WClust - 0 error(s), 1 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+WClust - 0 error(s), 67 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
 </font></table></body></html>
