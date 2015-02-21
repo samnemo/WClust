@@ -635,25 +635,22 @@ void CWClustView::OnDraw(CDC* pDC)
 				// Main drawing of vectors and clusters
 				if (m_Redraw)
 				{
-					switch(pDoc->m_MainDataStack.whichDraw)
+					// first draw user-defined cluster boundaries
+					pDoc->m_MainClusters.Draw(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],0);
+					switch(pDoc->m_MainDataStack.whichDraw) // then draw the scatterplots
 					{
 					case CLUST_USER:
-						pDoc->m_MainClusters.Draw(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],0);
 						pDoc->m_MainDataStack.Draw(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],m_MiniView[i*2+j].m_PointsSize);
 						break;
 					case CLUST_ORIG:
 						pDoc->m_MainDataStack.DrawOrig(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],m_MiniView[i*2+j].m_PointsSize);
 						break;
-					case CLUST_KM:
+					case CLUST_KM: // these are the different auto-clustering methods
 					case CLUST_INFO:
 					case CLUST_AP:
 					case CLUST_KK:
 					case CLUST_FL:
 					default:
-
-						// first draw user-defined clusters (includes poly?)
-						pDoc->m_MainClusters.Draw(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],0);
-						// then auto-clust
 						pDoc->m_MainDataStack.DrawAutoC(pDC,m_MiniView[i*2+j].m_DrawingArea,&m_MiniView[i*2+j].m_DataArea,CPoint(m_MiniView[i*2+j].m_AxesX,m_MiniView[i*2+j].m_AxesY),&m_MiniView[i*2+j].m_ClustToView[0],m_MiniView[i*2+j].m_PointsSize,pDoc->m_MainDataStack.whichDraw);
 						break;
 					}

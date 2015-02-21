@@ -172,7 +172,7 @@ public:
 	void	DrawOrig(CDC *pDC, CRect DrawWin, CFloatRect *whichValues, CPoint whichAxes, unsigned char *Clust, int PntSize);
 	void	DrawAutoC(CDC *pDC, CRect DrawWin, CFloatRect *whichValues, CPoint whichAxes, unsigned char *Clust, int PntSize,char whichAuto);
 	void	DrawTimeSpikes(CDC *pDC, float *xa, int freq, int samples, CRect spikeWin, CRect drawWin, int whichChanel, int whichSpDraw);
-	void	DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawWin, int whichChanel, int whichClust, int whichDrawMode);
+	int		DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawWin, int whichChanel, int whichClust, int whichDrawMode);
 	int		DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawWin, int whichChanel);
 	void	EmptyClust(){ if (*m_Vertex.begin()!=0) { m_MyClusts.clear(); SetValue(0,0);}; };
 	void	ExportValues( FILE *file, int* pOverRideClust=0 );

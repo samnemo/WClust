@@ -347,11 +347,12 @@ void CEditDlg::OnPaint()
 	dc.SelectObject(pOldAxisZeroPen);
 	
 	// Main drawing of vectors & clusters
-	switch(m_MainDataStack->whichDraw)
+	// frst draw the user-defined boundaries
+	m_MainClusters->Draw(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],1);
+	switch(m_MainDataStack->whichDraw) // then draw the scatterplots
 	{
 	case CLUST_USER:
 		m_MainDataStack->Draw(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],m_MyView->m_PointsSize);
-		m_MainClusters->Draw(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],1);
 		break;
 	case CLUST_ORIG:
 		m_MainDataStack->DrawOrig(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],m_MyView->m_PointsSize);
@@ -361,10 +362,7 @@ void CEditDlg::OnPaint()
 	case CLUST_AP:
 	case CLUST_KK:
 	case CLUST_FL:
-	default:
-		// draw user-defined clusters first (includes polygons)
-		m_MainClusters->Draw(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],1);
-		// then draw the auto-clustered points
+	default: 		// draw the auto-cluster scatterplots
 		m_MainDataStack->DrawAutoC(&dc,m_rect,&m_MyView->m_DataArea,CPoint(m_MyView->m_AxesX,m_MyView->m_AxesY),&m_MyView->m_ClustToView[0],m_MyView->m_PointsSize,m_MainDataStack->whichDraw);
 		break;
 	}
@@ -1203,7 +1201,7 @@ void CEditDlg::OnLButtonUp(UINT nFlags, CPoint point)
 }
 
 void CEditDlg::OnRButtonDown(UINT nFlags, CPoint point) 
-{
+{ // gets called to complete a cluster's boundary
 #ifdef _DEBUG
 	Write2Log("OnRButtonDown m_State%d m_Dragging%d",m_State,m_Dragging);
 #endif
@@ -1243,7 +1241,7 @@ void CEditDlg::OnRButtonDown(UINT nFlags, CPoint point)
 
 					EndWaitCursor();				
 
-					m_MainDataStack->whichDraw = 0;
+					//m_MainDataStack->whichDraw = 0;// do not switch draw mode
 					CheckComboClust();
 					m_wndComboClust.SetCurSel(m_NewPoly->GetNumb()+1);
 					flagChoose |= 2;
@@ -1261,7 +1259,7 @@ void CEditDlg::OnRButtonDown(UINT nFlags, CPoint point)
 					m_NewPoly->AddProj(m_NewProj);
 					CCmdTarget::BeginWaitCursor();
 					m_MainClusters->Clustering(m_MainDataStack);
-					m_MainDataStack->whichDraw = 0;
+					//m_MainDataStack->whichDraw = 0; // do not switch draw mode
 					EndWaitCursor();
 					flagChoose |= 2;
 				}

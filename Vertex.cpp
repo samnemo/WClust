@@ -562,15 +562,17 @@ void CVertex::DrawTimeSpikes(CDC *pDC, float *xa, int freq, int samples, CRect s
 };
 
 /////////////////////////////////////////////////////////////////////////////
-void CVertex::DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawWin,int whichChanel,int whichClust,int whichDrawMode)
+int CVertex::DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawWin,int whichChanel,int whichClust,int whichDrawMode)
 {
+	if(!(m_Flag & 0x0004)) return 0;
+
 	int ShowIt=0;
 	int Index = *m_Vertex.begin();
 	unsigned long color;
 
 	if(GetNoise())// && whichDrawMode!=CLUST_USER && whichDrawMode!=CLUST_ORIG)
 	{
-		if(whichClust>=0) return;
+		if(whichClust>=0) return 0;
 		else{ ShowIt=1; color = RGB(204,204,204); }
 	}
 
@@ -658,6 +660,7 @@ void CVertex::DrawSpikes(CDC *pDC, float *xa, int Freq, int Samples, CRect DrawW
 		}
 		pDC->SelectObject(pOldPen);
 	}
+	return ShowIt;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -4108,7 +4111,8 @@ int CVerxStack::DrawSpikes(CDC *pDC,CRect DrawWin,int whichChanel,int Start, int
 	
 	while ( Index != m_VerxStack.end() && Numb < HowMany )
 	{
-		if ( ((CVertex*)*Index)->DrawSpikes(pDC, &m_x[0], SAMPLE_FREQ, NUM_SAMPLES, DrawWin, whichChanel) )
+		//if ( ((CVertex*)*Index)->DrawSpikes(pDC, &m_x[0], SAMPLE_FREQ, NUM_SAMPLES, DrawWin, whichChanel) )
+		if ( ((CVertex*)*Index)->DrawSpikes(pDC, &m_x[0], SAMPLE_FREQ, NUM_SAMPLES, DrawWin, whichChanel, GetVClust((CVertex*)*Index,whichDraw), whichDraw))
 			Numb++;
 		Index++;
 		*Last += 1;
@@ -4594,7 +4598,7 @@ void CVerxStack::CalcViewSpike(int FirstEv,int LastEv,int PercEv)
 		//don't want cluster index out of bounds of steps array
 		if(m_vx->GetNoise()) continue;
 		
-		indI = 	m_vx->GetClust(m_vx->GetValue(0)-1);
+		indI = GetVClust(m_vx,whichDraw); // m_vx->GetClust(m_vx->GetValue(0)-1);
 
 		//make sure index doesn't go out of bounds of steps
 		if(indI < 0 || indI >= iMaxSteps) continue;
@@ -4635,7 +4639,7 @@ void CVerxStack::CalcViewSpike(int FirstEv,int LastEv,int PercEv, unsigned char 
 		//don't want cluster index out of bounds of steps array
 		if(m_vx->GetNoise()) continue;
 
-		indI = 	m_vx->GetClust(m_vx->GetValue(0)-1);
+		indI = GetVClust(m_vx,whichDraw); //m_vx->GetClust(m_vx->GetValue(0)-1);
 
 		//make sure index doesn't go out of bounds
 		if(indI < 0 || indI >= iMaxSteps) continue;
@@ -4679,7 +4683,7 @@ void CVerxStack::CalcViewSpike(int FirstEv,int LastEv,int PercEv, int Clust)
 		//don't want cluster index out of bounds of steps array
 		if(m_vx->GetNoise()) continue;
 
-		indI = 	m_vx->GetClust(m_vx->GetValue(0)-1);
+		indI = 	GetVClust(m_vx,whichDraw); // m_vx->GetClust(m_vx->GetValue(0)-1);
 
 		if(indI < 0 || indI >= iMaxSteps) continue;
 

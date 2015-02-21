@@ -297,7 +297,12 @@ void CEditSpikes::OnShowWindow(BOOL bShow, UINT nStatus)
 	m_IsPlay = 0;
 	m_IsStopped = 0;
 
-	maxCluster =  m_MainClusters->m_Count - 1; //( m_MainDataStack->m_NumOriginalCl > (m_MainClusters->m_Count - 1) ) ? m_MainDataStack->m_NumOriginalCl : ( m_MainClusters->m_Count - 1 );
+	if (m_MainDataStack->whichDraw == CLUST_ORIG)
+		maxCluster =  m_MainDataStack->m_NumOriginalCl;
+	else if(m_MainDataStack->whichDraw == CLUST_USER)
+		maxCluster = m_MainClusters->m_Count - 1;
+	else
+		maxCluster =  m_MainClusters->m_pNumClusts[m_MainDataStack->whichDraw];
 
 	clView = vector<unsigned char>(256);
 	std::fill(clView.begin(),clView.end(),(unsigned char)0xFF);
