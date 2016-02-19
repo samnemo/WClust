@@ -1,0 +1,14 @@
+last frame was not printing until version 121, 
+
+V122 fixed, now can print last frame
+
+SyncStack.cpp  , 
+made below changes in both LoadArenaFromDAT and LoadRoomFromDAT function
+
+//if ( firstFrame && secondFrame && isEOF != EOF )
+
+//Jaini :: 11/24/15 :: If you keep the condition as above, 
+//it doesn't write out last frame value. 
+//To write last frame value use below condition. 
+
+if ( firstFrame && secondFrame )

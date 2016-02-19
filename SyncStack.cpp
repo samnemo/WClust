@@ -150,6 +150,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 	char	endHeader = 0;
 	char	*pdest;
 	int	Items = 0;
+
 	// Indices from header ( -1 indicates not present )
 	int	I_FrameCount   = -1;
 	int	I_1msTimeStamp = -1;
@@ -243,7 +244,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 		Split(cBuf,string(" \t"),vstr);
 		int vsz = (int) vstr.size();
 
-		if(I_FrameCount>-1 && I_FrameCount<vsz) FrameCount=atoi(vstr[I_FrameCount].c_str());
+		if(I_FrameCount>-1 && I_FrameCount<vsz)  FrameCount=atoi(vstr[I_FrameCount].c_str());
 		if(I_1msTimeStamp>-1 && I_1msTimeStamp<vsz) TimeStamp=10*atoi(vstr[I_1msTimeStamp].c_str());
 		if(I_RoomX>-1 && I_RoomX<vsz) ArenaX=atoi(vstr[I_RoomX].c_str());
 		if(I_RoomY>-1 && I_RoomY<vsz) ArenaY=atoi(vstr[I_RoomY].c_str());
@@ -253,8 +254,13 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 		if(I_AngleY>-1 && I_AngleY<vsz) ArenaAngY=atoi(vstr[I_AngleY].c_str());
 
 		if(feof(from)) isEOF = EOF;
-		
-		if ( firstFrame && secondFrame && isEOF != EOF  )
+
+		//if ( firstFrame && secondFrame && isEOF != EOF  )
+
+//Jaini :: 11/24/15 :: If you keep the condition as above, it doesn't write out last frame value. 
+//To write last frame value use below condition. 
+
+		if ( firstFrame && secondFrame )
 		{	// 3th ...... nth
 			if ( FrameCount - lastFrameCount <= 1 )
 			{	// is in order i.e. 123... or 11223344...
@@ -263,7 +269,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 				sync->SetLoadedTS(TimeStamp);
 				NoArena++;
 				index++;
-				}
+			}
 			else {
 				char stop = 0;
 				int i = lastFrameCount+1;
@@ -272,7 +278,7 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 					do {
 						noEmpty++;
 						sync->SetArena(0,0,0,0,0,0);
-						sync->SetLoadedTS(0);
+						sync->SetLoadedTS(0);				
 						NoArena++;
 						index++;
 						if ( index == SyncStack.end() )
@@ -294,7 +300,8 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 					i++;
 				} while ( i < FrameCount && stop == 0);
 				if ( index != SyncStack.end() )
-				{	noAdd++;
+				{	
+					noAdd++;
 					sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng,ArenaAngX,ArenaAngY);
 					sync->SetLoadedTS(TimeStamp);
 					lastFrameCount = FrameCount;
@@ -304,7 +311,8 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 			}
 		}
 		if ( secondFrame == 0 && isEOF != EOF )
-		{	noAdd++;
+		{	
+			noAdd++;
 			secondFrame = 1;
 			sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng,ArenaAngX,ArenaAngY);
 			sync->SetLoadedTS(TimeStamp);
@@ -314,7 +322,8 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 				biValuedFrame = 1;
 		}
 		if ( firstFrame == 0 && isEOF != EOF )
-		{	noAdd++;
+		{	
+			noAdd++;
 			firstFrame = 1;
 			secondFrame = 0;
 			sync->SetArena(ArenaX,ArenaY,ArenaZ,ArenaAng,ArenaAngX,ArenaAngY);
@@ -446,8 +455,13 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 		if(I_AngleY>-1 && I_AngleY<vsz) RoomAngY=atoi(vstr[I_AngleY].c_str());
 
 		if(feof(from)) isEOF = EOF;
+		
+		//if ( firstFrame && secondFrame && isEOF != EOF )
 
-		if ( firstFrame && secondFrame && isEOF != EOF )
+//Jaini :: 11/24/15 :: If you keep the condition as above, it doesn't write out last frame value. 
+//To write last frame value use below condition. 
+
+		if ( firstFrame && secondFrame )
 		{	// 3th ...... nth
 			if ( FrameCount - lastFrameCount <= 1 )
 			{	// is in order i.e. 123... or 11223344...
@@ -476,12 +490,12 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 						}
 						j++;
 
-	/* Jaini : DATE MODIFIED : 10/6/15 and 10/13/15.
-	Changed the condition in while loop. You can use equal sign in condition only if
-	biValuedFrame=0. If you make it 1, then remove equal sign. Otherwise it will add
-	twice as many times x and y values for missing frames when comparing BPF to DAT
-	
-	//} while ( j <= 1 && stop == 0); */
+								/* Jaini : DATE MODIFIED : 10/6/15 and 10/13/15.
+								Changed the condition in while loop. You can use equal sign in condition only if
+								biValuedFrame=0. If you make it 1, then remove equal sign. Otherwise it will add
+								twice as many times x and y values for missing frames when comparing BPF to DAT
+								
+								//} while ( j <= 1 && stop == 0); */
 					  
 					} while ( j <= biValuedFrame && stop == 0);
 					i++;
@@ -562,12 +576,22 @@ void CSyncStack::SaveArenaFirst(CFile *fptr)
 	int TS, i;       // timestamp, loop index
 	unsigned char L; // location
 	short Ang,AngX,AngY;       // angle
+	
 	MY_SYNC_STACK::iterator index = SyncStack.begin(); // record
+	
 	for (i = 0; i< NoArena; i++,index++)
-	{	ms = (CSyncBPF*)*index;
+
+//Jaini :: 11/20/15
+// Currently with above "for loop" condition it saves (0,0,0) before first frame.
+// if you want to remove that first (0,0,0) line then comment above "for loop" 
+//and uncomment below "for loop" line.
+
+//  for (i = 0,index++; i< NoArena; i++)
+      {	
+		ms = (CSyncBPF*)*index;
 		fptr->Write("A",1); // Arena record identifier
 		TS = ms->GetTimeStamp(); fptr->Write(&TS,4);
-		L = ms->GetArenaX(); 	 fptr->Write(&L,1);
+		L = ms->GetArenaX(); fptr->Write(&L,1);
 		L = ms->GetArenaY();	 fptr->Write(&L,1);
 		L = ms->GetArenaZ();	 fptr->Write(&L,1);
 		Ang = ms->GetArenaAng(); fptr->Write(&Ang,2);
@@ -584,8 +608,18 @@ void CSyncStack::SaveRoomFirst(CFile *fptr)
 	unsigned char L; // location
 	short Ang,AngX,AngY;       // angle
 	MY_SYNC_STACK::iterator index = SyncStack.begin(); // record
+	
 	for (i = 0; i< NoRoom; i++,index++)
-	{	ms = (CSyncBPF*)*index;
+	
+
+//Jaini :: 11/20/15
+// Currently with above "for loop" condition it saves (0,0,0) before first frame.
+// if you want to remove that first (0,0,0) line then comment above "for loop" 
+//and uncomment below "for loop" line.
+
+//  for (i = 0,index++; i< NoRoom; i++)
+	{	
+		ms = (CSyncBPF*)*index;
 		fptr->Write("R",1); // Room record identifier
 		TS = ms->GetTimeStamp(); fptr->Write(&TS,4);
 		L = ms->GetRoomX();      fptr->Write(&L,1);
