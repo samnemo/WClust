@@ -150,6 +150,8 @@ protected:
 		// No message handlers
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnBnClickedOk();
 };
 
 CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
@@ -169,6 +171,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 	//{{AFX_MSG_MAP(CAboutDlg)
 		// No message handlers
 	//}}AFX_MSG_MAP
+	ON_BN_CLICKED(IDOK, OnBnClickedOk)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
@@ -192,4 +195,10 @@ void CWClustApp::OnClusterSetbins32800()
 	//oB.EnableWindow(1);
 	//oB.
 	// TODO: Add your command handler code here
+}
+
+void CAboutDlg::OnBnClickedOk()
+{
+	// TODO: Add your control notification handler code here
+	OnOK();
 }

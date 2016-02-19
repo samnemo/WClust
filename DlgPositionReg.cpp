@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "wclust.h"
 #include "DlgPositionReg.h"
+#include "winuser.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 
 CDlgPositionReg::CDlgPositionReg(CWnd* pParent /*=NULL*/)
 	: CDialog(CDlgPositionReg::IDD, pParent),
-	  m_type(0),
+	  m_type(4),
 	  m_param(16.0f)
 {
 	//{{AFX_DATA_INIT(CDlgPositionReg)
@@ -64,11 +65,11 @@ void CDlgPositionReg::InitUI()
 {
 	switch(m_type)
 	{
-	case 0:
+//	case 0:
 	case 4:
-		OnRadioWithout();
+        OnRadioWithout();
 		((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
-		break;
+        break;
 	case 1:
 		OnRadioSync();
 		((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->SetCheck(true);
@@ -100,21 +101,41 @@ BOOL CDlgPositionReg::OnInitDialog()
 void CDlgPositionReg::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
 	CDialog::OnShowWindow(bShow, nStatus);
-	
+
 	static bool bFirst = true;
 	if(bFirst)
+
+/* Jaini : Commented on 10/7/15 : 
+When position registration window opens up, 
+the default value should be "Without changes(from BPF)". 
+Commented part has default value of "Use Sync" and "Without changes(from BPF)" is disabled.
+
+Also, to make sure everytime when you open it just has "Without changes(from BPF)" 
+selected, forced it to go back to m_type = 4 under "OnOK" function.
+
+Changed default value of "m_type" in line21 from "0" to "4" & commented line67 with "case 0".
+	
 	{
 		if ( !(m_MainDataStack->InBpfExist & 3) )
 		{
 			CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(false);
 			((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->SetCheck(true);
 		}
-		else
+	else
 		{
 			CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(true);
 			((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
 		}
-		bFirst=false;
+		bFirst=false;  
+	}
+*/
+
+	{
+		if ( !(m_MainDataStack->InBpfExist & 3) )
+		{ 
+			CWnd::GetDlgItem(IDC_RADIO_WITHOUT)->EnableWindow(true);
+			((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->SetCheck(true);
+		}
 	}
 	else
 	{
@@ -123,8 +144,9 @@ void CDlgPositionReg::OnShowWindow(BOOL bShow, UINT nStatus)
 }
 
 void CDlgPositionReg::OnRadioSync() 
-{
+{	
 	DisableConst();
+
 }
 
 void CDlgPositionReg::OnRadioConst() 
@@ -159,31 +181,64 @@ void CDlgPositionReg::OnRadioWithout()
 	DisableConst();
 }
 
+
+/*
+Jaini : Below changes Made : 10/13/15
+
+Added MessageBox in OK function with warning/alert message if anything else 
+chosen other than default
+*/
+
 void CDlgPositionReg::OnOK() 
 {
+	int iAnswer;
 	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_SYNC))->GetCheck())
 	{
-		m_type = 1;
+		iAnswer = AfxMessageBox(_T("DO YOU REALLY WANT TO RUN THIS ??? "),MB_YESNO|MB_ICONSTOP);
+		if (iAnswer == IDYES)
+		{
+			m_type = 1;
+		}
+		else
+		{
+			AfxMessageBox(_T("USER ABORTED 'USE SYNC' PARAMETER"));
+		}
 	}
 	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_CONST))->GetCheck())
 	{
-		m_type = 2;
-		if (((CButton*) CWnd::GetDlgItem(IDC_16_7))->GetCheck())
-			m_param = 16.0f;
-		if (((CButton*) CWnd::GetDlgItem(IDC_20))->GetCheck())
-			m_param = 20.0f;
-		if (((CButton*) CWnd::GetDlgItem(IDC_33_3))->GetCheck())
-			m_param = 33.0f;
-		if (((CButton*) CWnd::GetDlgItem(IDC_40))->GetCheck())
-			m_param = 40.0f;
-		if (((CButton*) CWnd::GetDlgItem(IDC_100))->GetCheck())
-			m_param = 100.0f;
+		iAnswer = AfxMessageBox(_T("DO YOU REALLY WANT TO RUN THIS ??? "),MB_YESNO|MB_ICONSTOP);
+		if (iAnswer == IDYES)
+		{
+			m_type = 2;
+			if (((CButton*) CWnd::GetDlgItem(IDC_16_7))->GetCheck())
+				m_param = 16.0f;
+			if (((CButton*) CWnd::GetDlgItem(IDC_20))->GetCheck())
+				m_param = 20.0f;
+			if (((CButton*) CWnd::GetDlgItem(IDC_33_3))->GetCheck())
+				m_param = 33.0f;
+			if (((CButton*) CWnd::GetDlgItem(IDC_40))->GetCheck())
+				m_param = 40.0f;
+			if (((CButton*) CWnd::GetDlgItem(IDC_100))->GetCheck())
+				m_param = 100.0f;
+		}
+		else
+		{
+			AfxMessageBox(_T("USER ABORTED 'CONSTANT DELTA-t' PARAMETER"));
+		}
 	}
 	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_OTHER))->GetCheck())
 	{
+		iAnswer = AfxMessageBox(_T("DO YOU REALLY WANT TO RUN THIS ??? "),MB_YESNO|MB_ICONSTOP);
+		if (iAnswer == IDYES)
+		{
 		m_type = 3;
 		UpdateData(true);
 		m_param = m_Edit;
+		}
+		else
+		{
+			AfxMessageBox(_T("USER ABORTED 'OTHER CONSTANT DELTA-t' PARAMETER"));
+		}
 	}
 	if (((CButton*) CWnd::GetDlgItem(IDC_RADIO_WITHOUT))->GetCheck())
 	{
@@ -191,7 +246,9 @@ void CDlgPositionReg::OnOK()
 	}
 	
 	m_MainDataStack->m_MainSyncStack.OrganizeSync(m_type, m_param);
-
+	
 	CDialog::OnOK();
+
+	m_type = 4;
 }
 
