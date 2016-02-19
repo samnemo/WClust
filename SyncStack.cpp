@@ -282,7 +282,15 @@ int CSyncStack::LoadArenaFromDAT(FILE *from)
 						{	sync = (CSyncBPF*)*index;
 						}
 						j++;
-					} while ( j <= biValuedFrame && stop == 0);
+
+	/* Jaini : DATE MODIFIED : 10/6/15 and 10/13/15.
+	Changed the condition in while loop. You can use equal sign in condition only if
+	biValuedFrame=0. If you make it 1, then remove equal sign. Otherwise it will add
+	twice as many times x and y values for missing frames when comparing BPF to DAT
+	 
+	 //} while ( j <= biValuedFrame && stop == 0);   */
+
+						} while ( j <= biValuedFrame && stop == 0);   
 					i++;
 				} while ( i < FrameCount && stop == 0);
 				if ( index != SyncStack.end() )
@@ -467,7 +475,15 @@ int CSyncStack::LoadRoomFromDAT(FILE *from)
 						{	sync = (CSyncBPF*)*index;
 						}
 						j++;
-					} while ( j <= 1 && stop == 0);
+
+	/* Jaini : DATE MODIFIED : 10/6/15 and 10/13/15.
+	Changed the condition in while loop. You can use equal sign in condition only if
+	biValuedFrame=0. If you make it 1, then remove equal sign. Otherwise it will add
+	twice as many times x and y values for missing frames when comparing BPF to DAT
+	
+	//} while ( j <= 1 && stop == 0); */
+					  
+					} while ( j <= biValuedFrame && stop == 0);
 					i++;
 				} while ( i < FrameCount && stop == 0);
 				if ( index != SyncStack.end() )
