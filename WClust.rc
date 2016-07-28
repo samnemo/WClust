@@ -254,37 +254,37 @@ BEGIN
     GROUPBOX        "Cluster assignment",IDC_STATIC,75,5,70,45
 END
 
-IDD_EDIT_SPIKES DIALOGEX 0, 0, 491, 273
+IDD_EDIT_SPIKES DIALOGEX 0, 0, 468, 293
 STYLE DS_SETFONT | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | 
     WS_THICKFRAME
 CAPTION "View spikes"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    PUSHBUTTON      "&Play",IDC_PLAY,5,240,35,14
-    PUSHBUTTON      "&Next",IDC_NEXT,5,255,35,14
-    PUSHBUTTON      "&Stop",IDC_STOP,45,240,35,14
-    PUSHBUTTON      "&Clear",IDC_BCLEAR,45,255,35,14
+    PUSHBUTTON      "&Play",IDC_PLAY,6,247,35,14
+    PUSHBUTTON      "&Next",IDC_NEXT,6,265,35,14
+    PUSHBUTTON      "&Stop",IDC_STOP,45,246,35,14
+    PUSHBUTTON      "&Clear",IDC_BCLEAR,45,265,35,14
     CONTROL         "Chanel &1",IDC_CHECK_CH1,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,90,240,44,10
+                    WS_TABSTOP,90,247,44,10
     CONTROL         "Chanel &2",IDC_CHECK_CH2,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,90,250,44,10
+                    WS_TABSTOP,90,260,44,10
     CONTROL         "Chanel &3",IDC_CHECK_CH3,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,135,240,44,10
+                    WS_TABSTOP,135,247,44,10
     CONTROL         "Chanel &4",IDC_CHECK_CH4,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,135,250,44,10
-    COMBOBOX        IDC_COMBOPROP,256,240,90,93,CBS_DROPDOWNLIST | 
+                    WS_TABSTOP,135,260,44,10
+    COMBOBOX        IDC_COMBOPROP,256,244,90,93,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
-    DEFPUSHBUTTON   "OK",IDOK,415,255,65,14
-    PUSHBUTTON      "&Remove",IDC_REMOVE,350,240,35,14
-    PUSHBUTTON      "Se&t sp.",IDC_SET_SP,415,240,65,14
-    COMBOBOX        IDC_CMB_SEL_PARAM,190,240,50,80,CBS_DROPDOWNLIST | 
+    DEFPUSHBUTTON   "OK",IDOK,395,262,65,14
+    PUSHBUTTON      "&Remove",IDC_REMOVE,350,242,35,14
+    PUSHBUTTON      "Se&t sp.",IDC_SET_SP,395,244,65,14
+    COMBOBOX        IDC_CMB_SEL_PARAM,190,244,50,80,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "&Add param.",IDC_ADD,190,255,50,14
+    PUSHBUTTON      "&Add param.",IDC_ADD,190,263,50,14
     CONTROL         "List2",IDC_LIST_CLUST,"SysListView32",LVS_REPORT | 
-                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,415,7,65,219
-    EDITTEXT        IDC_EDIT_EXTRA_PARAM,320,256,62,12,ES_LOWERCASE | 
+                    LVS_SINGLESEL | WS_BORDER | WS_TABSTOP,397,5,63,197
+    EDITTEXT        IDC_EDIT_EXTRA_PARAM,320,264,62,12,ES_LOWERCASE | 
                     ES_AUTOHSCROLL
-    LTEXT           "",IDC_STATIC_EXTRA_PARAM,254,257,60,12
+    LTEXT           "",IDC_STATIC_EXTRA_PARAM,254,267,60,12
 END
 
 IDD_SELECT_TETRODE DIALOGEX 0, 0, 254, 145
@@ -822,6 +822,17 @@ BEGIN
     LTEXT           "Max Possible Clusters:",IDC_STATIC,30,62,75,14
 END
 
+IDD_DIALOG_SAMP_ARENAROOM_BATCH DIALOGEX 0, 0, 573, 164
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "SAMPLE ARENAROOM BATCH"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,244,137,50,14
+    EDITTEXT        IDC_EDIT_SAMP_ARENAROOM_BATCH,15,22,540,100,
+                    ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -849,10 +860,10 @@ BEGIN
 
     IDD_EDIT_SPIKES, DIALOG
     BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 484
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 260
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 460
+        TOPMARGIN, 5
+        BOTTOMMARGIN, 279
     END
 
     IDD_SELECT_TETRODE, DIALOG
@@ -1053,6 +1064,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 107
     END
+
+    IDD_DIALOG_SAMP_ARENAROOM_BATCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 566
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 157
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -1191,6 +1210,9 @@ BEGIN
         MENUITEM "Sample Batch File",           ID_BATCH_SAMPLEBATCHFILE
         MENUITEM "TimeStamp Adjust",            ID_BATCH_TIMESTAMPADJUST
         MENUITEM "Auto Clustering",             ID_BATCH_AUTOCLUSTERING
+        MENUITEM "Sample ArenaRoom Batch File", ID_BATCH_SAMPLEARENAROOMBATCHFILE
+
+        MENUITEM "BPF ArenaRoom Batch",         ID_BATCH_BPFARENAROOMBATCH
     END
     POPUP "&Help"
     BEGIN
@@ -1218,8 +1240,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 2,0,0,119
- PRODUCTVERSION 2,0,0,119
+ FILEVERSION 2,0,0,123
+ PRODUCTVERSION 2,0,0,123
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -1235,12 +1257,12 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "WClust MFC Application"
-            VALUE "FileVersion", "2, 0, 0, 119"
+            VALUE "FileVersion", "2, 0, 0, 123"
             VALUE "InternalName", "WClust"
             VALUE "LegalCopyright", "Copyright (C) 2002 - 2015"
             VALUE "OriginalFilename", "WClust.EXE"
             VALUE "ProductName", "WClust Application"
-            VALUE "ProductVersion", "2, 0, 0, 119"
+            VALUE "ProductVersion", "2, 0, 0, 123"
         END
     END
     BLOCK "VarFileInfo"
@@ -1423,6 +1445,8 @@ BEGIN
     ID_BATCH_AUTOCLUSTERING "Perform AutoClustering Batch"
     ID_TOOLS_EXPORTCLUSTERBOUNDS 
                             "Export user-defined cluster boundaries to text file."
+    ID_BATCH_SAMPLEARENAROOMBATCHFILE 
+                            "Display Sample Arena Room Batch Input File"
 END
 
 #endif    // English (U.S.) resources

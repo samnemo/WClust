@@ -251,13 +251,14 @@ public:
 	CEEGStack		m_MainEEGStack;	// eeg signal
 	MY_WCP_FILES_STACK wcpFilesStack;	// found external parameters files
 	
-	// constants
-	int				SAMPLE_FREQ;		// Frequency of electrode signal
+	// constants , are local to CVerxStack class and FREQ, SAMPLES,RESOLUTION, CHANNELS are 
+	//defined as static variables under CVertex. 
+	int				SAMPLE_FREQ;		// Frequency of electrode signal // =FREQ
 	int				EEG_SAMPLE_FREQ;	// Frequency of eeg signal
-	int				NUM_CHANNELS;
-	int				NUM_SAMPLES;
+	int				NUM_CHANNELS;		// = CHANNELS
+	int				NUM_SAMPLES;        // = SAMPLES
 	char			BASE_DIMENSION;
-	int				RESOLUTION;
+	int				RESOLUTION;         // = RESOLUTION
 	
 	int				AreData;
 	int				Dimension;
@@ -267,7 +268,7 @@ public:
 	char			FileType;			//0 - none, 1 - BPF, 2 -UFF
 	int				AmountDataFromFile;	
 
-	vector<float>	m_x;		
+    vector<float>	m_x;		
 	CString         m_FileName;
 	CString         m_TmpName;
 	CString			m_FileNameWithoutExt;	//this is a CString, you can add ext

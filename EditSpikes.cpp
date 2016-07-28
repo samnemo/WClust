@@ -2,6 +2,22 @@
 // EditSpikes.cpp : implementation file
 //
 
+/*
+
+Version 123 changes:: Jaini Shah :: 2.19.16
+
+In all of the below functions, replaced 63/32000 with CVertex::FREQ/CVertex::SAMPLES
+OnPaint, OnLButtonDown, OnMouseMove, OnSelchangeComboprop, OnSelchangeCmbSelParam, 
+
+Reason for change : Milenna had started recordings where Spike Sampling Freq was 48000 and 
+Tetrode record format was 1440. 63/32000 was displaying maximum of 2ms of data. 
+where as for Milenna's recording we needed 1440/48000 = 30ms of data display. So, now with 
+CVertex::FREQ/CVertex::SAMPLES, it gets FREQ and SAMPLES values from header file. 
+Vertex.cpp=>CVerxStack:GetBPFHeader_SetupInformation and 
+Vertex.cpp=>CVerxStack::GetBPFHeader
+
+*/
+
 #include "stdafx.h"
 #include "wclust.h"
 #include "EditSpikes.h"
@@ -10,6 +26,8 @@
 #include "DlgAddWCP.h"
 #include "StringUtils.h"
 #include "WCMath.h"
+#include ".\editspikes.h"
+#include "vertex.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,14 +36,17 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 const int ID_TimerPlay = 100;
+
 /////////////////////////////////////////////////////////////////////////////
 // CEditSpikes dialog
 
 CEditSpikes::CEditSpikes(CWnd* pParent /*=NULL*/)
 	: cdxCSizingDialog(CEditSpikes::IDD, pParent)
 {
+
 	//{{AFX_DATA_INIT(CEditSpikes)
 	//}}AFX_DATA_INIT
+
 }
 
 
@@ -50,9 +71,10 @@ void CEditSpikes::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_COMBOPROP, m_wndComboProp);
 	DDX_Control(pDX, IDC_EDIT_EXTRA_PARAM, m_wndExtraParm);
 	DDX_Control(pDX, IDC_STATIC_EXTRA_PARAM, m_wndPrompt);
+		
 	//}}AFX_DATA_MAP
 }
-
+	
 
 BEGIN_MESSAGE_MAP(CEditSpikes, cdxCSizingDialog)
 	//{{AFX_MSG_MAP(CEditSpikes)
@@ -77,13 +99,17 @@ BEGIN_MESSAGE_MAP(CEditSpikes, cdxCSizingDialog)
 	ON_BN_CLICKED(IDC_BCLEAR, OnBclear)
 	ON_BN_CLICKED(IDC_EXT_PARAM, OnExtParam)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LIST_CLUST, OnItemchangedListClust)
+
 	//}}AFX_MSG_MAP
+	//ON_BN_CLICKED(IDC_SelectAll, OnBnClickedButtonSelectall)
+	//ON_BN_CLICKED(IDC_UnselectAll, OnBnClickedButtonUnselectall)
+
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CEditSpikes message handlers
 
-BOOL CEditSpikes::OnInitDialog() 
+BOOL CEditSpikes::OnInitDialog()
 {
 	cdxCSizingDialog::OnInitDialog();
 	
@@ -106,7 +132,7 @@ BOOL CEditSpikes::OnInitDialog()
 	AddSzControl( m_wndSetSp, mdRepos,mdRepos);
 	AddSzControl( m_wndOK, mdRepos,mdRepos);
 	AddSzControl( m_wndListClust, mdRepos,mdResize);
-
+	
 	m_HCross = AfxGetApp()->LoadStandardCursor(IDC_CROSS);
 	m_HSize = AfxGetApp()->LoadStandardCursor(IDC_SIZEWE);
 	m_LoadAct = 0;
@@ -119,6 +145,7 @@ BOOL CEditSpikes::OnInitDialog()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void CEditSpikes::OnOK() 
 {
 	StoreWindowPosition(_T("Main\\EdSpWin")); 	
@@ -130,7 +157,7 @@ void CEditSpikes::OnPaint()
 {
 	CPaintDC dc(this); // device context for painting
 	// Do not call cdxCSizingDialog::OnPaint() for painting messages
-	
+
 	GetClientRect(m_MainRect);
 
 	m_ClearRect = m_MainRect;
@@ -233,8 +260,8 @@ void CEditSpikes::OnPaint()
 			if (m_IsLine1 == 2) 
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 				m_IsLine1 = 1;
 			}
@@ -242,8 +269,8 @@ void CEditSpikes::OnPaint()
 			if (m_wndCmbSelParam.GetCurSel()==2 && m_IsLine2 == 2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 				m_IsLine2 = 1;
 			}
@@ -263,16 +290,16 @@ void CEditSpikes::OnPaint()
 		if (m_IsLine1)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 			m_IsLine1 = 2;
 		}
 		if (m_wndCmbSelParam.GetCurSel()==2 && m_IsLine2)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 			m_IsLine2 = 2;
 		}
@@ -290,7 +317,7 @@ void CEditSpikes::OnPaint()
 void CEditSpikes::OnShowWindow(BOOL bShow, UINT nStatus) 
 {
 	cdxCSizingDialog::OnShowWindow(bShow, nStatus);
-	
+
 	m_IsEnd = 0;
 	m_DrawOnlyOne = 0;
 	m_ActualEdSp = 0;
@@ -542,7 +569,7 @@ void CEditSpikes::OnLButtonDown(UINT nFlags, CPoint point)
 	{
 		::SetCursor(m_HCross);
 
-		float NewPos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*63/32000;
+		float NewPos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*CVertex::SAMPLES/CVertex::FREQ;
 		if (m_wndCmbSelParam.GetCurSel()==2)
 		{
 			float p1,p2;
@@ -571,18 +598,18 @@ void CEditSpikes::OnLButtonDown(UINT nFlags, CPoint point)
 			if (m_IsLine1 == 2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 
-			m_Line1Pos = NewPos;//((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*63/32000;
+			m_Line1Pos = NewPos;//((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*SAMPLES/FREQ;
 
 			if (m_IsLine1)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 		}
@@ -592,18 +619,18 @@ void CEditSpikes::OnLButtonDown(UINT nFlags, CPoint point)
 			if (m_IsLine2 == 2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 
-			m_Line2Pos = NewPos;//((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*63/32000;
+			m_Line2Pos = NewPos;//((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*NUM_SAMPLES/FREQ;
 
 			if (m_IsLine1)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 		}
@@ -653,18 +680,18 @@ void CEditSpikes::OnMouseMove(UINT nFlags, CPoint point)
 			if (m_IsLine1 == 2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 
-			m_Line1Pos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*63/32000;
+			m_Line1Pos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*CVertex::SAMPLES/CVertex::FREQ;
 	
 			if (m_IsLine1)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 		}
@@ -674,18 +701,18 @@ void CEditSpikes::OnMouseMove(UINT nFlags, CPoint point)
 			if (m_IsLine2 == 2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 
-			m_Line2Pos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*63/32000;
+			m_Line2Pos = ((float)(point.x-m_DrawingRect.left)/m_DrawingRect.Width())*CVertex::SAMPLES/CVertex::FREQ;
 	
 			if (m_IsLine2)
 			{
 				dc.SetROP2(R2_NOT);
-				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+				dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+				dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 				dc.SetROP2(R2_COPYPEN);
 			}
 		}
@@ -724,6 +751,7 @@ void CEditSpikes::OnLButtonUp(UINT nFlags, CPoint point)
 //////////////////////////////////////////////////////////
 void CEditSpikes::OnSelchangeComboprop() 
 {
+
 	CParamDim *ParDim;
 	ParDim = (CParamDim*) *(m_MainClusters->m_ParamDimStack.begin() + m_wndComboProp.GetCurSel()*4);
 	if (ParDim->GetType() == 2 || ParDim->GetType() == 3)
@@ -733,8 +761,8 @@ void CEditSpikes::OnSelchangeComboprop()
 		if (m_IsLine1 == 2)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 		}
 
@@ -743,8 +771,8 @@ void CEditSpikes::OnSelchangeComboprop()
 		if (m_IsLine1)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line1Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 		}
 	}
@@ -1029,8 +1057,8 @@ void CEditSpikes::OnSelchangeCmbSelParam()
 		if (m_IsLine2)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 		}
 		m_IsLine2 = 0;
@@ -1040,8 +1068,8 @@ void CEditSpikes::OnSelchangeCmbSelParam()
 		if (m_IsLine2)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 		}
 		m_IsLine2 = 0;
@@ -1051,8 +1079,8 @@ void CEditSpikes::OnSelchangeCmbSelParam()
 		if (!m_IsLine2)
 		{
 			dc.SetROP2(R2_NOT);
-			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.top+1);
-			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)63/32000))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
+			dc.MoveTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.top+1);
+			dc.LineTo(m_DrawingRect.left + (m_Line2Pos/((float)CVertex::SAMPLES/CVertex::FREQ))*m_DrawingRect.Width(),m_DrawingRect.bottom-1);
 			dc.SetROP2(R2_COPYPEN);
 		}
 		m_IsLine2 = 2;
@@ -1146,8 +1174,6 @@ void CEditSpikes::FillClList()
 
 	list->InsertColumn(0,Str,LVCFMT_LEFT,65);
 	list->SetImageList(&m_imageList,LVSIL_SMALL);
-	list->SetExtendedStyle( LVS_EX_CHECKBOXES  );
-
 	
 	list->InsertItem(0,Str,0);
 	Str.Format("noise");
@@ -1166,8 +1192,42 @@ void CEditSpikes::FillClList()
 		list->SetItemText(i+1,0,Str);
 		list->SetCheck(i+1,(clView[i] && CLUST_SEL) ? true : false );		
 	}
+	list->SetExtendedStyle( LVS_EX_CHECKBOXES  );
 }
 
+/*void CEditSpikes::OnBnClickedButtonSelectall()
+{
+			CListCtrl *list;
+	
+			list = & m_wndListClust;
+			list->SetCheck(0, true);
+			list->SetCheck(1, true);
+
+			for (int i = 1; i <= maxCluster ; i++)
+				{	
+					list->SetCheck(i+1, true);		
+				}
+	
+	// TODO: Add your control notification handler code here
+}
+
+void CEditSpikes::OnBnClickedButtonUnselectall()
+{
+  
+	CListCtrl *list;
+	
+	list = & m_wndListClust;
+	list->SetCheck(0, false);
+	list->SetCheck(1, false);
+
+	for (int i = 1; i <= maxCluster ; i++)
+	{
+		list->SetCheck(i+1, false);		
+	}
+
+	// TODO: Add your control notification handler code here
+}
+*/
 void CEditSpikes::OnItemchangedListClust(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
