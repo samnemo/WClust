@@ -1,3 +1,11 @@
+This is the WClust project - belonging to Andre Fenton Lab &
+Biosignal Group.
+
+The first version of the code was developed by Anton Svrcek in
+Prague. Then during Sam Neymotin's PhD he took over the project.
+Most of the project commit history is in the RCS files which haven't
+been converted to git.
+
 ========================================================================
        MICROSOFT FOUNDATION CLASS LIBRARY : WClust
 ========================================================================
